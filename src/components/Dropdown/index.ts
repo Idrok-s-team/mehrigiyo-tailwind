@@ -1,5 +1,3 @@
-'use client'
+import { Dropdown } from './Dropdown'
 
-import { Dropdown } from "./Dropdown";
-
-export default Dropdown;
+export default Dropdown

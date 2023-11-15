@@ -1,46 +1,41 @@
-import { type FC, useState, useRef, memo, useEffect, ReactNode } from "react";
-import { useOnClickOutside } from "usehooks-ts";
+'use client'
+
+import { type FC, useState, useRef, memo, ReactNode } from 'react'
+import { useOnClickOutside } from 'usehooks-ts'
 
 export interface ItemProps {
-  id: string;
-  label: ReactNode;
-  selected?: boolean;
+  id: string
+  label: ReactNode
+  selected?: boolean
 }
 
 interface IProps {
-  items: ItemProps[];
-  className?: string;
-  // onClick: (item: ItemProps) => void;
+  items: ItemProps[]
+  className?: string
 }
 
-export const Dropdown: FC<IProps> = memo(function Dropdown({
-  items,
-}: // onClick,
-IProps) {
-  const [open, setOpen] = useState<boolean>(false);
-  const [selectedItem, setSelectedItem] = useState<ItemProps | null>(null);
-  const ref = useRef<HTMLDivElement>(null);
+export const Dropdown: FC<IProps> = memo(function Dropdown({ items }: IProps) {
+  const initialSelected = items.find((item) => item.selected) || items[0]
 
-  useEffect(() => {
-    const selected = items.find((item) => item.selected) || items[0];
-    setSelectedItem(selected);
-  }, [items]);
+  const [open, setOpen] = useState<boolean>(false)
+  const [selectedItem, setSelectedItem] = useState<ItemProps | null>(initialSelected)
+  const ref = useRef<HTMLDivElement>(null)
 
   useOnClickOutside(ref, () => {
-    setOpen(false);
-  });
+    setOpen(false)
+  })
 
   const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
-  };
+    setOpen((prevOpen) => !prevOpen)
+  }
 
   const handleSelectItem = (item: ItemProps) => {
-    setSelectedItem(item);
-    setOpen(false);
-  };
+    setSelectedItem(item)
+    setOpen(false)
+  }
 
   return (
-    <div className="relative w-full h-full" ref={ref}>
+    <div className="relative w-full h-full text-sm" ref={ref}>
       <button
         id="dropdownHoverButton"
         data-dropdown-toggle="dropdownHover"
@@ -57,28 +52,18 @@ IProps) {
           fill="none"
           viewBox="0 0 10 6"
         >
-          <path
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="m1 1 4 4 4-4"
-          />
+          <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
         </svg>
       </button>
       {open && (
         <div className="flex flex-col absolute min-w-full z-10 bg-white rounded-lg shadow">
           {items.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => handleSelectItem(item)}
-              className="py-1 hover:bg-green-light"
-            >
+            <button key={item.id} onClick={() => handleSelectItem(item)} className="py-1 hover:bg-green-light">
               {item.label}
             </button>
           ))}
         </div>
       )}
     </div>
-  );
-});
+  )
+})
