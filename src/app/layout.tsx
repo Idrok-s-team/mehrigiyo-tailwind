@@ -21,7 +21,7 @@ interface IProps {
 }
 
 const RootLayout: FC<IProps> = async ({ children }) => {
-  const doctorTypes = await getShopTypes()
+  const doctorTypesData = await getShopTypes()
 
   const titles = [
     { text: `Mahsulotlar katalogi`, href: `#` },
@@ -52,7 +52,7 @@ const RootLayout: FC<IProps> = async ({ children }) => {
     {
       label: 'Mahsulotlar',
       mainPath: '/products',
-      dropdownItems: doctorTypes.results
+      dropdownItems: doctorTypesData.results
         ?.slice(0, 4)
         .map((product) => ({
           label: product.name,
@@ -119,7 +119,7 @@ const RootLayout: FC<IProps> = async ({ children }) => {
             </ul>
           </nav>
 
-          <nav className="flex items-center justify-between px-24 mt-4">
+          <nav className="flex items-center justify-between px-24 py-4 bg-[#addabe]">
             <section className="flex items-center gap-12">
               <div>
                 <Link href={'#'}>
