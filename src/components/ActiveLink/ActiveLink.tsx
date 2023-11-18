@@ -6,7 +6,7 @@ import { FC, PropsWithChildren } from 'react'
 
 type Props = PropsWithChildren<LinkProps>
 
-export const ActiveLink: FC<Props> = ({ children, ...props }) => {
+const ActiveLink: FC<Props> = ({ children, ...props }) => {
   const pathname = usePathname()
   const { href } = props
   const isActive = href === pathname
@@ -23,3 +23,5 @@ export const ActiveLink: FC<Props> = ({ children, ...props }) => {
     </Link>
   )
 }
+
+export default ActiveLink

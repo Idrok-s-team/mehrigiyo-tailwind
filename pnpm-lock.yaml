@@ -2,11 +2,14 @@ lockfileVersion: 5.4
 
 specifiers:
   '@tailwindcss/line-clamp': ^0.4.4
+  '@tanstack/react-query': ^5.8.4
   '@types/node': ^20
   '@types/react': ^18
   '@types/react-dom': ^18
   autoprefixer: ^10.0.1
   clsx: ^2.0.0
+  embla-carousel: 8.0.0-rc14
+  embla-carousel-react: 8.0.0-rc14
   eslint: ^8
   eslint-config-next: 14.0.2
   eslint-plugin-react: ^7.33.2
@@ -21,7 +24,10 @@ specifiers:
   usehooks-ts: ^2.9.1
 
 dependencies:
+  '@tanstack/react-query': 5.8.4_biqbaboplfbrettd7655fr4n2y
   clsx: 2.0.0
+  embla-carousel: 8.0.0-rc14
+  embla-carousel-react: 8.0.0-rc14_react@18.2.0
   next: 14.0.2_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -277,6 +283,27 @@ packages:
     dependencies:
       tailwindcss: 3.3.5
     dev: true
+
+  /@tanstack/query-core/5.8.3:
+    resolution: {integrity: sha512-SWFMFtcHfttLYif6pevnnMYnBvxKf3C+MHMH7bevyYfpXpTMsLB9O6nNGBdWSoPwnZRXFNyNeVZOw25Wmdasow==}
+    dev: false
+
+  /@tanstack/react-query/5.8.4_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-CD+AkXzg8J72JrE6ocmuBEJfGzEzu/bzkD6sFXFDDB5yji9N20JofXZlN6n0+CaPJuIi+e4YLCbGsyPFKkfNQA==}
+    peerDependencies:
+      react: ^18.0.0
+      react-dom: ^18.0.0
+      react-native: '*'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    dependencies:
+      '@tanstack/query-core': 5.8.3
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
 
   /@types/json5/0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
@@ -776,6 +803,28 @@ packages:
   /electron-to-chromium/1.4.581:
     resolution: {integrity: sha512-6uhqWBIapTJUxgPTCHH9sqdbxIMPt7oXl0VcAL1kOtlU6aECdcMncCrX5Z7sHQ/invtrC9jUQUef7+HhO8vVFw==}
     dev: true
+
+  /embla-carousel-react/8.0.0-rc14_react@18.2.0:
+    resolution: {integrity: sha512-2b9vXACEcn0qja4QyaFMfCgFbFhumV3krOCGr9+jlQiuXt5z/EyfiYYziDsm70DhTtxtg/uKEGflIqZSfWRYKg==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.1 || ^18.0.0
+    dependencies:
+      embla-carousel: 8.0.0-rc14
+      embla-carousel-reactive-utils: 8.0.0-rc14_embla-carousel@8.0.0-rc14
+      react: 18.2.0
+    dev: false
+
+  /embla-carousel-reactive-utils/8.0.0-rc14_embla-carousel@8.0.0-rc14:
+    resolution: {integrity: sha512-r153bynAo9eTBuWWggPWLYnE9xqVOYmkkeMbAuGX8pkUisJN8aTLMW9b7CYOzjURRB7z85EmYRbeBg+axQzc9g==}
+    peerDependencies:
+      embla-carousel: 8.0.0-rc14
+    dependencies:
+      embla-carousel: 8.0.0-rc14
+    dev: false
+
+  /embla-carousel/8.0.0-rc14:
+    resolution: {integrity: sha512-/NLkMFZ7xKryRVYeUjmhbfV63Vr07saPBDwAX2TPMbcaiWwfQfU5Xsc2AiCMZANtwmzsjRK6gSBa7hOy/VXu6g==}
+    dev: false
 
   /emoji-regex/9.2.2:
     resolution: {integrity: sha512-L18DaJsXSUk2+42pv8mLs5jJT2hqFkFE4j21wOmgbUqsZ2hL72NsUU785g9RXgo3s0ZNgVl42TiHp3ZtOv/Vyg==}

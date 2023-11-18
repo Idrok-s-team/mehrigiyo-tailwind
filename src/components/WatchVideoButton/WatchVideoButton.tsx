@@ -4,11 +4,11 @@ import { type FC, memo } from 'react'
 import clsx from 'clsx'
 import { VideoPlayIcon } from '@/assets/icons'
 
-interface IProps {
+type Props = {
   className?: string
 }
 
-export const WatchVideoButton: FC<IProps> = ({ className }: IProps) => {
+const WatchVideoButton: FC<Props> = ({ className }) => {
   const classNames = clsx('flex items-center gap-3', className)
   return (
     <button className={classNames}>
@@ -19,3 +19,5 @@ export const WatchVideoButton: FC<IProps> = ({ className }: IProps) => {
     </button>
   )
 }
+
+export default WatchVideoButton

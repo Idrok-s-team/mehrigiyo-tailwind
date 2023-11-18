@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 import clsx from 'clsx'
 import { BasketIcon, FavouriteOutlineIcon, UserIcon } from '@/assets/icons'
 
-export const HeaderActions: FC = ({}) => {
+const HeaderActions: FC = ({}) => {
   const pathname = usePathname()
 
   const actions = [
@@ -42,3 +42,5 @@ export const HeaderActions: FC = ({}) => {
     </div>
   )
 }
+
+export default HeaderActions

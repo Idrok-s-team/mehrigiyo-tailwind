@@ -1,3 +1,3 @@
-import { SeeAllButton } from './SeeAllButton'
+import SeeAllButton from './SeeAllButton'
 
 export default SeeAllButton

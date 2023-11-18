@@ -3,7 +3,7 @@
 import { type FC, useState, useRef, memo, ReactNode } from 'react'
 import { useOnClickOutside } from 'usehooks-ts'
 
-export interface ItemProps {
+interface ItemProps {
   id: string
   label: ReactNode
   selected?: boolean
@@ -14,7 +14,7 @@ interface IProps {
   className?: string
 }
 
-export const Dropdown: FC<IProps> = memo(function Dropdown({ items }: IProps) {
+const Dropdown: FC<IProps> = memo(function Dropdown({ items }: IProps) {
   const initialSelected = items.find((item) => item.selected) || items[0]
 
   const [open, setOpen] = useState<boolean>(false)
@@ -67,3 +67,5 @@ export const Dropdown: FC<IProps> = memo(function Dropdown({ items }: IProps) {
     </div>
   )
 })
+
+export default Dropdown

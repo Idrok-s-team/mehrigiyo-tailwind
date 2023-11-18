@@ -2,9 +2,10 @@ import type { Config } from 'tailwindcss'
 
 const config: Config = {
   content: [
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/modules/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
@@ -20,7 +21,8 @@ const config: Config = {
         'gray-primary': '#b0b7c3',
       },
       boxShadow: {
-        'primary': '0px 15px 60px rgba(22, 22, 22, 0.1);',
+        primary: '0px 15px 60px rgba(22, 22, 22, 0.1)',
+        secondary: '0px 6px 12px 0px rgba(0, 0, 0, 0.00)',
       },
     },
   },

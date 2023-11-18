@@ -5,13 +5,13 @@ import clsx from 'clsx'
 import { ArrowRightIcon } from '@/assets/icons'
 import { ElementSizeType } from '@/types'
 
-interface IProps {
+type Props = {
   text: string
   size?: ElementSizeType
   className?: string
 }
 
-export const SeeAllButton: FC<IProps> = ({ text, size = 'lg', className }: IProps) => {
+const SeeAllButton: FC<Props> = ({ text, size = 'lg', className }) => {
   const classNames = clsx(
     'flex items-center gap-4 py-3 px-6 rounded-[30px] bg-green-light duration-300 transition-colors hover:border-[0.5px] hover:border-green-primary group',
     {
@@ -30,3 +30,5 @@ export const SeeAllButton: FC<IProps> = ({ text, size = 'lg', className }: IProp
     </button>
   )
 }
+
+export default SeeAllButton

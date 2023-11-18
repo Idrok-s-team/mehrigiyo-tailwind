@@ -16,3 +16,11 @@ export type LocalizedNamesType = {
 }
 
 export type ElementSizeType = 'sm' | 'md' | 'lg'
+
+export type Nullable<T> = {
+  [K in keyof T]: T[K] | null | string
+}
+
+export type QueryParamsType = {
+  [key: string]: string | number | boolean
+}

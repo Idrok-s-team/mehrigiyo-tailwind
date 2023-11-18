@@ -8,6 +8,7 @@ import { getShopTypes } from '@/api'
 
 import './globals.css'
 import HeaderActions from '@/components/HeaderActions'
+import Providers from './providers'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,7 +22,7 @@ interface IProps {
 }
 
 const RootLayout: FC<IProps> = async ({ children }) => {
-  const doctorTypesData = await getShopTypes()
+  const shopTypesData = await getShopTypes()
 
   const titles = [
     { text: `Mahsulotlar katalogi`, href: `#` },
@@ -52,7 +53,7 @@ const RootLayout: FC<IProps> = async ({ children }) => {
     {
       label: 'Mahsulotlar',
       mainPath: '/products',
-      dropdownItems: doctorTypesData.results
+      dropdownItems: shopTypesData.results
         ?.slice(0, 4)
         .map((product) => ({
           label: product.name,
@@ -91,51 +92,53 @@ const RootLayout: FC<IProps> = async ({ children }) => {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <header className="sticky top-0 z-10">
-          <nav className="flex items-center justify-between bg-green-light h-10 text-sm px-24">
-            <ul className="flex gap-5">
-              {titles.map(({ text, href }) => (
-                <Link href={href} key={text}>
-                  {text}
-                </Link>
-              ))}
-            </ul>
-            <ul className="flex items-center gap-5">
-              <div>
-                <Dropdown items={languageItems} />
-              </div>
-              <div className="flex items-center gap-2">
-                <div>Toshkent shahar</div>
+        <Providers>
+          <header className="sticky top-0 z-10">
+            <nav className="flex items-center justify-between bg-green-light h-10 text-sm px-24">
+              <ul className="flex gap-5">
+                {titles.map(({ text, href }) => (
+                  <Link href={href} key={text}>
+                    {text}
+                  </Link>
+                ))}
+              </ul>
+              <ul className="flex items-center gap-5">
                 <div>
-                  <LocationIcon />
+                  <Dropdown items={languageItems} />
                 </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <div>Kirish</div>
+                <div className="flex items-center gap-2">
+                  <div>Toshkent shahar</div>
+                  <div>
+                    <LocationIcon />
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div>Kirish</div>
+                  <div>
+                    <AvatarIcon />
+                  </div>
+                </div>
+              </ul>
+            </nav>
+
+            <nav className="flex items-center justify-between px-24 py-4 bg-[#addabe]">
+              <section className="flex items-center gap-12">
                 <div>
-                  <AvatarIcon />
+                  <Link href={'#'}>
+                    <LogoIcon />
+                  </Link>
                 </div>
-              </div>
-            </ul>
-          </nav>
+                <div className="flex gap-3 text-sm">{getNavElements()}</div>
+              </section>
 
-          <nav className="flex items-center justify-between px-24 py-4 bg-[#addabe]">
-            <section className="flex items-center gap-12">
-              <div>
-                <Link href={'#'}>
-                  <LogoIcon />
-                </Link>
-              </div>
-              <div className="flex gap-3 text-sm">{getNavElements()}</div>
-            </section>
+              <section>
+                <HeaderActions />
+              </section>
+            </nav>
+          </header>
 
-            <section>
-              <HeaderActions />
-            </section>
-          </nav>
-        </header>
-
-        <main className="px-24">{children}</main>
+          <main className="px-24 overflow-hidden">{children}</main>
+        </Providers>
       </body>
     </html>
   )

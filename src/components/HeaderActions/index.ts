@@ -1,3 +1,3 @@
-import { HeaderActions } from './HeaderActions'
+import HeaderActions from './HeaderActions'
 
 export default HeaderActions

@@ -1,13 +1,15 @@
 /* eslint-disable react/no-unescaped-entities */
-import { getSpecialistTypes } from '@/api'
-import { DeliveryIcon, FastPaymentIcon, OnlineHelpIcon, PermanentDiscountIcon } from '@/assets/icons'
-import { Input, SeeAllButton, WatchVideoButton } from '@/components'
 import Image from 'next/image'
 import Link from 'next/link'
+
+import { getSpecialistTypes } from '@/api'
+import { ProductsListModule } from '@/modules/home'
+import { Input, ProductCardSkeleton, SeeAllButton, WatchVideoButton } from '@/components'
 import organicLogosIcon from '@/assets/icons/home/organicLogosIcon.svg'
 import backgroundBubble1 from '@/assets/icons/home/backgroundPlantationBubble1.svg'
 import backgroundBubble2 from '@/assets/icons/home/backgroundPlantationBubble2.svg'
 import onlineDoctorIcon from '@/assets/icons/home/onlineDoctorIcon.svg'
+import { DeliveryIcon, FastPaymentIcon, OnlineHelpIcon, PermanentDiscountIcon } from '@/assets/icons'
 
 export default async function Home() {
   const specialistTypesData = await getSpecialistTypes()
@@ -38,7 +40,7 @@ export default async function Home() {
 
   return (
     <>
-      <section className="w-full absolute inset-0 top-0 h-[97vh] bg-[url(../assets/icons/home/backgroundDarkGreen.svg)] bg-no-repeat bg-bottom bg-cover">
+      {/* <section className="w-full absolute inset-0 top-0 h-[97vh] bg-[url(../assets/icons/home/backgroundDarkGreen.svg)] bg-no-repeat bg-bottom bg-cover">
         <div className="w-full h-[100vh] bg-[url(../assets/icons/home/backgroundLightGreen.svg)] bg-no-repeat bg-bottom bg-cover">
           <div className="flex flex-col items-center">
             <div className="text-center pt-40">
@@ -134,14 +136,14 @@ export default async function Home() {
           <Image
             src={'https://res.cloudinary.com/mehrigiyo/image/upload/v1661489066/Mehrigiyo/organicPlantation_m9fvbp.png'}
             alt=""
-            width={555}
-            height={469}
-            className="mt-64 relative"
+            width={660}
+            height={600}
+            className="mt-64 absolute -right-20"
           />
         </div>
       </section>
 
-      <section className="mt-72 flex justify-between items-center">
+      <section className="mt-64 flex justify-between items-center">
         <div className="w-2/5">
           <h2 className="text-[30px] font-semibold">Shoshilinch onlayn yordam</h2>
           <p className="text-gray-primary mt-4">
@@ -151,7 +153,7 @@ export default async function Home() {
           <SeeAllButton text="Onlayn uchrashuv belgilash" className="mt-10" />
         </div>
 
-        <div className='relative'>
+        <div className="relative">
           <Image
             src={'https://res.cloudinary.com/mehrigiyo/image/upload/v1661755312/Mehrigiyo/onlineDoctor_gwhktl.png'}
             alt=""
@@ -159,7 +161,10 @@ export default async function Home() {
             height={412}
             className="relative"
           />
-          <div className="w-[288px] absolute -left-24 top-[88px] bg-white p-[18px] shadow-primary rounded-2xl" content="card">
+          <div
+            className="w-[288px] absolute -left-24 top-[88px] bg-white p-[18px] shadow-primary rounded-2xl"
+            content="card"
+          >
             <div className="flex gap-2">
               <Image src={onlineDoctorIcon} alt="" />
               <h4 className="font-bold">Onlayn shifokorlar</h4>
@@ -170,6 +175,10 @@ export default async function Home() {
             </p>
           </div>
         </div>
+      </section> */}
+
+      <section className="mt-48">
+        <ProductsListModule />
       </section>
     </>
   )
