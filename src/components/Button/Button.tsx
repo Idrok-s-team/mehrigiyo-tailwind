@@ -1,3 +1,5 @@
+'use client'
+
 import { ButtonHTMLAttributes, FC } from 'react'
 import clsx from 'clsx'
 import { ElementSizeType } from '@/types'

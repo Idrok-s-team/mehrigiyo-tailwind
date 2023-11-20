@@ -34,6 +34,17 @@ export const ArrowRightGrayIcon = () => {
   )
 }
 
+export const ArrowRightLongerGreenIcon = () => {
+  return (
+    <svg width="25" height="13" viewBox="0 0 25 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M24.1553 7.03033C24.4482 6.73744 24.4482 6.26256 24.1553 5.96967L19.3824 1.1967C19.0895 0.903806 18.6146 0.903806 18.3217 1.1967C18.0288 1.48959 18.0288 1.96447 18.3217 2.25736L22.5643 6.5L18.3217 10.7426C18.0288 11.0355 18.0288 11.5104 18.3217 11.8033C18.6146 12.0962 19.0895 12.0962 19.3824 11.8033L24.1553 7.03033ZM0 7.25H23.625V5.75H0V7.25Z"
+        fill="#53B175"
+      />
+    </svg>
+  )
+}
+
 export const CloseRoundIcon = () => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">

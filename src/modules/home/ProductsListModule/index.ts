@@ -1,3 +1,3 @@
-import { ProductsListModule } from './ProductsListModule'
+import ProductsListModule from './ProductsListModule'
 
 export default ProductsListModule

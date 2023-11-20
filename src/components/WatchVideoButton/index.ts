@@ -1,3 +1,3 @@
-import { WatchVideoButton } from './WatchVideoButton'
+import WatchVideoButton from './WatchVideoButton'
 
 export default WatchVideoButton

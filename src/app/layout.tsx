@@ -2,13 +2,12 @@ import type { Metadata } from 'next'
 import { FC, ReactNode } from 'react'
 import { Inter } from 'next/font/google'
 import Link from 'next/link'
-import { ActiveLink, Dropdown } from '@/components'
+import { ActiveLink, Dropdown, HeaderActions } from '@/components'
 import { AvatarIcon, FlagUzIcon, LocationIcon, LogoIcon } from '@/assets/icons'
 import { getShopTypes } from '@/api'
+import Providers from './providers'
 
 import './globals.css'
-import HeaderActions from '@/components/HeaderActions'
-import Providers from './providers'
 
 const inter = Inter({ subsets: ['latin'] })
 

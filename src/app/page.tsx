@@ -3,13 +3,18 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { getSpecialistTypes } from '@/api'
-import { ProductsListModule } from '@/modules/home'
-import { Input, ProductCardSkeleton, SeeAllButton, WatchVideoButton } from '@/components'
+import { Button, Input, ProductCardSkeleton, SeeAllButton, WatchVideoButton } from '@/components'
 import organicLogosIcon from '@/assets/icons/home/organicLogosIcon.svg'
 import backgroundBubble1 from '@/assets/icons/home/backgroundPlantationBubble1.svg'
 import backgroundBubble2 from '@/assets/icons/home/backgroundPlantationBubble2.svg'
 import onlineDoctorIcon from '@/assets/icons/home/onlineDoctorIcon.svg'
+import bannerHomeIcon from '@/assets/icons/home/bannerHomeIcon.svg'
+import backgroundLeafIcon from '@/assets/icons/common/backgroundLeafIcon.svg'
 import { DeliveryIcon, FastPaymentIcon, OnlineHelpIcon, PermanentDiscountIcon } from '@/assets/icons'
+import appStoreIcon from '@/assets/icons/home/appStoreIcon.svg'
+import googlePlayIcon from '@/assets/icons/home/googlePlayIcon.svg'
+import mobileScreenIcon from '@/assets/icons/home/mobileScreenIcon.svg'
+import { NewsListModule, ProductsListModule } from '@/modules/home'
 
 export default async function Home() {
   const specialistTypesData = await getSpecialistTypes()
@@ -40,11 +45,11 @@ export default async function Home() {
 
   return (
     <>
-      {/* <section className="w-full absolute inset-0 top-0 h-[97vh] bg-[url(../assets/icons/home/backgroundDarkGreen.svg)] bg-no-repeat bg-bottom bg-cover">
+      <section className="w-full absolute inset-0 top-0 h-[97vh] bg-[url(../assets/icons/home/backgroundDarkGreen.svg)] bg-no-repeat bg-bottom bg-cover">
         <div className="w-full h-[100vh] bg-[url(../assets/icons/home/backgroundLightGreen.svg)] bg-no-repeat bg-bottom bg-cover">
           <div className="flex flex-col items-center">
             <div className="text-center pt-40">
-              <h1 className="text-[44px] font-bold">Bepul shifokor maslahati kerakmi?</h1>
+              <h1>Bepul shifokor maslahati kerakmi?</h1>
               <p className="mx-auto mt-3">24/7 Video maslahat Shaxsiy maslahat + Audio qo'ng'iroq</p>
               <p>
                 Faqat{' '}
@@ -84,9 +89,7 @@ export default async function Home() {
       </section>
 
       <section className="mt-40 flex flex-col items-center text-center">
-        <h2 className="text-3xl w-4/5 font-semibold">
-          Har qanday sog'liq bilan bog'liq muammolar uchun onlayn shifokorlarga murojaat qiling
-        </h2>
+        <h2 className="w-4/5">Har qanday sog'liq bilan bog'liq muammolar uchun onlayn shifokorlarga murojaat qiling</h2>
         <p className="text-gray-primary mt-4">
           Eng yaxshi shifokorlarimiz, Sizning barcha savolaringizga javob berishadi
         </p>
@@ -101,7 +104,7 @@ export default async function Home() {
               <div>
                 <Image src={image} alt={name} width={30} height={30} />
               </div>
-              <h4 className="font-semibold my-2">{name}</h4>
+              <h6 className="font-semibold my-2">{name}</h6>
               <span className="text-[#6b779a] text-xs">{get_doctors_count} shifokor</span>
             </Link>
           ))}
@@ -114,8 +117,8 @@ export default async function Home() {
 
       <section className="flex justify-between relative">
         <div className="w-2/5 mt-72">
-          <h4 className="uppercase text-gray-primary">MEHRIGIYOGA Xush kelibsiz</h4>
-          <h2 className="text-[26px] font-semibold mt-2">Yaxshi kelajak uchun salomatlik</h2>
+          <p className="uppercase text-gray-primary">MEHRIGIYOGA Xush kelibsiz</p>
+          <h3 className="mt-2">Yaxshi kelajak uchun salomatlik</h3>
           <p className="text-gray-primary mt-2">
             1992-yildan buyon shifokorlar, oʻsimlikshunoslar, sharq tabobati izdoshlari, fermer va texnologlardan iborat
             “MEHRIGIYO” professional jamoasi Fargʻona vodiysi va oʻz plantatsiyalarida yetishtirib, zamonaviy
@@ -145,7 +148,7 @@ export default async function Home() {
 
       <section className="mt-64 flex justify-between items-center">
         <div className="w-2/5">
-          <h2 className="text-[30px] font-semibold">Shoshilinch onlayn yordam</h2>
+          <h2>Shoshilinch onlayn yordam</h2>
           <p className="text-gray-primary mt-4">
             Bizga shoshilinch sog'liq bo'yicha maslahatchini ayting va biz 60 soniya ichida eng yaxshi shifokorni
             tayinlaymiz.
@@ -175,10 +178,65 @@ export default async function Home() {
             </p>
           </div>
         </div>
-      </section> */}
+      </section>
 
       <section className="mt-48">
         <ProductsListModule />
+      </section>
+
+      <section className="mt-40 overflow-hidden">
+        <div className="w-full flex items-start h-[300px] bg-[#3C3C3C] rounded-3xl relative px-10 py-[50px]">
+          <Image src={bannerHomeIcon} alt="" className="absolute bottom-0" />
+          <Image src={backgroundLeafIcon} alt="" className="absolute right-[26%] top-0" />
+
+          <div className="z-10">
+            <h2 className="text-white">Biz shifobaxsh o‘tlarimiz o‘sishiga g‘amxo‘rlik qilamiz</h2>
+            <p className="text-gray-primary w-3/5 mt-4">
+              Farg‘ona vodiysi tabiati bergan bu xilma-xilliklarning barchasi noyob mahsulotlar yaratishga asos
+              bo‘lmoqda.
+            </p>
+          </div>
+
+          <div className="absolute top-0 right-0">
+            <Image
+              src={'https://res.cloudinary.com/mehrigiyo/image/upload/v1664251391/Mehrigiyo/factory_ngvp35.png'}
+              alt="mehrigiyo"
+              width={400}
+              height={300}
+              objectFit="contain"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section className="mt-52 flex justify-between items-center gap-20">
+        <div className='w-1/2'>
+          <h2>
+            ”Mehrigiyo” mobil ilovasini yuklab{' '}
+            <span className="text-green-primary"> Shifokorlardan BEPUL maslahat </span>
+            oling
+          </h2>
+          <p className="mt-5">O’zbekistonning yetakchi shifokorlari bilan videokonsultatsiyadan foydalaning.</p>
+          <div className="mt-[54px]">
+            <label htmlFor="">Ilovani yuklab olish uchun havolani oling</label>
+            <Input className="mt-4" />
+          </div>
+          <div className="flex gap-7 mt-10">
+            <button>
+              <Image src={appStoreIcon} alt="" />
+            </button>
+            <button>
+              <Image src={googlePlayIcon} alt="" />
+            </button>
+          </div>
+        </div>
+        <div>
+          <Image src={mobileScreenIcon} alt="" />
+        </div>
+      </section>
+
+      <section className="mt-48">
+        <NewsListModule />
       </section>
     </>
   )

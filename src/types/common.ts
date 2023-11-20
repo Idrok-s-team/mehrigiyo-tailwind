@@ -8,19 +8,16 @@ type NavigationTypes = {
   previous: number | null
 }
 
-export type LocalizedNamesType = {
-  name: string
-  name_uz: string
-  name_ru: string
-  name_en: string
+export type LocalizedType<T extends string> = {
+  [K in `${T}` | `${T}_uz` | `${T}_ru` | `${T}_en`]: string
 }
 
 export type ElementSizeType = 'sm' | 'md' | 'lg'
 
 export type Nullable<T> = {
-  [K in keyof T]: T[K] | null | string
+  [K in keyof T]: T[K] | null
 }
 
 export type QueryParamsType = {
-  [key: string]: string | number | boolean
+  [key: string]: string | number | boolean | string[] | number[]
 }

@@ -1,16 +1,23 @@
 'use client'
 
-import { type FC } from 'react'
+import { memo, type FC, useCallback } from 'react'
 import Image from 'next/image'
 import { IShopMedicines } from '@/types'
 import { ArrowRightGrayIcon, FavoriteFillIcon, PlusWhiteIcon } from '@/assets/icons'
 
 type Props = {
   product: IShopMedicines
+  setIsDetailsOpen: (isOpen: boolean) => void
+  setSelectedProduct: (product: IShopMedicines) => void
 }
 
-const ProductCard: FC<Props> = ({ product }) => {
+const ProductCard: FC<Props> = memo(function ProductCard({ product, setIsDetailsOpen, setSelectedProduct }) {
   const { id, name, image, description, cost, discount } = product
+
+  const handleDetailsOpen = useCallback(() => {
+    setIsDetailsOpen(true)
+    setSelectedProduct(product)
+  }, [product, setIsDetailsOpen, setSelectedProduct])
 
   return (
     <article
@@ -27,7 +34,7 @@ const ProductCard: FC<Props> = ({ product }) => {
       </header>
 
       <section className="mt-3 h-[60px]">
-        <h4 className="line-clamp-1 font-medium">{name}</h4>
+        <h6 className="line-clamp-1">{name}</h6>
         <p className="line-clamp-1 mt-1 text-sm text-[#7c7c7c]">{description}</p>
       </section>
 
@@ -36,10 +43,10 @@ const ProductCard: FC<Props> = ({ product }) => {
           {!cost ? (
             <>
               <p className="line-through text-[#808080]">{cost.toLocaleString('ru')} uzs</p>
-              <h2 className="text-2xl text-green-primary font-bold">{discount.toLocaleString('ru')} uzs</h2>
+              <h4 className="text-green-primary font-bold">{discount.toLocaleString('ru')} uzs</h4>
             </>
           ) : (
-            <h2 className="text-2xl text-green-primary font-bold">{discount.toLocaleString('ru')} uzs</h2>
+            <h4 className="text-green-primary font-bold">{discount.toLocaleString('ru')} uzs</h4>
           )}
         </div>
         <div>
@@ -52,7 +59,10 @@ const ProductCard: FC<Props> = ({ product }) => {
         </div>
       </section>
 
-      <footer className="flex items-center justify-center text-[#BDBDBD] mt-3 cursor-pointer">
+      <footer
+        className="flex items-center justify-center text-[#BDBDBD] mt-3 cursor-pointer"
+        onClick={handleDetailsOpen}
+      >
         <span>Tafsilotlar</span>
         <span>
           <ArrowRightGrayIcon />
@@ -60,6 +70,6 @@ const ProductCard: FC<Props> = ({ product }) => {
       </footer>
     </article>
   )
-}
+})
 
 export default ProductCard

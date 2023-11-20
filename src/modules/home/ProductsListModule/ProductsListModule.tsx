@@ -1,27 +1,30 @@
 /* eslint-disable react/no-unescaped-entities */
 'use client'
 
-import { FC, PropsWithChildren, useState } from 'react'
+import { FC, useMemo, useState } from 'react'
 import { Carousel, Drawer, ProductCard, ProductCardSkeleton, SeeAllButton } from '@/components'
 import { useShopMedicinesQuery, useShopTypesQuery } from '@/hooks/queries'
+import { IShopMedicines } from '@/types'
 
-type Props = PropsWithChildren
-
-export const ProductsListModule: FC<Props> = ({ children, ...props }) => {
+const ProductsListModule: FC = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const [selectedProduct, setSelectedProduct] = useState<IShopMedicines | null>(null)
 
   const { data: shopMedicinesData, isFetching: isFetchingMedicines } = useShopMedicinesQuery()
   const { data: shopTypesData, isFetching: isFetchingShopTypes } = useShopTypesQuery()
 
-  const filterValues = [
-    { key: '', title: 'Hammasi' },
-    ...(shopTypesData?.results.map((value) => ({ key: value.id, title: value.name })) || []),
-  ]
+  const filterValues = useMemo(
+    () => [
+      { key: '', title: 'Hammasi' },
+      ...(shopTypesData?.results.map((value) => ({ key: value.id, title: value.name })) || []),
+    ],
+    [shopTypesData?.results],
+  )
 
   return (
     <>
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-semibold">Mahsulotlarimiz ro'yxati</h2>
+        <h4>Mahsulotlarimiz ro'yxati</h4>
         <SeeAllButton text="Barchasini ko'rish" />
       </div>
       <nav
@@ -53,13 +56,20 @@ export const ProductsListModule: FC<Props> = ({ children, ...props }) => {
         ) : (
           <Carousel>
             {shopMedicinesData?.results.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard
+                key={product.id}
+                product={product}
+                setIsDetailsOpen={setIsOpen}
+                setSelectedProduct={setSelectedProduct}
+              />
             ))}
           </Carousel>
         )}
       </div>
 
-      <Drawer isOpen={isOpen} setIsOpen={setIsOpen}></Drawer>
+      <Drawer isOpen={isOpen} setIsOpen={setIsOpen} product={selectedProduct} />
     </>
   )
 }
+
+export default ProductsListModule
