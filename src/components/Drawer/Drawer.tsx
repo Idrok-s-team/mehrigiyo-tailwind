@@ -6,6 +6,7 @@ import Image from 'next/image'
 import clsx from 'clsx'
 import { CloseRoundIcon, FavoriteIcon, SharedIcon } from '@/assets/icons'
 import { IShopMedicines } from '@/types'
+import backgroundLeaf from '@/assets/images/common/backgroundLeaf.png'
 import ActionButton from '../ActionButton'
 import Button from '../Button'
 
@@ -42,7 +43,7 @@ const Drawer: FC<Props> = ({ product, children, isOpen, setIsOpen }) => {
         </header>
 
         <main className="overflow-auto">
-          <div className="absolute w-[225px] h-[305px] bg-[url(../assets/icons/common/backgroundLeafIcon.svg)]"></div>
+        <Image src={backgroundLeaf} alt="" priority className="-ml-[10%] object-cover w-[225px] h-[305px]" />
           <div className="flex m-5 ml-52 bg-red-200">
             <section>
               <Image src={image} alt={name} width={270} height={270} />

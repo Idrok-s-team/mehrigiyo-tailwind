@@ -3,25 +3,20 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { getSpecialistTypes } from '@/api'
-import { Accordion, Button, Carousel, Input, ProductCardSkeleton, SeeAllButton, WatchVideoButton } from '@/components'
+import { Accordion, Input, SeeAllButton, WatchVideoButton } from '@/components'
 import { ContactSendIcon, DeliveryIcon, FastPaymentIcon, OnlineHelpIcon, PermanentDiscountIcon } from '@/assets/icons'
-import { NewsListModule, ProductsListModule } from '@/modules/home'
+import {
+  BrandsListModule,
+  HerbsBannerModule,
+  MobileAppModule,
+  NewsListModule,
+  ProductsListModule,
+} from '@/modules/home'
 import organicLogosIcon from '@/assets/icons/home/organicLogosIcon.svg'
 import backgroundBubble1 from '@/assets/icons/home/backgroundPlantationBubble1.svg'
 import backgroundBubble2 from '@/assets/icons/home/backgroundPlantationBubble2.svg'
 import onlineDoctorIcon from '@/assets/icons/home/onlineDoctorIcon.svg'
-import bannerHomeIcon from '@/assets/icons/home/bannerHomeIcon.svg'
-import backgroundLeafIcon from '@/assets/icons/common/backgroundLeafIcon.svg'
-import appStoreIcon from '@/assets/icons/home/appStoreIcon.svg'
-import googlePlayIcon from '@/assets/icons/home/googlePlayIcon.svg'
-import mobileScreenIcon from '@/assets/icons/home/mobileScreenIcon.svg'
 import contactPersonIcon from '@/assets/icons/home/contactPersonIcon.svg'
-import grandpharmIcon from '@/assets/icons/home/grandpharmIcon.svg'
-import asklepiyIcon from '@/assets/icons/home/asklepiyIcon.svg'
-import doriDarmonIcon from '@/assets/icons/home/doriDarmonIcon.svg'
-import nikapharmIcon from '@/assets/icons/home/nikapharmIcon.svg'
-import laxisamIcon from '@/assets/icons/home/laxisamIcon.svg'
-import jayxunInvestIcon from '@/assets/icons/home/jayxunInvestIcon.svg'
 
 export default async function Home() {
   const specialistTypesData = await getSpecialistTypes()
@@ -72,8 +67,6 @@ export default async function Home() {
       children: `Detoks sharbati Alatoo juda oddiy tarkibga ega. Bular yashil papayya sharbati va achchiq tarvuz sharbati. O'z navbatida, bu ikki komponent organik kislotalar, vitamin C, vitamin b1, vitamin D va papain fermenti kabi ko'plab foydali fermentlar, iz elementlari va vitaminlarni o'z ichiga oladi.`,
     },
   ]
-
-  const brands = [grandpharmIcon, asklepiyIcon, doriDarmonIcon, nikapharmIcon, laxisamIcon, jayxunInvestIcon]
 
   return (
     <>
@@ -216,55 +209,12 @@ export default async function Home() {
         <ProductsListModule />
       </section>
 
-      <section className="mt-40 overflow-hidden">
-        <div className="w-full flex items-start h-[300px] bg-[#3C3C3C] rounded-3xl relative px-10 py-[50px]">
-          <Image src={bannerHomeIcon} alt="" className="absolute bottom-0" />
-          <Image src={backgroundLeafIcon} alt="" className="absolute right-[26%] top-0" />
-
-          <div className="z-10">
-            <h2 className="text-white">Biz shifobaxsh o‘tlarimiz o‘sishiga g‘amxo‘rlik qilamiz</h2>
-            <p className="text-gray-primary w-3/5 mt-4">
-              Farg‘ona vodiysi tabiati bergan bu xilma-xilliklarning barchasi noyob mahsulotlar yaratishga asos
-              bo‘lmoqda.
-            </p>
-          </div>
-
-          <div className="absolute top-0 right-0">
-            <Image
-              src={'https://res.cloudinary.com/mehrigiyo/image/upload/v1664251391/Mehrigiyo/factory_ngvp35.png'}
-              alt="mehrigiyo"
-              width={400}
-              height={300}
-              objectFit="contain"
-            />
-          </div>
-        </div>
+      <section className="mt-40">
+        <HerbsBannerModule />
       </section>
 
-      <section className="mt-52 flex justify-between items-center gap-20">
-        <div className="w-1/2">
-          <h2>
-            ”Mehrigiyo” mobil ilovasini yuklab{' '}
-            <span className="text-green-primary"> Shifokorlardan BEPUL maslahat </span>
-            oling
-          </h2>
-          <p className="mt-5">O’zbekistonning yetakchi shifokorlari bilan videokonsultatsiyadan foydalaning.</p>
-          <div className="mt-[54px]">
-            <label htmlFor="">Ilovani yuklab olish uchun havolani oling</label>
-            <Input className="mt-4" />
-          </div>
-          <div className="flex gap-7 mt-10">
-            <button>
-              <Image src={appStoreIcon} alt="" />
-            </button>
-            <button>
-              <Image src={googlePlayIcon} alt="" />
-            </button>
-          </div>
-        </div>
-        <div>
-          <Image src={mobileScreenIcon} alt="" />
-        </div>
+      <section className="mt-52">
+        <MobileAppModule />
       </section>
 
       <section className="mt-48">
@@ -302,14 +252,8 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className='py-6 border-y-[1px] border-gray-100'>
-        <Carousel>
-          {brands.map((brand, index) => (
-            <div key={index} className='w-full'>
-              <Image src={brand} alt="" />
-            </div>
-          ))}
-        </Carousel>
+      <section>
+        <BrandsListModule />
       </section>
     </>
   )

@@ -15,7 +15,7 @@ const ActiveLink: FC<Props> = ({ children, ...props }) => {
       {...props}
       className={
         isActive
-          ? "after:content-['sa'] after:w-5 after:h-1 after:rounded after:bg-red-200 afte after:left-1/2 after:top-full after:-translate-x-1/2"
+          ? "after:content-[' sa'] after:w-5 after:h-1 after:rounded after:bg-red-200 afte after:left-1/2 after:top-full after:-translate-x-1/2"
           : ''
       }
     >

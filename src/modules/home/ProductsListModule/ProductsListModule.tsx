@@ -6,7 +6,12 @@ import { Carousel, Drawer, ProductCard, ProductCardSkeleton, SeeAllButton } from
 import { useShopMedicinesQuery, useShopTypesQuery } from '@/hooks/queries'
 import { IShopMedicines } from '@/types'
 
-const ProductsListModule: FC = () => {
+type Props = {
+  title?: string
+  withFilter?: boolean
+}
+
+const ProductsListModule: FC<Props> = ({ title = "Mahsulotlarimiz ro'yxati", withFilter = true }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedProduct, setSelectedProduct] = useState<IShopMedicines | null>(null)
 
@@ -24,27 +29,29 @@ const ProductsListModule: FC = () => {
   return (
     <>
       <div className="flex items-center justify-between">
-        <h4>Mahsulotlarimiz ro'yxati</h4>
+        <h4>{title}</h4>
         <SeeAllButton text="Barchasini ko'rish" />
       </div>
-      <nav
-        className="flex items-center text-lg text-gray-primary"
-        style={{ gap: 24, marginTop: 32, listStyle: 'none' }}
-      >
-        {isFetchingShopTypes ? (
-          <div className={`w-20 h-10 grid grid-cols-4 gap-7`}>
-            {Array.from({ length: 5 }).map((_, index) => (
-              <div key={index} className="w-full h-5 bg-gray-300 rounded-md duration-300 animate-pulse"></div>
-            ))}
-          </div>
-        ) : (
-          filterValues?.map(({ key, title }) => (
-            <li key={key} className="cursor-pointer list-none">
-              {title}
-            </li>
-          ))
-        )}
-      </nav>
+      {withFilter && (
+        <nav
+          className="flex items-center text-lg text-gray-primary"
+          style={{ gap: 24, marginTop: 32, listStyle: 'none' }}
+        >
+          {isFetchingShopTypes ? (
+            <div className={`w-20 h-10 grid grid-cols-4 gap-7`}>
+              {Array.from({ length: 5 }).map((_, index) => (
+                <div key={index} className="w-full h-5 bg-gray-300 rounded-md duration-300 animate-pulse"></div>
+              ))}
+            </div>
+          ) : (
+            filterValues?.map(({ key, title }) => (
+              <li key={key} className="cursor-pointer list-none">
+                {title}
+              </li>
+            ))
+          )}
+        </nav>
+      )}
 
       <div className="mt-10">
         {isFetchingMedicines ? (
