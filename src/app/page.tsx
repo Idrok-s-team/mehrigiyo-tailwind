@@ -3,18 +3,25 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { getSpecialistTypes } from '@/api'
-import { Button, Input, ProductCardSkeleton, SeeAllButton, WatchVideoButton } from '@/components'
+import { Accordion, Button, Carousel, Input, ProductCardSkeleton, SeeAllButton, WatchVideoButton } from '@/components'
+import { ContactSendIcon, DeliveryIcon, FastPaymentIcon, OnlineHelpIcon, PermanentDiscountIcon } from '@/assets/icons'
+import { NewsListModule, ProductsListModule } from '@/modules/home'
 import organicLogosIcon from '@/assets/icons/home/organicLogosIcon.svg'
 import backgroundBubble1 from '@/assets/icons/home/backgroundPlantationBubble1.svg'
 import backgroundBubble2 from '@/assets/icons/home/backgroundPlantationBubble2.svg'
 import onlineDoctorIcon from '@/assets/icons/home/onlineDoctorIcon.svg'
 import bannerHomeIcon from '@/assets/icons/home/bannerHomeIcon.svg'
 import backgroundLeafIcon from '@/assets/icons/common/backgroundLeafIcon.svg'
-import { DeliveryIcon, FastPaymentIcon, OnlineHelpIcon, PermanentDiscountIcon } from '@/assets/icons'
 import appStoreIcon from '@/assets/icons/home/appStoreIcon.svg'
 import googlePlayIcon from '@/assets/icons/home/googlePlayIcon.svg'
 import mobileScreenIcon from '@/assets/icons/home/mobileScreenIcon.svg'
-import { NewsListModule, ProductsListModule } from '@/modules/home'
+import contactPersonIcon from '@/assets/icons/home/contactPersonIcon.svg'
+import grandpharmIcon from '@/assets/icons/home/grandpharmIcon.svg'
+import asklepiyIcon from '@/assets/icons/home/asklepiyIcon.svg'
+import doriDarmonIcon from '@/assets/icons/home/doriDarmonIcon.svg'
+import nikapharmIcon from '@/assets/icons/home/nikapharmIcon.svg'
+import laxisamIcon from '@/assets/icons/home/laxisamIcon.svg'
+import jayxunInvestIcon from '@/assets/icons/home/jayxunInvestIcon.svg'
 
 export default async function Home() {
   const specialistTypesData = await getSpecialistTypes()
@@ -42,6 +49,31 @@ export default async function Home() {
       description: `Ish vaqti: 08:00 - 18:00`,
     },
   ]
+
+  const faqData = [
+    {
+      title: `Alatoo sharbatining tarkibi qanday?`,
+      children: `Detoks sharbati Alatoo juda oddiy tarkibga ega. Bular yashil papayya sharbati va achchiq tarvuz sharbati. O'z navbatida, bu ikki komponent organik kislotalar, vitamin C, vitamin b1, vitamin D va papain fermenti kabi ko'plab foydali fermentlar, iz elementlari va vitaminlarni o'z ichiga oladi.`,
+    },
+    {
+      title: `Alatoo qancha turadi va yetkazib berish qancha?`,
+      children: `Detoks sharbati Alatoo juda oddiy tarkibga ega. Bular yashil papayya sharbati va achchiq tarvuz sharbati. O'z navbatida, bu ikki komponent organik kislotalar, vitamin C, vitamin b1, vitamin D va papain fermenti kabi ko'plab foydali fermentlar, iz elementlari va vitaminlarni o'z ichiga oladi.`,
+    },
+    {
+      title: `Salom, bu sharbatga tez-tez allergiyangiz bormi?`,
+      children: `Detoks sharbati Alatoo juda oddiy tarkibga ega. Bular yashil papayya sharbati va achchiq tarvuz sharbati. O'z navbatida, bu ikki komponent organik kislotalar, vitamin C, vitamin b1, vitamin D va papain fermenti kabi ko'plab foydali fermentlar, iz elementlari va vitaminlarni o'z ichiga oladi.`,
+    },
+    {
+      title: `Alatoo sharbati tez-tez takrorlanadigan gerpes uchun samaralimi?`,
+      children: `Detoks sharbati Alatoo juda oddiy tarkibga ega. Bular yashil papayya sharbati va achchiq tarvuz sharbati. O'z navbatida, bu ikki komponent organik kislotalar, vitamin C, vitamin b1, vitamin D va papain fermenti kabi ko'plab foydali fermentlar, iz elementlari va vitaminlarni o'z ichiga oladi.`,
+    },
+    {
+      title: `Salom, o't pufagidagi polip bilan qabul qilish mumkinmi?`,
+      children: `Detoks sharbati Alatoo juda oddiy tarkibga ega. Bular yashil papayya sharbati va achchiq tarvuz sharbati. O'z navbatida, bu ikki komponent organik kislotalar, vitamin C, vitamin b1, vitamin D va papain fermenti kabi ko'plab foydali fermentlar, iz elementlari va vitaminlarni o'z ichiga oladi.`,
+    },
+  ]
+
+  const brands = [grandpharmIcon, asklepiyIcon, doriDarmonIcon, nikapharmIcon, laxisamIcon, jayxunInvestIcon]
 
   return (
     <>
@@ -210,7 +242,7 @@ export default async function Home() {
       </section>
 
       <section className="mt-52 flex justify-between items-center gap-20">
-        <div className='w-1/2'>
+        <div className="w-1/2">
           <h2>
             ”Mehrigiyo” mobil ilovasini yuklab{' '}
             <span className="text-green-primary"> Shifokorlardan BEPUL maslahat </span>
@@ -237,6 +269,47 @@ export default async function Home() {
 
       <section className="mt-48">
         <NewsListModule />
+      </section>
+
+      <section className="mt-20">
+        <h2>Ko’p so'raladigan savollar</h2>
+        <div className="flex justify-between">
+          <div className="w-1/5 mt-3">
+            <p className="text-green-primary">Qo'shimcha ma'lumot uchun biz bilan bog'laning</p>
+            <SeeAllButton text="Batafsil" size="md" className="mt-11" />
+          </div>
+          <div className="w-[68%] flex-">
+            <Accordion items={faqData} />
+          </div>
+        </div>
+      </section>
+
+      <section className="mt-16 flex items-center justify-center w-full h-[900px] -ml-[8%] bg-[url(../assets/icons/home/contactBublesIcon.svg)] bg-no-repeat gap-40">
+        <div className="mt-40">
+          <Image src={contactPersonIcon} alt="" className="" />
+        </div>
+
+        <div>
+          <p className="text-green-primary">Biz bilan bog'lanish</p>
+          <h2>So'rovingizni yuboring</h2>
+          <div className="flex flex-col gap-6 mt-10">
+            <Input label="Foydalanuvchi nomi" />
+            <Input label="Elektron pochta (ixtiyoriy)" />
+            <Input label="Telefon raqam" />
+            <Input label="Sizning savolingiz" />
+            <SeeAllButton text="Xabar yuborish" icon={<ContactSendIcon />} size="md" className="w-2/3" />
+          </div>
+        </div>
+      </section>
+
+      <section className='py-6 border-y-[1px] border-gray-100'>
+        <Carousel>
+          {brands.map((brand, index) => (
+            <div key={index} className='w-full'>
+              <Image src={brand} alt="" />
+            </div>
+          ))}
+        </Carousel>
       </section>
     </>
   )

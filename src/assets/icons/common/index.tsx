@@ -1,3 +1,11 @@
+import { FC } from 'react'
+
+type Props = {
+  color?: string
+  width?: string | number
+  height?: string | number
+}
+
 export const ArrowRightIcon = () => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width={20} height={21} fill="none">
@@ -58,3 +66,25 @@ export const CloseRoundIcon = () => {
     </svg>
   )
 }
+
+export const DropdownIcon: FC<Props> = ({ width = 12, height = 12 }) => (
+  <svg
+    width={width}
+    height={height}
+    aria-hidden="true"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 10 6"
+  >
+    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
+  </svg>
+)
+
+export const ContactSendIcon: FC<Props> = ({ width = 12, height = 12 }) => (
+  <svg width="21" height="18" viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M20.3622 9.81969C20.4747 9.77152 20.5705 9.69141 20.6379 9.58928C20.7053 9.48716 20.7412 9.36751 20.7412 9.24517C20.7412 9.12283 20.7053 9.00317 20.6379 8.90105C20.5705 8.79892 20.4747 8.71881 20.3622 8.67064L2.36106 0.956106L2.36017 0.955222L1.80156 0.714806C1.69571 0.669321 1.57934 0.653979 1.46532 0.670476C1.35129 0.686973 1.24405 0.734667 1.15543 0.808288C1.06681 0.88191 1.00026 0.978594 0.963138 1.08766C0.926018 1.19673 0.919767 1.31393 0.945076 1.42633L1.07766 2.01853L1.07677 2.02119L2.68279 9.24517L1.07677 16.4691L1.07677 16.4727L0.944191 17.0649C0.919288 17.1772 0.925844 17.2941 0.963139 17.4029C1.00043 17.5117 1.06702 17.6081 1.15557 17.6815C1.24411 17.7548 1.35119 17.8024 1.46501 17.8188C1.57883 17.8352 1.69498 17.82 1.80067 17.7746L20.3622 9.81969ZM17.0715 9.87007L3.82388 9.87007L3.9326 9.38128C3.9526 9.29164 3.9526 9.19869 3.9326 9.10905L3.82388 8.62026L17.0715 8.62026L18.5291 9.24517L17.0724 9.87096L17.0715 9.87007Z"
+      fill="#53B175"
+    />
+  </svg>
+)

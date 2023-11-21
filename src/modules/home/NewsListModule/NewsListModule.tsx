@@ -25,7 +25,7 @@ const NewsListModule: FC = () => {
     <>
       <div className="flex items-center justify-between">
         <h4>So'nggi yangiliklar</h4>
-        <SeeAllButton text="Batafsil" />
+        <SeeAllButton text="Batafsil" size='md' />
       </div>
       <nav
         className="flex items-center text-lg text-gray-primary"
