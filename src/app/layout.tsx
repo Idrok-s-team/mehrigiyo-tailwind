@@ -22,13 +22,13 @@ interface IProps {
 const RootLayout: FC<IProps> = async ({ children }) => {
   return (
     <html lang="en">
-      <body className={`${inter.className} flex flex-col justify-between min-h-screen`}>
+      <body className={`${inter.className} flex flex-col justify-between min-h-screen`} suppressHydrationWarning={true}>
         <Providers>
           <header className="sticky top-0 z-10">
             <HeaderModule />
           </header>
 
-          <main className="px-24 overflow-hidden">{children}</main>
+          <main className="px-24">{children}</main>
 
           <footer className="mt-[70px]">
             <FooterModule />

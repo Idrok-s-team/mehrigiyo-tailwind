@@ -13,8 +13,8 @@ import {
   ProductsListModule,
 } from '@/modules/home'
 import organicLogosIcon from '@/assets/icons/home/organicLogosIcon.svg'
-import backgroundBubble1 from '@/assets/icons/home/backgroundPlantationBubble1.svg'
-import backgroundBubble2 from '@/assets/icons/home/backgroundPlantationBubble2.svg'
+import backgroundBubble1 from '@/assets/icons/common/backgroundBubble1.svg'
+import backgroundBubble2 from '@/assets/icons/common/backgroundBubble2.svg'
 import onlineDoctorIcon from '@/assets/icons/home/onlineDoctorIcon.svg'
 import contactPersonIcon from '@/assets/icons/home/contactPersonIcon.svg'
 
@@ -129,7 +129,7 @@ export default async function Home() {
               <div>
                 <Image src={image} alt={name} width={30} height={30} />
               </div>
-              <h6 className="font-semibold my-2">{name}</h6>
+              <p className="font-semibold my-2">{name}</p>
               <span className="text-[#6b779a] text-xs">{get_doctors_count} shifokor</span>
             </Link>
           ))}

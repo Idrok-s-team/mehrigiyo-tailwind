@@ -16,7 +16,7 @@ const ProductTypesModule: FC = () => {
           href={'#'}
           className="shadow-primary flex flex-col justify-between p-5 pb-2.5 w-[188px] h-[150px] rounded-2xl duration-300 transition-colors hover:bg-green-light hover:border-[0.5px] hover:border-green-primary"
         >
-          <h6 className="font-semibold text-green-primary">{name}</h6>
+          <p className="font-semibold text-green-primary">{name}</p>
           <div className="flex justify-end">
             <Image src={icon} alt={name} width={70} height={70} />
           </div>

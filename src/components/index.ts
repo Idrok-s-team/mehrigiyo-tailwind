@@ -1,5 +1,7 @@
+export { default as Tabs } from './Tabs'
 export { default as Input } from './Input'
 export { default as Drawer } from './Drawer'
+export { default as Slider } from './Slider'
 export { default as Button } from './Button'
 export { default as Carousel } from './Carousel'
 export { default as Dropdown } from './Dropdown'

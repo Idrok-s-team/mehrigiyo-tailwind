@@ -34,7 +34,7 @@ const ProductCard: FC<Props> = memo(function ProductCard({ product, setIsDetails
       </header>
 
       <section className="mt-3 h-[60px]">
-        <h6 className="line-clamp-1">{name}</h6>
+        <p className="line-clamp-1 font-semibold">{name}</p>
         <p className="line-clamp-1 mt-1 text-sm text-[#7c7c7c]">{description}</p>
       </section>
 
