@@ -4,19 +4,19 @@ import Link from 'next/link'
 
 import { getSpecialistTypes } from '@/api'
 import { Accordion, Input, SeeAllButton, WatchVideoButton } from '@/components'
-import { ContactSendIcon, DeliveryIcon, FastPaymentIcon, OnlineHelpIcon, PermanentDiscountIcon } from '@/assets/icons'
+import { DeliveryIcon, FastPaymentIcon, OnlineHelpIcon, PermanentDiscountIcon } from '@/assets/icons'
 import {
   BrandsListModule,
   HerbsBannerModule,
   MobileAppModule,
   NewsListModule,
   ProductsListModule,
+  SendRequestModule,
 } from '@/modules/home'
 import organicLogosIcon from '@/assets/icons/home/organicLogosIcon.svg'
 import backgroundBubble1 from '@/assets/icons/common/backgroundBubble1.svg'
 import backgroundBubble2 from '@/assets/icons/common/backgroundBubble2.svg'
 import onlineDoctorIcon from '@/assets/icons/home/onlineDoctorIcon.svg'
-import contactPersonIcon from '@/assets/icons/home/contactPersonIcon.svg'
 
 export default async function Home() {
   const specialistTypesData = await getSpecialistTypes()
@@ -234,22 +234,8 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="mt-16 flex items-center justify-center w-full h-[900px] -ml-[8%] bg-[url(../assets/icons/home/contactBublesIcon.svg)] bg-no-repeat gap-40">
-        <div className="mt-40">
-          <Image src={contactPersonIcon} alt="" className="" />
-        </div>
-
-        <div>
-          <p className="text-green-primary">Biz bilan bog'lanish</p>
-          <h2>So'rovingizni yuboring</h2>
-          <div className="flex flex-col gap-6 mt-10">
-            <Input label="Foydalanuvchi nomi" />
-            <Input label="Elektron pochta (ixtiyoriy)" />
-            <Input label="Telefon raqam" />
-            <Input label="Sizning savolingiz" />
-            <SeeAllButton text="Xabar yuborish" icon={<ContactSendIcon />} size="md" className="w-2/3" />
-          </div>
-        </div>
+      <section>
+        <SendRequestModule />
       </section>
 
       <section>

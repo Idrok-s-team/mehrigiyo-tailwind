@@ -16,7 +16,7 @@ const ActiveLink: FC<Props> = ({ children, ...props }) => {
       {...props}
       className={
         isActive
-          ? "relative font-semibold after:content-[''] after:block after:w-6 after:h-[3px] after:absolute after:bg-green-primary after:rounded after:left-[40%]  after:-bottom-1"
+          ? "relative font-semibold after:content-[''] after:block after:w-6 after:h-[3px] after:absolute after:bg-green-primary after:rounded after:left-[30%]  after:-bottom-1"
           : ''
       }
     >
