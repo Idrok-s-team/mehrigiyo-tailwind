@@ -17,7 +17,7 @@ const Slider: FC<Props> = ({ children, ...props }) => {
   const [ref] = useKeenSlider<HTMLDivElement>(mergedOptions)
 
   return (
-    <div ref={ref} className="keen-slider">
+    <div ref={ref} className="!bg-white keen-slider">
       {children}
     </div>
   )

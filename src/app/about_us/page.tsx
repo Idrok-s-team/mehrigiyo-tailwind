@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { Breadcrumb, Slider, Tabs, WatchVideoButton } from '@/components'
 import { ProductCategoriesModule } from '@/modules/about'
 import backgroundLeaf from '@/assets/images/common/backgroundLeaf.png'
-import backgroundBranch from '@/assets/images/common/backgroundBranch.png'
+import backgroundBranch from '@/assets/images/common/backgroundBranchLeft.png'
 import organicLogosIcon from '@/assets/images/product/organicLogosWide.png'
 import ownerImg from '@/assets/images/about/owner.png'
 import backgroundBubble1 from '@/assets/icons/common/backgroundBubble1.svg'
@@ -62,14 +62,14 @@ const AboutUsPage = () => {
 
   return (
     <div className="mt-14">
-      <section className="flex items-center gap-32 justify-between">
+      <section className="flex items-center justify-between gap-32">
         <div className="flex gap-12">
           <Image src={backgroundLeaf} alt="" priority className="-ml-[10%] object-cover w-[225px] h-[305px]" />
 
           <div className="mt-10">
             <Breadcrumb items={breadcrumbItems} />
             <h2 className="mt-5">Mehrigiyo</h2>
-            <p className="text-gray-primary mt-4">
+            <p className="mt-4 text-gray-primary">
               Shifobaxsh o'simliklar yetishtirish va salomatlik va uzoq umr ko'rish uchun mahsulotlar ishlab chiqarish
               kompaniyasi
             </p>
@@ -81,18 +81,18 @@ const AboutUsPage = () => {
         </div>
       </section>
 
-      <section className="mt-14 sticky top-28 z-50 bg-white rounded-2xl">
+      <section className="sticky z-50 bg-white mt-14 top-28 rounded-2xl">
         <Tabs items={tabItems} />
       </section>
 
-      <section className="mt-24 flex items-center justify-between">
+      <section className="flex items-center justify-between mt-24">
         <div>
           <Image src={ownerImg} alt="Mehrigiyo owner" className="-ml-[16%]" />
         </div>
 
         <div className="w-3/5">
           <h2 className="font-bold">Xush kelibsiz!</h2>
-          <p className="text-gray-primary mt-5">
+          <p className="mt-5 text-gray-primary">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
             dolore magna aliqua. ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
             reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
@@ -106,10 +106,10 @@ const AboutUsPage = () => {
         </div>
       </section>
 
-      <section className="flex justify-between relative">
+      <section className="relative flex justify-between">
         <div className="w-[30%] mt-72">
           <h2 className="font-extrabold text-green-primary">Kelib chiqish</h2>
-          <p className="text-gray-primary mt-4">
+          <p className="mt-4 text-gray-primary">
             1992-yildan buyon yuqori malakali shifokorlar, o‘simlikshunoslar, sharq tabobati izdoshlari, fermer va
             texnologlardan tashkil topgan “MEHRIGIYO” kompaniyasining professional jamoasi zamonaviy farmatsevtika
             sanoati yutuqlari va qadimiy ta’limotlar tajribasini muvaffaqiyatli sintez qilib, o‘z plantatsiyalarida
@@ -126,7 +126,7 @@ const AboutUsPage = () => {
         </div>
       </section>
 
-      <section className="mt-60 flex items-center">
+      <section className="flex items-center mt-60">
         <div className="flex items-center gap-12">
           <Image src={backgroundLeaf} alt="" priority className="-ml-[20%] object-cover w-[225px] h-[305px]" />
 
@@ -135,7 +135,7 @@ const AboutUsPage = () => {
             <p className="mt-5 text-gray-primary">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
           </div>
         </div>
-        <div className="flex-shrink-0 grid grid-cols-2 gap-x-20 gap-y-10">
+        <div className="grid flex-shrink-0 grid-cols-2 gap-x-20 gap-y-10">
           {achievementsData.map(({ title, text, icon }) => (
             <div key={title} className="flex items-center gap-4">
               <span>{icon}</span>
@@ -150,7 +150,7 @@ const AboutUsPage = () => {
 
       <section className="mt-40">
         <h2 className="font-extrabold text-green-primary">Hozirda</h2>
-        <p className="text-gray-primary mt-3">
+        <p className="mt-3 text-gray-primary">
           Bugungi kunda korxonada qadimiy sharq tabobati va zamonaviy farmatsevtika yutuqlarini o‘zida jamlagan
           bog‘bonlar, farmatsevtlar, shifokorlar, akademiklar mehnat qilmoqda. Ayni paytda korxonada o‘zbekistonlik va
           xorijiy iste’molchilarning munosib ishonchiga ega bo‘lgan, salomatlik uchun samarali dori vositalari ishlab
@@ -205,7 +205,7 @@ const AboutUsPage = () => {
         </div>
       </section>
 
-      <section className="mt-9 text-center">
+      <section className="text-center mt-9">
         <h2>
           Kompaniya turli kasalliklarni <br /> tiklash uchun tizimli yondashuvdan foydalanadi,
           <br />
@@ -225,7 +225,7 @@ const AboutUsPage = () => {
           ))}
         </div>
 
-        <div className="mt-48 flex justify-center relative">
+        <div className="relative flex justify-center mt-48">
           <h3 className="text-[34px] text-green-primary italic font-medium">
             “Mehrigiyo” shifobaxsh mahsulotlari kasalliklarning <br /> oldini oladi hamda uzoq, sog‘lom va to‘kin hayot{' '}
             <br /> manbai bo‘lib xizmat qiladi.
@@ -235,10 +235,10 @@ const AboutUsPage = () => {
         </div>
       </section>
 
-      <section className="mt-40 flex justify-between">
-        <div className="w-1/3 flex-shrink-0">
+      <section className="flex justify-between mt-40">
+        <div className="flex-shrink-0 w-1/3">
           <h2 className="font-extrabold">Yutuqlar va sertifikatlar</h2>
-          <p className="text-gray-primary mt-3">
+          <p className="mt-3 text-gray-primary">
             2020 yil dekabr oyida kompaniya ikkita xalqaro organik sertifikatlarni oldi: Amerika USDA ORGANIC va Yevropa
             EU ORGANIC Gollandiyaning Control Union Certifications kompaniyasidan. Yaqin kelajakda Saudiya Arabistoni,
             Omon, AQSH, Yevropa mamlakatlariga mahsulot eksport qilish rejalashtirilgan.

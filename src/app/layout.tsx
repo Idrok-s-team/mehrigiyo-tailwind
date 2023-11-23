@@ -28,7 +28,7 @@ const RootLayout: FC<IProps> = async ({ children }) => {
             <HeaderModule />
           </header>
 
-          <main className="px-24">{children}</main>
+          <main className="px-24 overflow-hidden">{children}</main>
 
           <footer className="mt-[70px]">
             <FooterModule />
