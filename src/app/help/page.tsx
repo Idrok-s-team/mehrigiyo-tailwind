@@ -7,37 +7,10 @@ import backgroundBranch from '@/assets/images/common/backgroundBranchRight.png'
 import { SendRequestModule } from '@/modules/home'
 import Link from 'next/link'
 import { PhoneIcon } from '@/assets/icons'
+import { contactData } from '@/constants'
 
 const Help = async () => {
   const breadcrumbItems = [{ text: 'Bosh sahifa', href: '/' }, { text: 'Yordam' }]
-  const locations = [
-    {
-      name: 'AQSH',
-      address: '625 34-ave, San-Fransisko, CA 94121, AQSh.',
-      phone: '+1 415 387 33 99',
-    },
-    {
-      name: "O'zbekiston",
-      address: 'Farg‘ona tumani, Uchko‘prik tumani, O‘rozimergan ko‘chasi 94-uy',
-      phone: '+998 97 700 78 72',
-    },
-    {
-      name: 'Saudiya Arabistoni',
-      phone: '+0 53 223 52 23',
-    },
-    {
-      name: 'Rossiya, Moskva shahri.',
-      phone: '+7 995 500 34 56',
-    },
-    {
-      name: "Qozog'iston, Olma-Ota shahri",
-      phone: '+7 747 495 35 12',
-    },
-    {
-      name: "Qirg'iziston, O'sh shahri",
-      phone: '+996 55 828 28 22',
-    },
-  ]
 
   return (
     <div className="mt-14">
@@ -59,7 +32,7 @@ const Help = async () => {
       </section>
 
       <section className="grid grid-cols-2 p-16 mx-24 bg-white gap-y-10 rounded-xl shadow-primary">
-        {locations.map(({ name, phone, address }) => (
+        {contactData.map(({ name, phone, address }) => (
           <div key={name} className="flex flex-col">
             <h5 className="text-[22px] font-medium">{name}</h5>
             <p className="text-lg text-gray-primary">{address}</p>

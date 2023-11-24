@@ -17,6 +17,7 @@ import organicLogosIcon from '@/assets/icons/home/organicLogosIcon.svg'
 import backgroundBubble1 from '@/assets/icons/common/backgroundBubble1.svg'
 import backgroundBubble2 from '@/assets/icons/common/backgroundBubble2.svg'
 import onlineDoctorIcon from '@/assets/icons/home/onlineDoctorIcon.svg'
+import { faqData } from '@/constants'
 
 export default async function Home() {
   const specialistTypesData = await getSpecialistTypes()
@@ -45,40 +46,17 @@ export default async function Home() {
     },
   ]
 
-  const faqData = [
-    {
-      title: `Alatoo sharbatining tarkibi qanday?`,
-      children: `Detoks sharbati Alatoo juda oddiy tarkibga ega. Bular yashil papayya sharbati va achchiq tarvuz sharbati. O'z navbatida, bu ikki komponent organik kislotalar, vitamin C, vitamin b1, vitamin D va papain fermenti kabi ko'plab foydali fermentlar, iz elementlari va vitaminlarni o'z ichiga oladi.`,
-    },
-    {
-      title: `Alatoo qancha turadi va yetkazib berish qancha?`,
-      children: `Detoks sharbati Alatoo juda oddiy tarkibga ega. Bular yashil papayya sharbati va achchiq tarvuz sharbati. O'z navbatida, bu ikki komponent organik kislotalar, vitamin C, vitamin b1, vitamin D va papain fermenti kabi ko'plab foydali fermentlar, iz elementlari va vitaminlarni o'z ichiga oladi.`,
-    },
-    {
-      title: `Salom, bu sharbatga tez-tez allergiyangiz bormi?`,
-      children: `Detoks sharbati Alatoo juda oddiy tarkibga ega. Bular yashil papayya sharbati va achchiq tarvuz sharbati. O'z navbatida, bu ikki komponent organik kislotalar, vitamin C, vitamin b1, vitamin D va papain fermenti kabi ko'plab foydali fermentlar, iz elementlari va vitaminlarni o'z ichiga oladi.`,
-    },
-    {
-      title: `Alatoo sharbati tez-tez takrorlanadigan gerpes uchun samaralimi?`,
-      children: `Detoks sharbati Alatoo juda oddiy tarkibga ega. Bular yashil papayya sharbati va achchiq tarvuz sharbati. O'z navbatida, bu ikki komponent organik kislotalar, vitamin C, vitamin b1, vitamin D va papain fermenti kabi ko'plab foydali fermentlar, iz elementlari va vitaminlarni o'z ichiga oladi.`,
-    },
-    {
-      title: `Salom, o't pufagidagi polip bilan qabul qilish mumkinmi?`,
-      children: `Detoks sharbati Alatoo juda oddiy tarkibga ega. Bular yashil papayya sharbati va achchiq tarvuz sharbati. O'z navbatida, bu ikki komponent organik kislotalar, vitamin C, vitamin b1, vitamin D va papain fermenti kabi ko'plab foydali fermentlar, iz elementlari va vitaminlarni o'z ichiga oladi.`,
-    },
-  ]
-
   return (
     <>
       <section className="w-full absolute inset-0 top-0 h-[97vh] bg-[url(../assets/icons/home/backgroundDarkGreen.svg)] bg-no-repeat bg-bottom bg-cover">
         <div className="w-full h-[100vh] bg-[url(../assets/icons/home/backgroundLightGreen.svg)] bg-no-repeat bg-bottom bg-cover">
           <div className="flex flex-col items-center">
-            <div className="text-center pt-40">
+            <div className="pt-40 text-center">
               <h1>Bepul shifokor maslahati kerakmi?</h1>
               <p className="mx-auto mt-3">24/7 Video maslahat Shaxsiy maslahat + Audio qo'ng'iroq</p>
               <p>
                 Faqat{' '}
-                <Link href="#" className="text-green-dark underline">
+                <Link href="#" className="underline text-green-dark">
                   mobil ilovada
                 </Link>
               </p>
@@ -113,9 +91,9 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="mt-40 flex flex-col items-center text-center">
+      <section className="flex flex-col items-center mt-40 text-center">
         <h2 className="w-4/5">Har qanday sog'liq bilan bog'liq muammolar uchun onlayn shifokorlarga murojaat qiling</h2>
-        <p className="text-gray-primary mt-4">
+        <p className="mt-4 text-gray-primary">
           Eng yaxshi shifokorlarimiz, Sizning barcha savolaringizga javob berishadi
         </p>
 
@@ -129,7 +107,7 @@ export default async function Home() {
               <div>
                 <Image src={image} alt={name} width={30} height={30} />
               </div>
-              <p className="font-semibold my-2">{name}</p>
+              <p className="my-2 font-semibold">{name}</p>
               <span className="text-[#6b779a] text-xs">{get_doctors_count} shifokor</span>
             </Link>
           ))}
@@ -140,11 +118,11 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="flex justify-between relative">
+      <section className="relative flex justify-between">
         <div className="w-2/5 mt-72">
           <p className="uppercase text-gray-primary">MEHRIGIYOGA Xush kelibsiz</p>
           <h3 className="mt-2">Yaxshi kelajak uchun salomatlik</h3>
-          <p className="text-gray-primary mt-2">
+          <p className="mt-2 text-gray-primary">
             1992-yildan buyon shifokorlar, oʻsimlikshunoslar, sharq tabobati izdoshlari, fermer va texnologlardan iborat
             “MEHRIGIYO” professional jamoasi Fargʻona vodiysi va oʻz plantatsiyalarida yetishtirib, zamonaviy
             farmatsevtika sanoati yutuqlari va qadimiy taʼlimot tajribasini muvaffaqiyatli oʻzida mujassamlashtirib
@@ -166,15 +144,15 @@ export default async function Home() {
             alt=""
             width={660}
             height={600}
-            className="mt-64 absolute -right-20"
+            className="absolute mt-64 -right-20"
           />
         </div>
       </section>
 
-      <section className="mt-64 flex justify-between items-center">
+      <section className="flex items-center justify-between mt-64">
         <div className="w-2/5">
           <h2>Shoshilinch onlayn yordam</h2>
-          <p className="text-gray-primary mt-4">
+          <p className="mt-4 text-gray-primary">
             Bizga shoshilinch sog'liq bo'yicha maslahatchini ayting va biz 60 soniya ichida eng yaxshi shifokorni
             tayinlaymiz.
           </p>
@@ -197,7 +175,7 @@ export default async function Home() {
               <Image src={onlineDoctorIcon} alt="" />
               <h4 className="font-bold">Onlayn shifokorlar</h4>
             </div>
-            <p className="text-gray-primary text-xs mt-2">
+            <p className="mt-2 text-xs text-gray-primary">
               Bizga shoshilinch sog'liq bo'yicha maslahatchini ayting va biz 60 soniya ichida eng yaxshi shifokorni
               tayinlaymiz
             </p>
@@ -228,7 +206,7 @@ export default async function Home() {
             <p className="text-green-primary">Qo'shimcha ma'lumot uchun biz bilan bog'laning</p>
             <SeeAllButton text="Batafsil" size="md" className="mt-11" />
           </div>
-          <div className="w-[68%] flex-">
+          <div className="w-[68%]">
             <Accordion items={faqData} />
           </div>
         </div>

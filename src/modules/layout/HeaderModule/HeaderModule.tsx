@@ -49,7 +49,20 @@ const HeaderModule: FC = () => {
     { label: 'Onlayn shifokorlar', mainPath: '/online_doctors' },
     { label: 'Biz haqimizda', mainPath: '/about_us' },
     { label: 'Yangiliklar', mainPath: '/news' },
-    { label: 'Yordam', mainPath: '/help' },
+    {
+      label: 'Yordam',
+      mainPath: '/help',
+      dropdownItems: [
+        {
+          label: 'Yordam',
+          path: '/help',
+        },
+        {
+          label: "Ko'p so'raladigan savollar",
+          path: '/help/faq',
+        },
+      ],
+    },
   ]
 
   const getNavElements = () => {
