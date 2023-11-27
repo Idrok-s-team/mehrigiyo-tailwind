@@ -1,35 +1,44 @@
-'use client'
-
-import { type FC, type InputHTMLAttributes } from 'react'
+import React, { FC, InputHTMLAttributes, memo } from 'react'
+import InputMask from 'react-input-mask'
 import clsx from 'clsx'
-import { type ElementSizeType } from '@/types'
 
-export interface IProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
+type Props = InputHTMLAttributes<HTMLInputElement> & {
   label?: string
-  size?: ElementSizeType
 }
 
-const Input: FC<IProps> = function Input({ className, label, size = 'md', ...props }: IProps) {
-  const classNames = clsx(
-    'block w-full px-2 text-sm text-gray-900 border border-gray-300 rounded-lg !focus:ring-green-dark !focus:border-green-dark',
-    {
-      'h-6': size === 'sm',
-      'h-9': size === 'md',
-      'h-12 text-base': size === 'lg',
-    },
+const UnifiedInput: FC<Props> = ({ className, label, ...props }) => {
+  const inputClassNames = clsx(
+    'block w-full px-2 pb-3 pt-2 text-gray-900 border-b border-gray-[#E2E2E2] focus:outline-none focus:ring-0 focus:border-green-primary',
     className,
   )
 
+  const renderInput = () => {
+    if (props.type === 'tel') {
+      return (
+        <InputMask
+          {...props}
+          mask="+\9\98 99 999 99 99"
+          placeholder="+998 _ _  _ _ _ - _ _ - _ _"
+          maskChar="_"
+          alwaysShowMask
+          className={inputClassNames}
+        />
+      )
+    }
+    return <input {...props} className={inputClassNames} />
+  }
+
   return (
-    <div>
+    <div className="bg-white">
       {label && (
-        <label htmlFor={props.id} className="block mb-0.5 text-sm font-medium text-gray-900">
+        <label htmlFor={props.id} className="block text-sm text-[#C3C3C3]">
           {label}
+          {props.required && <span className="ml-1 text-lg text-primary">*</span>}
         </label>
       )}
-      <input className={classNames} {...props} />
+      {renderInput()}
     </div>
   )
 }
 
-export default Input
+export default memo(UnifiedInput)

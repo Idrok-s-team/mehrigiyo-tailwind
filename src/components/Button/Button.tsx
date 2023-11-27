@@ -10,11 +10,12 @@ type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
 
 const Button: FC<Props> = ({ children, type = 'button', className, size = 'md', ...props }) => {
   const classNames = clsx(
-    'flex items-center gap-4 py-3 px-6 rounded-[60px] bg-green-primary text-white duration-300 hover:shadow-primary',
+    'flex items-center justify-center w-full gap-4 py-3 px-6 rounded-[60px] bg-green-primary text-white duration-300 hover:shadow-primary',
     {
       'h-9': size === 'sm',
       'h-11': size === 'md',
       'h-[50px]': size === 'lg',
+      'opacity-50 cursor-not-allowed': props.disabled,
     },
     className,
   )

@@ -4,13 +4,13 @@ import Image from 'next/image'
 import { Breadcrumb, SeeAllButton, Slider } from '@/components'
 import backgroundLeaf from '@/assets/images/common/backgroundLeaf.png'
 import backgroundBranch from '@/assets/images/common/backgroundBranchRight.png'
-import { getNews } from '@/api'
+import { getNewsApi } from '@/api'
 import { formatDate } from '@/utils'
 import { NewsListModule } from '@/modules/home'
 import { AllNewsModule } from '@/modules/news'
 
 const News = async () => {
-  const newsData = await getNews()
+  const newsData = await getNewsApi()
   const firstNewsData = newsData.results[0]
 
   const breadcrumbItems = [{ text: 'Bosh sahifa', href: '/' }, { text: 'Yangiliklar' }]

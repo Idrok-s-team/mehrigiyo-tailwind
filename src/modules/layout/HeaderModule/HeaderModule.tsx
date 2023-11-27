@@ -1,12 +1,14 @@
 'use client'
 
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { ActiveLink, Dropdown, HeaderActions } from '@/components'
 import { AvatarIcon, FlagUzIcon, LocationIcon, LogoIcon } from '@/assets/icons'
+import { AuthModal } from './components'
 
 const HeaderModule: FC = () => {
+  const [isOpenAuthModal, setIsOpenAuthModal] = useState(true)
   const pathname = usePathname()
 
   const titles = [
@@ -112,7 +114,7 @@ const HeaderModule: FC = () => {
               <LocationIcon />
             </div>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 cursor-pointer" onClick={() => setIsOpenAuthModal(true)}>
             <div>Kirish</div>
             <div>
               <AvatarIcon />
@@ -134,6 +136,8 @@ const HeaderModule: FC = () => {
         <section>
           <HeaderActions />
         </section>
+
+        <AuthModal isOpen={isOpenAuthModal} setIsOpen={setIsOpenAuthModal} />
       </nav>
     </>
   )

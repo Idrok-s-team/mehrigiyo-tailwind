@@ -6,6 +6,7 @@ import { FooterModule, HeaderModule } from '@/modules/layout'
 import Providers from './providers'
 
 import './globals.css'
+import { Toaster } from 'react-hot-toast'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -24,6 +25,7 @@ const RootLayout: FC<IProps> = async ({ children }) => {
     <html lang="en">
       <body className={`${inter.className} flex flex-col justify-between min-h-screen`} suppressHydrationWarning={true}>
         <Providers>
+          <Toaster position="top-right" />
           <header className="sticky top-0 z-10">
             <HeaderModule />
           </header>

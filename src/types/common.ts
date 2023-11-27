@@ -18,6 +18,14 @@ export type Nullable<T> = {
   [K in keyof T]: T[K] | null
 }
 
-export type QueryParamsType = {
-  [key: string]: string | number | boolean | string[] | number[]
+export type QueryParamsType = Partial<{
+  limit: number
+  type_ides: string
+  offset: number
+}>
+
+export type SortCriteriaType = 'price_high_to_low' | 'price_low_to_high' | 'newest' | 'oldest' | ''
+
+export interface IApiErrorData {
+  detail: string
 }

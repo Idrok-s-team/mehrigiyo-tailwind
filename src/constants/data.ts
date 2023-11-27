@@ -1,3 +1,5 @@
+import { SortCriteriaType } from '@/types'
+
 export const faqData = [
   {
     title: `Alatoo sharbatining tarkibi qanday?`,
@@ -48,4 +50,12 @@ export const contactData = [
     name: "Qirg'iziston, O'sh shahri",
     phone: '+996 55 828 28 22',
   },
+]
+
+export const sortOptions: { label: string; value: SortCriteriaType }[] = [
+  { label: 'Hammasi', value: '' },
+  { label: 'Narxi boʻyicha: Yuqoridan Pastga', value: 'price_high_to_low' },
+  { label: 'Narxi boʻyicha: Pastdan Yuqoriga', value: 'price_low_to_high' },
+  { label: 'Yangi', value: 'newest' },
+  { label: 'Eski', value: 'oldest' },
 ]
