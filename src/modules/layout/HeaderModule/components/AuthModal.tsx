@@ -2,11 +2,12 @@
 
 import { FC, useState } from 'react'
 import Cookies from 'js-cookie'
+import toast from 'react-hot-toast'
 import { Input, Modal, Tabs } from '@/components'
-import useLoginMutation from '@/hooks/mutations/login'
 import { ILoginParams } from '@/types'
 import { inputHandler, parsePhoneNumber } from '@/utils'
-import toast from 'react-hot-toast'
+import { useUserMeQuery } from '@/hooks/queries'
+import { useLoginMutation } from '@/hooks/mutations'
 
 type Props = {
   isOpen: boolean
@@ -18,8 +19,9 @@ const initialFields: ILoginParams = {
   password: '',
 }
 
-export const AuthModal: FC<Props> = ({ isOpen, setIsOpen }) => {
+const AuthModal: FC<Props> = ({ isOpen, setIsOpen }) => {
   const [fields, setFields] = useState<ILoginParams>(initialFields)
+  const userMeQuery = useUserMeQuery()
   const { mutateAsync, isPending } = useLoginMutation()
   const { username, password } = fields
 
@@ -41,13 +43,14 @@ export const AuthModal: FC<Props> = ({ isOpen, setIsOpen }) => {
           Cookies.set('access_token', res.access)
           Cookies.set('refresh_token', res.refresh)
           setIsOpen(false)
+          userMeQuery.refetch()
         })
     }
   }
 
   return (
     <>
-      <Modal onClose={() => setIsOpen(false)} onSubmit={() => handleLogin()} isOpen={isOpen} disabled={isPending}>
+      <Modal onClose={() => setIsOpen(false)} onSubmit={() => handleLogin()} isOpen={isOpen}>
         <div className="px-16 pb-8 bg-white">
           <section>
             <Tabs
@@ -66,3 +69,5 @@ export const AuthModal: FC<Props> = ({ isOpen, setIsOpen }) => {
     </>
   )
 }
+
+export default AuthModal

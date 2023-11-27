@@ -16,7 +16,7 @@ const ProductsPage = () => {
   const bannerImages = [bannerImg1, bannerImg2, bannerImg3]
 
   return (
-    <div className="mt-14">
+    <div className="px-24 mt-14">
       <section className="flex justify-between">
         <div className="flex gap-12">
           <Image src={backgroundLeaf} alt="" priority className="-ml-[10%] object-cover w-[225px] h-[305px]" />
@@ -24,7 +24,7 @@ const ProductsPage = () => {
           <div className="mt-10">
             <Breadcrumb items={breadcrumbItems} />
             <h2 className="mt-5">Mehrigiyo tabiiy mahsulotlari</h2>
-            <p className="text-gray-primary mt-4 w-2/3">
+            <p className="w-2/3 mt-4 text-gray-primary">
               Shifobaxsh o'simliklardan foydalanish, salomatlik va uzoq umr ko'rishingi uchun asosiy omildir
             </p>
             <WatchVideoButton className="mt-10" />

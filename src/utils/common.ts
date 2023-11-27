@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from 'react'
+import Cookies from 'js-cookie'
 
 export const updateFilters = (
   currentValue: number,
@@ -19,4 +20,12 @@ export const updateFilters = (
 
 export const parsePhoneNumber = (phone: string): string => {
   return phone.replace(/\D/g, '')
+}
+
+export const getCookie = (name: string): string | undefined => {
+  return Cookies.get(name)
+}
+
+export const setCookie = (name: string, value: string, options = {}): void => {
+  Cookies.set(name, value, options)
 }

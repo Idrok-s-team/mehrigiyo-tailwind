@@ -3,8 +3,8 @@
 import React, { useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { useEventListener } from 'usehooks-ts'
-import { Button } from '@/components'
 import { CloseRoundIcon } from '@/assets/icons'
+import Button from '../Button'
 
 interface IProps extends React.PropsWithChildren {
   isOpen: boolean

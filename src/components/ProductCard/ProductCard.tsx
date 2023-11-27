@@ -3,7 +3,8 @@
 import { memo, type FC, useCallback } from 'react'
 import Image from 'next/image'
 import { IShopMedicines } from '@/types'
-import { ArrowRightGrayIcon, FavoriteFillIcon, PlusWhiteIcon } from '@/assets/icons'
+import { ArrowRightGrayIcon, FavoriteFillIcon, FavoriteIcon, PlusWhiteIcon } from '@/assets/icons'
+import { useAddToBasket, useChangeFavorite } from '@/hooks/common'
 
 type Props = {
   product: IShopMedicines
@@ -13,6 +14,9 @@ type Props = {
 
 const ProductCard: FC<Props> = memo(function ProductCard({ product, setIsDetailsOpen, setSelectedProduct }) {
   const { id, name, image, description, cost, discount } = product
+
+  const { isProductInCart, addToBasket } = useAddToBasket(id)
+  const { isProductInFavorite, onChangeFavorite } = useChangeFavorite(id)
 
   const handleDetailsOpen = useCallback(() => {
     setIsDetailsOpen(true)
@@ -28,8 +32,8 @@ const ProductCard: FC<Props> = memo(function ProductCard({ product, setIsDetails
         <figure>
           <Image src={image} alt={name} width={175} height={175} />
         </figure>
-        <button aria-label="Add to favorites" className="cursor-pointer">
-          <FavoriteFillIcon />
+        <button aria-label="Add to favorites" className="cursor-pointer" onClick={onChangeFavorite}>
+          {isProductInFavorite ? <FavoriteFillIcon /> : <FavoriteIcon />}
         </button>
       </header>
 
@@ -52,7 +56,10 @@ const ProductCard: FC<Props> = memo(function ProductCard({ product, setIsDetails
         <div>
           <button
             aria-label="Add to cart"
-            className="flex items-center justify-center bg-green-primary w-11 h-11 rounded-2xl"
+            className={`flex items-center justify-center bg-green-primary w-11 h-11 rounded-2xl ${
+              isProductInCart ? 'cursor-not-allowed opacity-50' : ''
+            }`}
+            onClick={addToBasket}
           >
             <PlusWhiteIcon />
           </button>

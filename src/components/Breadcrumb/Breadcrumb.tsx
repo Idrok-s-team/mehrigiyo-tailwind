@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import React from 'react'
 
 type BreadcrumbItem = {
   text: string
@@ -24,7 +23,9 @@ const Breadcrumb: React.FC<Props> = ({ items }) => {
               {isLastItem ? (
                 <span className="text-green-primary">{item.text}</span>
               ) : (
-                <Link href={item.href as string} className='hover:text-black duration-200'>{item.text}</Link>
+                <Link href={item.href as string} className="duration-200 hover:text-black">
+                  {item.text}
+                </Link>
               )}
             </li>
           )

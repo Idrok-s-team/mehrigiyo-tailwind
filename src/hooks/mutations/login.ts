@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query'
 import { loginPostApi } from '@/api/login'
 import { IApiErrorData, ILoginParams, ILoginResponse } from '@/types'
 
-const useLoginMutation = () => {
+export const useLoginMutation = () => {
   const mutation = useMutation<ILoginResponse, IApiErrorData, ILoginParams>({
     mutationFn: (params: ILoginParams) => {
       return loginPostApi(params)
@@ -10,5 +10,3 @@ const useLoginMutation = () => {
   })
   return mutation
 }
-
-export default useLoginMutation

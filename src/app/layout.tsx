@@ -23,7 +23,7 @@ interface IProps {
 const RootLayout: FC<IProps> = async ({ children }) => {
   return (
     <html lang="en">
-      <body className={`${inter.className} flex flex-col justify-between min-h-screen`} suppressHydrationWarning={true}>
+      <body className={`${inter.className} flex flex-col justify-between min-h-screen bg-gray-background`} suppressHydrationWarning={true}>
         <Providers>
           <Toaster position="top-right" />
           <header className="sticky top-0 z-10">

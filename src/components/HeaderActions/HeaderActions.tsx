@@ -23,9 +23,9 @@ const HeaderActions: FC = ({}) => {
       // // count: favoriteProducts.data?.count,
     },
     {
-      icon: <BasketIcon color={pathname === '/basket' ? '#fff' : '#505050'} />,
+      icon: <BasketIcon color={pathname === '/cart' ? '#fff' : '#505050'} />,
       name: `Savat`,
-      href: `/basket`,
+      href: `/cart`,
       // count: shopCartQuery.data?.data.length,
     },
   ]

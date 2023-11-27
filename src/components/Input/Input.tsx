@@ -1,4 +1,6 @@
-import React, { FC, InputHTMLAttributes, memo } from 'react'
+'use client'
+
+import React, { FC, InputHTMLAttributes } from 'react'
 import InputMask from 'react-input-mask'
 import clsx from 'clsx'
 
@@ -6,7 +8,7 @@ type Props = InputHTMLAttributes<HTMLInputElement> & {
   label?: string
 }
 
-const UnifiedInput: FC<Props> = ({ className, label, ...props }) => {
+const Input: FC<Props> = ({ className, label, ...props }) => {
   const inputClassNames = clsx(
     'block w-full px-2 pb-3 pt-2 text-gray-900 border-b border-gray-[#E2E2E2] focus:outline-none focus:ring-0 focus:border-green-primary',
     className,
@@ -41,4 +43,4 @@ const UnifiedInput: FC<Props> = ({ className, label, ...props }) => {
   )
 }
 
-export default memo(UnifiedInput)
+export default Input

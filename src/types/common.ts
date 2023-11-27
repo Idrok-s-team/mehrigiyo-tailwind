@@ -2,6 +2,12 @@ export type GetResponseType<T> = NavigationTypes & {
   results: T
 }
 
+export type ResponseStatusType<T> = {
+  data: T
+  request: string
+  status: string
+}
+
 type NavigationTypes = {
   count: number
   next: number | null
