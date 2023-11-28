@@ -4,7 +4,7 @@ import { memo, type FC, useCallback } from 'react'
 import Image from 'next/image'
 import { IShopMedicines } from '@/types'
 import { ArrowRightGrayIcon, FavoriteFillIcon, FavoriteIcon, PlusWhiteIcon } from '@/assets/icons'
-import { useAddToBasket, useChangeFavorite } from '@/hooks/common'
+import { useAddToCart, useChangeFavorite } from '@/hooks/cart'
 
 type Props = {
   product: IShopMedicines
@@ -15,7 +15,7 @@ type Props = {
 const ProductCard: FC<Props> = memo(function ProductCard({ product, setIsDetailsOpen, setSelectedProduct }) {
   const { id, name, image, description, cost, discount } = product
 
-  const { isProductInCart, addToBasket } = useAddToBasket(id)
+  const { isProductInCart, addToBasket } = useAddToCart(id)
   const { isProductInFavorite, onChangeFavorite } = useChangeFavorite(id)
 
   const handleDetailsOpen = useCallback(() => {

@@ -1,9 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
-import { DeleteIcon, MinusIcon, PlusIcon } from '@/assets/icons'
-import { Button } from '@/components'
-import { IShopCart } from '@/types'
-import Image from 'next/image'
 import React, { FC } from 'react'
+import { Button } from '@/components'
 
 type Props = {
   infoCard: {
@@ -15,7 +12,7 @@ type Props = {
 
 const CartItem: FC<Props> = ({ infoCard }) => {
   return (
-    <div className="flex-shrink-0 bg-white rounded-3xl shadow-card mt-11 px-[30px] py-6 w-[347px] sticky top-[200px]">
+    <div className="flex-shrink-0 bg-white rounded-3xl shadow-card mt-11 px-[30px] py-6 w-[347px] sticky top-0">
       <div className="flex flex-col gap-4">
         {infoCard.map(({ label, value, isLast }) => (
           <div key={label} className="flex items-center justify-between">

@@ -2,7 +2,7 @@ import toast from 'react-hot-toast'
 import { useShopCartQuery } from '../queries'
 import { useAddShopCartMutation } from '../mutations/shop'
 
-const useAddToBasket = (productId: number) => {
+const useAddToCart = (productId: number) => {
   const { data, refetch } = useShopCartQuery()
   const { mutateAsync } = useAddShopCartMutation()
 
@@ -30,4 +30,4 @@ const useAddToBasket = (productId: number) => {
   return { isProductInCart, addToBasket }
 }
 
-export default useAddToBasket
+export default useAddToCart
