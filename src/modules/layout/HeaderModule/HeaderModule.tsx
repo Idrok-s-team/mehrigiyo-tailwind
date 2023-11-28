@@ -4,10 +4,10 @@ import { FC, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import Image from 'next/image'
-import { ActiveLink, Dropdown, HeaderActions } from '@/components'
+import { ActiveLink, Dropdown } from '@/components'
 import { AvatarIcon, FlagUzIcon, LocationIcon, LogoIcon } from '@/assets/icons'
-import AuthModal from './components/AuthModal'
 import { useUserMeQuery } from '@/hooks/queries'
+import { HeaderActions, AuthModal } from './components'
 
 const HeaderModule: FC = () => {
   const [isOpenAuthModal, setIsOpenAuthModal] = useState(false)
@@ -142,7 +142,11 @@ const HeaderModule: FC = () => {
         </ul>
       </nav>
 
-      <nav className={`flex items-center justify-between px-24 py-4 ${pathname === '/' ? 'bg-[#addabe]' : 'bg-gray-background'}`}>
+      <nav
+        className={`flex items-center justify-between px-24 py-4 ${
+          pathname === '/' ? 'bg-[#addabe]' : 'bg-gray-background'
+        }`}
+      >
         <section className="flex items-center gap-12">
           <div>
             <Link href="/">

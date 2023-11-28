@@ -23,7 +23,6 @@ const NewsListModule: FC = () => {
             alt="mehrigiyo"
             width={400}
             height={300}
-            objectFit="contain"
           />
         </div>
       </div>
