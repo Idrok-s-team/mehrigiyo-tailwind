@@ -19,7 +19,7 @@ const HeaderActions: FC = ({}) => {
     {
       icon: <FavouriteOutlineIcon color={pathname === '/favourite_products' ? '#fff' : '#F3603F'} />,
       name: `Sevimli mahsulotlar`,
-      href: `/favourite_products`,
+      href: `/favorites`,
       // // count: favoriteProducts.data?.count,
     },
     {
