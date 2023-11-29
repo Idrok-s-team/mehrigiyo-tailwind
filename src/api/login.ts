@@ -1,22 +1,10 @@
-import { baseUrl } from '@/constants'
-import { IApiErrorData, ILoginParams, ILoginResponse } from '@/types'
-import { ApiError } from './error'
+import { ILoginParams, ILoginResponse } from '@/types'
+import { authorizedApiFetch } from './common'
 
-export const loginPostApi = async (params: ILoginParams): Promise<ILoginResponse> => {
-  const url = `${baseUrl}/login/`
-  const response = await fetch(url, {
-    method: 'post',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(params),
-  })
-  const statusCode = response.status
+export const loginApi = async (params: ILoginParams): Promise<ILoginResponse> => {
+  return authorizedApiFetch('/login/', 'POST', params, false)
+}
 
-  if (!response.ok) {
-    const errorData = await response.json()
-    throw new ApiError(`Login failed: ${errorData.detail}`, { ...errorData, statusCode })
-  }
-
-  return response.json()
+export const refreshTokenApi = async (params: Pick<ILoginResponse, 'refresh'>): Promise<ILoginResponse> => {
+  return authorizedApiFetch('/refresh/', 'POST', params, false)
 }

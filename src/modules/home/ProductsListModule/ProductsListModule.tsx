@@ -2,7 +2,7 @@
 'use client'
 
 import { FC, useMemo, useState } from 'react'
-import { Carousel, Drawer, ProductCard, ProductCardSkeleton, SeeAllButton } from '@/components'
+import { Drawer, ProductCard, ProductCardSkeleton, SeeAllButton, Slider } from '@/components'
 import { useShopMedicinesQuery, useShopTypesQuery } from '@/hooks/queries'
 import { IShopMedicines } from '@/types'
 
@@ -61,16 +61,13 @@ const ProductsListModule: FC<Props> = ({ title = "Mahsulotlarimiz ro'yxati", wit
             ))}
           </div>
         ) : (
-          <Carousel>
+          <Slider slides={{ perView: 4.7 }}>
             {shopMedicinesData?.results.map((product) => (
-              <ProductCard
-                key={product.id}
-                product={product}
-                setIsDetailsOpen={setIsOpen}
-                setSelectedProduct={setSelectedProduct}
-              />
+              <div key={product.id} className="keen-slider__slide">
+                <ProductCard product={product} setIsDetailsOpen={setIsOpen} setSelectedProduct={setSelectedProduct} />
+              </div>
             ))}
-          </Carousel>
+          </Slider>
         )}
       </div>
 

@@ -11,7 +11,6 @@ specifiers:
   autoprefixer: ^10.0.1
   clsx: ^2.0.0
   dayjs: ^1.11.10
-  embla-carousel-react: 8.0.0-rc14
   eslint: ^8
   eslint-config-next: 14.0.2
   eslint-plugin-react: ^7.33.2
@@ -33,7 +32,6 @@ dependencies:
   '@tanstack/react-query': 5.8.4_biqbaboplfbrettd7655fr4n2y
   clsx: 2.0.0
   dayjs: 1.11.10
-  embla-carousel-react: 8.0.0-rc14_react@18.2.0
   js-cookie: 3.0.5
   keen-slider: 6.8.6
   next: 14.0.4-canary.18_biqbaboplfbrettd7655fr4n2y
@@ -829,28 +827,6 @@ packages:
   /electron-to-chromium/1.4.581:
     resolution: {integrity: sha512-6uhqWBIapTJUxgPTCHH9sqdbxIMPt7oXl0VcAL1kOtlU6aECdcMncCrX5Z7sHQ/invtrC9jUQUef7+HhO8vVFw==}
     dev: true
-
-  /embla-carousel-react/8.0.0-rc14_react@18.2.0:
-    resolution: {integrity: sha512-2b9vXACEcn0qja4QyaFMfCgFbFhumV3krOCGr9+jlQiuXt5z/EyfiYYziDsm70DhTtxtg/uKEGflIqZSfWRYKg==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.1 || ^18.0.0
-    dependencies:
-      embla-carousel: 8.0.0-rc14
-      embla-carousel-reactive-utils: 8.0.0-rc14_embla-carousel@8.0.0-rc14
-      react: 18.2.0
-    dev: false
-
-  /embla-carousel-reactive-utils/8.0.0-rc14_embla-carousel@8.0.0-rc14:
-    resolution: {integrity: sha512-r153bynAo9eTBuWWggPWLYnE9xqVOYmkkeMbAuGX8pkUisJN8aTLMW9b7CYOzjURRB7z85EmYRbeBg+axQzc9g==}
-    peerDependencies:
-      embla-carousel: 8.0.0-rc14
-    dependencies:
-      embla-carousel: 8.0.0-rc14
-    dev: false
-
-  /embla-carousel/8.0.0-rc14:
-    resolution: {integrity: sha512-/NLkMFZ7xKryRVYeUjmhbfV63Vr07saPBDwAX2TPMbcaiWwfQfU5Xsc2AiCMZANtwmzsjRK6gSBa7hOy/VXu6g==}
-    dev: false
 
   /emoji-regex/9.2.2:
     resolution: {integrity: sha512-L18DaJsXSUk2+42pv8mLs5jJT2hqFkFE4j21wOmgbUqsZ2hL72NsUU785g9RXgo3s0ZNgVl42TiHp3ZtOv/Vyg==}

@@ -2,7 +2,7 @@
 'use client'
 
 import { FC, useMemo, useState } from 'react'
-import { Carousel, ProductCardSkeleton, SeeAllButton } from '@/components'
+import { ProductCardSkeleton, SeeAllButton, Slider } from '@/components'
 import { useNewsQuery, useNewsTagsQuery } from '@/hooks/queries'
 import { INews } from '@/types'
 import NewsCard from '@/components/NewsCard'
@@ -25,7 +25,7 @@ const NewsListModule: FC = () => {
     <>
       <div className="flex items-center justify-between">
         <h4>So'nggi yangiliklar</h4>
-        <SeeAllButton text="Batafsil" size='md' />
+        <SeeAllButton text="Batafsil" size="md" />
       </div>
       <nav
         className="flex items-center text-lg text-gray-primary"
@@ -54,11 +54,13 @@ const NewsListModule: FC = () => {
             ))}
           </div>
         ) : (
-          <Carousel>
+          <Slider slides={{ perView: 3.3 }}>
             {newsData?.results?.map((data) => (
-              <NewsCard key={data.id} data={data} setSelectedNews={setSelectedNews} />
+              <div key={data.id} className="keen-slider__slide p-2 py-7">
+                <NewsCard data={data} setSelectedNews={setSelectedNews} />
+              </div>
             ))}
-          </Carousel>
+          </Slider>
         )}
       </div>
     </>

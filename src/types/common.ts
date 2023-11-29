@@ -35,3 +35,17 @@ export type SortCriteriaType = 'price_high_to_low' | 'price_low_to_high' | 'newe
 export interface IApiErrorData {
   detail: string
 }
+
+export interface IErrorResponse {
+  data: {
+    detail: string
+    code: string
+    messages: Array<{
+      token_class: string
+      token_type: string
+      message: string
+    }>
+    statusCode: number
+  }
+  name: string
+}

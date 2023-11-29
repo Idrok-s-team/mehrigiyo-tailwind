@@ -37,9 +37,11 @@ const AllNewsModule: FC = () => {
       </nav>
 
       <div className="grid grid-cols-3 justify-between gap-x-[60px] gap-y-[50px] mt-10">
-        {newsData?.results?.map((data) => (
-          <NewsCard key={data.id} data={data} setSelectedNews={setSelectedNews} />
-        ))}
+        {newsData?.results
+          .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+          .map((data) => (
+            <NewsCard key={data.id} data={data} setSelectedNews={setSelectedNews} />
+          ))}
       </div>
     </>
   )

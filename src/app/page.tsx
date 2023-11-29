@@ -47,7 +47,7 @@ export default async function Home() {
   ]
 
   return (
-    <>
+    <div className="px-24">
       <section className="w-full absolute inset-0 top-0 h-[97vh] bg-[url(../assets/icons/home/backgroundDarkGreen.svg)] bg-no-repeat bg-bottom bg-cover">
         <div className="w-full h-[100vh] bg-[url(../assets/icons/home/backgroundLightGreen.svg)] bg-no-repeat bg-bottom bg-cover">
           <div className="flex flex-col items-center">
@@ -62,7 +62,7 @@ export default async function Home() {
               </p>
             </div>
             <div className="w-2/5 mt-5">
-              <Input size="lg" />
+              <Input />
             </div>
             <div>
               <Image
@@ -219,6 +219,6 @@ export default async function Home() {
       <section>
         <BrandsListModule />
       </section>
-    </>
+    </div>
   )
 }

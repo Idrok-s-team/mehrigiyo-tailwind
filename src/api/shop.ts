@@ -25,23 +25,19 @@ export const getShopMedicinesApi = async (params?: QueryParamsType): Promise<Get
 
 // SHOP CART API
 export const getShopCartApi = async (): Promise<ResponseStatusType<IShopCart[]>> => {
-  return authorizedApiFetch<void, ResponseStatusType<IShopCart[]>>('/shop/cart/')
+  return authorizedApiFetch('/shop/cart/')
 }
 
 export const addShopCartApi = async (params: ShopCartParamsType<'product'>): Promise<ResponseStatusType<IShopCart>> => {
-  return authorizedApiFetch<ShopCartParamsType<'product'>, ResponseStatusType<IShopCart>>('/shop/cart/', 'POST', params)
+  return authorizedApiFetch('/shop/cart/', 'POST', params)
 }
 
 export const updateShopCartApi = async (params: ShopCartParamsType<'id'>): Promise<ResponseStatusType<IShopCart>> => {
-  return authorizedApiFetch<ShopCartParamsType<'id'>, ResponseStatusType<IShopCart>>('/shop/cart/', 'PUT', params)
+  return authorizedApiFetch('/shop/cart/', 'PUT', params)
 }
 
 export const deleteShopCartApi = async (
   params: ShopCartParamsType<'onlyId'>,
 ): Promise<ResponseStatusType<IShopCart>> => {
-  return authorizedApiFetch<ShopCartParamsType<'onlyId'>, ResponseStatusType<IShopCart>>(
-    '/shop/cart/',
-    'DELETE',
-    params,
-  )
+  return authorizedApiFetch('/shop/cart/', 'DELETE', params)
 }

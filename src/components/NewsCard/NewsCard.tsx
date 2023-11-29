@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { INews } from '@/types'
 import { ArrowRightLongerGreenIcon } from '@/assets/icons'
 import { formatDate } from '@/utils'
+import Link from 'next/link'
 
 type Props = {
   data: INews
@@ -14,9 +15,10 @@ type Props = {
 
 const NewsCard: FC<Props> = memo(function NewsCard({ data, setSelectedNews }) {
   const { name, hashtag, image, created_at, description } = data
+  const slug = name.split(' ').join('-')
 
   return (
-    <article className="w-[347px] h-[543px] flex flex-col shadow-card rounded-3xl">
+    <article className="w-[347px] h-[543px] flex flex-col shadow-card rounded-3xl bg-white">
       <figure>
         <Image
           src={image}
@@ -34,17 +36,22 @@ const NewsCard: FC<Props> = memo(function NewsCard({ data, setSelectedNews }) {
           <span className="text-[#C4C4C4]">{formatDate(created_at)}</span>
         </section>
 
-        <section className="mt-2 h-[75%]">
-          <h5 className="text-lg text-black line-clamp-3 h-1/3">{name}</h5>
+        <section className="mt-2 h-[78%]">
+          <Link href={`/news/${slug}`} className="text-lg font-semibold text-black line-clamp-2 h-1/3 hover:underline">
+            {name}
+          </Link>
           <p className="text-sm text-gray-primary line-clamp-6">{description}</p>
         </section>
 
-        <section className="flex items-center gap-3 mt-3 text-sm cursor-pointer text-green-primary group">
+        <Link
+          href={`/news/${slug}`}
+          className="flex items-center gap-3 mt-3 text-sm cursor-pointer text-green-primary group"
+        >
           <span>Ko'proq o'qish</span>
           <span className="duration-200 group-hover:translate-x-1">
             <ArrowRightLongerGreenIcon />
           </span>
-        </section>
+        </Link>
       </main>
     </article>
   )

@@ -30,7 +30,7 @@ const RootLayout: FC<IProps> = async ({ children }) => {
             <HeaderModule />
           </header>
 
-          <main className="overflow-hidden">{children}</main>
+          <main className="">{children}</main>
 
           <footer>
             <FooterModule />

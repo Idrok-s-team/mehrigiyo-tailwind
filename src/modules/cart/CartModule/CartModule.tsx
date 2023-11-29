@@ -24,7 +24,7 @@ const CartModule = () => {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-w-[15vw] min-h-[50vh] animate-fade-in">
+      <div className="flex items-center justify-center min-w-[15vw] min-h-[50vh]">
         <Loader />
       </div>
     )

@@ -61,7 +61,7 @@ const AboutUsPage = () => {
   const certificates = [certificateImg1, certificateImg2, certificateImg3, certificateImg4]
 
   return (
-    <div className="mt-14">
+    <div className="px-24 mt-14">
       <section className="flex items-center justify-between gap-32">
         <div className="flex gap-12">
           <Image src={backgroundLeaf} alt="" priority className="-ml-[10%] object-cover w-[225px] h-[305px]" />

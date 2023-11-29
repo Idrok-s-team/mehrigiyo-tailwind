@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import Image from 'next/image'
-import { Carousel } from '@/components'
+import { Slider } from '@/components'
 import grandpharmIcon from '@/assets/icons/home/grandpharmIcon.svg'
 import asklepiyIcon from '@/assets/icons/home/asklepiyIcon.svg'
 import doriDarmonIcon from '@/assets/icons/home/doriDarmonIcon.svg'
@@ -12,13 +12,15 @@ const BrandsListModule: FC = () => {
   const brands = [grandpharmIcon, asklepiyIcon, doriDarmonIcon, nikapharmIcon, laxisamIcon, jayxunInvestIcon]
   return (
     <div className="py-6 border-y-[1px] border-gray-100">
-      <Carousel>
+      <Slider autoPlay>
         {brands.map((brand, index) => (
-          <div key={index} className="w-full">
-            <Image src={brand} alt="" />
+          <div key={index} className="keen-slider__slide flex items-center">
+            <div className="w-full">
+              <Image src={brand} alt="" />
+            </div>
           </div>
         ))}
-      </Carousel>
+      </Slider>
     </div>
   )
 }

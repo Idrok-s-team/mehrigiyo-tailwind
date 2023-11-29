@@ -1,13 +1,13 @@
 'use client'
 
-import { FC, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 import Cookies from 'js-cookie'
 import toast from 'react-hot-toast'
 import { Input, Modal, Tabs } from '@/components'
 import { ILoginParams } from '@/types'
-import { inputHandler, parsePhoneNumber } from '@/utils'
-import { useUserMeQuery } from '@/hooks/queries'
-import { useLoginMutation } from '@/hooks/mutations'
+import { getCookie, inputHandler, parsePhoneNumber } from '@/utils'
+import { useShopCartQuery, useUserFavoriteMedicinesQuery, useUserMeQuery } from '@/hooks/queries'
+import { useLoginMutation, useRefreshTokenMutation } from '@/hooks/mutations'
 
 type Props = {
   isOpen: boolean
@@ -21,9 +21,38 @@ const initialFields: ILoginParams = {
 
 const AuthModal: FC<Props> = ({ isOpen, setIsOpen }) => {
   const [fields, setFields] = useState<ILoginParams>(initialFields)
+  const hasRefreshed = useRef(false)
+
   const userMeQuery = useUserMeQuery()
-  const { mutateAsync, isPending } = useLoginMutation()
+  const userFavoriteMedicinesQuery = useUserFavoriteMedicinesQuery()
+  const shopCartQuery = useShopCartQuery()
+  const { mutateAsync: login } = useLoginMutation()
+  const { mutateAsync: refreshToken } = useRefreshTokenMutation()
+
   const { username, password } = fields
+
+  useEffect(() => {
+    const shouldRefreshToken =
+      userFavoriteMedicinesQuery.error?.data.statusCode === 401 ||
+      userMeQuery.error?.data.statusCode === 401 ||
+      shopCartQuery.error?.data.statusCode === 401
+
+    if (shouldRefreshToken && !hasRefreshed.current) {
+      hasRefreshed.current = true
+      refreshToken({ refresh: getCookie('refresh_token') as string })
+        .then((res) => {
+          Cookies.set('access_token', res.access)
+          Cookies.set('refresh_token', res.refresh)
+          // Refetch queries after refreshing tokens
+          userMeQuery.refetch()
+          userFavoriteMedicinesQuery.refetch()
+          shopCartQuery.refetch()
+        })
+        .finally(() => {
+          hasRefreshed.current = false
+        })
+    }
+  }, [userFavoriteMedicinesQuery, userMeQuery, shopCartQuery, refreshToken])
 
   const handleLogin = () => {
     if (username.length && password.length) {
@@ -31,7 +60,7 @@ const AuthModal: FC<Props> = ({ isOpen, setIsOpen }) => {
         username: parsePhoneNumber(username),
         password,
       }
-      const mutationPromise = mutateAsync(values)
+      const mutationPromise = login(values)
 
       toast
         .promise(mutationPromise, {
@@ -44,6 +73,8 @@ const AuthModal: FC<Props> = ({ isOpen, setIsOpen }) => {
           Cookies.set('refresh_token', res.refresh)
           setIsOpen(false)
           userMeQuery.refetch()
+          userFavoriteMedicinesQuery.refetch()
+          shopCartQuery.refetch()
         })
     }
   }

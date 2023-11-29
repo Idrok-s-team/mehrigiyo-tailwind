@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 'use client'
 
-import { PropsWithChildren, type FC } from 'react'
+import { PropsWithChildren, type FC, useEffect } from 'react'
 import Image from 'next/image'
 import clsx from 'clsx'
 import { CloseRoundIcon, FavoriteIcon, SharedIcon } from '@/assets/icons'
@@ -18,6 +18,19 @@ type Props = PropsWithChildren & {
 
 const Drawer: FC<Props> = ({ product, children, isOpen, setIsOpen }) => {
   const { id, name, image, description, cost, discount } = (product as IShopMedicines) ?? {}
+
+  useEffect(() => {
+    const body = document.body
+    const originalStyle = window.getComputedStyle(body).overflow
+
+    if (isOpen) {
+      body.style.overflow = 'hidden'
+    }
+
+    return () => {
+      body.style.overflow = originalStyle
+    }
+  }, [isOpen])
 
   const toggleDrawer = () => {
     setIsOpen(!isOpen)
@@ -43,7 +56,7 @@ const Drawer: FC<Props> = ({ product, children, isOpen, setIsOpen }) => {
         </header>
 
         <main className="overflow-auto">
-        <Image src={backgroundLeaf} alt="" priority className="-ml-[10%] object-cover w-[225px] h-[305px]" />
+          <Image src={backgroundLeaf} alt="" priority className="-ml-[10%] object-cover w-[225px] h-[305px]" />
           <div className="flex m-5 ml-52 bg-red-200">
             <section>
               <Image src={image} alt={name} width={270} height={270} />

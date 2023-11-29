@@ -1,19 +1,23 @@
 /* eslint-disable react/no-unescaped-entities */
-import React from 'react'
+import React, { FC } from 'react'
 import Image from 'next/image'
 import { Breadcrumb, SeeAllButton, Slider } from '@/components'
 import backgroundLeaf from '@/assets/images/common/backgroundLeaf.png'
 import backgroundBranch from '@/assets/images/common/backgroundBranchRight.png'
-import { getNewsApi } from '@/api'
 import { formatDate } from '@/utils'
 import { AllNewsModule } from '@/modules/news'
 
-const News = async () => {
-  const newsData = await getNewsApi()
-  const firstNewsData = newsData.results[0]
+type Props = {
+  params: {
+    slug: string
+  }
+}
 
-  const breadcrumbItems = [{ text: 'Bosh sahifa', href: '/' }, { text: 'Yangiliklar' }]
-
+const NewsBySlug: FC<Props> = ({ params }) => {
+  const breadcrumbItems = [
+    { text: 'Bosh sahifa', href: '/' },
+    { text: 'Yangiliklar', href: '/news' },
+  ]
   return (
     <div className="px-24 mt-14 overflow-hidden">
       <header className="relative flex items-center justify-between gap-32">
@@ -28,7 +32,7 @@ const News = async () => {
 
         <Image src={backgroundBranch} alt={''} className="absolute rotate-45 scale-75 -right-[25%]" />
       </header>
-
+{/* 
       <article className="-mt-20 bg-white relative flex items-center justify-between gap-[50px] p-10 shadow-primary rounded-3xl">
         <figure className="flex-shrink-0">
           <Image
@@ -67,7 +71,7 @@ const News = async () => {
             </div>
           ))}
         </Slider>
-      </section>
+      </section> */}
 
       <section className="mt-36 mb-[75px]">
         <AllNewsModule />
@@ -76,4 +80,4 @@ const News = async () => {
   )
 }
 
-export default News
+export default NewsBySlug

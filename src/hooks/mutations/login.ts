@@ -1,11 +1,20 @@
 import { useMutation } from '@tanstack/react-query'
-import { loginPostApi } from '@/api/login'
+import { loginApi, refreshTokenApi } from '@/api/login'
 import { IApiErrorData, ILoginParams, ILoginResponse } from '@/types'
 
 export const useLoginMutation = () => {
   const mutation = useMutation<ILoginResponse, IApiErrorData, ILoginParams>({
     mutationFn: (params: ILoginParams) => {
-      return loginPostApi(params)
+      return loginApi(params)
+    },
+  })
+  return mutation
+}
+
+export const useRefreshTokenMutation = () => {
+  const mutation = useMutation<ILoginResponse, IApiErrorData, Pick<ILoginResponse, 'refresh'>>({
+    mutationFn: (params: Pick<ILoginResponse, 'refresh'>) => {
+      return refreshTokenApi(params)
     },
   })
   return mutation

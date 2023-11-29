@@ -7,17 +7,17 @@ export const authorizedApiFetch = async <T, R = T>(
   path: string,
   method: 'GET' | 'POST' | 'DELETE' | 'PUT' = 'GET',
   bodyParams?: T,
+  withAuth: boolean = true,
 ): Promise<R> => {
   const url = `${baseUrl}${path}`
-  const token = getCookie('access_token')
-
-  if (!token) {
-    throw new Error('No access token available.')
+  const headers: HeadersInit = {
+    'Content-Type': 'application/json',
   }
 
-  const headers = {
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${token}`,
+  if (withAuth) {
+    const token = getCookie('access_token')
+    if (!token) throw new Error('No access token available.')
+    headers['Authorization'] = `Bearer ${token}`
   }
 
   const response = await fetch(url, {
