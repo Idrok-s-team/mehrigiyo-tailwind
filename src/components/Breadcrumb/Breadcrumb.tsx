@@ -18,12 +18,15 @@ const Breadcrumb: React.FC<Props> = ({ items }) => {
           return (
             <li
               key={index}
-              className={`flex items-center text-sm text-[#505050] ${!isLastItem && 'after:content-["/"] after:mx-2'}`}
+              className={`flex items-center text-sm text-[#505050] ${!isLastItem && 'after:content-["/"] after:mx-1'}`}
             >
               {isLastItem ? (
                 <span className="text-green-primary">{item.text}</span>
               ) : (
-                <Link href={item.href as string} className="duration-200 hover:text-black">
+                <Link
+                  href={item.href as string}
+                  className="duration-200 hover:bg-green-light hover:text-green-primary px-1"
+                >
                   {item.text}
                 </Link>
               )}

@@ -29,3 +29,13 @@ export const getCookie = (name: string): string | undefined => {
 export const setCookie = (name: string, value: string, options = {}): void => {
   Cookies.set(name, value, options)
 }
+
+export const createSlug = (name: string, id: number) => {
+  return (
+    name
+      .replace(/[.,\/#!$%\^&\*;"':{}=\-_`~()]/g, '')
+      .trim()
+      .replace(/\s+/g, '-')
+      .toLowerCase() + `___${id}`
+  )
+}

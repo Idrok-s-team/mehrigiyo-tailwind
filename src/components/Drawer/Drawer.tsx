@@ -56,7 +56,7 @@ const Drawer: FC<Props> = ({ product, children, isOpen, setIsOpen }) => {
         </header>
 
         <main className="overflow-auto">
-          <Image src={backgroundLeaf} alt="" priority className="-ml-[10%] object-cover w-[225px] h-[305px]" />
+          <Image src={backgroundLeaf} alt="" priority className="absolute w-[225px] h-[305px]" />
           <div className="flex m-5 ml-52 bg-red-200">
             <section>
               <Image src={image} alt={name} width={270} height={270} />

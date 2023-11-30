@@ -1,16 +1,17 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react'
 import Image from 'next/image'
-import { Breadcrumb, SeeAllButton, Slider } from '@/components'
+import { Breadcrumb, HashtagTime, SeeAllButton, Slider } from '@/components'
 import backgroundLeaf from '@/assets/images/common/backgroundLeaf.png'
 import backgroundBranch from '@/assets/images/common/backgroundBranchRight.png'
 import { getNewsApi } from '@/api'
-import { formatDate } from '@/utils'
+import { createSlug, formatDate } from '@/utils'
 import { AllNewsModule } from '@/modules/news'
 
 const News = async () => {
   const newsData = await getNewsApi()
   const firstNewsData = newsData.results[0]
+  const firstSlug = createSlug(firstNewsData.name, firstNewsData.id)
 
   const breadcrumbItems = [{ text: 'Bosh sahifa', href: '/' }, { text: 'Yangiliklar' }]
 
@@ -41,15 +42,18 @@ const News = async () => {
         </figure>
         <div>
           <div className="flex items-center gap-1 text-sm">
-            <span className="text-green-primary">#{firstNewsData.hashtag.tag_name}</span>
-            <span className="w-1 h-1 rounded-full bg-[#C4C4C4]"></span>
-            <span className="text-[#C4C4C4]">{formatDate(firstNewsData.created_at)}</span>
+            <HashtagTime hashtag={firstNewsData.hashtag.tag_name} date={firstNewsData.created_at} />
           </div>
 
           <h2 className="mt-3">{firstNewsData.name}</h2>
           <p className="mt-5 text-gray-primary line-clamp-4">{firstNewsData.description}</p>
 
-          <SeeAllButton text="Ko’proq o’qish" className="mt-7 text-green-primary" size="md" />
+          <SeeAllButton
+            text="Ko’proq o’qish"
+            className="mt-7 text-green-primary"
+            size="md"
+            href={`/news/${firstSlug}`}
+          />
         </div>
       </article>
 

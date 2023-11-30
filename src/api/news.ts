@@ -13,3 +13,9 @@ export const getNewsTagsApi = async (params?: QueryParamsType): Promise<INewsTag
   const response = await fetch(url)
   return response.json()
 }
+
+export const getNewsById = async (id: number): Promise<INews> => {
+  const url = queryStringUrl(`${baseUrl}/news/${id}`)
+  const response = await fetch(url)
+  return response.json()
+}

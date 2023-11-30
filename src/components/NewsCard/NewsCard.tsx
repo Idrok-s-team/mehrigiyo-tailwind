@@ -3,19 +3,20 @@
 
 import { memo, type FC } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { INews } from '@/types'
 import { ArrowRightLongerGreenIcon } from '@/assets/icons'
-import { formatDate } from '@/utils'
-import Link from 'next/link'
+import { createSlug, formatDate } from '@/utils'
 
 type Props = {
   data: INews
   setSelectedNews: (product: INews) => void
 }
 
-const NewsCard: FC<Props> = memo(function NewsCard({ data, setSelectedNews }) {
-  const { name, hashtag, image, created_at, description } = data
-  const slug = name.split(' ').join('-')
+const NewsCard: FC<Props> = memo(function NewsCard({ data }) {
+  const { name, id, hashtag, image, created_at, description } = data
+
+  const slug = createSlug(name, id)
 
   return (
     <article className="w-[347px] h-[543px] flex flex-col shadow-card rounded-3xl bg-white">
