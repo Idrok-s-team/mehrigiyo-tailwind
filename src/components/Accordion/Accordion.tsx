@@ -2,6 +2,7 @@
 
 import { FC, useState, useRef, useEffect, memo } from 'react'
 import { DropdownIcon } from '@/assets/icons'
+import { ElementSizeType } from '@/types'
 
 interface IChildren {
   title: string
@@ -10,9 +11,11 @@ interface IChildren {
 
 interface IAccordionProps {
   items: IChildren[]
+  withIndex?: boolean
+  size?: 'sm' | 'md'
 }
 
-const Accordion: FC<IAccordionProps> = memo(function Accordion({ items }) {
+const Accordion: FC<IAccordionProps> = memo(function Accordion({ items, withIndex = true, size = 'md' }) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const contentRefs = useRef<HTMLDivElement[]>([])
 
@@ -23,18 +26,22 @@ const Accordion: FC<IAccordionProps> = memo(function Accordion({ items }) {
   const toggleItem = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index)
   }
+  const smallSize = size === 'sm'
 
   return (
     <div className="flex flex-col w-full transition-transform">
       {items.map(({ title, children }, index) => (
-        <div key={title} className={`${index !== 0 ? 'border-t-2' : ''} border-[#ECECF1] py-5` }>
+        <div
+          key={title}
+          className={`${index !== 0 ? 'border-t-2' : ''} ${smallSize ? '!border-t' : ''} border-[#ECECF1] py-5`}
+        >
           <button
             className="flex items-center justify-between w-full rounded-md cursor-pointer"
             onClick={() => toggleItem(index)}
           >
             <div className="flex items-center gap-5">
-              <h4 className="font-medium text-green-primary">0{index + 1}</h4>
-              <h5 className="font-medium">{title}</h5>
+              {withIndex && <h4 className="font-medium text-green-primary">0{index + 1}</h4>}
+              <h5 className={`font-medium ${smallSize ? 'text-base' : ''}`}>{title}</h5>
             </div>
             <span className={`${activeIndex === index ? '' : '-rotate-90'} duration-300`}>
               <DropdownIcon />
@@ -43,14 +50,17 @@ const Accordion: FC<IAccordionProps> = memo(function Accordion({ items }) {
 
           <div
             ref={(el) => (contentRefs.current[index] = el!)}
-            className="transition-max-height duration-300 ease-in-out overflow-hidden"
+            className="overflow-hidden duration-300 ease-in-out transition-max-height"
             style={{
               maxHeight: activeIndex === index ? `${contentRefs.current[index]?.scrollHeight}px` : '0',
             }}
           >
-            <ul className="flex flex-col ml-12">
+            <ul className={`flex flex-col ${smallSize ? '' : 'ml-12'}`}>
               <li>
-                <p className="text-gray-primary">{children}</p>
+                <p
+                  className={`text-gray-primary ${smallSize ? 'text-sm mt-3' : ''}`}
+                  dangerouslySetInnerHTML={{ __html: String(children).replace(/\n/g, '<br>') }}
+                />
               </li>
             </ul>
           </div>

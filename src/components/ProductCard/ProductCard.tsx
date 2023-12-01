@@ -29,6 +29,7 @@ const ProductCard: FC<Props> = memo(function ProductCard({ product, setIsDetails
       className="w-[240px] h-[378px] bg-white border border-[#E2E2E2] shadow-secondary rounded-[18px] p-3.5"
     >
       <header className="flex items-start justify-between">
+        <span>{id}</span>
         <figure>
           <Image src={image} alt={name} width={175} height={175} />
         </figure>

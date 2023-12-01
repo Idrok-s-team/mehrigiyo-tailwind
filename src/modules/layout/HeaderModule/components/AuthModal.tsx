@@ -32,25 +32,29 @@ const AuthModal: FC<Props> = ({ isOpen, setIsOpen }) => {
   const { username, password } = fields
 
   useEffect(() => {
-    const shouldRefreshToken =
-      userFavoriteMedicinesQuery.error?.data.statusCode === 401 ||
-      userMeQuery.error?.data.statusCode === 401 ||
-      shopCartQuery.error?.data.statusCode === 401
+    const accessToken = getCookie('access_token')
 
-    if (shouldRefreshToken && !hasRefreshed.current) {
-      hasRefreshed.current = true
-      refreshToken({ refresh: getCookie('refresh_token') as string })
-        .then((res) => {
-          Cookies.set('access_token', res.access)
-          Cookies.set('refresh_token', res.refresh)
-          // Refetch queries after refreshing tokens
-          userMeQuery.refetch()
-          userFavoriteMedicinesQuery.refetch()
-          shopCartQuery.refetch()
-        })
-        .finally(() => {
-          hasRefreshed.current = false
-        })
+    if (accessToken) {
+      const shouldRefreshToken =
+        userFavoriteMedicinesQuery.error?.data?.statusCode === 401 ||
+        userMeQuery.error?.data?.statusCode === 401 ||
+        shopCartQuery.error?.data?.statusCode === 401
+
+      if (shouldRefreshToken && !hasRefreshed.current) {
+        hasRefreshed.current = true
+        refreshToken({ refresh: getCookie('refresh_token') as string })
+          .then((res) => {
+            Cookies.set('access_token', res.access)
+            Cookies.set('refresh_token', res.refresh)
+            // Refetch queries after refreshing tokens
+            userMeQuery.refetch()
+            userFavoriteMedicinesQuery.refetch()
+            shopCartQuery.refetch()
+          })
+          .finally(() => {
+            hasRefreshed.current = false
+          })
+      }
     }
   }, [userFavoriteMedicinesQuery, userMeQuery, shopCartQuery, refreshToken])
 

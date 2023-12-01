@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import React, { FC } from 'react'
+import React from 'react'
 import Image from 'next/image'
 import { Breadcrumb, HashtagTime } from '@/components'
 import backgroundLeaf from '@/assets/images/common/backgroundLeaf.png'
@@ -12,7 +12,7 @@ type Props = {
   }
 }
 
-const NewsBySlug: FC<Props> = async ({ params }) => {
+const NewsBySlug = async ({ params }: Props) => {
   const { slug } = params
   const id = Number(slug.split('___')[1])
   const { name, hashtag, created_at, image, description } = await getNewsById(id)
@@ -20,7 +20,7 @@ const NewsBySlug: FC<Props> = async ({ params }) => {
   const breadcrumbItems = [{ text: 'Bosh sahifa', href: '/' }, { text: 'Yangiliklar', href: '/news' }, { text: name }]
 
   return (
-    <div className="px-24 mt-14 mb-36 overflow-hidden">
+    <div className="px-24 overflow-hidden mt-14 mb-36">
       <header className="relative flex items-center justify-between gap-32">
         <figure className="flex gap-12">
           <Image src={backgroundLeaf} alt="" priority className="-ml-[10%] object-cover w-[225px] h-[305px]" />

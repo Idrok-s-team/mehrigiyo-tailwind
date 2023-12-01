@@ -2,7 +2,7 @@ import toast from 'react-hot-toast'
 import { useShopCartQuery } from '../queries'
 import { useAddShopCartMutation } from '../mutations/shop'
 
-const useAddToCart = (productId: number) => {
+const useAddToCart = (productId: number, amount: number = 1) => {
   const { data, refetch } = useShopCartQuery()
   const { mutateAsync } = useAddShopCartMutation()
 
@@ -14,7 +14,7 @@ const useAddToCart = (productId: number) => {
     } else {
       const cartAddPromise = mutateAsync({
         product: productId,
-        amount: 1,
+        amount,
       })
 
       toast

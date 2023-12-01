@@ -40,12 +40,12 @@ const ProductsListModule: FC<Props> = ({ title = "Mahsulotlarimiz ro'yxati", wit
           {isFetchingShopTypes ? (
             <div className={`w-20 h-10 grid grid-cols-4 gap-7`}>
               {Array.from({ length: 5 }).map((_, index) => (
-                <div key={index} className="w-full h-5 bg-gray-300 rounded-md duration-300 animate-pulse"></div>
+                <div key={index} className="w-full h-5 duration-300 bg-gray-300 rounded-md animate-pulse"></div>
               ))}
             </div>
           ) : (
             filterValues?.map(({ key, title }) => (
-              <li key={key} className="cursor-pointer list-none">
+              <li key={key} className="list-none cursor-pointer">
                 {title}
               </li>
             ))
@@ -71,7 +71,7 @@ const ProductsListModule: FC<Props> = ({ title = "Mahsulotlarimiz ro'yxati", wit
         )}
       </div>
 
-      <Drawer isOpen={isOpen} setIsOpen={setIsOpen} product={selectedProduct} />
+      <Drawer isOpen={isOpen} setIsOpen={setIsOpen} product={selectedProduct} setSelectedProduct={setSelectedProduct} />
     </>
   )
 }

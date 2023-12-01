@@ -11,7 +11,7 @@ export interface IShopMedicines extends LocalizedType<'name' | 'title' | 'descri
   pictures: {
     id: number
     image: string
-  }
+  }[]
   image: string
   quantity: number
   review: number

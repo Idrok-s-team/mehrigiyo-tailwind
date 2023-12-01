@@ -77,11 +77,12 @@ const HeaderModule: FC = () => {
         const dropdownChildren = dropdownItems.map((item) => ({
           label: item.label,
           id: item.path,
+          path: item.path,
         }))
 
         return (
           <ActiveLink href={mainPath} key={label}>
-            <Dropdown items={dropdownChildren} />
+            <Dropdown items={dropdownChildren} linkable />
           </ActiveLink>
         )
       } else {

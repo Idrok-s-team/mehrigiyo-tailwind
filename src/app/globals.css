@@ -80,3 +80,10 @@ h6 {
 .animate-scale-in {
   animation: scaleIn 0.2s ease-out forwards;
 }
+
+.thumbnail .keen-slider__slide {
+  cursor: pointer;
+}
+.thumbnail .keen-slider__slide.active {
+  border: 2px solid #53b175;
+}

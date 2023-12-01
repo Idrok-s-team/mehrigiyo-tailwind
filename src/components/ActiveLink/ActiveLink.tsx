@@ -4,7 +4,9 @@ import Link, { LinkProps } from 'next/link'
 import { usePathname } from 'next/navigation'
 import { FC, PropsWithChildren } from 'react'
 
-type Props = PropsWithChildren<LinkProps>
+type Props = PropsWithChildren<LinkProps> & {
+  className?: string
+}
 
 const ActiveLink: FC<Props> = ({ children, ...props }) => {
   const pathname = usePathname()
