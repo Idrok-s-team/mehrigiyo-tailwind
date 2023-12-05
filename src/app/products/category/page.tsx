@@ -129,7 +129,7 @@ const ProductsCategory = () => {
         </div>
       </section>
 
-      <section className='flex justify-end mt-12'>
+      <section className="flex justify-end mt-12">
         <Pagination
           currentPage={currentPage}
           pageSize={10}

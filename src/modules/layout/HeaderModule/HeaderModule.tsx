@@ -26,7 +26,7 @@ const HeaderModule: FC = () => {
   const languageItems = [
     {
       label: (
-        <div className="flex items-center">
+        <div className="flex items-center gap-3">
           <span>
             <FlagUzIcon />
           </span>

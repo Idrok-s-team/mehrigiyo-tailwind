@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 'use client'
 
 import { PropsWithChildren, type FC, useEffect } from 'react'

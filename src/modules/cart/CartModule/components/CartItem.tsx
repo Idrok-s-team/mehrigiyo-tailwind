@@ -1,8 +1,9 @@
-import React, { FC, memo, useState } from 'react'
+import React, { FC } from 'react'
 import Image from 'next/image'
 import { IShopCart } from '@/types'
-import { DeleteIcon, MinusIcon, PlusIcon } from '@/assets/icons'
+import { DeleteIcon } from '@/assets/icons'
 import { useCartItemActions } from '@/hooks/cart'
+import { ProductCount } from '@/components'
 
 type Props = {
   data: IShopCart
@@ -10,7 +11,7 @@ type Props = {
 
 const CartItem: FC<Props> = ({ data }) => {
   const { id, product, amount } = data
-  const { countValue, handleDecreaseCount, handleIncreaseCount, handleDelete } = useCartItemActions(id, amount)
+  const { handleDelete } = useCartItemActions(id, amount)
 
   return (
     <div className="flex items-center justify-between h-[120px] px-[30px] rounded-[18px] border border-[#E2E2E2] shadow-secondary">
@@ -21,14 +22,8 @@ const CartItem: FC<Props> = ({ data }) => {
           <p className="text-sm text-[#7C7C7C]">{product.title}</p>
         </div>
       </div>
-      <div className="flex items-center gap-2.5">
-        <button onClick={handleDecreaseCount} className="flex items-center justify-center w-10 h-10">
-          <MinusIcon />
-        </button>
-        <h6 className="w-10 h-10 rounded-xl border border-[#E2E2E2] flex items-center justify-center">{countValue}</h6>
-        <button onClick={handleIncreaseCount} className="flex items-center justify-center w-10 h-10">
-          <PlusIcon />
-        </button>
+      <div>
+        <ProductCount productId={id} quantity={product.quantity} />
       </div>
       <div>
         {product.discount ? (

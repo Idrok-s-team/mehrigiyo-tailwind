@@ -1,27 +1,52 @@
 'use client'
 
-import { memo, type FC, useCallback } from 'react'
+import { memo, type FC } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { IShopMedicines } from '@/types'
 import { ArrowRightGrayIcon, FavoriteFillIcon, FavoriteIcon, PlusWhiteIcon } from '@/assets/icons'
 import { useAddToCart, useChangeFavorite } from '@/hooks/cart'
+import { createSlug } from '@/utils'
+import { Tooltip } from '..'
 
 type Props = {
   product: IShopMedicines
-  setIsDetailsOpen: (isOpen: boolean) => void
-  setSelectedProduct: (product: IShopMedicines) => void
 }
 
-const ProductCard: FC<Props> = memo(function ProductCard({ product, setIsDetailsOpen, setSelectedProduct }) {
-  const { id, name, image, description, cost, discount } = product
+const ProductCard: FC<Props> = memo(function ProductCard({ product }) {
+  const { id, name, image, description, cost, discount, quantity } = product
+  const slug = createSlug(name, id)
 
   const { isProductInCart, addToBasket } = useAddToCart(id)
   const { isProductInFavorite, onChangeFavorite } = useChangeFavorite(id)
 
-  const handleDetailsOpen = useCallback(() => {
-    setIsDetailsOpen(true)
-    setSelectedProduct(product)
-  }, [product, setIsDetailsOpen, setSelectedProduct])
+  const renderPriceSection = () => {
+    return discount ? (
+      <>
+        <p className="line-through text-[#808080]">{cost.toLocaleString('ru')} uzs</p>
+        <h4 className="font-bold text-green-primary">{discount.toLocaleString('ru')} uzs</h4>
+      </>
+    ) : (
+      <h4 className="font-bold text-green-primary">{cost.toLocaleString('ru')} uzs</h4>
+    )
+  }
+
+  const renderAddToCartButton = () => {
+    const button = (
+      <button
+        aria-label="Add to cart"
+        className={`flex items-center justify-center bg-green-primary w-11 h-11 rounded-2xl ${
+          isProductInCart ? 'cursor-not-allowed opacity-50' : ''
+        }`}
+        onClick={!isProductInCart ? addToBasket : undefined}
+        disabled={isProductInCart}
+      >
+        <PlusWhiteIcon />
+      </button>
+    )
+
+    return isProductInCart ? <Tooltip text="Savatga qo'shilgan">{button}</Tooltip> : button
+  }
 
   return (
     <article
@@ -30,52 +55,32 @@ const ProductCard: FC<Props> = memo(function ProductCard({ product, setIsDetails
     >
       <header className="flex items-start justify-between">
         <span>{id}</span>
-        <figure>
-          <Image src={image} alt={name} width={175} height={175} />
-        </figure>
+        <Link href={`/products/${slug}`}>
+          <Image src={image} alt={name} width={175} height={175} loading="lazy" />
+        </Link>
         <button aria-label="Add to favorites" className="cursor-pointer" onClick={onChangeFavorite}>
           {isProductInFavorite ? <FavoriteFillIcon /> : <FavoriteIcon />}
         </button>
       </header>
 
       <section className="mt-3 h-[60px]">
-        <p className="font-semibold line-clamp-1">{name}</p>
+        <Link href={`/products/${slug}`} className="font-semibold line-clamp-1 hover:underline">
+          {name}
+        </Link>
         <p className="line-clamp-1 mt-1 text-sm text-[#7c7c7c]">{description}</p>
       </section>
 
       <section className="flex items-center justify-between mt-2">
-        <div>
-          {discount ? (
-            <>
-              <p className="line-through text-[#808080]">{cost.toLocaleString('ru')} uzs</p>
-              <h4 className="font-bold text-green-primary">{discount.toLocaleString('ru')} uzs</h4>
-            </>
-          ) : (
-            <h4 className="font-bold text-green-primary">{cost.toLocaleString('ru')} uzs</h4>
-          )}
-        </div>
-        <div>
-          <button
-            aria-label="Add to cart"
-            className={`flex items-center justify-center bg-green-primary w-11 h-11 rounded-2xl ${
-              isProductInCart ? 'cursor-not-allowed opacity-50' : ''
-            }`}
-            onClick={addToBasket}
-          >
-            <PlusWhiteIcon />
-          </button>
-        </div>
+        <div>{renderPriceSection()}</div>
+        <div>{renderAddToCartButton()}</div>
       </section>
 
-      <footer
-        className="flex items-center justify-center text-[#BDBDBD] mt-3 cursor-pointer"
-        onClick={handleDetailsOpen}
-      >
+      <Link href={`/products/${slug}`} className="flex items-center justify-center text-[#BDBDBD] mt-3 cursor-pointer">
         <span>Tafsilotlar</span>
         <span>
           <ArrowRightGrayIcon />
         </span>
-      </footer>
+      </Link>
     </article>
   )
 })

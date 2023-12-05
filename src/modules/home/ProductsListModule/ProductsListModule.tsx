@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 'use client'
 
 import { FC, useMemo, useState } from 'react'
@@ -71,7 +70,7 @@ const ProductsListModule: FC<Props> = ({ title = "Mahsulotlarimiz ro'yxati", wit
         )}
       </div>
 
-      <Drawer isOpen={isOpen} setIsOpen={setIsOpen} product={selectedProduct} setSelectedProduct={setSelectedProduct} />
+      {/* <Drawer isOpen={isOpen} setIsOpen={setIsOpen} product={selectedProduct} setSelectedProduct={setSelectedProduct} /> */}
     </>
   )
 }

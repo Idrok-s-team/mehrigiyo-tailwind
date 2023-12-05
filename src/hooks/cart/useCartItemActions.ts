@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useShopCartQuery } from '@/hooks/queries'
 import { useDeleteShopCartMutation, useUpdateShopCartMutation } from '@/hooks/mutations'
 
-const useCartItemActions = (id: number, initialAmount: number) => {
+const useCartItemActions = (id: number, initialAmount: number = 1) => {
   const [countValue, setCountValue] = useState<number>(initialAmount)
   const { refetch } = useShopCartQuery()
   const { mutateAsync: updateShopCartAsync } = useUpdateShopCartMutation()
@@ -13,13 +13,13 @@ const useCartItemActions = (id: number, initialAmount: number) => {
     await refetch()
   }
 
-  const handleDecreaseCount = async () => {
+  const decreaseCount = async () => {
     const newCount = countValue > 1 ? countValue - 1 : countValue
     setCountValue(newCount)
     await updateCart(newCount)
   }
 
-  const handleIncreaseCount = async () => {
+  const increaseCount = async () => {
     const newCount = countValue + 1
     setCountValue(newCount)
     await updateCart(newCount)
@@ -32,8 +32,8 @@ const useCartItemActions = (id: number, initialAmount: number) => {
 
   return {
     countValue,
-    handleDecreaseCount,
-    handleIncreaseCount,
+    decreaseCount,
+    increaseCount,
     handleDelete,
   }
 }

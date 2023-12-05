@@ -1,10 +1,9 @@
-/* eslint-disable react/no-unescaped-entities */
 import React from 'react'
 import Image from 'next/image'
 import { Breadcrumb, HashtagTime } from '@/components'
 import backgroundLeaf from '@/assets/images/common/backgroundLeaf.png'
 import backgroundBranch from '@/assets/images/common/backgroundBranchRight.png'
-import { getNewsById } from '@/api'
+import { getNewsByIdApi } from '@/api'
 
 type Props = {
   params: {
@@ -15,7 +14,7 @@ type Props = {
 const NewsBySlug = async ({ params }: Props) => {
   const { slug } = params
   const id = Number(slug.split('___')[1])
-  const { name, hashtag, created_at, image, description } = await getNewsById(id)
+  const { name, hashtag, created_at, image, description } = await getNewsByIdApi(id)
 
   const breadcrumbItems = [{ text: 'Bosh sahifa', href: '/' }, { text: 'Yangiliklar', href: '/news' }, { text: name }]
 

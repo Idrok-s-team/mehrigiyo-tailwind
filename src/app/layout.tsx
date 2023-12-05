@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 import type { Metadata } from 'next'
 import { FC, ReactNode } from 'react'
 import { Inter } from 'next/font/google'
@@ -23,7 +22,10 @@ interface IProps {
 const RootLayout: FC<IProps> = async ({ children }) => {
   return (
     <html lang="en">
-      <body className={`${inter.className} flex flex-col justify-between min-h-screen bg-gray-background`} suppressHydrationWarning={true}>
+      <body
+        className={`${inter.className} flex flex-col justify-between min-h-screen bg-gray-background`}
+        suppressHydrationWarning={true}
+      >
         <Providers>
           <Toaster position="top-right" />
           <header className="sticky top-0 z-10">

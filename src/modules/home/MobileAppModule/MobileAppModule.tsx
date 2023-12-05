@@ -13,7 +13,9 @@ const NewsListModule: FC = () => {
           ”Mehrigiyo” mobil ilovasini yuklab <span className="text-green-primary"> Shifokorlardan BEPUL maslahat </span>
           oling
         </h2>
-        <p className="mt-5 text-gray-primary">O’zbekistonning yetakchi shifokorlari bilan videokonsultatsiyadan foydalaning.</p>
+        <p className="mt-5 text-gray-primary">
+          O’zbekistonning yetakchi shifokorlari bilan videokonsultatsiyadan foydalaning.
+        </p>
         <div className="mt-[54px]">
           <label htmlFor="">Ilovani yuklab olish uchun havolani oling</label>
           <Input className="mt-4" />

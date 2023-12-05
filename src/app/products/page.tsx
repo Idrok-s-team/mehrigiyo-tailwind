@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 import React from 'react'
 import Image from 'next/image'
 import { Breadcrumb, WatchVideoButton } from '@/components'
@@ -65,7 +64,7 @@ const ProductsPage = () => {
         <HerbsBannerModule />
       </section>
 
-      <section className='mt-32'>
+      <section className="mt-32">
         <BrandsListModule />
       </section>
     </div>

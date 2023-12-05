@@ -1,11 +1,10 @@
-/* eslint-disable react/no-unescaped-entities */
 import React from 'react'
 import Image from 'next/image'
 import { Breadcrumb, HashtagTime, SeeAllButton, Slider } from '@/components'
 import backgroundLeaf from '@/assets/images/common/backgroundLeaf.png'
 import backgroundBranch from '@/assets/images/common/backgroundBranchRight.png'
 import { getNewsApi } from '@/api'
-import { createSlug, formatDate } from '@/utils'
+import { createSlug } from '@/utils'
 import { AllNewsModule } from '@/modules/news'
 
 const News = async () => {
@@ -16,7 +15,7 @@ const News = async () => {
   const breadcrumbItems = [{ text: 'Bosh sahifa', href: '/' }, { text: 'Yangiliklar' }]
 
   return (
-    <div className="px-24 mt-14 overflow-hidden">
+    <div className="px-24 overflow-hidden mt-14">
       <header className="relative flex items-center justify-between gap-32">
         <figure className="flex gap-12">
           <Image src={backgroundLeaf} alt="" priority className="-ml-[10%] object-cover w-[225px] h-[305px]" />
@@ -60,7 +59,7 @@ const News = async () => {
       <section className="mt-10 -ml-5">
         <Slider slides={{ perView: 1.7, spacing: 30 }}>
           {newsData.results.map(({ image, name, description, id }) => (
-            <div key={id} className="keen-slider__slide p-5">
+            <div key={id} className="p-5 keen-slider__slide">
               <div className="flex items-center gap-6 p-5 pr-8 bg-white shadow-lg rounded-3xl">
                 <Image src={image} alt={name} width={272} height={170} className="rounded-2xl" />
                 <div>

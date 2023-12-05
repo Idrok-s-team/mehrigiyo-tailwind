@@ -19,7 +19,9 @@ const Pagination: FC<Props> = ({ currentPage, totalCount, pageSize, onPageChange
     <button
       key={page}
       className={`p-2 text-sm font-semibold relative ${
-        currentPage === page ? "text-green-primary after:absolute after:left-0 after:-bottom-[2.5px] after:content-[''] after:rounded-sm after:w-full after:h-[3px] after:bg-green-primary" : ''
+        currentPage === page
+          ? "text-green-primary after:absolute after:left-0 after:-bottom-[2.5px] after:content-[''] after:rounded-sm after:w-full after:h-[3px] after:bg-green-primary"
+          : ''
       } duration-200`}
       onClick={() => handleClick(page)}
     >

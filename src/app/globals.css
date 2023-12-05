@@ -87,3 +87,12 @@ h6 {
 .thumbnail .keen-slider__slide.active {
   border: 2px solid #53b175;
 }
+.swiper-slide {
+  box-sizing: border-box;
+}
+
+.swiper-slide-thumb-active {
+  border: 2px solid #53b175;
+  border-radius: 10px;
+  /* scale: 1.058; */
+}

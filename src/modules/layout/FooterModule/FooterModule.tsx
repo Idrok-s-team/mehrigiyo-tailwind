@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 import { FC } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'

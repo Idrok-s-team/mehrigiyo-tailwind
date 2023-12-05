@@ -23,6 +23,12 @@ export const getShopMedicinesApi = async (params?: QueryParamsType): Promise<Get
   return response.json()
 }
 
+export const getShopMedicineByIdApi = async (id: number): Promise<IShopMedicines> => {
+  const url = queryStringUrl(`${baseUrl}/shop/medicines/${id}`)
+  const response = await fetch(url)
+  return response.json()
+}
+
 // SHOP CART API
 export const getShopCartApi = async (): Promise<ResponseStatusType<IShopCart[]>> => {
   return authorizedApiFetch('/shop/cart/')
