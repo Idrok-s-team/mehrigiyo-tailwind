@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier 'src/**/*.{tsx,ts,jsx,js,mjs,cjs,json}' --write"
+    "format": "prettier --write 'src/**/*.{tsx,ts,jsx,js}'"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.8.4",

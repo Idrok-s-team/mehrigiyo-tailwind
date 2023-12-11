@@ -35,7 +35,7 @@ const RootLayout: FC<IProps> = async ({ children }) => {
           <main className="">{children}</main>
 
           <footer>
-            <FooterModule />
+            {/* <FooterModule /> */}
           </footer>
         </Providers>
       </body>

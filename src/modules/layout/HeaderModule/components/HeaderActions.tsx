@@ -42,7 +42,7 @@ const HeaderActions: FC = ({}) => {
       {actions.map(({ name, href, icon, count }) => (
         <Link key={name} href={href} className="relative" title={name}>
           <div className={`${className} ${pathname === href ? '!bg-green-primary' : ''}`}>{icon}</div>
-          {count && (
+          {Number(count) > 0 && (
             <span className="absolute -top-2 -right-2 w-5 h-5 rounded-full flex items-center justify-center bg-[#F3603F] text-white text-xs">
               {count}
             </span>

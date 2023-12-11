@@ -1,10 +1,11 @@
 'use client'
 
-import { FC, useState, useCallback } from 'react'
+import { FC, useState, useCallback, ReactNode } from 'react'
 
 export type TabItemType = {
   key: number | string
   label: string
+  children?: ReactNode
 }
 
 type Props = {
@@ -18,24 +19,29 @@ const Tabs: FC<Props> = ({ items }): JSX.Element => {
     setActiveTab(key)
   }, [])
 
+  const activeTabItem = items.find((item) => item.key === activeTab)
+
   return (
-    <div className="h-[50px] px-4 py-[7px] shadow-primary rounded-2xl flex items-center">
-      <ul className="h-9 flex items-center" role="tablist">
-        {items.map(({ key, label }) => (
-          <li
-            key={key}
-            className={`h-full px-[23px] py-[7px] flex items-center rounded-[10px] text-gray-primary cursor-pointer select-none duration-200 ${
-              key === activeTab ? 'bg-green-primary/20 text-green-primary font-semibold' : ''
-            }`}
-            onClick={() => handleTabClick(key)}
-            role="tab"
-            tabIndex={key === activeTab ? 0 : -1}
-            aria-selected={key === activeTab}
-          >
-            {label}
-          </li>
-        ))}
-      </ul>
+    <div>
+      <div className="h-[50px] px-4 py-[7px] shadow-primary rounded-2xl flex items-center">
+        <ul className="h-9 flex items-center" role="tablist">
+          {items.map(({ key, label }) => (
+            <li
+              key={key}
+              className={`h-full px-[23px] py-[7px] flex items-center rounded-[10px] text-gray-primary cursor-pointer select-none duration-200 ${
+                key === activeTab ? 'bg-green-primary/20 text-green-primary font-semibold' : ''
+              }`}
+              onClick={() => handleTabClick(key)}
+              role="tab"
+              tabIndex={key === activeTab ? 0 : -1}
+              aria-selected={key === activeTab}
+            >
+              {label}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className='p-4'>{activeTabItem?.children}</div>
     </div>
   )
 }

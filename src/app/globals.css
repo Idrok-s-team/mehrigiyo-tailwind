@@ -96,3 +96,7 @@ h6 {
   border-radius: 10px;
   /* scale: 1.058; */
 }
+
+.sidebar-dashboard {
+  height: calc(100vh - 118px);
+}

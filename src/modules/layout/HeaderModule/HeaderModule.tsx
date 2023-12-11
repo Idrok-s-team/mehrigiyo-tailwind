@@ -120,7 +120,7 @@ const HeaderModule: FC = () => {
             </div>
           </div>
           {isSuccess ? (
-            <div className="flex items-center gap-2">
+            <Link href="/dashboard" className="flex items-center gap-2">
               <Image
                 src={userData?.avatar as string}
                 alt={`${userData?.first_name} ${userData?.last_name}`}
@@ -131,7 +131,7 @@ const HeaderModule: FC = () => {
               <p>
                 {userData?.first_name} {userData?.last_name}
               </p>
-            </div>
+            </Link>
           ) : (
             <div className="flex items-center gap-2 cursor-pointer" onClick={() => setIsOpenAuthModal(true)}>
               <div>Kirish</div>

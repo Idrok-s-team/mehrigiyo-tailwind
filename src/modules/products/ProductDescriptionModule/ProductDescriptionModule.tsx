@@ -5,7 +5,7 @@ import toast from 'react-hot-toast'
 import { useCopyToClipboard } from 'usehooks-ts'
 import { ChevronIcon, FavoriteFillIcon, FavoriteIcon, PlusWhiteIcon, SharedIcon } from '@/assets/icons'
 import { IShopMedicines } from '@/types'
-import { ActionButton, Button, ProductCount, Tooltip } from '@/components'
+import { ActionButton, Button, ProductCount, Tabs, Tooltip, ViewSlide } from '@/components'
 import { useAddToCart, useChangeFavorite } from '@/hooks/cart'
 
 type Props = {
@@ -14,7 +14,7 @@ type Props = {
 
 const ProductDescriptionModule: FC<Props> = ({ product }) => {
   const [showFullDescription, setShowFullDescription] = useState(false)
-  const { id, name, description, discount, cost, quantity } = product
+  const { id, name, description, discount, cost, quantity, image, pictures } = product
 
   const { isProductInCart, addToBasket } = useAddToCart(id)
   const { isProductInFavorite, onChangeFavorite } = useChangeFavorite(id)
@@ -28,6 +28,16 @@ const ProductDescriptionModule: FC<Props> = ({ product }) => {
 
   const formattedCost = useMemo(() => cost.toLocaleString('ru'), [cost])
   const formattedDiscount = useMemo(() => discount?.toLocaleString('ru'), [discount])
+
+  const mainImage = {
+    name,
+    image,
+  }
+
+  const slides =
+    pictures.length > 0
+      ? pictures.map((item) => ({ ...mainImage, name: `${name}__${item.id}`, image: item.image }))
+      : [mainImage]
 
   const renderFavoriteIcon = () =>
     isProductInFavorite ? <FavoriteFillIcon width={20} /> : <FavoriteIcon color="black" width={20} />
@@ -57,45 +67,63 @@ const ProductDescriptionModule: FC<Props> = ({ product }) => {
 
   return (
     <>
-      <section className="flex justify-between">
-        <h2>{name}</h2>
-        <div className="flex gap-4">
-          <ActionButton onClick={onChangeFavorite}>{renderFavoriteIcon()}</ActionButton>
-          <ActionButton onClick={onCopyToClipboard}>
-            <SharedIcon />
-          </ActionButton>
+      <div className="flex gap-10 relative">
+        <section className="w-2/5 h-[550px] sticky top-32">
+          <ViewSlide slides={slides} />
+        </section>
+
+        <div className="flex-1">
+          <section className="flex justify-between">
+            <h2>{name}</h2>
+            <div className="flex gap-4">
+              <ActionButton onClick={onChangeFavorite}>{renderFavoriteIcon()}</ActionButton>
+              <ActionButton onClick={onCopyToClipboard}>
+                <SharedIcon />
+              </ActionButton>
+            </div>
+          </section>
+
+          <section className="flex items-center justify-between mt-7">
+            <ProductCount productId={id} quantity={quantity} />
+            <div className="flex items-center gap-2">{renderPriceSection()}</div>
+          </section>
+
+          <article className="mt-4">
+            {description && (
+              <div
+                className={`overflow-hidden ${showFullDescription ? '' : 'line-clamp-6'}`}
+                dangerouslySetInnerHTML={{ __html: description.replace(/\n/g, '<br>') }}
+              />
+            )}
+            {description && (
+              <button
+                className="flex items-center gap-2 group mt-2"
+                onClick={() => setShowFullDescription(!showFullDescription)}
+              >
+                <span className="font-semibold group-hover:underline">
+                  {showFullDescription ? 'Yopish' : "Batafsil o'qish"}
+                </span>
+                <span className={`scale-90 ${showFullDescription ? 'rotate-180' : 'rotate-0'}`}>
+                  <ChevronIcon />
+                </span>
+              </button>
+            )}
+          </article>
+
+          <section className="flex justify-end mt-10">
+            <div className="w-56">{renderAddToCartButton()}</div>
+          </section>
         </div>
-      </section>
-
-      <section className="flex items-center justify-between mt-7">
-        <ProductCount productId={id} quantity={quantity} />
-        <div className="flex items-center gap-2">{renderPriceSection()}</div>
-      </section>
-      <article className="mt-4">
-        {description && (
-          <div
-            className={`overflow-hidden ${showFullDescription ? '' : 'line-clamp-6'}`}
-            dangerouslySetInnerHTML={{ __html: description.replace(/\n/g, '<br>') }}
-          />
-        )}
-        {description && (
-          <button
-            className="flex items-center gap-2 group mt-2"
-            onClick={() => setShowFullDescription(!showFullDescription)}
-          >
-            <span className="font-semibold group-hover:underline">
-              {showFullDescription ? 'Yopish' : "Batafsil o'qish"}
-            </span>
-            <span className={`scale-90 ${showFullDescription ? 'rotate-180' : 'rotate-0'}`}>
-              <ChevronIcon />
-            </span>
-          </button>
-        )}
-      </article>
-
-      <div className="flex justify-end mt-10">
-        <div className="w-56">{renderAddToCartButton()}</div>
       </div>
+
+      {/* <div className="mt-10">
+        <Tabs
+          items={[
+            { key: 'description', label: 'Mahsulot tavsifi',children:<p>alksdjflkasjdklf</p> },
+            { key: 'comments', label: 'Izohlar' },
+          ]}
+        />
+      </div> */}
     </>
   )
 }

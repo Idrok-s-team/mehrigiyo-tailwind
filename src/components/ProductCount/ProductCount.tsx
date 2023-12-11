@@ -21,7 +21,7 @@ const ProductCard: FC<Props> = ({ productId, quantity }) => {
         <MinusIcon />
       </button>
       <h6 className="w-10 h-10 rounded-xl border border-[#E2E2E2] flex items-center justify-center">{countValue}</h6>
-      {isLastItem ? (
+      {/* {isLastItem ? (
         <Tooltip text="Sotuvda faqat 1 dona bor">
           <button
             onClick={increaseCount}
@@ -33,11 +33,15 @@ const ProductCard: FC<Props> = ({ productId, quantity }) => {
             <PlusIcon />
           </button>
         </Tooltip>
-      ) : (
-        <button onClick={increaseCount} disabled={!isLastItem} className="flex items-center justify-center w-10 h-10">
-          <PlusIcon />
-        </button>
-      )}
+      ) : ( */}
+      <button
+        onClick={increaseCount}
+        //  disabled={!isLastItem}
+        className="flex items-center justify-center w-10 h-10"
+      >
+        <PlusIcon />
+      </button>
+      {/* )} */}
     </div>
   )
 }
