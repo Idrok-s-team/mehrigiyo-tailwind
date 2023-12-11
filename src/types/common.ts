@@ -2,7 +2,7 @@ export type GetResponseType<T> = NavigationTypes & {
   results: T
 }
 
-export type ResponseStatusType<T> = {
+export type GetResponseWithStatusType<T> = {
   data: T
   request: string
   status: string

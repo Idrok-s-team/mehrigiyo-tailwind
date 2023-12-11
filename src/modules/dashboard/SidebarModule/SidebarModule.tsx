@@ -3,7 +3,7 @@
 import { FC, useMemo } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useParams } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import clsx from 'clsx'
 import { useUserMeQuery } from '@/hooks/queries'
 import {
@@ -21,7 +21,8 @@ const SidebarModule: FC = () => {
   const { data: userDatas } = useUserMeQuery()
   const userData = userDatas?.results[0]
 
-  const { subroute } = useParams()
+  const pathname = usePathname()
+  const subPath = pathname.split('/')[2]
 
   const sidebarData = useMemo(
     () => [
@@ -61,7 +62,7 @@ const SidebarModule: FC = () => {
   )
 
   const getLinkClassName = (href: string) => {
-    const isActive = `/${subroute}` === href
+    const isActive = `/${subPath}` === href
     return clsx('flex items-center gap-[14px] px-2.5 py-2 rounded-xl hover:bg-green-primary/10 duration-200', {
       'bg-green-primary/10': isActive,
     })

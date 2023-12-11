@@ -1,9 +1,9 @@
 import { useMutation } from '@tanstack/react-query'
-import { IApiErrorData, ResponseStatusType, UserFavoriteParamsType } from '@/types'
+import { IApiErrorData, GetResponseWithStatusType, UserFavoriteParamsType } from '@/types'
 import { addUserFavoriteMedicinesApi, deleteUserFavoriteMedicinesApi } from '@/api'
 
 export const useAddUserFavoriteMedicineMutation = () => {
-  const mutation = useMutation<ResponseStatusType<string>, IApiErrorData, UserFavoriteParamsType>({
+  const mutation = useMutation<GetResponseWithStatusType<string>, IApiErrorData, UserFavoriteParamsType>({
     mutationFn: (params: UserFavoriteParamsType) => {
       return addUserFavoriteMedicinesApi(params)
     },
@@ -12,7 +12,7 @@ export const useAddUserFavoriteMedicineMutation = () => {
 }
 
 export const useDeleteUserFavoriteMedicineMutation = () => {
-  const mutation = useMutation<ResponseStatusType<string>, IApiErrorData, UserFavoriteParamsType>({
+  const mutation = useMutation<GetResponseWithStatusType<string>, IApiErrorData, UserFavoriteParamsType>({
     mutationFn: (params: UserFavoriteParamsType) => {
       return deleteUserFavoriteMedicinesApi(params)
     },

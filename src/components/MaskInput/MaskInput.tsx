@@ -1,13 +1,14 @@
 'use client'
 
-import React, { FC, InputHTMLAttributes } from 'react'
+import React, { forwardRef } from 'react'
+import InputMask, { Props as MaskInputProps } from 'react-input-mask'
 import clsx from 'clsx'
 
-type Props = InputHTMLAttributes<HTMLInputElement> & {
+type Props = MaskInputProps & {
   label?: string
 }
 
-const Input: FC<Props> = ({ className, label, ...props }) => {
+const MaskInput = forwardRef<any, Props>(({ className, label, ...props }, ref) => {
   const inputClassNames = clsx(
     'block w-full px-2 pb-3 pt-2 text-gray-900 border-b border-gray-[#E2E2E2] focus:outline-none focus:ring-0 focus:border-green-primary placeholder:text-gray-primary/40',
     className,
@@ -21,9 +22,17 @@ const Input: FC<Props> = ({ className, label, ...props }) => {
           {props.required && <span className="ml-1 text-lg text-primary">*</span>}
         </label>
       )}
-      <input {...props} className={inputClassNames} />
+      <InputMask
+        {...props}
+        // mask="+\9\98 99 999 99 99"
+        // placeholder="+998 _ _  _ _ _ - _ _ - _ _"
+        // maskChar="_"
+        // alwaysShowMask
+        className={inputClassNames}
+        ref={ref}
+      />
     </div>
   )
-}
+})
 
-export default Input
+export default MaskInput

@@ -1,6 +1,6 @@
 import { baseUrl } from '@/constants'
 import {
-  ResponseStatusType,
+  GetResponseWithStatusType,
   GetResponseType,
   IShopCart,
   IShopMedicines,
@@ -30,20 +30,20 @@ export const getShopMedicineByIdApi = async (id: number): Promise<IShopMedicines
 }
 
 // SHOP CART API
-export const getShopCartApi = async (): Promise<ResponseStatusType<IShopCart[]>> => {
+export const getShopCartApi = async (): Promise<GetResponseWithStatusType<IShopCart[]>> => {
   return authorizedApiFetch('/shop/cart/')
 }
 
-export const addShopCartApi = async (params: ShopCartParamsType<'product'>): Promise<ResponseStatusType<IShopCart>> => {
+export const addShopCartApi = async (params: ShopCartParamsType<'product'>): Promise<GetResponseWithStatusType<IShopCart>> => {
   return authorizedApiFetch('/shop/cart/', 'POST', params)
 }
 
-export const updateShopCartApi = async (params: ShopCartParamsType<'id'>): Promise<ResponseStatusType<IShopCart>> => {
+export const updateShopCartApi = async (params: ShopCartParamsType<'id'>): Promise<GetResponseWithStatusType<IShopCart>> => {
   return authorizedApiFetch('/shop/cart/', 'PUT', params)
 }
 
 export const deleteShopCartApi = async (
   params: ShopCartParamsType<'onlyId'>,
-): Promise<ResponseStatusType<IShopCart>> => {
+): Promise<GetResponseWithStatusType<IShopCart>> => {
   return authorizedApiFetch('/shop/cart/', 'DELETE', params)
 }

@@ -1,4 +1,4 @@
-import { GetResponseType, IShopMedicines, IUserMe, ResponseStatusType, UserFavoriteParamsType } from '@/types'
+import { GetResponseType, IShopMedicines, IUserMe, GetResponseWithStatusType, UserFavoriteParamsType } from '@/types'
 import { authorizedApiFetch } from '.'
 
 // USER ME API
@@ -13,7 +13,7 @@ export const getUserFavoriteMedicinesApi = async (): Promise<GetResponseType<ISh
 
 export const addUserFavoriteMedicinesApi = async (
   params: UserFavoriteParamsType,
-): Promise<ResponseStatusType<string>> => {
+): Promise<GetResponseWithStatusType<string>> => {
   return authorizedApiFetch('/user/favorite/medicines/', 'POST', params)
 }
 
@@ -25,6 +25,6 @@ export const updateUserFavoriteMedicinesApi = async (
 
 export const deleteUserFavoriteMedicinesApi = async (
   params: UserFavoriteParamsType,
-): Promise<ResponseStatusType<string>> => {
+): Promise<GetResponseWithStatusType<string>> => {
   return authorizedApiFetch('/user/favorite/medicines/', 'DELETE', params)
 }
