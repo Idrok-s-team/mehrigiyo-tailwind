@@ -25,3 +25,10 @@ export interface IVerifyCard {
   }
   jsonrpc: string
 }
+
+export interface IDeleteCardResponse {
+  result: {
+    success: boolean
+  }
+  jsonrpc: string
+}
