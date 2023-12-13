@@ -9,8 +9,8 @@ import { useUserCountryQuery, useUserRegionQuery } from '@/hooks/queries'
 interface ICardActionModal {
   isOpenModal: boolean
   setIsOpenModal: (modal: boolean) => void
-  selectedCardId?: number | null
-  setSelectedCardId: (selectedCard: number) => void
+  selectedAddressId?: number | null
+  setSelectedAddressId: (selectedCard: number) => void
   refetchAddress: () => void
 }
 
@@ -153,7 +153,7 @@ const AddressActionModal: FC<ICardActionModal> = ({ isOpenModal, setIsOpenModal,
             label="Qavat (ixtiyoriy)"
             placeholder="e.g., 4-qavat"
             autoComplete="floor"
-            className='mt-2'
+            className="mt-2"
             onChange={inputHandler(setAddressDetails)}
           />
         </div>

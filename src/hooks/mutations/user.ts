@@ -36,4 +36,4 @@ export const useUpdateUserDeliverAddressMutation = () =>
   useCustomMutation<IUserDeliverAddress, IUserDeliverAddress>(updateUserDeliverAddressApi)
 
 export const useDeleteUserDeliverAddressMutation = () =>
-  useCustomMutation<Pick<UserFieldParamsType, 'pk'>, IUserDeliverAddress>(deleteUserDeliverAddressApi)
+  useCustomMutation<Pick<UserFieldParamsType, 'pk'>, GetResponseWithStatusType<unknown>>(deleteUserDeliverAddressApi)

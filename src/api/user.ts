@@ -7,6 +7,7 @@ import {
   UserFieldParamsType,
   IUserDeliverAddress,
   IUserCountry,
+  ICardError,
 } from '@/types'
 import { authorizedFetchApi } from './common'
 
@@ -75,7 +76,7 @@ export const updateUserDeliverAddressApi = async (body: IUserDeliverAddress): Pr
 
 export const deleteUserDeliverAddressApi = async (
   body: Pick<UserFieldParamsType, 'pk'>,
-): Promise<IUserDeliverAddress> => {
+): Promise<GetResponseWithStatusType<ICardError>> => {
   return authorizedFetchApi('/user/deliver/address/', 'DELETE', { body })
 }
 

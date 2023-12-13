@@ -2,33 +2,33 @@ import React, { FC } from 'react'
 import toast from 'react-hot-toast'
 import { Confirm } from '@/components'
 import { ICardError } from '@/types'
-import { useDeleteCardMutation } from '@/hooks/mutations'
+import { useDeleteCardMutation, useDeleteUserDeliverAddressMutation } from '@/hooks/mutations'
 
 interface ICardDeletionConfirmModal {
   isConfirmOpen: boolean
   setIsOpenConfirm: (modal: boolean) => void
-  selectedCardId?: number | null
-  refetchCards: () => void
+  selectedAddressId?: number | null
+  refetchAddress: () => void
   isEditMode: boolean
 }
 
-const CardDeletionConfirmModal: FC<ICardDeletionConfirmModal> = ({
+const AddressDeletionConfirmModal: FC<ICardDeletionConfirmModal> = ({
   isConfirmOpen,
   setIsOpenConfirm,
   isEditMode,
-  refetchCards,
-  selectedCardId,
+  refetchAddress,
+  selectedAddressId,
 }) => {
-  const { mutateAsync: deleteCard, isPending: isDeletingCard } = useDeleteCardMutation()
+  const { mutateAsync: deleteAddress, isPending: isDeletingAddress } = useDeleteUserDeliverAddressMutation()
 
   const handleCardDeletion = async () => {
-    if (isEditMode && selectedCardId) {
-      const deleteResponse = await deleteCard({ card_id: selectedCardId })
+    if (isEditMode && selectedAddressId) {
+      const deleteResponse = await deleteAddress({ pk: selectedAddressId })
 
       if (deleteResponse.status === 'success') {
-        toast.success("Karta o'chirildi")
+        toast.success("Manzil o'chirildi")
         setIsOpenConfirm(false)
-        refetchCards()
+        refetchAddress()
       } else {
         const cardError = deleteResponse.data as ICardError
         toast.error(cardError.uz || cardError.error.message)
@@ -40,14 +40,14 @@ const CardDeletionConfirmModal: FC<ICardDeletionConfirmModal> = ({
 
   return (
     <Confirm
-      confirmText="Ushbu kartani o'chirishga ishonchingiz komilmi?"
+      confirmText="Ushbu manzilni o'chirishga ishonchingiz komilmi?"
       isOpen={isConfirmOpen}
       onClose={handleClose}
       onSubmit={handleCardDeletion}
-      disabled={isDeletingCard}
-      submitButtonText={isDeletingCard ? "Karta o'chirilmoqda" : 'Tasdiqlash'}
+      disabled={isDeletingAddress}
+      submitButtonText={isDeletingAddress ? "Manzil o'chirilmoqda" : 'Tasdiqlash'}
     />
   )
 }
 
-export default CardDeletionConfirmModal
+export default AddressDeletionConfirmModal

@@ -46,7 +46,7 @@ const PaymentMethodsModule: FC = () => {
               <h4>To'lov usullari</h4>
               <p className="text-sm text-gray-primary">Bugun bemorlarimizga xizmat qilish uchun ajoyib kun.</p>
             </div>
-            <button className="font-medium text-green-primary" onClick={toggleEditMode}>
+            <button className="font-medium text-green-primary z-10" onClick={toggleEditMode}>
               {isEditMode ? 'Tasdiqlash' : "O'zgartirish"}
             </button>
           </section>

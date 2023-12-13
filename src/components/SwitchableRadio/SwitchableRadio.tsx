@@ -15,9 +15,8 @@ export type SwitchableRadioType = {
 
 interface ISwitchableRadioProps {
   items: SwitchableRadioType[]
-  selectedCardId: number
   isEditMode: boolean
-  setSelectedCardId: (id: number) => void
+  setSelectedItemId: (id: number) => void
   onAddAction: () => void
   onDeleteItemAction: () => void
   isAddressMode?: boolean
@@ -25,7 +24,7 @@ interface ISwitchableRadioProps {
 
 const SwitchableRadio: FC<ISwitchableRadioProps> = ({
   items,
-  setSelectedCardId,
+  setSelectedItemId,
   isEditMode,
   onAddAction,
   onDeleteItemAction,
@@ -35,10 +34,13 @@ const SwitchableRadio: FC<ISwitchableRadioProps> = ({
 
   const handleSelect = (key: number) => {
     setActiveItem(key)
-    setSelectedCardId(key)
+    setSelectedItemId(key)
   }
 
   const iconForType = (type: RadioType) => {
+    if (isEditMode && (type === 'address' || type === 'plastic')) {
+      return <CloseCircleRedIcon />
+    }
     switch (type) {
       case 'cash':
         return <CashIcon />
@@ -47,7 +49,7 @@ const SwitchableRadio: FC<ISwitchableRadioProps> = ({
       case 'address':
         return <SwitchableRightIcon />
       default:
-        return isEditMode ? <CloseCircleRedIcon /> : <PlasticCardIcon />
+        return <PlasticCardIcon />
     }
   }
 
