@@ -54,8 +54,8 @@ const Modal: React.FC<IProps> = ({
           </button>
         </header>
         <main>{children}</main>
-        <footer className='mt-4'>
-          <Button onClick={onSubmit} disabled={disabled} type='submit'>
+        <footer className="mt-4">
+          <Button onClick={onSubmit} disabled={disabled} type="submit">
             {buttonText}
           </Button>
         </footer>

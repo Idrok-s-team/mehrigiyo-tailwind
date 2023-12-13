@@ -16,14 +16,18 @@ export const fetchApi = async <T>(path: string, params?: QueryParamsType): Promi
 export const authorizedFetchApi = async <T, R = T>(
   path: string,
   method: 'GET' | 'POST' | 'DELETE' | 'PUT' = 'GET',
-  bodyParams?: T,
-  withAuth: boolean = true,
+  args?: {
+    body?: T
+    params?: { [key: string]: any }
+    withAuth?: boolean
+  },
 ): Promise<R> => {
-  const url = `${baseUrl}${path}`
-  const headers: HeadersInit = {
-    'Content-Type': 'application/json',
-  }
+  const { body, params, withAuth = true } = args || {}
 
+  const url = params && method === 'GET' ? queryStringUrl(`${baseUrl}${path}`, params) : `${baseUrl}${path}`
+
+  // Initialize headers and include Authorization header if withAuth is true
+  const headers: HeadersInit = { 'Content-Type': 'application/json' }
   if (withAuth) {
     const token = getCookie('access_token')
     if (!token) throw new Error('No access token available.')
@@ -31,9 +35,9 @@ export const authorizedFetchApi = async <T, R = T>(
   }
 
   const response = await fetch(url, {
-    method: method,
-    headers: headers,
-    body: bodyParams ? JSON.stringify(bodyParams) : null,
+    method,
+    headers,
+    body: body && method !== 'GET' ? JSON.stringify(body) : null,
   })
 
   if (!response.ok) {

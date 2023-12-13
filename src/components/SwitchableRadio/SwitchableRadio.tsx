@@ -2,14 +2,7 @@
 
 import React, { FC, useState } from 'react'
 import clsx from 'clsx'
-import {
-  CashIcon,
-  ChevronIcon,
-  CloseCircleRedIcon,
-  PlasticCardIcon,
-  PlusCircleGrayIcon,
-  SwitchableRightIcon,
-} from '@/assets/icons'
+import { CashIcon, CloseCircleRedIcon, PlasticCardIcon, PlusCircleGrayIcon, SwitchableRightIcon } from '@/assets/icons'
 
 type RadioType = `address` | `cash` | `plastic`
 
@@ -96,7 +89,7 @@ const SwitchableRadio: FC<ISwitchableRadioProps> = ({
         <span>
           <PlusCircleGrayIcon />
         </span>
-        <p className="text-gray-primary">Karta qo'shish</p>
+        <p className="text-gray-primary">{isAddressMode ? "Manzil qo'shish" : "Karta qo'shish"}</p>
       </button>
     </div>
   )

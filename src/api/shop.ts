@@ -27,19 +27,19 @@ export const getShopCartApi = async (): Promise<GetResponseWithStatusType<IShopC
 }
 
 export const addShopCartApi = async (
-  params: Pick<ShopFieldParamsType, 'product' | 'amount'>,
+  body: Pick<ShopFieldParamsType, 'product' | 'amount'>,
 ): Promise<GetResponseWithStatusType<IShopCart>> => {
-  return authorizedFetchApi('/shop/cart/', 'POST', params)
+  return authorizedFetchApi('/shop/cart/', 'POST', { body })
 }
 
 export const updateShopCartApi = async (
-  params: Pick<ShopFieldParamsType, 'id' | 'amount'>,
+  body: Pick<ShopFieldParamsType, 'id' | 'amount'>,
 ): Promise<GetResponseWithStatusType<IShopCart>> => {
-  return authorizedFetchApi('/shop/cart/', 'PUT', params)
+  return authorizedFetchApi('/shop/cart/', 'PUT', { body })
 }
 
 export const deleteShopCartApi = async (
-  params: Pick<ShopFieldParamsType, 'id'>,
+  body: Pick<ShopFieldParamsType, 'id'>,
 ): Promise<GetResponseWithStatusType<IShopCart>> => {
-  return authorizedFetchApi('/shop/cart/', 'DELETE', params)
+  return authorizedFetchApi('/shop/cart/', 'DELETE', { body })
 }

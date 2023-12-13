@@ -16,7 +16,7 @@ const Input: FC<Props> = ({ className, label, ...props }) => {
   return (
     <div className="bg-white">
       {label && (
-        <label htmlFor={props.id} className="block text-sm text-[#C3C3C3]">
+        <label htmlFor={props.id} className="flex items-center text-sm text-[#C3C3C3]">
           {label}
           {props.required && <span className="ml-1 text-lg text-primary">*</span>}
         </label>

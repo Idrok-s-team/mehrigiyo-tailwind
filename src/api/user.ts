@@ -5,7 +5,8 @@ import {
   GetResponseWithStatusType,
   IUserRegion,
   UserFieldParamsType,
-  IUserDeliveryAddress,
+  IUserDeliverAddress,
+  IUserCountry,
 } from '@/types'
 import { authorizedFetchApi } from './common'
 
@@ -20,48 +21,71 @@ export const getUserFavoriteMedicinesApi = async (): Promise<GetResponseType<ISh
 }
 
 export const addUserFavoriteMedicinesApi = async (
-  params: Pick<UserFieldParamsType, 'pk'>,
+  body: Pick<UserFieldParamsType, 'pk'>,
 ): Promise<GetResponseWithStatusType<string>> => {
-  return authorizedFetchApi('/user/favorite/medicines/', 'POST', params)
+  return authorizedFetchApi('/user/favorite/medicines/', 'POST', { body })
 }
 
 export const updateUserFavoriteMedicinesApi = async (
-  params: Pick<UserFieldParamsType, 'pk'>,
+  body: Pick<UserFieldParamsType, 'pk'>,
 ): Promise<GetResponseWithStatusType<string>> => {
-  return authorizedFetchApi('/user/favorite/medicines/', 'PUT', params)
+  return authorizedFetchApi('/user/favorite/medicines/', 'PUT', { body })
 }
 
 export const deleteUserFavoriteMedicinesApi = async (
-  params: Pick<UserFieldParamsType, 'pk'>,
+  body: Pick<UserFieldParamsType, 'pk'>,
 ): Promise<GetResponseWithStatusType<string>> => {
-  return authorizedFetchApi('/user/favorite/medicines/', 'DELETE', params)
+  return authorizedFetchApi('/user/favorite/medicines/', 'DELETE', { body })
 }
 
 // USER ADDRESS API
-export const addUserAddressApi = async (params: Pick<UserFieldParamsType, 'region_id'>): Promise<IUserRegion> => {
-  return authorizedFetchApi('/user/add/address/', 'POST', params)
+export const addUserAddressApi = async (body: Pick<UserFieldParamsType, 'region_id'>): Promise<IUserRegion> => {
+  return authorizedFetchApi('/user/add/address/', 'POST', { body })
 }
 
-export const updateUserAddressApi = async (params: Pick<UserFieldParamsType, 'region_id'>): Promise<IUserRegion> => {
-  return authorizedFetchApi('/user/add/address/', 'PUT', params)
+export const updateUserAddressApi = async (body: Pick<UserFieldParamsType, 'region_id'>): Promise<IUserRegion> => {
+  return authorizedFetchApi('/user/add/address/', 'PUT', { body })
 }
 
-export const deleteUserAddressApi = async (params: Pick<UserFieldParamsType, 'pk'>): Promise<IUserRegion> => {
-  return authorizedFetchApi('/user/add/address/', 'DELETE', params)
+export const deleteUserAddressApi = async (body: Pick<UserFieldParamsType, 'pk'>): Promise<IUserRegion> => {
+  return authorizedFetchApi('/user/add/address/', 'DELETE', { body })
 }
 
 // USER CHANGE PASSWORD API
 export const userChangePasswordApi = async (
-  params: Pick<UserFieldParamsType, 'phone' | 'new_password'>,
+  body: Pick<UserFieldParamsType, 'phone' | 'new_password'>,
 ): Promise<IUserRegion> => {
-  return authorizedFetchApi('/user/change/password/', 'POST', params)
+  return authorizedFetchApi('/user/change/password/', 'POST', { body })
 }
 
 // USER DELIVER ADDRESS API
-export const getUserDeliverAddressApi = async (): Promise<GetResponseType<IUserDeliveryAddress>> => {
+export const getUserDeliverAddressApi = async (): Promise<GetResponseType<IUserDeliverAddress[]>> => {
   return authorizedFetchApi('/user/deliver/address/')
 }
 
-export const addUserDeliverAddressApi = async (params: IUserDeliveryAddress): Promise<IUserRegion> => {
-  return authorizedFetchApi('/user/deliver/address/', 'POST', params)
+export const addUserDeliverAddressApi = async (
+  body: IUserDeliverAddress,
+): Promise<GetResponseWithStatusType<IUserDeliverAddress>> => {
+  return authorizedFetchApi('/user/deliver/address/', 'POST', { body })
+}
+
+export const updateUserDeliverAddressApi = async (body: IUserDeliverAddress): Promise<IUserDeliverAddress> => {
+  return authorizedFetchApi('/user/deliver/address/', 'PUT', { body })
+}
+
+export const deleteUserDeliverAddressApi = async (
+  body: Pick<UserFieldParamsType, 'pk'>,
+): Promise<IUserDeliverAddress> => {
+  return authorizedFetchApi('/user/deliver/address/', 'DELETE', { body })
+}
+
+// USER OTHER APIs
+export const getUserCountryApi = async (): Promise<GetResponseWithStatusType<IUserCountry[]>> => {
+  return authorizedFetchApi('/user/country/')
+}
+
+export const getUserRegionApi = async (
+  params: Pick<UserFieldParamsType, 'pk'>,
+): Promise<GetResponseWithStatusType<IUserDeliverAddress[]>> => {
+  return authorizedFetchApi('/user/region/', 'GET', { params })
 }

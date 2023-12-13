@@ -6,25 +6,25 @@ export const getCardApi = async (): Promise<GetResponseWithStatusType<ICard[]>> 
 }
 
 export const addCardApi = async (
-  params: Pick<CardFieldParamsType, 'number' | 'expire'>,
+  body: Pick<CardFieldParamsType, 'number' | 'expire'>,
 ): Promise<GetResponseWithStatusType<ICardError>> => {
-  return authorizedFetchApi('/payme/card/', 'POST', params)
+  return authorizedFetchApi('/payme/card/', 'POST', { body })
 }
 
 export const cardConfirmCodeApi = async (
-  params: Pick<CardFieldParamsType, 'card_id' | 'code'>,
+  body: Pick<CardFieldParamsType, 'card_id' | 'code'>,
 ): Promise<GetResponseWithStatusType<unknown>> => {
-  return authorizedFetchApi('/payme/card/', 'PUT', params)
+  return authorizedFetchApi('/payme/card/', 'PUT', { body })
 }
 
 export const cardVerifyApi = async (
-  params: Pick<CardFieldParamsType, 'card_id'>,
+  body: Pick<CardFieldParamsType, 'card_id'>,
 ): Promise<GetResponseWithStatusType<ICardError>> => {
-  return authorizedFetchApi('/payme/card/verify/', 'POST', params)
+  return authorizedFetchApi('/payme/card/verify/', 'POST', { body })
 }
 
 export const deleteCardApi = async (
-  params: Pick<CardFieldParamsType, 'card_id'>,
+  body: Pick<CardFieldParamsType, 'card_id'>,
 ): Promise<GetResponseWithStatusType<ICardError>> => {
-  return authorizedFetchApi('/payme/card/', 'DELETE', params)
+  return authorizedFetchApi('/payme/card/', 'DELETE', { body })
 }

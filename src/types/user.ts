@@ -22,7 +22,7 @@ export interface IUserMe {
   theme_mode: number
 }
 
-export interface IUserDeliveryAddress {
+export interface IUserDeliverAddress {
   readonly id: number
   name: string
   region: IUserRegion
