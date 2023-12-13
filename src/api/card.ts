@@ -1,25 +1,30 @@
-import { AddCardParamsType, GetResponseWithStatusType, ICard, ICardError } from '@/types'
-import { authorizedApiFetch } from '.'
+import { CardFieldParamsType, GetResponseWithStatusType, ICard, ICardError } from '@/types'
+import { authorizedFetchApi } from './common'
 
 export const getCardApi = async (): Promise<GetResponseWithStatusType<ICard[]>> => {
-  return authorizedApiFetch('/payme/card/')
+  return authorizedFetchApi('/payme/card/')
 }
 
-export const addCardApi = async (params: AddCardParamsType): Promise<GetResponseWithStatusType<ICardError>> => {
-  return authorizedApiFetch('/payme/card/', 'POST', params)
+export const addCardApi = async (
+  params: Pick<CardFieldParamsType, 'number' | 'expire'>,
+): Promise<GetResponseWithStatusType<ICardError>> => {
+  return authorizedFetchApi('/payme/card/', 'POST', params)
 }
 
-export const cardConfirmCodeApi = async (params: {
-  card_id: number
-  code: string
-}): Promise<GetResponseWithStatusType<unknown>> => {
-  return authorizedApiFetch('/payme/card/', 'PUT', params)
+export const cardConfirmCodeApi = async (
+  params: Pick<CardFieldParamsType, 'card_id' | 'code'>,
+): Promise<GetResponseWithStatusType<unknown>> => {
+  return authorizedFetchApi('/payme/card/', 'PUT', params)
 }
 
-export const cardVerifyApi = async (params: { card_id: number }): Promise<GetResponseWithStatusType<ICardError>> => {
-  return authorizedApiFetch('/payme/card/verify/', 'POST', params)
+export const cardVerifyApi = async (
+  params: Pick<CardFieldParamsType, 'card_id'>,
+): Promise<GetResponseWithStatusType<ICardError>> => {
+  return authorizedFetchApi('/payme/card/verify/', 'POST', params)
 }
 
-export const deleteCardApi = async (params: { card_id: number }): Promise<GetResponseWithStatusType<ICardError>> => {
-  return authorizedApiFetch('/payme/card/', 'DELETE', params)
+export const deleteCardApi = async (
+  params: Pick<CardFieldParamsType, 'card_id'>,
+): Promise<GetResponseWithStatusType<ICardError>> => {
+  return authorizedFetchApi('/payme/card/', 'DELETE', params)
 }

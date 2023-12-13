@@ -1,9 +1,19 @@
 import { baseUrl } from '@/constants'
-import { getCookie } from '@/utils'
+import { getCookie, queryStringUrl } from '@/utils'
 import { ApiError } from './error'
+import { QueryParamsType } from '@/types'
 
-// Utility function to perform API requests
-export const authorizedApiFetch = async <T, R = T>(
+export const fetchApi = async <T>(path: string, params?: QueryParamsType): Promise<T> => {
+  const url = queryStringUrl(`${baseUrl}${path}`, params)
+  const response = await fetch(url)
+  if (!response.ok) {
+    throw new Error('Network response was not ok')
+  }
+  return response.json()
+}
+
+// Authorized fetch API
+export const authorizedFetchApi = async <T, R = T>(
   path: string,
   method: 'GET' | 'POST' | 'DELETE' | 'PUT' = 'GET',
   bodyParams?: T,

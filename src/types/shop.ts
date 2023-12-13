@@ -31,6 +31,9 @@ export interface IShopCart {
   product: IShopMedicines
 }
 
-export type ShopCartParamsType<T extends 'product' | 'id' | 'onlyId'> = T extends 'onlyId'
-  ? { id: number }
-  : { [K in T]: number } & { amount: number }
+// PARAMS TYPES
+export type ShopFieldParamsType = {
+  id: number
+  product: number
+  amount: number
+}

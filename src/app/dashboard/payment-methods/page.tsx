@@ -3,7 +3,7 @@ import { PaymentMethodsModule } from '@/modules/dashboard'
 
 const PaymentMethods = () => {
   return (
-    <div >
+    <div>
       <PaymentMethodsModule />
     </div>
   )

@@ -1,5 +1,7 @@
+import { LocalizedType } from '.'
+
 export interface IUserMe {
-  id: number
+  readonly id: number
   username: string | number
   first_name: string
   last_name: string
@@ -20,6 +22,31 @@ export interface IUserMe {
   theme_mode: number
 }
 
-export type UserFavoriteParamsType = {
+export interface IUserDeliveryAddress {
+  readonly id: number
+  name: string
+  region: IUserRegion
+  full_address: string
+  apartment_office: string
+  floor: string
+  door_or_phone: string
+  instructions: string
+}
+
+export interface IUserRegion extends LocalizedType<'name'> {
+  readonly id: number
+  delivery_price: number
+  country: number
+}
+
+export interface IUserCountry extends LocalizedType<'name'> {
+  readonly id: number
+}
+
+// PARAMS TYPES
+export type UserFieldParamsType = {
+  region_id: number
   pk: number
+  phone: string
+  new_password: string
 }

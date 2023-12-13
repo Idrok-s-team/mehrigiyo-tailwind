@@ -6,8 +6,6 @@ export interface ICard {
   is_deleted: boolean
 }
 
-export type AddCardParamsType = Pick<ICard, 'number' | 'expire'>
-
 export interface ICardError {
   uz: string
   error: {
@@ -31,4 +29,12 @@ export interface IDeleteCardResponse {
     success: boolean
   }
   jsonrpc: string
+}
+
+// PARAMS TYPES
+export type CardFieldParamsType = {
+  number: string
+  expire: string
+  card_id: number
+  code: string
 }

@@ -1,21 +1,26 @@
-import { useMutation } from '@tanstack/react-query'
-import { IApiErrorData, GetResponseWithStatusType, UserFavoriteParamsType } from '@/types'
-import { addUserFavoriteMedicinesApi, deleteUserFavoriteMedicinesApi } from '@/api'
+import { GetResponseWithStatusType, UserFieldParamsType, IUserRegion } from '@/types'
+import {
+  addUserAddressApi,
+  addUserFavoriteMedicinesApi,
+  deleteUserAddressApi,
+  deleteUserFavoriteMedicinesApi,
+  updateUserAddressApi,
+} from '@/api'
+import { useCustomMutation } from './common'
 
-export const useAddUserFavoriteMedicineMutation = () => {
-  const mutation = useMutation<GetResponseWithStatusType<string>, IApiErrorData, UserFavoriteParamsType>({
-    mutationFn: (params: UserFavoriteParamsType) => {
-      return addUserFavoriteMedicinesApi(params)
-    },
-  })
-  return mutation
-}
+// FAVORITE MUTATIONS
+export const useAddUserFavoriteMedicineMutation = () =>
+  useCustomMutation<Pick<UserFieldParamsType, 'pk'>, GetResponseWithStatusType<string>>(addUserFavoriteMedicinesApi)
 
-export const useDeleteUserFavoriteMedicineMutation = () => {
-  const mutation = useMutation<GetResponseWithStatusType<string>, IApiErrorData, UserFavoriteParamsType>({
-    mutationFn: (params: UserFavoriteParamsType) => {
-      return deleteUserFavoriteMedicinesApi(params)
-    },
-  })
-  return mutation
-}
+export const useDeleteUserFavoriteMedicineMutation = () =>
+  useCustomMutation<Pick<UserFieldParamsType, 'pk'>, GetResponseWithStatusType<string>>(deleteUserFavoriteMedicinesApi)
+
+// ADDRESS MUTATIONS
+export const useAddUserAddressMutation = () =>
+  useCustomMutation<Pick<UserFieldParamsType, 'region_id'>, IUserRegion>(addUserAddressApi)
+
+export const useUpdateUserAddressMutation = () =>
+  useCustomMutation<Pick<UserFieldParamsType, 'region_id'>, IUserRegion>(updateUserAddressApi)
+
+export const useDeleteUserAddressMutation = () =>
+  useCustomMutation<Pick<UserFieldParamsType, 'pk'>, IUserRegion>(deleteUserAddressApi)

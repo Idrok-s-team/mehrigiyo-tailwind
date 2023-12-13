@@ -1,39 +1,17 @@
-import { useMutation } from '@tanstack/react-query'
-import { IApiErrorData, GetResponseWithStatusType, AddCardParamsType, ICard, ICardError } from '@/types'
+import { GetResponseWithStatusType, CardFieldParamsType } from '@/types'
 import { addCardApi, cardConfirmCodeApi, cardVerifyApi, deleteCardApi } from '@/api'
+import { useCustomMutation } from './common'
 
-export const useAddCardMutation = () => {
-  const mutation = useMutation<GetResponseWithStatusType<unknown>, IApiErrorData, AddCardParamsType>({
-    mutationFn: (params: AddCardParamsType) => {
-      return addCardApi(params)
-    },
-  })
-  return mutation
-}
+export const useAddCardMutation = () =>
+  useCustomMutation<Pick<CardFieldParamsType, 'number' | 'expire'>, GetResponseWithStatusType<unknown>>(addCardApi)
 
-export const useCardConfirmCodeMutation = () => {
-  const mutation = useMutation<GetResponseWithStatusType<unknown>, IApiErrorData, { card_id: number; code: string }>({
-    mutationFn: (params: { card_id: number; code: string }) => {
-      return cardConfirmCodeApi(params)
-    },
-  })
-  return mutation
-}
+export const useCardConfirmCodeMutation = () =>
+  useCustomMutation<Pick<CardFieldParamsType, 'card_id' | 'code'>, GetResponseWithStatusType<unknown>>(
+    cardConfirmCodeApi,
+  )
 
-export const useVerifyCardMutation = () => {
-  const mutation = useMutation<GetResponseWithStatusType<unknown>, IApiErrorData, { card_id: number }>({
-    mutationFn: (params: { card_id: number }) => {
-      return cardVerifyApi(params)
-    },
-  })
-  return mutation
-}
+export const useVerifyCardMutation = () =>
+  useCustomMutation<Pick<CardFieldParamsType, 'card_id'>, GetResponseWithStatusType<unknown>>(cardVerifyApi)
 
-export const useDeleteCardMutation = () => {
-  const mutation = useMutation<GetResponseWithStatusType<unknown>, IApiErrorData, { card_id: number }>({
-    mutationFn: (params: { card_id: number }) => {
-      return deleteCardApi(params)
-    },
-  })
-  return mutation
-}
+export const useDeleteCardMutation = () =>
+  useCustomMutation<Pick<CardFieldParamsType, 'card_id'>, GetResponseWithStatusType<unknown>>(deleteCardApi)

@@ -2,13 +2,21 @@
 
 import React, { FC, useState } from 'react'
 import clsx from 'clsx'
-import { CashIcon, CloseCircleRedIcon, PlasticCardIcon, PlusCircleGrayIcon } from '@/assets/icons'
+import {
+  CashIcon,
+  ChevronIcon,
+  CloseCircleRedIcon,
+  PlasticCardIcon,
+  PlusCircleGrayIcon,
+  SwitchableRightIcon,
+} from '@/assets/icons'
 
 type RadioType = `address` | `cash` | `plastic`
 
 export type SwitchableRadioType = {
   key: number
   title: string
+  description?: string
   type: RadioType
 }
 
@@ -19,6 +27,7 @@ interface ISwitchableRadioProps {
   setSelectedCardId: (id: number) => void
   onAddAction: () => void
   onDeleteItemAction: () => void
+  isAddressMode?: boolean
 }
 
 const SwitchableRadio: FC<ISwitchableRadioProps> = ({
@@ -27,6 +36,7 @@ const SwitchableRadio: FC<ISwitchableRadioProps> = ({
   isEditMode,
   onAddAction,
   onDeleteItemAction,
+  isAddressMode = false,
 }) => {
   const [activeItem, setActiveItem] = useState<number>(items[0]?.key)
 
@@ -41,6 +51,8 @@ const SwitchableRadio: FC<ISwitchableRadioProps> = ({
         return <CashIcon />
       case 'plastic':
         return <PlasticCardIcon />
+      case 'address':
+        return <SwitchableRightIcon />
       default:
         return isEditMode ? <CloseCircleRedIcon /> : <PlasticCardIcon />
     }
@@ -51,6 +63,7 @@ const SwitchableRadio: FC<ISwitchableRadioProps> = ({
       'w-full h-[50px] flex items-center justify-between px-5 rounded-xl cursor-pointer transition-colors duration-300 ease-in-out',
       {
         'bg-green-primary/20': activeItem === key,
+        '!h-[68px]': isAddressMode,
       },
     )
 
@@ -62,11 +75,14 @@ const SwitchableRadio: FC<ISwitchableRadioProps> = ({
 
   return (
     <div className="w-[360px] flex flex-col">
-      {items.map(({ title, type, key }) => (
+      {items.map(({ title, type, key, description }) => (
         <div key={key} className={getElementClassNames(key)} onClick={() => handleSelect(key)}>
           <div className="flex items-center gap-[13px]">
             <span className={getRoundIndicatorClassNames(key)}></span>
-            <h6 className="text-base">{title}</h6>
+            <div>
+              <h6 className="text-base">{title}</h6>
+              {description && <p className="mt-1 text-sm text-gray-500">{description}</p>}
+            </div>
           </div>
           <div className="animate-fade-in" onClick={isEditMode ? onDeleteItemAction : undefined}>
             {iconForType(type)}

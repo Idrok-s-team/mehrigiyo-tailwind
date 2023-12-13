@@ -21,7 +21,7 @@ const PaymentMethodsModule: FC = () => {
   const openActionModal = () => setIsActionModalOpen(true)
   const openConfirmModal = () => setIsConfirmModalOpen(true)
 
-  const cashPayment = [{ key: 1, title: 'Naqd pul', type: 'cash' }]
+  const cashPayment = [{ key: 1, title: 'Naqd pul', type: 'address', description: 'Rasulova street' }]
   const paymentMethods = [
     ...cashPayment,
     ...(cardsData?.data
@@ -43,7 +43,7 @@ const PaymentMethodsModule: FC = () => {
         <div className="animate-fade-in">
           <section className="flex items-center justify-between">
             <div>
-              <h4>To'lov usullari</h4>
+              <h4>Yetkazish manzili</h4>
               <p className="text-sm text-gray-primary">Bugun bemorlarimizga xizmat qilish uchun ajoyib kun.</p>
             </div>
             <button className="font-medium text-green-primary" onClick={toggleEditMode}>
@@ -52,6 +52,7 @@ const PaymentMethodsModule: FC = () => {
           </section>
           <section className="mt-10">
             <SwitchableRadio
+              isAddressMode
               items={paymentMethods}
               selectedCardId={selectedCardId as number}
               setSelectedCardId={setSelectedCardId}

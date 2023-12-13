@@ -1,10 +1,10 @@
 import { ILoginParams, ILoginResponse } from '@/types'
-import { authorizedApiFetch } from './common'
+import { authorizedFetchApi } from './common'
 
 export const loginApi = async (params: ILoginParams): Promise<ILoginResponse> => {
-  return authorizedApiFetch('/login/', 'POST', params, false)
+  return authorizedFetchApi('/login/', 'POST', params, false)
 }
 
 export const refreshTokenApi = async (params: Pick<ILoginResponse, 'refresh'>): Promise<ILoginResponse> => {
-  return authorizedApiFetch('/refresh/', 'POST', params, false)
+  return authorizedFetchApi('/refresh/', 'POST', params, false)
 }

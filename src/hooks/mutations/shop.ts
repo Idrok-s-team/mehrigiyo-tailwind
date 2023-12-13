@@ -1,30 +1,14 @@
-import { useMutation } from '@tanstack/react-query'
-import { IApiErrorData, IShopCart, GetResponseWithStatusType, ShopCartParamsType } from '@/types'
+import { IShopCart, GetResponseWithStatusType, ShopFieldParamsType } from '@/types'
 import { addShopCartApi, deleteShopCartApi, updateShopCartApi } from '@/api'
+import { useCustomMutation } from './common'
 
-export const useAddShopCartMutation = () => {
-  const mutation = useMutation<GetResponseWithStatusType<IShopCart>, IApiErrorData, ShopCartParamsType<'product'>>({
-    mutationFn: (params: ShopCartParamsType<'product'>) => {
-      return addShopCartApi(params)
-    },
-  })
-  return mutation
-}
+export const useAddShopCartMutation = () =>
+  useCustomMutation<Pick<ShopFieldParamsType, 'product' | 'amount'>, GetResponseWithStatusType<IShopCart>>(
+    addShopCartApi,
+  )
 
-export const useUpdateShopCartMutation = () => {
-  const mutation = useMutation<GetResponseWithStatusType<IShopCart>, IApiErrorData, ShopCartParamsType<'id'>>({
-    mutationFn: (params: ShopCartParamsType<'id'>) => {
-      return updateShopCartApi(params)
-    },
-  })
-  return mutation
-}
+export const useUpdateShopCartMutation = () =>
+  useCustomMutation<Pick<ShopFieldParamsType, 'id' | 'amount'>, GetResponseWithStatusType<IShopCart>>(updateShopCartApi)
 
-export const useDeleteShopCartMutation = () => {
-  const mutation = useMutation<GetResponseWithStatusType<IShopCart>, IApiErrorData, ShopCartParamsType<'onlyId'>>({
-    mutationFn: (params: ShopCartParamsType<'onlyId'>) => {
-      return deleteShopCartApi(params)
-    },
-  })
-  return mutation
-}
+export const useDeleteShopCartMutation = () =>
+  useCustomMutation<Pick<ShopFieldParamsType, 'id'>, GetResponseWithStatusType<IShopCart>>(deleteShopCartApi)
