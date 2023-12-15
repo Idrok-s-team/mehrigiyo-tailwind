@@ -5,6 +5,7 @@ import {
   IShopMedicines,
   IUserCountry,
   IUserDeliverAddress,
+  IUserMe,
   IUserRegion,
   UserFieldParamsType,
 } from '@/types'
@@ -17,7 +18,8 @@ import {
 } from '@/api'
 
 // USER ME QUERIES
-export const useUserMeQuery = () => useGetQuery('user-me', getUserMeApi)
+export const useUserMeQuery = (props?: QueryProps<GetResponseType<IUserMe[]>>) =>
+  useGetQuery('user-me', getUserMeApi, [], props)
 
 // USER FAVORITE MEDICINES QUERIES
 export const useUserFavoriteMedicinesQuery = (props?: QueryProps<GetResponseType<IShopMedicines[]>>) =>

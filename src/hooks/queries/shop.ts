@@ -1,5 +1,12 @@
-import { GetResponseWithStatusType, GetResponseType, IShopCart, IShopMedicines, IShopTypes } from '@/types'
-import { getShopCartApi, getShopMedicinesApi, getShopTypesApi } from '@/api'
+import {
+  GetResponseWithStatusType,
+  GetResponseType,
+  IShopCart,
+  IShopMedicines,
+  IShopTypes,
+  IShopCheckout,
+} from '@/types'
+import { getShopCartApi, getShopCheckoutApi, getShopMedicinesApi, getShopTypesApi } from '@/api'
 import { QueryProps, useGetQuery } from './common'
 
 export const useShopTypesQuery = (props?: QueryProps<GetResponseType<IShopTypes[]>>) =>
@@ -10,3 +17,6 @@ export const useShopMedicinesQuery = (props?: QueryProps<GetResponseType<IShopMe
 
 export const useShopCartQuery = (props?: QueryProps<GetResponseWithStatusType<IShopCart[]>>) =>
   useGetQuery('shop-cart', getShopCartApi, [], props)
+
+export const useShopCheckoutQuery = (props?: QueryProps<GetResponseWithStatusType<IShopCheckout>>) =>
+  useGetQuery('shop-checkout', getShopCheckoutApi, [], props)

@@ -6,6 +6,7 @@ import {
   IShopTypes,
   QueryParamsType,
   ShopFieldParamsType,
+  IShopCheckout,
 } from '@/types'
 import { authorizedFetchApi, fetchApi } from './common'
 
@@ -42,4 +43,21 @@ export const deleteShopCartApi = async (
   body: Pick<ShopFieldParamsType, 'id'>,
 ): Promise<GetResponseWithStatusType<IShopCart>> => {
   return authorizedFetchApi('/shop/cart/', 'DELETE', { body })
+}
+
+// SHOP CHECKOUT API
+export const getShopCheckoutApi = async (): Promise<GetResponseWithStatusType<IShopCheckout>> => {
+  return authorizedFetchApi('/shop/checkout/')
+}
+
+export const addShopCheckoutApi = async (
+  body: Pick<ShopFieldParamsType, 'list'>,
+): Promise<GetResponseWithStatusType<IShopCheckout>> => {
+  return authorizedFetchApi('/shop/checkout/', 'POST', { body })
+}
+
+export const updateShopCheckoutApi = async (
+  body: Pick<ShopFieldParamsType, 'id' | 'shipping_address' | 'credit_card'>,
+): Promise<GetResponseWithStatusType<IShopCheckout>> => {
+  return authorizedFetchApi('/shop/checkout/', 'PUT', { body })
 }
