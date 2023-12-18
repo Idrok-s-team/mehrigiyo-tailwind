@@ -18,7 +18,7 @@ interface ISwitchableRadioProps {
   isEditMode: boolean
   setSelectedItemId: (id: number) => void
   onAddAction: () => void
-  onDeleteItemAction: () => void
+  onDeleteItemAction?: () => void
   isAddressMode?: boolean
 }
 
@@ -69,7 +69,7 @@ const SwitchableRadio: FC<ISwitchableRadioProps> = ({
     })
 
   return (
-    <div className="w-[360px] flex flex-col">
+    <div className="flex flex-col w-full">
       {items.map(({ title, type, key, description }) => (
         <div key={key} className={getElementClassNames(key)} onClick={() => handleSelect(key)}>
           <div className="flex items-center gap-[13px]">

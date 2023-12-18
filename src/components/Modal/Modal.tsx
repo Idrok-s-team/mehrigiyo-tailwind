@@ -1,17 +1,19 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import React, { PropsWithChildren, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { useEventListener } from 'usehooks-ts'
+import clsx from 'clsx'
 import { CloseRoundIcon } from '@/assets/icons'
 import Button from '../Button'
 
-interface IProps extends React.PropsWithChildren {
+interface IProps extends PropsWithChildren {
   isOpen: boolean
   disabled?: boolean
   buttonText?: string
   onSubmit: () => void
   onClose: () => void
+  className?: string
 }
 
 const Modal: React.FC<IProps> = ({
@@ -21,6 +23,7 @@ const Modal: React.FC<IProps> = ({
   disabled = false,
   buttonText = 'Tizimga kirish',
   children,
+  className,
 }) => {
   useEventListener('keydown', (event: KeyboardEvent) => {
     if (event.key === 'Escape' && isOpen) {
@@ -45,9 +48,14 @@ const Modal: React.FC<IProps> = ({
 
   const modalRoot = document.body
 
+  const modalClasses = clsx(
+    'w-[536px] min-h-[100px] flex flex-col gap-5 justify-between p-5 bg-white rounded-3xl animate-scale-in pb-[50px]',
+    className,
+  )
+
   return createPortal(
     <div className="fixed top-0 left-0 z-50 flex items-center justify-center w-full h-full overflow-hidden bg-gray-600 bg-opacity-50 animate-fade-in">
-      <div className="w-[536px] min-h-[100px] flex flex-col gap-5 justify-between p-5 bg-white rounded-3xl animate-scale-in pb-[50px]">
+      <div className={modalClasses}>
         <header className="flex justify-end">
           <button onClick={onClose} aria-label="Close modal">
             <CloseRoundIcon width={30} height={30} />

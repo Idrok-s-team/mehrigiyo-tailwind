@@ -18,5 +18,5 @@ export const useShopMedicinesQuery = (props?: QueryProps<GetResponseType<IShopMe
 export const useShopCartQuery = (props?: QueryProps<GetResponseWithStatusType<IShopCart[]>>) =>
   useGetQuery('shop-cart', getShopCartApi, [], props)
 
-export const useShopCheckoutQuery = (props?: QueryProps<GetResponseWithStatusType<IShopCheckout>>) =>
+export const useShopCheckoutQuery = (props?: QueryProps<GetResponseWithStatusType<IShopCheckout[]>>) =>
   useGetQuery('shop-checkout', getShopCheckoutApi, [], props)

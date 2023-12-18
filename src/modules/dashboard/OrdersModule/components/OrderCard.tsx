@@ -1,7 +1,7 @@
 import React, { FC, ReactNode } from 'react'
 import Image, { StaticImageData } from 'next/image'
 import { useUserMeQuery } from '@/hooks/queries'
-import { EDelivery_Status } from '@/types'
+import { DeliveryStatusKey } from '@/types'
 import {
   OrderChatIcon,
   OrderCloseIcon,
@@ -17,11 +17,11 @@ import orderDeliverIcon from '@/assets/icons/dashboard/orders/orderDeliverIcon.s
 import orderCarIcon from '@/assets/icons/dashboard/orders/orderCarIcon.svg'
 
 interface IProps {
-  statusType?: keyof typeof EDelivery_Status
+  statusType?: DeliveryStatusKey
 }
 
 interface StatusSectionProps {
-  status: keyof typeof EDelivery_Status
+  status: DeliveryStatusKey
   bgColor: string
   icon?: ReactNode
   img?: StaticImageData

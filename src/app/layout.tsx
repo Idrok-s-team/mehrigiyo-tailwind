@@ -1,11 +1,12 @@
 import type { Metadata } from 'next'
 import { FC, ReactNode } from 'react'
 import { Inter } from 'next/font/google'
+import { Router } from 'next/router'
+import { Toaster } from 'react-hot-toast'
 import { FooterModule, HeaderModule } from '@/modules/layout'
 import Providers from './providers'
 
 import './globals.css'
-import { Toaster } from 'react-hot-toast'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -34,9 +35,7 @@ const RootLayout: FC<IProps> = async ({ children }) => {
 
           <main className="">{children}</main>
 
-          <footer>
-            {/* <FooterModule /> */}
-          </footer>
+          <footer>{/* <FooterModule /> */}</footer>
         </Providers>
       </body>
     </html>

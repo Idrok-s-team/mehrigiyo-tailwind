@@ -46,7 +46,7 @@ export const deleteShopCartApi = async (
 }
 
 // SHOP CHECKOUT API
-export const getShopCheckoutApi = async (): Promise<GetResponseWithStatusType<IShopCheckout>> => {
+export const getShopCheckoutApi = async (): Promise<GetResponseWithStatusType<IShopCheckout[]>> => {
   return authorizedFetchApi('/shop/checkout/')
 }
 

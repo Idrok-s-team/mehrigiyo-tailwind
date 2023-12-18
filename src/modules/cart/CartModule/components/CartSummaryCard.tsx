@@ -2,6 +2,8 @@ import React, { FC } from 'react'
 import { Button } from '@/components'
 
 type Props = {
+  isOpenModal: boolean
+  setIsOpenModal: (modal: boolean) => void
   infoCard: {
     label: string
     value: number
@@ -9,7 +11,7 @@ type Props = {
   }[]
 }
 
-const CartItem: FC<Props> = ({ infoCard }) => {
+const CartItem: FC<Props> = ({ infoCard, isOpenModal, setIsOpenModal }) => {
   return (
     <div className="flex-shrink-0 bg-white rounded-3xl shadow-card mt-11 px-[30px] py-6 w-[347px] sticky top-0">
       <div className="flex flex-col gap-4">
@@ -23,7 +25,7 @@ const CartItem: FC<Props> = ({ infoCard }) => {
         ))}
       </div>
       <div className="flex flex-col gap-4 mt-[30px]">
-        <Button>To'lovga o'tish</Button>
+        <Button onClick={() => setIsOpenModal(true)}>To'lovga o'tish</Button>
         <Button className="!text-black bg-green-primary/10">Menyuga qaytish</Button>
       </div>
     </div>

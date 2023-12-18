@@ -4,12 +4,12 @@ import { FC, useState } from 'react'
 import { Loader } from '@/components'
 import { useShopCheckoutQuery } from '@/hooks/queries'
 import { OrderCard } from './components'
+import { DeliveryStatusMap } from '@/constants'
 
 const OrdersModule: FC = () => {
   const [isEditMode, setIsEditMode] = useState(false)
 
   const { data: ordersData, isSuccess, refetch: refetchOrders } = useShopCheckoutQuery()
-  console.log(ordersData)
 
   const toggleEditMode = () => setIsEditMode(!isEditMode)
 
@@ -27,11 +27,10 @@ const OrdersModule: FC = () => {
               <p className="text-sm text-gray-primary">Bugun bemorlarimizga xizmat qilish uchun ajoyib kun.</p>
             </div>
           </section>
-          <div className="grid grid-cols-2 gap-10 mt-10">
-            <OrderCard />
-            <OrderCard statusType="OnDelivery" />
-            <OrderCard statusType="Delivered" />
-            <OrderCard statusType="Returned" />
+          <div className="grid grid-cols-2 gap-5 mt-10">
+            {ordersData.data.map((item) => (
+              <OrderCard key={item.id} statusType={DeliveryStatusMap[item.delivery_status]} />
+            ))}
           </div>
         </div>
       )}
