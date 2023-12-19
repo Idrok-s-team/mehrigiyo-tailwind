@@ -3,27 +3,22 @@ import toast from 'react-hot-toast'
 import { Confirm } from '@/components'
 import { ICardError } from '@/types'
 import { useDeleteCardMutation } from '@/hooks/mutations'
+import { useShopStore } from '@/store'
 
-interface ICardDeletionConfirmModal {
+interface IProps {
   isConfirmOpen: boolean
   setIsOpenConfirm: (modal: boolean) => void
-  selectedCardId?: number | null
   refetchCards: () => void
   isEditMode: boolean
 }
 
-const CardDeletionConfirmModal: FC<ICardDeletionConfirmModal> = ({
-  isConfirmOpen,
-  setIsOpenConfirm,
-  isEditMode,
-  refetchCards,
-  selectedCardId,
-}) => {
+const CardDeletionConfirmModal: FC<IProps> = ({ isConfirmOpen, setIsOpenConfirm, isEditMode, refetchCards }) => {
+  const { selectedPaymentCard } = useShopStore()
   const { mutateAsync: deleteCard, isPending: isDeletingCard } = useDeleteCardMutation()
 
   const handleCardDeletion = async () => {
-    if (isEditMode && selectedCardId) {
-      const deleteResponse = await deleteCard({ card_id: selectedCardId })
+    if (isEditMode && selectedPaymentCard) {
+      const deleteResponse = await deleteCard({ card_id: selectedPaymentCard.id })
 
       if (deleteResponse.status === 'success') {
         toast.success("Karta o'chirildi")

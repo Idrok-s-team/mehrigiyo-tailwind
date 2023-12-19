@@ -3,17 +3,16 @@
 import { FC, useState } from 'react'
 import Image from 'next/image'
 import { Loader, SwitchableRadio } from '@/components'
-import { useUserDeliveryAddressQuery } from '@/hooks/queries'
 import { AddressActionModal, AddressDeletionConfirmModal } from './components'
 import backgroundDeliverAddress from '@/assets/images/dashboard/backgroundDeliverAddress.png'
+import { useUserAddresses } from '@/hooks/checkout'
 
-const PaymentMethodsModule: FC = () => {
-  const [selectedAddressId, setSelectedAddressId] = useState<number | null>(null)
+const DeliveryAddressModule: FC = () => {
   const [isEditMode, setIsEditMode] = useState(false)
   const [isActionModalOpen, setIsActionModalOpen] = useState(false)
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false)
 
-  const { data: addressData, isSuccess, refetch: refetchAddress } = useUserDeliveryAddressQuery()
+  const { addressData, isAddressSuccess, refetchAddresses } = useUserAddresses()
 
   const toggleEditMode = () => setIsEditMode(!isEditMode)
   const openActionModal = () => setIsActionModalOpen(true)
@@ -21,7 +20,7 @@ const PaymentMethodsModule: FC = () => {
 
   return (
     <div className="w-full min-h-[78.5vh] pr-24 relative">
-      {!isSuccess ? (
+      {!isAddressSuccess ? (
         <div className="w-full relative flex items-center justify-center min-h-[50vh]">
           <Loader />
         </div>
@@ -36,18 +35,10 @@ const PaymentMethodsModule: FC = () => {
               {isEditMode ? 'Tasdiqlash' : "O'zgartirish"}
             </button>
           </section>
-          <section className="mt-10">
+          <section className="w-2/5 mt-10">
             <SwitchableRadio
               isAddressMode
-              items={
-                addressData?.results.map(({ id, name, full_address }) => ({
-                  key: id,
-                  title: name,
-                  description: full_address,
-                  type: 'address',
-                })) || []
-              }
-              setSelectedItemId={setSelectedAddressId}
+              items={addressData}
               isEditMode={isEditMode}
               onAddAction={openActionModal}
               onDeleteItemAction={openConfirmModal}
@@ -59,17 +50,14 @@ const PaymentMethodsModule: FC = () => {
       <AddressDeletionConfirmModal
         isConfirmOpen={isConfirmModalOpen}
         setIsOpenConfirm={setIsConfirmModalOpen}
-        refetchAddress={refetchAddress}
+        refetchAddress={refetchAddresses}
         isEditMode={isEditMode}
-        selectedAddressId={selectedAddressId}
       />
 
       <AddressActionModal
         isOpenModal={isActionModalOpen}
-        refetchAddress={refetchAddress}
-        selectedAddressId={selectedAddressId}
+        refetchAddress={refetchAddresses}
         setIsOpenModal={setIsActionModalOpen}
-        setSelectedAddressId={setSelectedAddressId}
       />
 
       <Image
@@ -81,4 +69,4 @@ const PaymentMethodsModule: FC = () => {
   )
 }
 
-export default PaymentMethodsModule
+export default DeliveryAddressModule

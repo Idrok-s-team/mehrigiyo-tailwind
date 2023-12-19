@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 import { Breadcrumb, Checkbox, Loader, Pagination, ProductCard } from '@/components'
@@ -14,8 +14,6 @@ import { useSortedData, useSyncUrlQueryParams } from '@/hooks/common'
 import { updateFilters } from '@/utils'
 
 const ProductsCategory = () => {
-  const [isOpen, setIsOpen] = useState(false)
-  const [selectedProduct, setSelectedProduct] = useState<IShopMedicines | null>(null)
   const [productFilters, setProductFilters] = useState<number[]>([])
   const [sortCriteria, setSortCriteria] = useState<SortCriteriaType>('')
   const [currentPage, setCurrentPage] = useState(1)
@@ -38,15 +36,14 @@ const ProductsCategory = () => {
 
   const sortedData = useSortedData(shopMedicinesData?.results, sortCriteria)
 
-  const handleClear = () => {
+  const handleClear = useCallback(() => {
     setProductFilters([])
-  }
+  }, [])
 
-  const breadcrumbItems = [
-    { text: 'Bosh sahifa', href: '/' },
-    { text: 'Mahsulotlar', href: '/products' },
-    { text: 'Barchasi' },
-  ]
+  const breadcrumbItems = useMemo(
+    () => [{ text: 'Bosh sahifa', href: '/' }, { text: 'Mahsulotlar', href: '/products' }, { text: 'Barchasi' }],
+    [],
+  )
 
   return (
     <div className="relative min-h-screen px-24 mt-14">
@@ -117,12 +114,7 @@ const ProductsCategory = () => {
           ) : (
             <div className="grid grid-cols-3 gap-[30px] mt-7 animate-fade-in">
               {sortedData.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                  setIsDetailsOpen={setIsOpen}
-                  setSelectedProduct={setSelectedProduct}
-                />
+                <ProductCard key={product.id} product={product} />
               ))}
             </div>
           )}

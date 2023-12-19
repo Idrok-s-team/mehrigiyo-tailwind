@@ -10,9 +10,10 @@ export type LocalizedType<T extends string> = Record<`${T}` | `${T}_uz` | `${T}_
 export type ElementSizeType = 'sm' | 'md' | 'lg'
 
 export type Nullable<T> = {
-  [K in keyof T]: T[K] | null
+  [K in keyof T]: T[K] extends (...args: infer P) => any
+    ? (...args: { [I in keyof P]: P[I] | null }) => ReturnType<T[K]>
+    : T[K] | null
 }
-
 export type QueryParamsType = Partial<{
   limit: number
   type_ides: string

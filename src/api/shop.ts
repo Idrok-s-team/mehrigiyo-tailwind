@@ -57,7 +57,7 @@ export const addShopCheckoutApi = async (
 }
 
 export const updateShopCheckoutApi = async (
-  body: Pick<ShopFieldParamsType, 'id' | 'shipping_address' | 'credit_card'>,
+  body: Partial<IShopCheckout>,
 ): Promise<GetResponseWithStatusType<IShopCheckout>> => {
   return authorizedFetchApi('/shop/checkout/', 'PUT', { body })
 }

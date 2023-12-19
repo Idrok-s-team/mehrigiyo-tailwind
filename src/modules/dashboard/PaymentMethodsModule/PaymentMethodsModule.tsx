@@ -3,39 +3,25 @@
 import { FC, useState } from 'react'
 import Image from 'next/image'
 import { Loader, SwitchableRadio } from '@/components'
-import { formatPlasticCardNumber } from '@/utils'
-import { SwitchableRadioType } from '@/components/SwitchableRadio/SwitchableRadio'
-import { useGetCardQuery } from '@/hooks/queries'
 import { CardActionModal, CardDeletionConfirmModal } from './components'
 import backgroundPaymentMethod from '@/assets/images/dashboard/backgroundPaymentMethod.png'
+import { usePaymentMethods } from '@/hooks/checkout'
 
 const PaymentMethodsModule: FC = () => {
-  const [selectedCardId, setSelectedCardId] = useState<number | null>(null)
+  
   const [isEditMode, setIsEditMode] = useState(false)
   const [isActionModalOpen, setIsActionModalOpen] = useState(false)
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false)
 
-  const { data: cardsData, isSuccess, refetch: refetchCards } = useGetCardQuery()
+  const { paymentMethods, isPaymentSuccess, refetchPayments } = usePaymentMethods()
 
   const toggleEditMode = () => setIsEditMode(!isEditMode)
   const openActionModal = () => setIsActionModalOpen(true)
   const openConfirmModal = () => setIsConfirmModalOpen(true)
 
-  const cashPayment = [{ key: 1, title: 'Naqd pul', type: 'cash' }]
-  const paymentMethods = [
-    ...cashPayment,
-    ...(cardsData?.data
-      ?.filter((item) => item.verify)
-      .map(({ id, number }) => ({
-        key: id,
-        title: formatPlasticCardNumber(number),
-        type: 'plastic',
-      })) ?? []),
-  ] as SwitchableRadioType[]
-
   return (
     <div className="w-full min-h-[78.5vh] pr-24 relative">
-      {!isSuccess ? (
+      {!isPaymentSuccess ? (
         <div className="w-full relative flex items-center justify-center min-h-[50vh]">
           <Loader />
         </div>
@@ -50,11 +36,9 @@ const PaymentMethodsModule: FC = () => {
               {isEditMode ? 'Tasdiqlash' : "O'zgartirish"}
             </button>
           </section>
-          <section className="mt-10">
+          <section className="w-1/3 mt-10">
             <SwitchableRadio
               items={paymentMethods}
-              selectedCardId={selectedCardId as number}
-              setSelectedCardId={setSelectedCardId}
               isEditMode={isEditMode}
               onAddAction={openActionModal}
               onDeleteItemAction={openConfirmModal}
@@ -66,17 +50,14 @@ const PaymentMethodsModule: FC = () => {
       <CardDeletionConfirmModal
         isConfirmOpen={isConfirmModalOpen}
         setIsOpenConfirm={setIsConfirmModalOpen}
-        refetchCards={refetchCards}
+        refetchCards={refetchPayments}
         isEditMode={isEditMode}
-        selectedCardId={selectedCardId}
       />
 
       <CardActionModal
         isOpenModal={isActionModalOpen}
-        refetchCards={refetchCards}
-        selectedCardId={selectedCardId}
+        refetchCards={refetchPayments}
         setIsOpenModal={setIsActionModalOpen}
-        setSelectedCardId={setSelectedCardId}
       />
 
       <Image

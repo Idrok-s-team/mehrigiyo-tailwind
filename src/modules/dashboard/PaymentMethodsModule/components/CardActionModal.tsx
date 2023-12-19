@@ -8,8 +8,6 @@ import { useAddCardMutation, useCardConfirmCodeMutation, useVerifyCardMutation }
 interface ICardActionModal {
   isOpenModal: boolean
   setIsOpenModal: (modal: boolean) => void
-  selectedCardId?: number | null
-  setSelectedCardId: (selectedCard: number) => void
   refetchCards: () => void
 }
 
@@ -19,17 +17,12 @@ const initialCardDetails = {
   otp: '',
 }
 
-const CardActionModal: FC<ICardActionModal> = ({
-  isOpenModal,
-  selectedCardId,
-  setSelectedCardId,
-  setIsOpenModal,
-  refetchCards,
-}) => {
+const CardActionModal: FC<ICardActionModal> = ({ isOpenModal, setIsOpenModal, refetchCards }) => {
   const [isOtpMode, setIsOtpMode] = useState(false)
   const [cardDetails, setCardDetails] = useState(initialCardDetails)
   const [otpTimeout, setOtpTimeout] = useState<number>(60)
   const [verifiedPhone, setVerifiedPhone] = useState<string | null>(null)
+  const [selectedCardId, setSelectedCardId] = useState<number | null>(null)
 
   const { mutateAsync: addCard, isPending: isAddingCard } = useAddCardMutation()
   const { mutateAsync: verifyCard, isPending: isVerifyingCard } = useVerifyCardMutation()

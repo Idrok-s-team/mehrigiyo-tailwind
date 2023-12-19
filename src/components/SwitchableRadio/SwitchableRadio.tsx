@@ -1,22 +1,23 @@
 'use client'
 
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import clsx from 'clsx'
-import { CashIcon, CloseCircleRedIcon, PlasticCardIcon, PlusCircleGrayIcon, SwitchableRightIcon } from '@/assets/icons'
+import { CloseCircleRedIcon, PlasticCardIcon, PlusCircleGrayIcon, SwitchableRightIcon } from '@/assets/icons'
+import { useShopStore } from '@/store'
 
-type RadioType = `address` | `cash` | `plastic`
+type RadioType = `address` | `plastic`
 
 export type SwitchableRadioType = {
   key: number
   title: string
   description?: string
   type: RadioType
+  data: any
 }
 
 interface ISwitchableRadioProps {
   items: SwitchableRadioType[]
   isEditMode: boolean
-  setSelectedItemId: (id: number) => void
   onAddAction: () => void
   onDeleteItemAction?: () => void
   isAddressMode?: boolean
@@ -24,33 +25,38 @@ interface ISwitchableRadioProps {
 
 const SwitchableRadio: FC<ISwitchableRadioProps> = ({
   items,
-  setSelectedItemId,
   isEditMode,
   onAddAction,
   onDeleteItemAction,
   isAddressMode = false,
 }) => {
   const [activeItem, setActiveItem] = useState<number>(items[0]?.key)
+  const { selectedAddress, setSelectedAddress, setSelectedPaymentCard, selectedPaymentCard } = useShopStore()
 
-  const handleSelect = (key: number) => {
+  useEffect(() => {
+    if (items.length > 0) {
+      if (isAddressMode && !selectedAddress) {
+        setSelectedAddress(items[0].data)
+        setActiveItem(items[0].key)
+      } else if (!isAddressMode && !selectedPaymentCard) {
+        setSelectedPaymentCard(items[0].data)
+        setActiveItem(items[0].key)
+      }
+    }
+    if (!selectedAddress && items.length > 0) {
+    }
+  }, [items, selectedAddress, selectedPaymentCard])
+
+  const handleSelect = (key: number, data: any, type: RadioType) => {
     setActiveItem(key)
-    setSelectedItemId(key)
+    type === 'address' ? setSelectedAddress(data) : setSelectedPaymentCard(data)
   }
 
-  const iconForType = (type: RadioType) => {
-    if (isEditMode && (type === 'address' || type === 'plastic')) {
+  const getIconForType = (type: RadioType) => {
+    if (isEditMode) {
       return <CloseCircleRedIcon />
     }
-    switch (type) {
-      case 'cash':
-        return <CashIcon />
-      case 'plastic':
-        return <PlasticCardIcon />
-      case 'address':
-        return <SwitchableRightIcon />
-      default:
-        return <PlasticCardIcon />
-    }
+    return type === 'plastic' ? <PlasticCardIcon /> : <SwitchableRightIcon />
   }
 
   const getElementClassNames = (key: number) =>
@@ -68,22 +74,24 @@ const SwitchableRadio: FC<ISwitchableRadioProps> = ({
       'border-2 border-[#C4C4C4]': activeItem !== key,
     })
 
+  const renderItem = ({ title, type, key, description, data }: SwitchableRadioType) => (
+    <div key={key} className={getElementClassNames(key)} onClick={() => handleSelect(key, data, type)}>
+      <div className="flex items-center gap-[13px]">
+        <span className={getRoundIndicatorClassNames(key)}></span>
+        <div>
+          <h6 className="text-base">{title}</h6>
+          {description && <p className="mt-1 text-sm text-gray-500">{description}</p>}
+        </div>
+      </div>
+      <div className="animate-fade-in" onClick={isEditMode ? onDeleteItemAction : undefined}>
+        {getIconForType(type)}
+      </div>
+    </div>
+  )
+
   return (
     <div className="flex flex-col w-full">
-      {items.map(({ title, type, key, description }) => (
-        <div key={key} className={getElementClassNames(key)} onClick={() => handleSelect(key)}>
-          <div className="flex items-center gap-[13px]">
-            <span className={getRoundIndicatorClassNames(key)}></span>
-            <div>
-              <h6 className="text-base">{title}</h6>
-              {description && <p className="mt-1 text-sm text-gray-500">{description}</p>}
-            </div>
-          </div>
-          <div className="animate-fade-in" onClick={isEditMode ? onDeleteItemAction : undefined}>
-            {iconForType(type)}
-          </div>
-        </div>
-      ))}
+      {items.map(renderItem)}
       <button
         className="w-full h-[50px] flex items-center px-5 gap-[13px] bg-gray-primary/10 rounded-xl"
         onClick={onAddAction}

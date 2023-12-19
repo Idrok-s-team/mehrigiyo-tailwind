@@ -1,6 +1,6 @@
 'use client'
 
-import React, { PropsWithChildren, useEffect } from 'react'
+import React, { FC, PropsWithChildren, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { useEventListener } from 'usehooks-ts'
 import clsx from 'clsx'
@@ -11,16 +11,18 @@ interface IProps extends PropsWithChildren {
   isOpen: boolean
   disabled?: boolean
   buttonText?: string
+  closeText?: string | null
   onSubmit: () => void
   onClose: () => void
   className?: string
 }
 
-const Modal: React.FC<IProps> = ({
+const Modal: FC<IProps> = ({
   isOpen,
   onSubmit,
   onClose,
   disabled = false,
+  closeText = null,
   buttonText = 'Tizimga kirish',
   children,
   className,
@@ -62,7 +64,12 @@ const Modal: React.FC<IProps> = ({
           </button>
         </header>
         <main>{children}</main>
-        <footer className="mt-4">
+        <footer className="mt-4 flex gap-5">
+          {closeText && (
+            <Button onClick={onClose} disabled={disabled} type="button" buttonType="secondary">
+              {closeText}
+            </Button>
+          )}
           <Button onClick={onSubmit} disabled={disabled} type="submit">
             {buttonText}
           </Button>

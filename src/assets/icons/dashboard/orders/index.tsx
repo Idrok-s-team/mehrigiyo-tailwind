@@ -70,8 +70,8 @@ export const OrderChatIcon = () => {
     <svg width="55" height="59" viewBox="0 0 55 59" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g filter="url(#filter0_d_2268_3220)">
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M19.144 7C16.303 7 14 9.30304 14 12.144V28.6047C14 31.4457 16.303 33.7487 19.144 33.7487H23.5498L26.4659 36.6627C26.9681 37.1645 27.7818 37.1645 28.2839 36.6627L31.2001 33.7487H35.6047C38.4457 33.7487 40.7487 31.4457 40.7487 28.6047V12.144C40.7487 9.30304 38.4457 7 35.6047 7H19.144Z"
           fill="white"
         />
@@ -84,9 +84,9 @@ export const OrderChatIcon = () => {
           width="54.748"
           height="58.039"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"
@@ -176,7 +176,7 @@ export const OrderNoOngoingIcon = () => {
         <circle cx="101" cy="101" r="101" fill="#DADADA" />
       </mask>
       <g mask="url(#mask0_908_12933)"></g>
-      <g opacity="0.6" clip-path="url(#clip0_908_12933)">
+      <g opacity="0.6" clipPath="url(#clip0_908_12933)">
         <path
           d="M134.655 68.0681C126.132 59.5425 113.899 54 101.016 54C89.9362 54 79.0873 58.0717 70.7074 65.2872L66.6033 58.4455C66.0009 57.4451 64.8336 56.9448 63.6989 57.1628C62.5532 57.3941 61.6819 58.3192 61.515 59.4729L57.6208 86.7349C57.3551 88.5768 58.9555 90.1054 60.7351 89.852L87.9946 85.9578C89.151 85.7911 90.0761 84.9198 90.3075 83.7767C90.5388 82.6336 90.0223 81.4693 89.0219 80.8695L82.5244 76.97C91.4063 70.0094 100.727 70.6184 101.28 70.5234C111.569 70.5234 118.406 75.1922 122.327 79.116C128.077 84.8658 131.498 92.977 131.476 100.808C131.476 102.369 132.737 103.57 134.23 103.57H145.246C146.763 103.57 147.994 102.344 148 100.827C148.048 88.171 143.433 76.8435 134.655 68.0681Z"
           fill="url(#paint0_linear_908_12933)"

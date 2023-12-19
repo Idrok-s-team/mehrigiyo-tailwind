@@ -71,13 +71,15 @@ const SidebarModule: FC = () => {
   return (
     <div className="flex flex-col w-[272px] sidebar-dashboard  bg-white rounded-t-[30px] shadow-sidebar">
       <section className="flex gap-3 pt-6 pb-4 pl-9 border-b border-b-[#E2E2E280]/50">
-        <Image
-          src={userData?.avatar as string}
-          alt={`${userData?.first_name} ${userData?.last_name}`}
-          width={35}
-          height={35}
-          className="border rounded-full border-green-primary shadow-avatar w-9 h-9"
-        />
+        {userData && (
+          <Image
+            src={userData?.avatar}
+            alt={`${userData?.first_name} ${userData?.last_name}`}
+            width={35}
+            height={35}
+            className="border rounded-full border-green-primary shadow-avatar w-9 h-9"
+          />
+        )}
         <div>
           <h6 className="text-sm">{`${userData?.first_name} ${userData?.last_name}`}</h6>
           <p className="mt-1 text-xs text-gray-primary">{userData?.username}</p>

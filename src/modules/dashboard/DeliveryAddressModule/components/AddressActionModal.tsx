@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useMemo, useState } from 'react'
 import toast from 'react-hot-toast'
-import { clearObject, inputHandler, selectHandler } from '@/utils'
+import { clearObject, inputHandler } from '@/utils'
 import { Input, Modal, Select } from '@/components'
 import { ISelectOption, IUserDeliverAddress } from '@/types'
 import { useAddUserDeliverAddressMutation } from '@/hooks/mutations'
@@ -9,8 +9,6 @@ import { useUserCountryQuery, useUserRegionQuery } from '@/hooks/queries'
 interface ICardActionModal {
   isOpenModal: boolean
   setIsOpenModal: (modal: boolean) => void
-  selectedAddressId?: number | null
-  setSelectedAddressId: (selectedCard: number) => void
   refetchAddress: () => void
 }
 
@@ -28,12 +26,8 @@ const AddressActionModal: FC<ICardActionModal> = ({ isOpenModal, setIsOpenModal,
   const [selectedCountryId, setSelectedCountryId] = useState<number | null>(null)
   const [selectedRegionId, setSelectedRegionId] = useState<number | null>(null)
 
-  const {
-    data: countryData,
-    isSuccess: isSuccessCountry,
-    refetch: refetchCountries,
-  } = useUserCountryQuery({ options: { enabled: !!isOpenModal } })
-  const { data: regionData, refetch: refetchRegion } = useUserRegionQuery(
+  const { data: countryData } = useUserCountryQuery({ options: { enabled: !!isOpenModal } })
+  const { data: regionData } = useUserRegionQuery(
     { pk: selectedCountryId as number },
     { options: { enabled: !!selectedCountryId } },
   )
@@ -73,9 +67,8 @@ const AddressActionModal: FC<ICardActionModal> = ({ isOpenModal, setIsOpenModal,
     const { name, full_address, apartment_office } = addressDetails
 
     if (name.length && full_address.length && apartment_office.length) {
-      const clearData = clearObject({ ...addressDetails, region: 999 })
+      const clearData = clearObject({ ...addressDetails, region: selectedRegionId })
       const response = await addAddress(clearData as IUserDeliverAddress)
-      console.log(response)
 
       try {
         toast.success("Manzil muvaffaqiyatli qo'shildi")
@@ -83,7 +76,6 @@ const AddressActionModal: FC<ICardActionModal> = ({ isOpenModal, setIsOpenModal,
         refetchAddress()
         setIsOpenModal(false)
       } catch (error) {
-        console.log(error)
         toast.error("Nimadur xato bo'ldi, iltimos qayta tekshirib ko'ring!")
       }
     }

@@ -19,7 +19,4 @@ export const useAddShopCheckoutMutation = () =>
   useCustomMutation<Pick<ShopFieldParamsType, 'list'>, GetResponseWithStatusType<IShopCheckout>>(addShopCheckoutApi)
 
 export const useUpdateShopCheckoutMutation = () =>
-  useCustomMutation<
-    Pick<ShopFieldParamsType, 'id' | 'shipping_address' | 'credit_card'>,
-    GetResponseWithStatusType<IShopCheckout>
-  >(updateShopCheckoutApi)
+  useCustomMutation<Partial<IShopCheckout>, GetResponseWithStatusType<IShopCheckout>>(updateShopCheckoutApi)

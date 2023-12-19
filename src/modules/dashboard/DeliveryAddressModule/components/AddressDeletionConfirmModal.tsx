@@ -2,12 +2,12 @@ import React, { FC } from 'react'
 import toast from 'react-hot-toast'
 import { Confirm } from '@/components'
 import { ICardError } from '@/types'
-import { useDeleteCardMutation, useDeleteUserDeliverAddressMutation } from '@/hooks/mutations'
+import { useDeleteUserDeliverAddressMutation } from '@/hooks/mutations'
+import { useShopStore } from '@/store'
 
 interface ICardDeletionConfirmModal {
   isConfirmOpen: boolean
   setIsOpenConfirm: (modal: boolean) => void
-  selectedAddressId?: number | null
   refetchAddress: () => void
   isEditMode: boolean
 }
@@ -17,13 +17,13 @@ const AddressDeletionConfirmModal: FC<ICardDeletionConfirmModal> = ({
   setIsOpenConfirm,
   isEditMode,
   refetchAddress,
-  selectedAddressId,
 }) => {
+  const { selectedAddress } = useShopStore()
   const { mutateAsync: deleteAddress, isPending: isDeletingAddress } = useDeleteUserDeliverAddressMutation()
 
   const handleCardDeletion = async () => {
-    if (isEditMode && selectedAddressId) {
-      const deleteResponse = await deleteAddress({ pk: selectedAddressId })
+    if (isEditMode && selectedAddress) {
+      const deleteResponse = await deleteAddress({ pk: selectedAddress.id })
 
       if (deleteResponse.status === 'success') {
         toast.success("Manzil o'chirildi")

@@ -121,13 +121,15 @@ const HeaderModule: FC = () => {
           </div>
           {isSuccess ? (
             <Link href="/dashboard" className="flex items-center gap-2">
-              <Image
-                src={userData?.avatar as string}
-                alt={`${userData?.first_name} ${userData?.last_name}`}
-                width={25}
-                height={25}
-                className="border rounded-full border-green-primary shadow-avatar"
-              />
+              {userData && (
+                <Image
+                  src={userData?.avatar}
+                  alt={`${userData?.first_name} ${userData?.last_name}`}
+                  width={25}
+                  height={25}
+                  className="border rounded-full border-green-primary shadow-avatar"
+                />
+              )}
               <p>
                 {userData?.first_name} {userData?.last_name}
               </p>
