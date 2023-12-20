@@ -15,6 +15,7 @@ interface IProps extends PropsWithChildren {
   onSubmit: () => void
   onClose: () => void
   className?: string
+  withFooter?: boolean
 }
 
 const Modal: FC<IProps> = ({
@@ -26,6 +27,7 @@ const Modal: FC<IProps> = ({
   buttonText = 'Tizimga kirish',
   children,
   className,
+  withFooter = true,
 }) => {
   useEventListener('keydown', (event: KeyboardEvent) => {
     if (event.key === 'Escape' && isOpen) {
@@ -51,7 +53,7 @@ const Modal: FC<IProps> = ({
   const modalRoot = document.body
 
   const modalClasses = clsx(
-    'w-[536px] min-h-[100px] flex flex-col gap-5 justify-between p-5 bg-white rounded-3xl animate-scale-in pb-[50px]',
+    'w-[536px] min-h-[100px] flex flex-col gap-5 justify-between p-5 bg-white rounded-3xl animate-scale-in pb-11',
     className,
   )
 
@@ -64,16 +66,18 @@ const Modal: FC<IProps> = ({
           </button>
         </header>
         <main>{children}</main>
-        <footer className="mt-4 flex gap-5">
-          {closeText && (
-            <Button onClick={onClose} disabled={disabled} type="button" buttonType="secondary">
-              {closeText}
+        {withFooter && (
+          <footer className="mt-4 flex gap-5">
+            {closeText && (
+              <Button onClick={onClose} disabled={disabled} type="button" buttonType="secondary">
+                {closeText}
+              </Button>
+            )}
+            <Button onClick={onSubmit} disabled={disabled} type="submit">
+              {buttonText}
             </Button>
-          )}
-          <Button onClick={onSubmit} disabled={disabled} type="submit">
-            {buttonText}
-          </Button>
-        </footer>
+          </footer>
+        )}
       </div>
     </div>,
     modalRoot,

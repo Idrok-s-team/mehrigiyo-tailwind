@@ -7,7 +7,7 @@ import {
   PaymentTypeValue,
 } from '@/types'
 
-export const PaymentType: Record<PaymentTypeValue, PaymentTypeKey> = {
+export const PaymentTypeMap: Record<PaymentTypeValue, PaymentTypeKey> = {
   1: 'PayOnDelivery',
   2: 'CreditCard',
   3: 'BankTransfer',

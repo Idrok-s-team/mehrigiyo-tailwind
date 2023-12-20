@@ -12,12 +12,12 @@ export type SwitchableRadioType = {
   title: string
   description?: string
   type: RadioType
-  data: any
+  data?: any
 }
 
 interface ISwitchableRadioProps {
   items: SwitchableRadioType[]
-  isEditMode: boolean
+  isEditMode?: boolean
   onAddAction: () => void
   onDeleteItemAction?: () => void
   isAddressMode?: boolean
@@ -25,9 +25,9 @@ interface ISwitchableRadioProps {
 
 const SwitchableRadio: FC<ISwitchableRadioProps> = ({
   items,
-  isEditMode,
   onAddAction,
   onDeleteItemAction,
+  isEditMode = false,
   isAddressMode = false,
 }) => {
   const [activeItem, setActiveItem] = useState<number>(items[0]?.key)
@@ -42,8 +42,6 @@ const SwitchableRadio: FC<ISwitchableRadioProps> = ({
         setSelectedPaymentCard(items[0].data)
         setActiveItem(items[0].key)
       }
-    }
-    if (!selectedAddress && items.length > 0) {
     }
   }, [items, selectedAddress, selectedPaymentCard])
 

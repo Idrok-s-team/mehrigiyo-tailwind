@@ -3,15 +3,12 @@
 import { FC, useState } from 'react'
 import { Loader } from '@/components'
 import { useShopCheckoutQuery } from '@/hooks/queries'
-import { OrderCard } from './components'
+import { OrderCancelConfirmModal, OrderCard, OrderDetailsModal } from './components'
 import { DeliveryStatusMap } from '@/constants'
-import OrderDeletionConfirmModal from './components/OrderDeletionConfirmModal'
-import { IShopCheckout } from '@/types'
 
 const OrdersModule: FC = () => {
   const [isEditMode, setIsEditMode] = useState(false)
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false)
-  const [selectedOrder, setSelectedOrder] = useState<IShopCheckout | null>(null)
 
   const { data: ordersData, isSuccess, refetch: refetchOrders } = useShopCheckoutQuery()
 
@@ -36,8 +33,6 @@ const OrdersModule: FC = () => {
                   key={item.id}
                   orderData={item}
                   statusType={DeliveryStatusMap[item.delivery_status]}
-                  // selectedOrder={selectedOrder}
-                  // setSelectedOrder={setSelectedOrder}
                   setIsOpenConfirm={setIsConfirmModalOpen}
                 />
               ))}
@@ -45,13 +40,13 @@ const OrdersModule: FC = () => {
           </div>
         )}
 
-        <OrderDeletionConfirmModal
+        <OrderCancelConfirmModal
           isConfirmOpen={isConfirmModalOpen}
           setIsOpenConfirm={setIsConfirmModalOpen}
           refetchOrders={refetchOrders}
-          isEditMode={isEditMode}
-          selectedOrder={selectedOrder}
         />
+
+        <OrderDetailsModal />
       </div>
     </>
   )

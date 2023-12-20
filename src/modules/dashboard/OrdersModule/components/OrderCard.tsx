@@ -15,12 +15,11 @@ import backgroundMap from '@/assets/icons/dashboard/orders/backgroundMap.png'
 import orderSandClock from '@/assets/icons/dashboard/orders/orderSandClock.svg'
 import orderDeliverIcon from '@/assets/icons/dashboard/orders/orderDeliverIcon.svg'
 import orderCarIcon from '@/assets/icons/dashboard/orders/orderCarIcon.svg'
+import { useShopStore } from '@/store'
 
 interface IProps {
   orderData?: IShopCheckout
   statusType?: DeliveryStatusKey
-  selectedOrderId?: IShopCheckout | null
-  setSelectedOrderId: (selectedOrder: IShopCheckout | null) => void
   setIsOpenConfirm: (modal: boolean) => void
 }
 
@@ -32,19 +31,21 @@ interface StatusSectionProps {
   text: string
 }
 
-const OrderCard: FC<IProps> = ({
-  statusType = 'Pending',
-  orderData,
-  selectedOrderId,
-  setSelectedOrderId,
-  setIsOpenConfirm,
-}) => {
+const OrderCard: FC<IProps> = ({ statusType = 'Pending', orderData, setIsOpenConfirm }) => {
+  const { setSelectedOrder, setIsOpenModal } = useShopStore()
   const { data: userDatas } = useUserMeQuery()
   const userData = userDatas?.results[0]
 
+  const handleSelectOrder = () => {
+    if (orderData?.id) {
+      setSelectedOrder(orderData)
+      setIsOpenModal(true)
+    }
+  }
+
   const handleDeleteOrder = () => {
     if (orderData?.id) {
-      // setSelectedOrderId(orderData.id)
+      setSelectedOrder(orderData)
       setIsOpenConfirm(true)
     }
   }
@@ -110,7 +111,7 @@ const OrderCard: FC<IProps> = ({
 
   return (
     <div className="w-[366px] h-[169px] flex rounded-3xl bg-[#F9FAFE] shadow-action-button overflow-hidden">
-      <section>
+      <section className="cursor-pointer" onClick={handleSelectOrder}>
         {statusType === 'Pending' &&
           renderStatusSection({
             status: 'Pending',
@@ -153,7 +154,7 @@ const OrderCard: FC<IProps> = ({
             <OrderProductIcon />
           </span>
           {statusType === 'Pending' && (
-            <button className="absolute z-[1] right-3 top-3" onClick={handleDeleteOrder}>
+            <button className="absolute z-[2] right-3 top-3" onClick={handleDeleteOrder}>
               <OrderCloseIcon />
             </button>
           )}

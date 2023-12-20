@@ -37,7 +37,7 @@ export interface IShopCheckout {
   shipping_address: IUserDeliverAddress
   cart_products: IShopCart[]
   price: number
-  payment_type: PaymentStatusValue
+  payment_type: PaymentTypeValue
   payment_status: PaymentStatusValue
   delivery_status: DeliveryStatusValue
   created_at: string
