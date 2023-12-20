@@ -31,15 +31,15 @@ const SwitchableRadio: FC<ISwitchableRadioProps> = ({
   isAddressMode = false,
 }) => {
   const [activeItem, setActiveItem] = useState<number>(items[0]?.key)
-  const { selectedAddress, setSelectedAddress, setSelectedPaymentCard, selectedPaymentCard } = useShopStore()
+  const { selectedAddress, selectedPaymentCard, updateShopState } = useShopStore()
 
   useEffect(() => {
     if (items.length > 0) {
       if (isAddressMode && !selectedAddress) {
-        setSelectedAddress(items[0].data)
+        updateShopState('selectedAddress', items[0].data)
         setActiveItem(items[0].key)
       } else if (!isAddressMode && !selectedPaymentCard) {
-        setSelectedPaymentCard(items[0].data)
+        updateShopState('selectedPaymentCard', items[0].data)
         setActiveItem(items[0].key)
       }
     }
@@ -47,7 +47,7 @@ const SwitchableRadio: FC<ISwitchableRadioProps> = ({
 
   const handleSelect = (key: number, data: any, type: RadioType) => {
     setActiveItem(key)
-    type === 'address' ? setSelectedAddress(data) : setSelectedPaymentCard(data)
+    type === 'address' ? updateShopState('selectedAddress', data) : updateShopState('selectedPaymentCard', data)
   }
 
   const getIconForType = (type: RadioType) => {

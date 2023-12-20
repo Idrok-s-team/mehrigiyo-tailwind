@@ -1,13 +1,12 @@
 'use client'
 
-import React, { useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
 import { useShopCartQuery } from '@/hooks/queries'
 import { CartItem, CartSummaryCard, CheckoutActionModal } from './components'
 import { useCartTotalsCalculator } from '@/hooks/cart'
 import { EmptyBox, Loader } from '@/components'
 
 const CartModule = () => {
-  const [isActionModalOpen, setIsActionModalOpen] = useState(false)
   const { data, isLoading } = useShopCartQuery()
   const cartData = useMemo(() => data?.data.sort((a, b) => a.id - b.id) ?? [], [data])
 
@@ -49,10 +48,10 @@ const CartModule = () => {
             <CartItem key={item.id} data={item} />
           ))}
         </section>
-        <CartSummaryCard infoCard={infoCard} isOpenModal={isActionModalOpen} setIsOpenModal={setIsActionModalOpen} />
+        <CartSummaryCard infoCard={infoCard} />
       </div>
 
-      <CheckoutActionModal isOpenModal={isActionModalOpen} setIsOpenModal={setIsActionModalOpen} />
+      <CheckoutActionModal />
     </div>
   )
 }

@@ -6,72 +6,50 @@ import { useAddShopCheckoutMutation, useUpdateShopCheckoutMutation } from '@/hoo
 import { useShopCartQuery } from '@/hooks/queries'
 import { usePaymentMethods, useUserAddresses } from '@/hooks/checkout'
 import { SuccessfulCheckoutIcon, UnsuccessfulCheckoutIcon } from '@/assets/icons'
+import { useCommonStore, useShopStore } from '@/store'
 
-interface ICardActionModal {
-  isOpenModal: boolean
-  setIsOpenModal: (modal: boolean) => void
-}
-
-const CheckoutActionModal: FC<ICardActionModal> = ({ isOpenModal, setIsOpenModal }) => {
-  const [selectedAddressId, setSelectedAddressId] = useState<number | null>(null)
-  const [selectedPaymentId, setSelectedPaymentId] = useState<number | null>(null)
-  const [isEditMode, setIsEditMode] = useState(false)
-  const [isSuccessMode, setIsSuccessMode] = useState(false)
-  const [isFailMode, setIsFailMode] = useState(false)
-
+const CheckoutActionModal: FC = () => {
+  const [checkoutStatus, setCheckoutStatus] = useState('idle')
+  const { selectedAddress, selectedPaymentCard } = useShopStore()
   const router = useRouter()
 
-  const { data, refetch } = useShopCartQuery()
+  const { activeModal, setActiveModal } = useCommonStore()
+  const { data: cartData, refetch } = useShopCartQuery()
   const { mutateAsync: addCheckout, isPending: addCheckoutPending } = useAddShopCheckoutMutation()
   const { mutateAsync: updateCheckout, isPending: updateCheckoutPending } = useUpdateShopCheckoutMutation()
+  const { paymentMethods } = usePaymentMethods()
+  const { addressData } = useUserAddresses()
 
-  const { paymentMethods, isPaymentSuccess, refetchPayments } = usePaymentMethods()
-  const { addressData, isAddressSuccess, refetchAddresses } = useUserAddresses()
-
-  const handleAddCheckout = async () => {
-    const cartProductIds = data?.data.map((item) => item.id)
+  const handleCheckout = async () => {
+    const cartProductIds = cartData?.data.map((item) => item.id)
     const addCheckoutResponse = await addCheckout({ list: cartProductIds?.toString() as string })
     const updateCheckoutResponse = await updateCheckout({
       id: addCheckoutResponse.data.id,
-      credit_card: selectedPaymentId as number,
-      shipping_address: selectedAddressId as number,
+      credit_card: selectedPaymentCard?.id,
+      shipping_address: selectedAddress?.id as any,
     })
 
     if (updateCheckoutResponse.status === 'success') {
-      setIsSuccessMode(true)
+      setCheckoutStatus('success')
       toast.success('Buyurtma muvaffaqiyatli tasdiqlandi!')
       refetch()
     } else {
-      setIsFailMode(true)
+      setCheckoutStatus('fail')
       toast.error("Nimadur xato bo'ldi, iltimos qayta urinib ko'ring")
       refetch()
     }
   }
 
-  const handleMoveOrders = () => {
-    router.push('/dashboard/orders')
+  const navigateTo = (path: string) => {
+    router.push(path)
   }
 
-  const handleTryAgain = () => {
-    setIsSuccessMode(false)
-    setIsFailMode(false)
+  const closeModal = () => {
+    setActiveModal(null)
+    setCheckoutStatus('idle')
   }
 
-  const handleCloseModal = () => {
-    setIsOpenModal(false)
-    setIsSuccessMode(false)
-    setIsFailMode(false)
-  }
-
-  const onAddressAction = () => {
-    router.push('/dashboard/delivery-address')
-  }
-
-  const onAddPaymentAction = () => {
-    router.push('/dashboard/payment-methods')
-  }
-
-  const renderModalContent = () => (
+  const CheckoutFormContent = () => (
     <>
       <h4 className="text-center">Buyurtma</h4>
       <div className="mt-3 flex flex-col gap-8 max-h-[50vh] overflow-auto">
@@ -80,65 +58,67 @@ const CheckoutActionModal: FC<ICardActionModal> = ({ isOpenModal, setIsOpenModal
           <SwitchableRadio
             isAddressMode
             items={addressData}
-            selectedItemId={selectedAddressId as number}
-            setSelectedItemId={setSelectedAddressId}
-            isEditMode={isEditMode}
-            onAddAction={onAddressAction}
+            onAddAction={() => navigateTo('/dashboard/delivery-address')}
           />
         </section>
         <section className="flex flex-col">
           <h6 className="mb-3 text-start">To'lov turi</h6>
-          <SwitchableRadio
-            items={paymentMethods}
-            selectedItemId={selectedPaymentId as number}
-            setSelectedItemId={setSelectedPaymentId}
-            isEditMode={isEditMode}
-            onAddAction={onAddPaymentAction}
-          />
+          <SwitchableRadio items={paymentMethods} onAddAction={() => navigateTo('/dashboard/payment-methods')} />
         </section>
       </div>
     </>
   )
 
-  const renderSuccessContent = () => (
+  const CheckoutSuccessContent = () => (
     <div className="flex flex-col items-center">
       <div className="mr-10">
         <SuccessfulCheckoutIcon />
       </div>
       <h4 className="mt-12">Buyurtmangiz qabul qilindi</h4>
-      <p className="text-[#7C7C7C]">Tez orada sizga bog'lanamiz</p>
+      <p className="text-[#7C7C7C]">Tez orada sizga bog'lanamiz!</p>
     </div>
   )
 
-  const renderFailModeContent = () => (
+  const CheckoutFailContent = () => (
     <div className="flex flex-col items-center">
       <div className="mr-10">
         <UnsuccessfulCheckoutIcon />
       </div>
-      <h4 className="mt-12">Buyurtmangiz qabul qilindi</h4>
-      <p className="text-[#7C7C7C]">Tez orada sizga bog'lanamiz</p>
+      <h4 className="mt-12">To'lov qabul qilinmadi</h4>
+      <p className="text-[#7C7C7C]">Nimadur noto'g'ri ketdi!</p>
     </div>
   )
 
+  const renderContent = () => {
+    switch (checkoutStatus) {
+      case 'success':
+        return <CheckoutSuccessContent />
+      case 'fail':
+        return <CheckoutFailContent />
+      default:
+        return <CheckoutFormContent />
+    }
+  }
+
   return (
     <Modal
-      onSubmit={isSuccessMode ? handleMoveOrders : isFailMode ? handleTryAgain : handleAddCheckout}
-      onClose={handleCloseModal}
-      isOpen={isOpenModal}
+      onSubmit={checkoutStatus === 'success' ? () => navigateTo('/dashboard/orders') : handleCheckout}
+      onClose={closeModal}
+      isOpen={activeModal === 'cart'}
       className="w-[446px] px-10"
       disabled={addCheckoutPending || updateCheckoutPending}
       closeText="Chiqish"
       buttonText={
-        isSuccessMode
+        checkoutStatus === 'success'
           ? "Buyurtmalarga o'tish"
-          : isFailMode
+          : checkoutStatus === 'success'
             ? "Qayta urinib ko'rish"
-            : addCheckoutPending || updateCheckoutPending
+            : addCheckoutPending
               ? "To'lov tekshirilmoqda..."
               : "To'lov qilish"
       }
     >
-      {isSuccessMode ? renderSuccessContent() : isFailMode ? renderFailModeContent() : renderModalContent()}
+      {renderContent()}
     </Modal>
   )
 }

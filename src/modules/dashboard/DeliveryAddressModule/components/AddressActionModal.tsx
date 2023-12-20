@@ -5,10 +5,9 @@ import { Input, Modal, Select } from '@/components'
 import { ISelectOption, IUserDeliverAddress } from '@/types'
 import { useAddUserDeliverAddressMutation } from '@/hooks/mutations'
 import { useUserCountryQuery, useUserRegionQuery } from '@/hooks/queries'
+import { useCommonStore } from '@/store'
 
 interface ICardActionModal {
-  isOpenModal: boolean
-  setIsOpenModal: (modal: boolean) => void
   refetchAddress: () => void
 }
 
@@ -21,12 +20,13 @@ const initialAddressDetails = {
   instructions: '',
 }
 
-const AddressActionModal: FC<ICardActionModal> = ({ isOpenModal, setIsOpenModal, refetchAddress }) => {
+const AddressActionModal: FC<ICardActionModal> = ({ refetchAddress }) => {
   const [addressDetails, setAddressDetails] = useState(initialAddressDetails)
   const [selectedCountryId, setSelectedCountryId] = useState<number | null>(null)
   const [selectedRegionId, setSelectedRegionId] = useState<number | null>(null)
 
-  const { data: countryData } = useUserCountryQuery({ options: { enabled: !!isOpenModal } })
+  const { activeModal, setActiveModal } = useCommonStore()
+  const { data: countryData } = useUserCountryQuery({ options: { enabled: activeModal !== 'address' } })
   const { data: regionData } = useUserRegionQuery(
     { pk: selectedCountryId as number },
     { options: { enabled: !!selectedCountryId } },
@@ -74,7 +74,7 @@ const AddressActionModal: FC<ICardActionModal> = ({ isOpenModal, setIsOpenModal,
         toast.success("Manzil muvaffaqiyatli qo'shildi")
         setAddressDetails(initialAddressDetails)
         refetchAddress()
-        setIsOpenModal(false)
+        setActiveModal(null)
       } catch (error) {
         toast.error("Nimadur xato bo'ldi, iltimos qayta tekshirib ko'ring!")
       }
@@ -83,14 +83,14 @@ const AddressActionModal: FC<ICardActionModal> = ({ isOpenModal, setIsOpenModal,
 
   const handleCloseModal = () => {
     setAddressDetails(initialAddressDetails)
-    setIsOpenModal(false)
+    setActiveModal(null)
   }
 
   return (
     <Modal
       onSubmit={handleAddAddress}
       onClose={handleCloseModal}
-      isOpen={isOpenModal}
+      isOpen={activeModal === 'address'}
       disabled={isAddingAddress}
       buttonText={isAddingAddress ? "Manzil qo'shilmoqda..." : "Manzil qo'shish"}
     >

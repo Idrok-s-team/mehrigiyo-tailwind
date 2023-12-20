@@ -4,16 +4,15 @@ import { Confirm } from '@/components'
 import { ICardError, IShopCheckout } from '@/types'
 import { useUpdateShopCheckoutMutation } from '@/hooks/mutations'
 import { DeliveryStatusMap } from '@/constants'
-import { useShopStore } from '@/store'
+import { useCommonStore, useShopStore } from '@/store'
 
 interface IProps {
-  isConfirmOpen: boolean
-  setIsOpenConfirm: (modal: boolean) => void
   refetchOrders: () => void
 }
 
-const OrderCancelConfirmModal: FC<IProps> = ({ isConfirmOpen, setIsOpenConfirm, refetchOrders }) => {
-  const { selectedOrder, setSelectedOrder } = useShopStore()
+const OrderCancelConfirmModal: FC<IProps> = ({ refetchOrders }) => {
+  const { activeModal, setActiveModal } = useCommonStore()
+  const { selectedOrder, updateShopState } = useShopStore()
   const { mutateAsync: updateOrder, isPending: updateOrderPending } = useUpdateShopCheckoutMutation()
 
   const handleCancelOrder = async () => {
@@ -27,24 +26,24 @@ const OrderCancelConfirmModal: FC<IProps> = ({ isConfirmOpen, setIsOpenConfirm, 
 
       if (updateResponse.status === 'success') {
         toast.success('Buyurtma bekor qilindi!')
-        setIsOpenConfirm(false)
+        setActiveModal(null)
         refetchOrders()
       } else {
-        setIsOpenConfirm(false)
+        setActiveModal(null)
         toast.error("Nimadur xato bo'ldi! Iltimos qayta urinib ko'ring.")
       }
     }
   }
 
   const handleClose = () => {
-    setIsOpenConfirm(false)
-    setSelectedOrder(null)
+    setActiveModal(null)
+    updateShopState('selectedOrder', null)
   }
 
   return (
     <Confirm
       confirmText="Rostdan buyurtmani bekor qilmoqchimisiz?"
-      isOpen={isConfirmOpen}
+      isOpen={activeModal === 'orderConfirm'}
       onClose={handleClose}
       onSubmit={handleCancelOrder}
       disabled={updateOrderPending}

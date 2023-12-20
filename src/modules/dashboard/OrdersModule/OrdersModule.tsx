@@ -1,15 +1,12 @@
 'use client'
 
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import { Loader } from '@/components'
 import { useShopCheckoutQuery } from '@/hooks/queries'
 import { OrderCancelConfirmModal, OrderCard, OrderDetailsModal } from './components'
 import { DeliveryStatusMap } from '@/constants'
 
 const OrdersModule: FC = () => {
-  const [isEditMode, setIsEditMode] = useState(false)
-  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false)
-
   const { data: ordersData, isSuccess, refetch: refetchOrders } = useShopCheckoutQuery()
 
   return (
@@ -29,22 +26,13 @@ const OrdersModule: FC = () => {
             </section>
             <div className="grid grid-cols-2 gap-5 mt-10">
               {ordersData.data.map((item) => (
-                <OrderCard
-                  key={item.id}
-                  orderData={item}
-                  statusType={DeliveryStatusMap[item.delivery_status]}
-                  setIsOpenConfirm={setIsConfirmModalOpen}
-                />
+                <OrderCard key={item.id} orderData={item} statusType={DeliveryStatusMap[item.delivery_status]} />
               ))}
             </div>
           </div>
         )}
 
-        <OrderCancelConfirmModal
-          isConfirmOpen={isConfirmModalOpen}
-          setIsOpenConfirm={setIsConfirmModalOpen}
-          refetchOrders={refetchOrders}
-        />
+        <OrderCancelConfirmModal refetchOrders={refetchOrders} />
 
         <OrderDetailsModal />
       </div>

@@ -4,10 +4,9 @@ import { inputHandler } from '@/utils'
 import { MaskInput, Modal } from '@/components'
 import { ICard, ICardError, IVerifyCard } from '@/types'
 import { useAddCardMutation, useCardConfirmCodeMutation, useVerifyCardMutation } from '@/hooks/mutations'
+import { useCommonStore } from '@/store'
 
 interface ICardActionModal {
-  isOpenModal: boolean
-  setIsOpenModal: (modal: boolean) => void
   refetchCards: () => void
 }
 
@@ -17,13 +16,14 @@ const initialCardDetails = {
   otp: '',
 }
 
-const CardActionModal: FC<ICardActionModal> = ({ isOpenModal, setIsOpenModal, refetchCards }) => {
+const CardActionModal: FC<ICardActionModal> = ({ refetchCards }) => {
   const [isOtpMode, setIsOtpMode] = useState(false)
   const [cardDetails, setCardDetails] = useState(initialCardDetails)
   const [otpTimeout, setOtpTimeout] = useState<number>(60)
   const [verifiedPhone, setVerifiedPhone] = useState<string | null>(null)
   const [selectedCardId, setSelectedCardId] = useState<number | null>(null)
 
+  const { activeModal, setActiveModal } = useCommonStore()
   const { mutateAsync: addCard, isPending: isAddingCard } = useAddCardMutation()
   const { mutateAsync: verifyCard, isPending: isVerifyingCard } = useVerifyCardMutation()
   const { mutateAsync: confirmCode, isPending: isConfirmingCode } = useCardConfirmCodeMutation()
@@ -91,7 +91,7 @@ const CardActionModal: FC<ICardActionModal> = ({ isOpenModal, setIsOpenModal, re
     setCardDetails(initialCardDetails)
     setOtpTimeout(60)
     setVerifiedPhone(null)
-    setIsOpenModal(false)
+    setActiveModal(null)
   }
 
   const buttonText = isAddingCard
@@ -106,7 +106,7 @@ const CardActionModal: FC<ICardActionModal> = ({ isOpenModal, setIsOpenModal, re
     <Modal
       onSubmit={isOtpMode ? handleConfirmCode : handleAddCard}
       onClose={handleCloseModal}
-      isOpen={isOpenModal}
+      isOpen={activeModal === 'cart'}
       disabled={isAddingCard || isConfirmingCode || (isOtpMode && otpTimeout === 0)}
       buttonText={buttonText}
     >

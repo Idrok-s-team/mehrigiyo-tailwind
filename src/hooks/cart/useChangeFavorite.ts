@@ -16,9 +16,7 @@ const useChangeFavorite = (productId: number) => {
         await addFavoriteAsync({ pk: productId })
       }
       await refetch()
-    } catch (error) {
-      console.error('Error changing favorite status:', error)
-    }
+    } catch (error) {}
   }
 
   return { isProductInFavorite, onChangeFavorite }

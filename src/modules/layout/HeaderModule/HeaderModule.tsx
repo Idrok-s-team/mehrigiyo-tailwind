@@ -8,10 +8,12 @@ import { ActiveLink, Dropdown } from '@/components'
 import { AvatarIcon, FlagUzIcon, LocationIcon, LogoIcon } from '@/assets/icons'
 import { useUserMeQuery } from '@/hooks/queries'
 import { HeaderActions, AuthModal } from './components'
+import { useCommonStore, useShopStore } from '@/store'
 
 const HeaderModule: FC = () => {
-  const [isOpenAuthModal, setIsOpenAuthModal] = useState(false)
   const pathname = usePathname()
+
+  const { setActiveModal } = useCommonStore()
   const { data: userDatas, isSuccess } = useUserMeQuery()
   const userData = userDatas?.results[0]
 
@@ -135,7 +137,7 @@ const HeaderModule: FC = () => {
               </p>
             </Link>
           ) : (
-            <div className="flex items-center gap-2 cursor-pointer" onClick={() => setIsOpenAuthModal(true)}>
+            <div className="flex items-center gap-2 cursor-pointer" onClick={() => setActiveModal('auth')}>
               <div>Kirish</div>
               <div>
                 <AvatarIcon />
@@ -163,7 +165,7 @@ const HeaderModule: FC = () => {
           <HeaderActions />
         </section>
 
-        <AuthModal isOpen={isOpenAuthModal} setIsOpen={setIsOpenAuthModal} />
+        <AuthModal />
       </nav>
     </>
   )

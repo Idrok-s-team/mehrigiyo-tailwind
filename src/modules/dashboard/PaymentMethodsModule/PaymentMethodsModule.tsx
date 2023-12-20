@@ -6,18 +6,17 @@ import { Loader, SwitchableRadio } from '@/components'
 import { CardActionModal, CardDeletionConfirmModal } from './components'
 import backgroundPaymentMethod from '@/assets/images/dashboard/backgroundPaymentMethod.png'
 import { usePaymentMethods } from '@/hooks/checkout'
+import { useCommonStore } from '@/store'
 
 const PaymentMethodsModule: FC = () => {
-  
   const [isEditMode, setIsEditMode] = useState(false)
-  const [isActionModalOpen, setIsActionModalOpen] = useState(false)
-  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false)
 
+  const { activeModal, setActiveModal } = useCommonStore()
   const { paymentMethods, isPaymentSuccess, refetchPayments } = usePaymentMethods()
 
   const toggleEditMode = () => setIsEditMode(!isEditMode)
-  const openActionModal = () => setIsActionModalOpen(true)
-  const openConfirmModal = () => setIsConfirmModalOpen(true)
+  const openActionModal = () => setActiveModal('cart')
+  const openConfirmModal = () => setActiveModal('cartConfirm')
 
   return (
     <div className="w-full min-h-[78.5vh] pr-24 relative">
@@ -47,23 +46,14 @@ const PaymentMethodsModule: FC = () => {
         </div>
       )}
 
-      <CardDeletionConfirmModal
-        isConfirmOpen={isConfirmModalOpen}
-        setIsOpenConfirm={setIsConfirmModalOpen}
-        refetchCards={refetchPayments}
-        isEditMode={isEditMode}
-      />
+      <CardDeletionConfirmModal refetchCards={refetchPayments} isEditMode={isEditMode} />
 
-      <CardActionModal
-        isOpenModal={isActionModalOpen}
-        refetchCards={refetchPayments}
-        setIsOpenModal={setIsActionModalOpen}
-      />
+      <CardActionModal refetchCards={refetchPayments} />
 
       <Image
         src={backgroundPaymentMethod}
         alt=""
-        className={`absolute right-0 bottom-0 duration-300 ${isActionModalOpen ? 'scale-110' : ''}`}
+        className={`absolute right-0 bottom-0 duration-300 ${activeModal === 'cart' ? 'scale-110' : ''}`}
       />
     </div>
   )

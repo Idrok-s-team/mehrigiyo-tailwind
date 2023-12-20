@@ -6,17 +6,17 @@ import { Loader, SwitchableRadio } from '@/components'
 import { AddressActionModal, AddressDeletionConfirmModal } from './components'
 import backgroundDeliverAddress from '@/assets/images/dashboard/backgroundDeliverAddress.png'
 import { useUserAddresses } from '@/hooks/checkout'
+import { useCommonStore } from '@/store'
 
 const DeliveryAddressModule: FC = () => {
   const [isEditMode, setIsEditMode] = useState(false)
-  const [isActionModalOpen, setIsActionModalOpen] = useState(false)
-  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false)
 
+  const { activeModal, setActiveModal } = useCommonStore()
   const { addressData, isAddressSuccess, refetchAddresses } = useUserAddresses()
 
   const toggleEditMode = () => setIsEditMode(!isEditMode)
-  const openActionModal = () => setIsActionModalOpen(true)
-  const openConfirmModal = () => setIsConfirmModalOpen(true)
+  const openActionModal = () => setActiveModal('address')
+  const openConfirmModal = () => setActiveModal('addressConfirm')
 
   return (
     <div className="w-full min-h-[78.5vh] pr-24 relative">
@@ -47,23 +47,14 @@ const DeliveryAddressModule: FC = () => {
         </div>
       )}
 
-      <AddressDeletionConfirmModal
-        isConfirmOpen={isConfirmModalOpen}
-        setIsOpenConfirm={setIsConfirmModalOpen}
-        refetchAddress={refetchAddresses}
-        isEditMode={isEditMode}
-      />
+      <AddressDeletionConfirmModal refetchAddress={refetchAddresses} isEditMode={isEditMode} />
 
-      <AddressActionModal
-        isOpenModal={isActionModalOpen}
-        refetchAddress={refetchAddresses}
-        setIsOpenModal={setIsActionModalOpen}
-      />
+      <AddressActionModal refetchAddress={refetchAddresses} />
 
       <Image
         src={backgroundDeliverAddress}
         alt=""
-        className={`absolute right-0 bottom-0 duration-300 ${isActionModalOpen ? 'scale-110' : ''}`}
+        className={`absolute right-0 bottom-0 duration-300 ${activeModal === 'address' ? 'scale-110' : ''}`}
       />
     </div>
   )

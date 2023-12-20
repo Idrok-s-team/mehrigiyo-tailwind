@@ -1,19 +1,20 @@
 import React, { FC } from 'react'
 import { Modal } from '@/components'
 import { DeliveryStatusMap } from '@/constants'
-import { useShopStore } from '@/store'
+import { useCommonStore, useShopStore } from '@/store'
 import clsx from 'clsx'
 import { CashIcon, PlasticCardIcon } from '@/assets/icons'
 
 interface IProps {}
 
 const OrderDetailsModal: FC<IProps> = () => {
-  const { isOpenModal, setIsOpenModal, selectedOrder } = useShopStore()
+  const { selectedOrder } = useShopStore()
+  const { activeModal, setActiveModal } = useCommonStore()
 
   const { id, shipping_address, cart_products, payment_type, delivery_status, price } = selectedOrder ?? {}
 
   const handleCloseModal = () => {
-    setIsOpenModal(false)
+    setActiveModal(null)
   }
 
   const statusClasses = clsx('px-9 py-1 text-sm font-semibold rounded-full', {
@@ -23,7 +24,7 @@ const OrderDetailsModal: FC<IProps> = () => {
   })
 
   return (
-    <Modal onSubmit={() => {}} onClose={handleCloseModal} isOpen={isOpenModal} withFooter={false}>
+    <Modal onSubmit={() => {}} onClose={handleCloseModal} isOpen={activeModal === 'order'} withFooter={false}>
       <h4 className="text-center">Buyurtma tafsilotlari</h4>
       <div>
         <div className="mt-2 px-5 max-h-[50vh] overflow-auto">

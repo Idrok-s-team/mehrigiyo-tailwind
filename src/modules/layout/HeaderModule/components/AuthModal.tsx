@@ -8,21 +8,20 @@ import { ILoginParams } from '@/types'
 import { getCookie, inputHandler, parsePhoneNumber } from '@/utils'
 import { useShopCartQuery, useUserFavoriteMedicinesQuery, useUserMeQuery } from '@/hooks/queries'
 import { useLoginMutation, useRefreshTokenMutation } from '@/hooks/mutations'
+import { useCommonStore } from '@/store'
 
-type Props = {
-  isOpen: boolean
-  setIsOpen: (isOpen: boolean) => void
-}
+type Props = {}
 
 const initialFields: ILoginParams = {
   username: '',
   password: '',
 }
 
-const AuthModal: FC<Props> = ({ isOpen, setIsOpen }) => {
+const AuthModal: FC<Props> = () => {
   const [fields, setFields] = useState<ILoginParams>(initialFields)
   const hasRefreshed = useRef(false)
 
+  const { activeModal, setActiveModal } = useCommonStore()
   const userMeQuery = useUserMeQuery()
   const userFavoriteMedicinesQuery = useUserFavoriteMedicinesQuery()
   const shopCartQuery = useShopCartQuery()
@@ -75,7 +74,7 @@ const AuthModal: FC<Props> = ({ isOpen, setIsOpen }) => {
         .then((res) => {
           Cookies.set('access_token', res.access)
           Cookies.set('refresh_token', res.refresh)
-          setIsOpen(false)
+          setActiveModal(null)
           userMeQuery.refetch()
           userFavoriteMedicinesQuery.refetch()
           shopCartQuery.refetch()
@@ -85,7 +84,7 @@ const AuthModal: FC<Props> = ({ isOpen, setIsOpen }) => {
 
   return (
     <>
-      <Modal onClose={() => setIsOpen(false)} onSubmit={() => handleLogin()} isOpen={isOpen}>
+      <Modal onClose={() => setActiveModal(null)} onSubmit={() => handleLogin()} isOpen={activeModal === 'auth'}>
         <div className="px-16 pb-8 bg-white">
           <section>
             <Tabs

@@ -15,12 +15,11 @@ import backgroundMap from '@/assets/icons/dashboard/orders/backgroundMap.png'
 import orderSandClock from '@/assets/icons/dashboard/orders/orderSandClock.svg'
 import orderDeliverIcon from '@/assets/icons/dashboard/orders/orderDeliverIcon.svg'
 import orderCarIcon from '@/assets/icons/dashboard/orders/orderCarIcon.svg'
-import { useShopStore } from '@/store'
+import { useCommonStore, useShopStore } from '@/store'
 
 interface IProps {
   orderData?: IShopCheckout
   statusType?: DeliveryStatusKey
-  setIsOpenConfirm: (modal: boolean) => void
 }
 
 interface StatusSectionProps {
@@ -31,22 +30,23 @@ interface StatusSectionProps {
   text: string
 }
 
-const OrderCard: FC<IProps> = ({ statusType = 'Pending', orderData, setIsOpenConfirm }) => {
-  const { setSelectedOrder, setIsOpenModal } = useShopStore()
+const OrderCard: FC<IProps> = ({ statusType = 'Pending', orderData }) => {
+  const { updateShopState } = useShopStore()
+  const { setActiveModal } = useCommonStore()
   const { data: userDatas } = useUserMeQuery()
   const userData = userDatas?.results[0]
 
   const handleSelectOrder = () => {
     if (orderData?.id) {
-      setSelectedOrder(orderData)
-      setIsOpenModal(true)
+      updateShopState('selectedOrder', orderData)
+      setActiveModal('order')
     }
   }
 
   const handleDeleteOrder = () => {
     if (orderData?.id) {
-      setSelectedOrder(orderData)
-      setIsOpenConfirm(true)
+      updateShopState('selectedOrder', orderData)
+      setActiveModal('order')
     }
   }
 
