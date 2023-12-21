@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
 import { Modal, SwitchableRadio } from '@/components'
@@ -9,7 +9,7 @@ import { SuccessfulCheckoutIcon, UnsuccessfulCheckoutIcon } from '@/assets/icons
 import { useCommonStore, useShopStore } from '@/store'
 
 const CheckoutActionModal: FC = () => {
-  const [checkoutStatus, setCheckoutStatus] = useState('idle')
+  const [checkoutStatus, setCheckoutStatus] = useState<'idle' | 'success' | 'fail'>('idle')
   const { selectedAddress, selectedPaymentCard } = useShopStore()
   const router = useRouter()
 
@@ -19,6 +19,11 @@ const CheckoutActionModal: FC = () => {
   const { mutateAsync: updateCheckout, isPending: updateCheckoutPending } = useUpdateShopCheckoutMutation()
   const { paymentMethods } = usePaymentMethods()
   const { addressData } = useUserAddresses()
+
+  useEffect(() => {
+    setActiveModal(null)
+    refetch()
+  }, [])
 
   const handleCheckout = async () => {
     const cartProductIds = cartData?.data.map((item) => item.id)
@@ -32,11 +37,9 @@ const CheckoutActionModal: FC = () => {
     if (updateCheckoutResponse.status === 'success') {
       setCheckoutStatus('success')
       toast.success('Buyurtma muvaffaqiyatli tasdiqlandi!')
-      refetch()
     } else {
       setCheckoutStatus('fail')
       toast.error("Nimadur xato bo'ldi, iltimos qayta urinib ko'ring")
-      refetch()
     }
   }
 
@@ -47,9 +50,20 @@ const CheckoutActionModal: FC = () => {
   const closeModal = () => {
     setActiveModal(null)
     setCheckoutStatus('idle')
+    refetch()
   }
 
-  const CheckoutFormContent = () => (
+  const handleSubmit = () => {
+    if (checkoutStatus === 'success') {
+      navigateTo('/dashboard/orders')
+    } else if (checkoutStatus === 'fail') {
+      setCheckoutStatus('idle')
+    } else {
+      handleCheckout()
+    }
+  }
+
+  const checkoutFormContent = () => (
     <>
       <h4 className="text-center">Buyurtma</h4>
       <div className="mt-3 flex flex-col gap-8 max-h-[50vh] overflow-auto">
@@ -69,7 +83,7 @@ const CheckoutActionModal: FC = () => {
     </>
   )
 
-  const CheckoutSuccessContent = () => (
+  const checkoutSuccessContent = () => (
     <div className="flex flex-col items-center">
       <div className="mr-10">
         <SuccessfulCheckoutIcon />
@@ -79,7 +93,7 @@ const CheckoutActionModal: FC = () => {
     </div>
   )
 
-  const CheckoutFailContent = () => (
+  const checkoutFailContent = () => (
     <div className="flex flex-col items-center">
       <div className="mr-10">
         <UnsuccessfulCheckoutIcon />
@@ -92,31 +106,30 @@ const CheckoutActionModal: FC = () => {
   const renderContent = () => {
     switch (checkoutStatus) {
       case 'success':
-        return <CheckoutSuccessContent />
+        return checkoutSuccessContent()
       case 'fail':
-        return <CheckoutFailContent />
+        return checkoutFailContent()
       default:
-        return <CheckoutFormContent />
+        return checkoutFormContent()
     }
+  }
+
+  const getButtonText = () => {
+    if (checkoutStatus === 'success') return "Buyurtmalarga o'tish"
+    if (checkoutStatus === 'fail') return "Qayta urinib ko'rish"
+    if (addCheckoutPending) return "To'lov tekshirilmoqda..."
+    return "To'lov qilish"
   }
 
   return (
     <Modal
-      onSubmit={checkoutStatus === 'success' ? () => navigateTo('/dashboard/orders') : handleCheckout}
+      onSubmit={handleSubmit}
       onClose={closeModal}
       isOpen={activeModal === 'cart'}
       className="w-[446px] px-10"
       disabled={addCheckoutPending || updateCheckoutPending}
       closeText="Chiqish"
-      buttonText={
-        checkoutStatus === 'success'
-          ? "Buyurtmalarga o'tish"
-          : checkoutStatus === 'success'
-            ? "Qayta urinib ko'rish"
-            : addCheckoutPending
-              ? "To'lov tekshirilmoqda..."
-              : "To'lov qilish"
-      }
+      buttonText={getButtonText()}
     >
       {renderContent()}
     </Modal>

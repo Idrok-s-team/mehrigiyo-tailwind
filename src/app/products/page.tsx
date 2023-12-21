@@ -38,7 +38,7 @@ const ProductsPage = () => {
         <h4>Siz uchun eng yaxshi takliflar</h4>
         <div className="flex justify-between mt-10">
           {bannerImages.map((img, i) => (
-            <Image src={img} alt="" width={366} height={135} key={i} />
+            <Image key={i} src={img} alt="" width={366} height={135} />
           ))}
         </div>
       </section>

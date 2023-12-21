@@ -30,7 +30,7 @@ const SwitchableRadio: FC<ISwitchableRadioProps> = ({
   isEditMode = false,
   isAddressMode = false,
 }) => {
-  const [activeItem, setActiveItem] = useState<number>(items[0]?.key)
+  const [activeItem, setActiveItem] = useState<number>(items?.[0]?.key)
   const { selectedAddress, selectedPaymentCard, updateShopState } = useShopStore()
 
   useEffect(() => {

@@ -29,7 +29,11 @@ const Pagination: FC<Props> = ({ currentPage, totalCount, pageSize, onPageChange
     </button>
   )
 
-  const renderEllipsis = () => <span className="p-2 animate-fade-in">...</span>
+  const renderEllipsis = (key: string) => (
+    <span key={key} className="p-2 animate-fade-in">
+      ...
+    </span>
+  )
 
   return (
     <div className="flex items-center justify-center gap-2 border-b-[0.5px] border-gray-primary">
@@ -48,8 +52,12 @@ const Pagination: FC<Props> = ({ currentPage, totalCount, pageSize, onPageChange
           return renderPageNumber(page)
         }
 
-        if (page === 4 || page === totalPages - 1) {
-          return renderEllipsis()
+        if (page === 4) {
+          return renderEllipsis('ellipsis_start')
+        }
+
+        if (page === totalPages - 1) {
+          return renderEllipsis('ellipsis_end')
         }
 
         return null

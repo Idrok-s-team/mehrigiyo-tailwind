@@ -1,24 +1,25 @@
 'use client'
 
 import { FC, useMemo } from 'react'
-import { ProductCard, ProductCardSkeleton, SeeAllButton, Slider } from '@/components'
-import { useShopMedicinesQuery, useShopTypesQuery } from '@/hooks/queries'
+import { DoctorCard, ProductCardSkeleton, SeeAllButton, Slider } from '@/components'
+import { useDoctorTypesQuery, useDoctorsQuery } from '@/hooks/queries'
 
 type Props = {
   title?: string
   withFilter?: boolean
 }
 
-const ProductsListModule: FC<Props> = ({ title = "Mahsulotlarimiz ro'yxati", withFilter = true }) => {
-  const { data: shopMedicinesData, isFetching: isFetchingMedicines } = useShopMedicinesQuery()
-  const { data: shopTypesData, isFetching: isFetchingShopTypes } = useShopTypesQuery()
+const DoctorListModule: FC<Props> = ({ title = 'Top shifokorlar', withFilter = true }) => {
+  const { data: doctorsData, isFetching: isFetchingDoctors } = useDoctorsQuery()
+  const { data: doctorTypesData, isFetching: isFetchingDoctorTypes } = useDoctorTypesQuery()
+  console.log(doctorsData)
 
   const filterValues = useMemo(
     () => [
       { key: '', title: 'Hammasi' },
-      ...(shopTypesData?.results.map((value) => ({ key: value.id, title: value.name })) || []),
+      ...(doctorTypesData?.results.map((value) => ({ key: value.id, title: value.name })) || []),
     ],
-    [shopTypesData?.results],
+    [doctorTypesData?.results],
   )
 
   return (
@@ -32,7 +33,7 @@ const ProductsListModule: FC<Props> = ({ title = "Mahsulotlarimiz ro'yxati", wit
           className="flex items-center text-lg text-gray-primary"
           style={{ gap: 24, marginTop: 32, listStyle: 'none' }}
         >
-          {isFetchingShopTypes ? (
+          {isFetchingDoctorTypes ? (
             <div className={`w-20 h-10 grid grid-cols-4 gap-7`}>
               {Array.from({ length: 5 }).map((_, index) => (
                 <div key={index} className="w-full h-5 duration-300 bg-gray-300 rounded-md animate-pulse"></div>
@@ -49,17 +50,17 @@ const ProductsListModule: FC<Props> = ({ title = "Mahsulotlarimiz ro'yxati", wit
       )}
 
       <div className="mt-10">
-        {isFetchingMedicines ? (
+        {isFetchingDoctors ? (
           <div className="grid grid-cols-5 gap-7 ">
             {Array.from({ length: 5 }).map((_, index) => (
               <ProductCardSkeleton key={index} />
             ))}
           </div>
         ) : (
-          <Slider slides={{ perView: 4.7 }}>
-            {shopMedicinesData?.results.map((product) => (
-              <div key={product.id} className="keen-slider__slide">
-                <ProductCard product={product} />
+          <Slider slides={{ perView: 5.4 }}>
+            {doctorsData?.results.map((doctor) => (
+              <div key={doctor.id} className="keen-slider__slide">
+                <DoctorCard data={doctor} />
               </div>
             ))}
           </Slider>
@@ -69,4 +70,4 @@ const ProductsListModule: FC<Props> = ({ title = "Mahsulotlarimiz ro'yxati", wit
   )
 }
 
-export default ProductsListModule
+export default DoctorListModule
