@@ -1,5 +1,5 @@
-export { default as useAnimatedCounter } from './useAnimatedCounter'
 export { default as useAddToCart } from './useAddToCart'
-export { default as useChangeFavorite } from './useChangeFavorite'
+export { default as useAnimatedCounter } from './useAnimatedCounter'
 export { default as useCartItemActions } from './useCartItemActions'
 export { default as useCartTotalsCalculator } from './useCartTotalsCalculator'
+export { default as useChangeFavoriteProducts } from './useChangeFavoriteProducts'

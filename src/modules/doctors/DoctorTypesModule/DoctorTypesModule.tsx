@@ -6,14 +6,14 @@ import Image from 'next/image'
 import { useDoctorTypesQuery } from '@/hooks/queries'
 
 const DoctorTypesModule: FC = () => {
-  const { data, isFetching } = useDoctorTypesQuery()
+  const { data } = useDoctorTypesQuery()
 
   return (
     <div className="grid grid-cols-6 gap-x-[22px] gap-y-[30px] mt-8">
       {data?.results.map(({ id, name, image, get_doctors_count }) => (
         <Link
           key={id}
-          href="/doctors/category"
+          href="/online_doctors/category"
           className="shadow-primary flex flex-col items-center justify-between p-5 py-4 w-[188px] rounded-2xl duration-300 transition-colors hover:bg-green-light hover:border-[0.5px] hover:border-green-primary"
           title={name}
         >

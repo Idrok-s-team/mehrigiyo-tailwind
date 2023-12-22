@@ -5,8 +5,8 @@ import toast from 'react-hot-toast'
 import { useCopyToClipboard } from 'usehooks-ts'
 import { ChevronIcon, FavoriteFillIcon, FavoriteIcon, PlusWhiteIcon, SharedIcon } from '@/assets/icons'
 import { IShopMedicines } from '@/types'
-import { ActionButton, Button, ProductCount, Tabs, Tooltip, ViewSlide } from '@/components'
-import { useAddToCart, useChangeFavorite } from '@/hooks/cart'
+import { ActionButton, Button, ProductCount, Tooltip, ViewSlide } from '@/components'
+import { useAddToCart, useChangeFavoriteProducts } from '@/hooks/cart'
 
 type Props = {
   product: IShopMedicines
@@ -17,7 +17,7 @@ const ProductDescriptionModule: FC<Props> = ({ product }) => {
   const { id, name, description, discount, cost, quantity, image, pictures } = product
 
   const { isProductInCart, addToBasket } = useAddToCart(id)
-  const { isProductInFavorite, onChangeFavorite } = useChangeFavorite(id)
+  const { isProductInFavorite, onChangeFavorite } = useChangeFavoriteProducts(id)
   const [__, copy] = useCopyToClipboard()
 
   const onCopyToClipboard = () => {

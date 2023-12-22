@@ -3,8 +3,8 @@ import { fetchApi } from './common'
 import { IDoctor, IDoctorTypes } from '@/types/doctor'
 
 // DOCTORS API
-export const getDoctorsApi = async () => {
-  return fetchApi<GetResponseType<IDoctor[]>>('/specialist/doctors/')
+export const getDoctorsApi = async (params?: QueryParamsType) => {
+  return fetchApi<GetResponseType<IDoctor[]>>('/specialist/doctors/', params)
 }
 
 export const getDoctorByIdApi = async (id: number, params?: QueryParamsType) => {

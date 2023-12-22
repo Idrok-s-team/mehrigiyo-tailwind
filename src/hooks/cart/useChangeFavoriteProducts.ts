@@ -1,12 +1,12 @@
-import { useAddUserFavoriteMedicineMutation, useDeleteUserFavoriteMedicineMutation } from '../mutations/user'
+import { useAddUserFavoriteMedicinesMutation, useDeleteUserFavoriteMedicinesMutation } from '../mutations/user'
 import { useUserFavoriteMedicinesQuery } from '../queries'
 
-const useChangeFavorite = (productId: number) => {
+const useChangeFavoriteProducts = (productId: number) => {
   const { data, refetch } = useUserFavoriteMedicinesQuery()
   const isProductInFavorite = data?.results.some((item) => item.id === productId)
 
-  const { mutateAsync: addFavoriteAsync } = useAddUserFavoriteMedicineMutation()
-  const { mutateAsync: deleteFavoriteAsync } = useDeleteUserFavoriteMedicineMutation()
+  const { mutateAsync: addFavoriteAsync } = useAddUserFavoriteMedicinesMutation()
+  const { mutateAsync: deleteFavoriteAsync } = useDeleteUserFavoriteMedicinesMutation()
 
   const onChangeFavorite = async () => {
     try {
@@ -22,4 +22,4 @@ const useChangeFavorite = (productId: number) => {
   return { isProductInFavorite, onChangeFavorite }
 }
 
-export default useChangeFavorite
+export default useChangeFavoriteProducts

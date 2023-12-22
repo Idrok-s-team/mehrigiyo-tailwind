@@ -39,7 +39,7 @@ const Pagination: FC<Props> = ({ currentPage, totalCount, pageSize, onPageChange
     <div className="flex items-center justify-center gap-2 border-b-[0.5px] border-gray-primary">
       {currentPage !== 1 && (
         <button
-          className={`p-2 rotate-180 animate-fade-in`}
+          className={`p-2 rotate-90 animate-fade-in`}
           onClick={() => handleClick(currentPage - 1)}
           disabled={currentPage === 1}
         >
@@ -64,7 +64,7 @@ const Pagination: FC<Props> = ({ currentPage, totalCount, pageSize, onPageChange
       })}
 
       {currentPage !== totalPages && (
-        <button className="p-2 animate-fade-in" onClick={() => handleClick(currentPage + 1)}>
+        <button className="p-2 -rotate-90 animate-fade-in" onClick={() => handleClick(currentPage + 1)}>
           <ChevronIcon />
         </button>
       )}

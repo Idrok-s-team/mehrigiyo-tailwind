@@ -4,10 +4,10 @@ import { type FC } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { BookmarkIcon } from '@/assets/icons'
-import { useChangeFavorite } from '@/hooks/cart'
 import { createSlug } from '@/utils'
 import Button from '../Button'
 import { IDoctor } from '@/types/doctor'
+import { useChangeFavoriteDoctors } from '@/hooks/doctor'
 
 type Props = {
   data: IDoctor
@@ -17,7 +17,7 @@ const DoctorCard: FC<Props> = ({ data }) => {
   const { id, full_name, image, rate, review } = data
   const slug = createSlug(full_name, id)
 
-  const { isProductInFavorite, onChangeFavorite } = useChangeFavorite(id)
+  const { isDoctorInFavorite, onChangeFavorite } = useChangeFavoriteDoctors(id)
   const [firstName, lastName] = full_name.split(' ')
 
   return (
@@ -31,7 +31,7 @@ const DoctorCard: FC<Props> = ({ data }) => {
           <Image src={image} alt={full_name} width={100} height={100} loading="lazy" className="rounded-full" />
         </Link>
         <button aria-label="Add to favorites" className="cursor-pointer" onClick={onChangeFavorite}>
-          {isProductInFavorite ? <BookmarkIcon /> : <BookmarkIcon color="#53B175" />}
+          {isDoctorInFavorite ? <BookmarkIcon color="#53B175" /> : <BookmarkIcon />}
         </button>
       </header>
       <section className="mt-2.5 h-[60px]">

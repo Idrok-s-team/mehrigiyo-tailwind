@@ -1,13 +1,10 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 import { useUserFavoriteMedicinesQuery } from '@/hooks/queries'
 import { EmptyBox, Loader, ProductCard } from '@/components'
-import { IShopMedicines } from '@/types'
 
-const CartModule = () => {
-  const [isOpen, setIsOpen] = useState(false)
-  const [selectedProduct, setSelectedProduct] = useState<IShopMedicines | null>(null)
+const FavoriteProductsModule = () => {
   const { data, isLoading } = useUserFavoriteMedicinesQuery()
 
   if (isLoading) {
@@ -31,17 +28,10 @@ const CartModule = () => {
     <div className="mt-2.5 animate-fade-in">
       <h4>Sevimlilarda {data?.count} ta mahsulot bor</h4>
       <div className="flex flex-wrap gap-[30px] mt-[30px]">
-        {data?.results.map((product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            setIsDetailsOpen={setIsOpen}
-            setSelectedProduct={setSelectedProduct}
-          />
-        ))}
+        {data?.results.map((product) => <ProductCard key={product.id} data={product} />)}
       </div>
     </div>
   )
 }
 
-export default CartModule
+export default FavoriteProductsModule

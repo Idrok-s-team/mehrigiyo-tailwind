@@ -12,7 +12,7 @@ type Props = {
   }
 }
 
-const ProductBySlug = async ({ params }: Props) => {
+const DoctorBySlug = async ({ params }: Props) => {
   const { slug } = params
   const id = Number(slug.split('___')[1])
   const product = await getShopMedicineByIdApi(id)
@@ -42,4 +42,4 @@ const ProductBySlug = async ({ params }: Props) => {
   )
 }
 
-export default ProductBySlug
+export default DoctorBySlug

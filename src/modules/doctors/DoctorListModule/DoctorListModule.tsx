@@ -12,7 +12,6 @@ type Props = {
 const DoctorListModule: FC<Props> = ({ title = 'Top shifokorlar', withFilter = true }) => {
   const { data: doctorsData, isFetching: isFetchingDoctors } = useDoctorsQuery()
   const { data: doctorTypesData, isFetching: isFetchingDoctorTypes } = useDoctorTypesQuery()
-  console.log(doctorsData)
 
   const filterValues = useMemo(
     () => [

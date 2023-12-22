@@ -2,21 +2,30 @@ import { GetResponseWithStatusType, UserFieldParamsType, IUserRegion, IUserDeliv
 import {
   addUserAddressApi,
   addUserDeliverAddressApi,
+  addUserFavoriteDoctorsApi,
   addUserFavoriteMedicinesApi,
   deleteUserAddressApi,
   deleteUserDeliverAddressApi,
+  deleteUserFavoriteDoctorsApi,
   deleteUserFavoriteMedicinesApi,
   updateUserAddressApi,
   updateUserDeliverAddressApi,
 } from '@/api'
 import { useCustomMutation } from './common'
 
-// FAVORITE MUTATIONS
-export const useAddUserFavoriteMedicineMutation = () =>
+// FAVORITE MEDICINE MUTATIONS
+export const useAddUserFavoriteMedicinesMutation = () =>
   useCustomMutation<Pick<UserFieldParamsType, 'pk'>, GetResponseWithStatusType<string>>(addUserFavoriteMedicinesApi)
 
-export const useDeleteUserFavoriteMedicineMutation = () =>
+export const useDeleteUserFavoriteMedicinesMutation = () =>
   useCustomMutation<Pick<UserFieldParamsType, 'pk'>, GetResponseWithStatusType<string>>(deleteUserFavoriteMedicinesApi)
+
+// FAVORITE DOCTORS MUTATIONS
+export const useAddUserFavoriteDoctorsMutation = () =>
+  useCustomMutation<Pick<UserFieldParamsType, 'pk'>, GetResponseWithStatusType<string>>(addUserFavoriteDoctorsApi)
+
+export const useDeleteUserFavoriteDoctorsMutation = () =>
+  useCustomMutation<Pick<UserFieldParamsType, 'pk'>, GetResponseWithStatusType<string>>(deleteUserFavoriteDoctorsApi)
 
 // ADDRESS MUTATIONS
 export const useAddUserAddressMutation = () =>

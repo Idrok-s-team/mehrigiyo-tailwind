@@ -59,7 +59,7 @@ const ProductsListModule: FC<Props> = ({ title = "Mahsulotlarimiz ro'yxati", wit
           <Slider slides={{ perView: 4.7 }}>
             {shopMedicinesData?.results.map((product) => (
               <div key={product.id} className="keen-slider__slide">
-                <ProductCard product={product} />
+                <ProductCard data={product} />
               </div>
             ))}
           </Slider>

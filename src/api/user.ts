@@ -10,6 +10,7 @@ import {
   ICardError,
 } from '@/types'
 import { authorizedFetchApi } from './common'
+import { IDoctor } from '@/types/doctor'
 
 // USER ME API
 export const getUserMeApi = async (): Promise<GetResponseType<IUserMe[]>> => {
@@ -27,16 +28,27 @@ export const addUserFavoriteMedicinesApi = async (
   return authorizedFetchApi('/user/favorite/medicines/', 'POST', { body })
 }
 
-export const updateUserFavoriteMedicinesApi = async (
-  body: Pick<UserFieldParamsType, 'pk'>,
-): Promise<GetResponseWithStatusType<string>> => {
-  return authorizedFetchApi('/user/favorite/medicines/', 'PUT', { body })
-}
-
 export const deleteUserFavoriteMedicinesApi = async (
   body: Pick<UserFieldParamsType, 'pk'>,
 ): Promise<GetResponseWithStatusType<string>> => {
   return authorizedFetchApi('/user/favorite/medicines/', 'DELETE', { body })
+}
+
+// USER FAVORITE DOCTORS API
+export const getUserFavoriteDoctorsApi = async (): Promise<GetResponseType<IDoctor[]>> => {
+  return authorizedFetchApi('/user/favorite/doctors/')
+}
+
+export const addUserFavoriteDoctorsApi = async (
+  body: Pick<UserFieldParamsType, 'pk'>,
+): Promise<GetResponseWithStatusType<string>> => {
+  return authorizedFetchApi('/user/favorite/doctors/', 'POST', { body })
+}
+
+export const deleteUserFavoriteDoctorsApi = async (
+  body: Pick<UserFieldParamsType, 'pk'>,
+): Promise<GetResponseWithStatusType<string>> => {
+  return authorizedFetchApi('/user/favorite/doctors/', 'DELETE', { body })
 }
 
 // USER ADDRESS API

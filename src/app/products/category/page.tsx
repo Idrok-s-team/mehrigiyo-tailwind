@@ -114,25 +114,29 @@ const ProductsCategory = () => {
           ) : (
             <div className="grid grid-cols-3 gap-[30px] mt-7 animate-fade-in">
               {sortedData.map((product) => (
-                <ProductCard key={product.id} product={product} />
+                <ProductCard key={product.id} data={product} />
               ))}
             </div>
           )}
         </div>
       </section>
 
-      <section className="flex justify-end mt-12">
-        <Pagination
-          currentPage={currentPage}
-          pageSize={10}
-          totalCount={50}
-          onPageChange={(page) => setCurrentPage(page)}
-        />
-      </section>
+      {shopTypesData && shopTypesData?.count > 10 && (
+        <section className="flex justify-end mt-12">
+          <Pagination
+            currentPage={currentPage}
+            pageSize={10}
+            totalCount={shopTypesData?.count as number}
+            onPageChange={(page) => setCurrentPage(page)}
+          />
+        </section>
+      )}
 
-      <section className="flex justify-end mt-[30%]">
-        <Image src={backgroundBranch} alt={''} className="absolute -bottom-[16%] -right-[9%] scale-75" />
-      </section>
+      {shopTypesData && shopTypesData?.count < 10 && (
+        <section className="flex justify-end mt-[30%]">
+          <Image src={backgroundBranch} alt={''} className="absolute -bottom-[16%] -right-[9%] scale-75" />
+        </section>
+      )}
     </div>
   )
 }

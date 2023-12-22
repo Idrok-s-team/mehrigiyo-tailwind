@@ -3,25 +3,25 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
-import { Breadcrumb, Checkbox, Loader, Pagination, ProductCard } from '@/components'
+import { Breadcrumb, Checkbox, DoctorCard, Loader, Pagination } from '@/components'
 import { ResetIcon } from '@/assets/icons'
-import { useShopMedicinesQuery, useShopTypesQuery } from '@/hooks/queries'
+import { useDoctorTypesQuery, useDoctorsQuery } from '@/hooks/queries'
 import { sortOptions } from '@/constants'
-import { IShopMedicines, SortCriteriaType } from '@/types'
+import { SortCriteriaType } from '@/types'
 import backgroundLeaf from '@/assets/images/common/backgroundLeaf.png'
 import backgroundBranch from '@/assets/images/common/backgroundBranchRight.png'
 import { useSortedData, useSyncUrlQueryParams } from '@/hooks/common'
 import { updateFilters } from '@/utils'
 
-const ProductsCategory = () => {
+const DoctorsCategory = () => {
   const [productFilters, setProductFilters] = useState<number[]>([])
   const [sortCriteria, setSortCriteria] = useState<SortCriteriaType>('')
   const [currentPage, setCurrentPage] = useState(1)
   const searchParams = useSearchParams()
   const typeParams = searchParams.get('type')
 
-  const { data: shopTypesData, isFetching: isFetchingShopTypes } = useShopTypesQuery()
-  const { data: shopMedicinesData, isFetching: isFetchingMedicines } = useShopMedicinesQuery({
+  const { data: doctorTypesData, isFetching: isFetchingDoctorTypes } = useDoctorTypesQuery()
+  const { data: doctorsData, isFetching: isFetchingDoctors } = useDoctorsQuery({
     params: { type_ides: typeParams as string },
   })
 
@@ -34,7 +34,7 @@ const ProductsCategory = () => {
     }
   }, [typeParams])
 
-  const sortedData = useSortedData(shopMedicinesData?.results, sortCriteria)
+  const sortedData = useSortedData(doctorsData?.results, sortCriteria)
 
   const handleClear = useCallback(() => {
     setProductFilters([])
@@ -65,13 +65,13 @@ const ProductsCategory = () => {
                 <span className="text-sm text-gray-primary group-hover:underline">Tozalash</span>
               </button>
             </div>
-            {isFetchingShopTypes ? (
+            {isFetchingDoctorTypes ? (
               <div className="flex items-center justify-center min-w-[15vw] min-h-[50vh]">
                 <Loader />
               </div>
             ) : (
               <div className="flex flex-col gap-3 animate-fade-in">
-                {shopTypesData?.results.map(({ id, name }, i) => (
+                {doctorTypesData?.results.map(({ id, name }) => (
                   <Checkbox
                     key={id}
                     value={id}
@@ -107,34 +107,38 @@ const ProductsCategory = () => {
             </ul>
           </nav>
 
-          {isFetchingMedicines ? (
+          {isFetchingDoctors ? (
             <div className="flex items-center justify-center min-w-[50vw] min-h-[50vh]">
               <Loader />
             </div>
           ) : (
-            <div className="grid grid-cols-3 gap-[30px] mt-7 animate-fade-in">
-              {sortedData.map((product) => (
-                <ProductCard key={product.id} product={product} />
+            <div className="grid grid-cols-4 gap-[30px] mt-7 animate-fade-in">
+              {sortedData.map((doctor) => (
+                <DoctorCard key={doctor.id} data={doctor} />
               ))}
             </div>
           )}
         </div>
       </section>
 
-      <section className="flex justify-end mt-12">
-        <Pagination
-          currentPage={currentPage}
-          pageSize={10}
-          totalCount={50}
-          onPageChange={(page) => setCurrentPage(page)}
-        />
-      </section>
+      {doctorsData && doctorsData?.count > 10 && (
+        <section className="flex justify-end mt-12 relative">
+          <Pagination
+            currentPage={currentPage}
+            pageSize={10}
+            totalCount={doctorsData?.count as number}
+            onPageChange={(page) => setCurrentPage(page)}
+          />
+        </section>
+      )}
 
-      <section className="flex justify-end mt-[30%]">
-        <Image src={backgroundBranch} alt={''} className="absolute -bottom-[16%] -right-[9%] scale-75" />
-      </section>
+      {doctorsData && doctorsData?.count < 10 && (
+        <section className="flex justify-end mt-[30%]">
+          <Image src={backgroundBranch} alt={''} className="absolute -bottom-[16%] -right-[9%] scale-75" />
+        </section>
+      )}
     </div>
   )
 }
 
-export default ProductsCategory
+export default DoctorsCategory

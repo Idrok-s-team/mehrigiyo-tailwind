@@ -5,25 +5,26 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import clsx from 'clsx'
 import { BasketIcon, FavouriteOutlineIcon, UserIcon } from '@/assets/icons'
-import { useShopCartQuery, useUserFavoriteMedicinesQuery } from '@/hooks/queries'
+import { useShopCartQuery, useUserFavoriteDoctorsQuery, useUserFavoriteMedicinesQuery } from '@/hooks/queries'
 
 const HeaderActions: FC = ({}) => {
   const pathname = usePathname()
-  const { data: favoritesData } = useUserFavoriteMedicinesQuery()
+  const { data: favoriteProductsData } = useUserFavoriteMedicinesQuery()
+  const { data: favoriteDoctorsData } = useUserFavoriteDoctorsQuery()
   const { data: shopCartData } = useShopCartQuery()
 
   const actions = [
     {
-      icon: <UserIcon color={pathname === '/saved_doctors' ? '#fff' : '#7165E3'} />,
+      icon: <UserIcon color={pathname === '/favorite_doctors' ? '#fff' : '#7165E3'} />,
       name: `Sevimli doktorlar`,
-      href: `/saved_doctors`,
-      // count: favoriteDoctors.data?.count,
+      href: `/favorite_doctors`,
+      count: favoriteDoctorsData?.count,
     },
     {
-      icon: <FavouriteOutlineIcon color={pathname === '/favorites' ? '#fff' : '#F3603F'} />,
+      icon: <FavouriteOutlineIcon color={pathname === '/favorite_products' ? '#fff' : '#F3603F'} />,
       name: `Sevimli mahsulotlar`,
-      href: `/favorites`,
-      count: favoritesData?.count,
+      href: `/favorite_products`,
+      count: favoriteProductsData?.count,
     },
     {
       icon: <BasketIcon color={pathname === '/cart' ? '#fff' : '#505050'} />,

@@ -1,7 +1,8 @@
 import { useMemo } from 'react'
 import { IShopMedicines, SortCriteriaType } from '@/types'
+import { IDoctor } from '@/types/doctor'
 
-function useSortedData<T extends IShopMedicines>(data: T[] | undefined, sortCriteria: SortCriteriaType) {
+function useSortedData<T extends IShopMedicines | IDoctor>(data: T[] | undefined, sortCriteria: SortCriteriaType) {
   return useMemo(() => {
     if (!data || data.length === 0) {
       return []

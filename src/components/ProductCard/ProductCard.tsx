@@ -5,20 +5,20 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { IShopMedicines } from '@/types'
 import { ArrowRightGrayIcon, FavoriteFillIcon, FavoriteIcon, PlusWhiteIcon } from '@/assets/icons'
-import { useAddToCart, useChangeFavorite } from '@/hooks/cart'
+import { useAddToCart, useChangeFavoriteProducts } from '@/hooks/cart'
 import { createSlug } from '@/utils'
 import { Tooltip } from '..'
 
 type Props = {
-  product: IShopMedicines
+  data: IShopMedicines
 }
 
-const ProductCard: FC<Props> = memo(function ProductCard({ product }) {
-  const { id, name, image, description, cost, discount, quantity } = product
+const ProductCard: FC<Props> = ({ data }) => {
+  const { id, name, image, description, cost, discount, quantity } = data
   const slug = createSlug(name, id)
 
   const { isProductInCart, addToBasket } = useAddToCart(id)
-  const { isProductInFavorite, onChangeFavorite } = useChangeFavorite(id)
+  const { isProductInFavorite, onChangeFavorite } = useChangeFavoriteProducts(id)
 
   const renderPriceSection = () => {
     return discount ? (
@@ -83,6 +83,6 @@ const ProductCard: FC<Props> = memo(function ProductCard({ product }) {
       </Link>
     </article>
   )
-})
+}
 
 export default ProductCard

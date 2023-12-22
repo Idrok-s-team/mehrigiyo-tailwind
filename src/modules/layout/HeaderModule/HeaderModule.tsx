@@ -8,7 +8,7 @@ import { ActiveLink, Dropdown } from '@/components'
 import { AvatarIcon, FlagUzIcon, LocationIcon, LogoIcon } from '@/assets/icons'
 import { useUserMeQuery } from '@/hooks/queries'
 import { HeaderActions, AuthModal } from './components'
-import { useCommonStore, useShopStore } from '@/store'
+import { useCommonStore } from '@/store'
 
 const HeaderModule: FC = () => {
   const pathname = usePathname()
