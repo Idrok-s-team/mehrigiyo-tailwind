@@ -21,9 +21,7 @@ const ProductDescriptionModule: FC<Props> = ({ product }) => {
   const [__, copy] = useCopyToClipboard()
 
   const onCopyToClipboard = () => {
-    copy(location.href).then(() => {
-      toast('Buferga nusxa olindi')
-    })
+    copy(location.href)
   }
 
   const formattedCost = useMemo(() => cost.toLocaleString('ru'), [cost])
@@ -77,9 +75,11 @@ const ProductDescriptionModule: FC<Props> = ({ product }) => {
             <h2>{name}</h2>
             <div className="flex gap-4">
               <ActionButton onClick={onChangeFavorite}>{renderFavoriteIcon()}</ActionButton>
-              <ActionButton onClick={onCopyToClipboard}>
-                <SharedIcon />
-              </ActionButton>
+              <Tooltip text="Nusxa olish">
+                <ActionButton onClick={onCopyToClipboard}>
+                  <SharedIcon />
+                </ActionButton>
+              </Tooltip>
             </div>
           </section>
 

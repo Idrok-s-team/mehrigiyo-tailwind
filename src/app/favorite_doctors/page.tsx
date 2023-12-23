@@ -6,7 +6,7 @@ import { Breadcrumb } from '@/components'
 import { FavoriteDoctorsModule } from '@/modules/doctors'
 
 const FavoriteProducts = async () => {
-  const breadcrumbItems = [{ text: 'Bosh sahifa', href: '/' }, { text: 'Sevimli mahsulotlar' }]
+  const breadcrumbItems = [{ text: 'Bosh sahifa', href: '/' }, { text: 'Sevimli shifokorlar' }]
 
   return (
     <div className="px-24 mt-14 mb-[30%] relative">

@@ -19,7 +19,7 @@ export const getShopMedicinesApi = (params?: QueryParamsType) => {
 }
 
 export const getShopMedicineByIdApi = (id: number, params?: QueryParamsType) => {
-  return fetchApi<GetResponseType<IShopMedicines[]>>(`/shop/medicines/${id}/`, params)
+  return fetchApi<IShopMedicines>(`/shop/medicines/${id}/`, params)
 }
 
 // SHOP CART API

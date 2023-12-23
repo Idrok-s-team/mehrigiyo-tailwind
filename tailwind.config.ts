@@ -29,6 +29,7 @@ const config: Config = {
         image: '0px 4px 20px 0px rgba(0, 0, 0, 0.05)',
         'action-button': '0px 4px 10px 0px rgba(0, 0, 0, 0.10)',
         sidebar: '0px 2px 30px 0px rgba(51, 51, 51, 0.04)',
+        'doctor-card': '0px 0px 20px 0px rgba(0, 0, 0, 0.10)',
       },
     },
   },

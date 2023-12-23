@@ -27,7 +27,7 @@ const DoctorCard: FC<Props> = ({ data }) => {
       title={full_name}
     >
       <header className="flex items-start justify-between">
-        <Link href={`/products/${slug}`}>
+        <Link href={`/online_doctors/${slug}`}>
           <Image src={image} alt={full_name} width={100} height={100} loading="lazy" className="rounded-full" />
         </Link>
         <button aria-label="Add to favorites" className="cursor-pointer" onClick={onChangeFavorite}>
@@ -35,7 +35,7 @@ const DoctorCard: FC<Props> = ({ data }) => {
         </button>
       </header>
       <section className="mt-2.5 h-[60px]">
-        <Link href={`/products/${slug}`} className="font-medium line-clamp-1 hover:underline">
+        <Link href={`/online_doctors/${slug}`} className="font-medium line-clamp-1 hover:underline">
           {firstName}&nbsp;{lastName?.[0]}
         </Link>
         <p className="line-clamp-1 mt-1 text-sm text-[#7c7c7c]">

@@ -8,7 +8,7 @@ export const getDoctorsApi = async (params?: QueryParamsType) => {
 }
 
 export const getDoctorByIdApi = async (id: number, params?: QueryParamsType) => {
-  return fetchApi<GetResponseType<IDoctor[]>>(`/shop/medicines/${id}/`, params)
+  return fetchApi<IDoctor>(`/specialist/doctors/${id}/`, params)
 }
 
 export const getDoctorTypesApi = async () => {

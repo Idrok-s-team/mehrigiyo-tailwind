@@ -1,10 +1,7 @@
 import React from 'react'
-import Image from 'next/image'
 import { Breadcrumb } from '@/components'
-import backgroundLeaf from '@/assets/images/common/backgroundLeaf.png'
-import backgroundBranch from '@/assets/images/common/backgroundBranchRight.png'
-import { getShopMedicineByIdApi } from '@/api'
-import { ProductDescriptionModule } from '@/modules/products'
+import { getDoctorByIdApi } from '@/api'
+import { DoctorDescriptionModule } from '@/modules/doctors'
 
 type Props = {
   params: {
@@ -15,12 +12,12 @@ type Props = {
 const DoctorBySlug = async ({ params }: Props) => {
   const { slug } = params
   const id = Number(slug.split('___')[1])
-  const product = await getShopMedicineByIdApi(id)
+  const doctor = await getDoctorByIdApi(id)
 
   const breadcrumbItems = [
     { text: 'Bosh sahifa', href: '/' },
-    { text: 'Mahsulotlar', href: '/products/category' },
-    { text: product.name },
+    { text: 'Shifokorlar', href: '/online_doctors/category' },
+    { text: doctor.full_name },
   ]
 
   return (
@@ -36,7 +33,7 @@ const DoctorBySlug = async ({ params }: Props) => {
       </header>
 
       <main className="mt-10">
-        <ProductDescriptionModule product={product} />
+        <DoctorDescriptionModule data={doctor} />
       </main>
     </div>
   )

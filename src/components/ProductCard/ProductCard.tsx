@@ -54,7 +54,6 @@ const ProductCard: FC<Props> = ({ data }) => {
       className="w-[240px] h-[378px] bg-white border border-[#E2E2E2] shadow-secondary rounded-[18px] p-3.5"
     >
       <header className="flex items-start justify-between">
-        <span>{id}</span>
         <Link href={`/products/${slug}`}>
           <Image src={image} alt={name} width={175} height={175} loading="lazy" />
         </Link>
