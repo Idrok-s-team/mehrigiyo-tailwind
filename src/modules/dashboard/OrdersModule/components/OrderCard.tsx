@@ -33,8 +33,7 @@ interface StatusSectionProps {
 const OrderCard: FC<IProps> = ({ statusType = 'Pending', orderData }) => {
   const { updateShopState } = useShopStore()
   const { setActiveModal } = useCommonStore()
-  const { data: userDatas } = useUserMeQuery()
-  const userData = userDatas?.results[0]
+  const { data: userData } = useUserMeQuery()
 
   const handleSelectOrder = () => {
     if (orderData?.id) {
@@ -75,13 +74,13 @@ const OrderCard: FC<IProps> = ({ statusType = 'Pending', orderData }) => {
 
   const renderUserAvatar = () => (
     <span className="absolute z-[1] top-1/3 left-5 border-[8px] rounded-2xl border-[#2C7747]/10">
-      <Image
+      {/* <Image
         src={userData?.avatar as string}
         alt={`${userData?.first_name} ${userData?.last_name}`}
         width={32}
         height={32}
         className="rounded-[10px] "
-      />
+      /> */}
     </span>
   )
 

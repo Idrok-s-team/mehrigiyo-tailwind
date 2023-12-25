@@ -20,8 +20,7 @@ import {
 import { IDoctor } from '@/types/doctor'
 
 // USER ME QUERIES
-export const useUserMeQuery = (props?: QueryProps<GetResponseType<IUserMe[]>>) =>
-  useGetQuery('user-me', getUserMeApi, [], props)
+export const useUserMeQuery = (props?: QueryProps<IUserMe>) => useGetQuery('user-me', getUserMeApi, [], props)
 
 // USER FAVORITE MEDICINES QUERIES
 export const useUserFavoriteMedicinesQuery = (props?: QueryProps<GetResponseType<IShopMedicines[]>>) =>

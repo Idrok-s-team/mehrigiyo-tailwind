@@ -18,8 +18,7 @@ import {
 } from '@/assets/icons'
 
 const SidebarModule: FC = () => {
-  const { data: userDatas } = useUserMeQuery()
-  const userData = userDatas?.results[0]
+  const { data: userData } = useUserMeQuery()
 
   const pathname = usePathname()
   const subPath = pathname.split('/')[2]

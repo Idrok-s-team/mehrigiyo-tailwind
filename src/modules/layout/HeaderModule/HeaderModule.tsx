@@ -14,8 +14,7 @@ const HeaderModule: FC = () => {
   const pathname = usePathname()
 
   const { setActiveModal } = useCommonStore()
-  const { data: userDatas, isSuccess } = useUserMeQuery()
-  const userData = userDatas?.results[0]
+  const { data: userData, isSuccess } = useUserMeQuery()
 
   const titles = [
     { text: `Mahsulotlar katalogi`, href: `#` },

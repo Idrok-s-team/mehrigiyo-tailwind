@@ -1,6 +1,6 @@
 import { GetResponseType, QueryParamsType } from '@/types'
-import { fetchApi } from './common'
-import { IDoctor, IDoctorTypes } from '@/types/doctor'
+import { authorizedFetchApi, fetchApi } from './common'
+import { DoctorFieldParamsType, IDoctor, IDoctorAppointmentResponse, IDoctorTypes } from '@/types/doctor'
 
 // DOCTORS API
 export const getDoctorsApi = async (params?: QueryParamsType) => {
@@ -13,4 +13,8 @@ export const getDoctorByIdApi = async (id: number, params?: QueryParamsType) => 
 
 export const getDoctorTypesApi = async () => {
   return fetchApi<GetResponseType<IDoctorTypes[]>>('/specialist/types/')
+}
+
+export const addDoctorAdviceApi = async (body: DoctorFieldParamsType): Promise<IDoctorAppointmentResponse> => {
+  return authorizedFetchApi('/specialist/advice/', 'POST', { body })
 }

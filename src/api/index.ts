@@ -1,5 +1,4 @@
 export * from './shop'
-export * from './specialist'
 export * from './news'
 export * from './user'
 export * from './error'

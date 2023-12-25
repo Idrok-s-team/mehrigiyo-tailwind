@@ -18,3 +18,19 @@ export interface IDoctor extends LocalizedType<'full_name' | 'description'> {
   experience: string
   created_at: string
 }
+
+export interface IDoctorAppointmentResponse {
+  readonly id: number
+  doctor: IDoctor
+  start_time: string
+  end_time: string
+  status: boolean
+  client: number
+}
+
+// PARAMS TYPES
+export type DoctorFieldParamsType = {
+  id: number
+  start_time: string
+  end_time: string
+}

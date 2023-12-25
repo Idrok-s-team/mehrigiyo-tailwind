@@ -49,7 +49,7 @@ const ProductsListModule: FC<Props> = ({ title = "Mahsulotlarimiz ro'yxati", wit
       )}
 
       <div className="mt-10">
-        {isFetchingMedicines ? (
+        {/* {isFetchingMedicines ? (
           <div className="grid grid-cols-5 gap-7 ">
             {Array.from({ length: 5 }).map((_, index) => (
               <ProductCardSkeleton key={index} />
@@ -63,7 +63,7 @@ const ProductsListModule: FC<Props> = ({ title = "Mahsulotlarimiz ro'yxati", wit
               </div>
             ))}
           </Slider>
-        )}
+        )} */}
       </div>
     </>
   )

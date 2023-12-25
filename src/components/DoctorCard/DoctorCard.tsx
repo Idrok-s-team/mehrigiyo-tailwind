@@ -8,6 +8,8 @@ import { createSlug } from '@/utils'
 import Button from '../Button'
 import { IDoctor } from '@/types/doctor'
 import { useChangeFavoriteDoctors } from '@/hooks/doctor'
+import { useCommonStore } from '@/store'
+import useAppointmentStore from '@/store/appointment'
 
 type Props = {
   data: IDoctor
@@ -17,8 +19,15 @@ const DoctorCard: FC<Props> = ({ data }) => {
   const { id, full_name, image, rate, review } = data
   const slug = createSlug(full_name, id)
 
+  const { setActiveModal } = useCommonStore()
+  const { updateAppointmentState } = useAppointmentStore()
   const { isDoctorInFavorite, onChangeFavorite } = useChangeFavoriteDoctors(id)
   const [firstName, lastName] = full_name.split(' ')
+
+  const handleAppointment = () => {
+    setActiveModal('drawer')
+    updateAppointmentState('selectedDoctor', data)
+  }
 
   return (
     <article
@@ -43,7 +52,9 @@ const DoctorCard: FC<Props> = ({ data }) => {
         </p>
       </section>
       <section className="mt-1">
-        <Button className="bg-green-primary/10 !text-green-primary rounded-xl">Uchrashuv</Button>
+        <Button className="bg-green-primary/10 !text-green-primary rounded-xl" onClick={handleAppointment}>
+          Uchrashuv
+        </Button>
       </section>
     </article>
   )

@@ -13,8 +13,9 @@ import { authorizedFetchApi } from './common'
 import { IDoctor } from '@/types/doctor'
 
 // USER ME API
-export const getUserMeApi = async (): Promise<GetResponseType<IUserMe[]>> => {
-  return authorizedFetchApi('/user/me/')
+export const getUserMeApi = async () => {
+  const result = await authorizedFetchApi<Promise<GetResponseType<IUserMe[]>>>('/user/me/')
+  return result.results[0]
 }
 
 // USER FAVORITE MEDICINES API

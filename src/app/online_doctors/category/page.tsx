@@ -12,6 +12,7 @@ import backgroundLeaf from '@/assets/images/common/backgroundLeaf.png'
 import backgroundBranch from '@/assets/images/common/backgroundBranchRight.png'
 import { useSortedData, useSyncUrlQueryParams } from '@/hooks/common'
 import { updateFilters } from '@/utils'
+import { DoctorAppointmentDrawer } from '@/modules/doctors'
 
 const DoctorsCategory = () => {
   const [productFilters, setProductFilters] = useState<number[]>([])
@@ -137,6 +138,8 @@ const DoctorsCategory = () => {
           <Image src={backgroundBranch} alt={''} className="absolute -bottom-[16%] -right-[9%] scale-75" />
         </section>
       )}
+
+      <DoctorAppointmentDrawer />
     </div>
   )
 }

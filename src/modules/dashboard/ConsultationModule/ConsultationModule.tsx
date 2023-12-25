@@ -2,13 +2,11 @@
 
 import { FC } from 'react'
 import { Loader, Tabs } from '@/components'
-import { useChatFileQuery, useChatMessagesQuery, useChatQuery, useDoctorsQuery } from '@/hooks/queries'
+import { useDoctorsQuery } from '@/hooks/queries'
 import Image from 'next/image'
 
 const ConsultationModule: FC = () => {
   const { data, isLoading } = useDoctorsQuery()
-  const chatQuery = useChatMessagesQuery({ chat_id: 5 })
-  console.log(chatQuery)
 
   const Ongoing = () => {
     return (
