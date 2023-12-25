@@ -1,7 +1,7 @@
 import { OrdersModule } from '@/modules/dashboard'
 import React from 'react'
 
-const page = () => {
+const ConsultationPage = () => {
   return (
     <div>
       <OrdersModule />
@@ -9,4 +9,4 @@ const page = () => {
   )
 }
 
-export default page
+export default ConsultationPage

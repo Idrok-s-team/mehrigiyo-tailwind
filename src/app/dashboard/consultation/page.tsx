@@ -1,9 +1,12 @@
 import React from 'react'
+import { ConsultationModule } from '@/modules/dashboard'
 
-const page = () => {
+const ConsultationPage = () => {
   return (
-    <div>page</div>
+    <div>
+      <ConsultationModule />
+    </div>
   )
 }
 
-export default page
+export default ConsultationPage
