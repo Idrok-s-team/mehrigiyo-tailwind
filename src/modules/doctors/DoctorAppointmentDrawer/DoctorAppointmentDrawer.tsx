@@ -1,6 +1,8 @@
 'use client'
 
-import React, { FC } from 'react'
+import React, { FC, useCallback } from 'react'
+import dayjs from 'dayjs'
+import toast from 'react-hot-toast'
 import { BookingIcon } from '@/assets/icons'
 import { Drawer } from '@/components'
 import { useCommonStore } from '@/store'
@@ -8,6 +10,7 @@ import { useAppointmentData } from './hooks'
 import { DayCard, TimeRangeCard } from './components'
 import useAppointmentStore from '@/store/appointment'
 import { useAddDoctorAdviceMutation } from '@/hooks/mutations'
+import { formatAppointmentTime } from '@/utils'
 
 type Props = {}
 
@@ -15,34 +18,59 @@ const DoctorAppointmentDrawer: FC<Props> = () => {
   const { activeModal, setActiveModal } = useCommonStore()
   const { selectedDay, selectedRangeTime, selectedDoctor, updateAppointmentState } = useAppointmentStore()
   const { daysGroupedByMonth, appointmentTimeSlots } = useAppointmentData()
-  console.log(selectedDoctor)
 
-  const { mutateAsync: addAppointment } = useAddDoctorAdviceMutation()
+  const { mutateAsync: addAppointment, isPending } = useAddDoctorAdviceMutation()
+  const { startTime, endTime } = formatAppointmentTime(selectedDay, selectedRangeTime)
 
-  const handleSubmitAppointment = () => {
-    const time = selectedRangeTime?.split(' ')
-    addAppointment({
-      id: Number(selectedDoctor?.id),
-      start_time: time?.[0] as string,
-      end_time: time?.[2] as string,
-    }).then((res) => console.log(res))
+  const handleSubmitAppointment = async () => {
+    if (selectedDoctor?.id && startTime && endTime) {
+      const response = await addAppointment({
+        id: selectedDoctor?.id as number,
+        start_time: startTime,
+        end_time: endTime,
+      })
+
+      if (response.status === 'success') {
+        toast.success('Uchrashuv muvaffaqqiyatli belgilandi!')
+        handleClose()
+      } else {
+        const isBusyTime = response.data.includes('busy')
+        toast.error(
+          isBusyTime ? "Kechirasiz bu vaqt band qilingan. Boshqa vaqt tanlab ko'ring" : 'Biror narsa xato ketdi',
+        )
+      }
+    }
   }
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setActiveModal(null)
     updateAppointmentState('selectedDoctor', null)
-  }
+  }, [setActiveModal, updateAppointmentState])
 
-  const handleSelectDay = (day: string, monthYear: string) => {
-    updateAppointmentState('selectedDay', `${day} ${monthYear}`)
-  }
+  const handleSelectDay = useCallback(
+    (day: string) => {
+      updateAppointmentState('selectedDay', day)
+    },
+    [updateAppointmentState],
+  )
 
-  const handleSelectRangeTime = (timeRange: string) => {
-    updateAppointmentState('selectedRangeTime', timeRange)
-  }
+  const handleSelectRangeTime = useCallback(
+    (timeRange: string) => {
+      updateAppointmentState('selectedRangeTime', timeRange)
+    },
+    [updateAppointmentState],
+  )
+
+  const isSubmitDisabled = !startTime || !endTime || isPending
 
   return (
-    <Drawer isOpen={activeModal === 'drawer'} onClose={handleClose} onSubmit={handleSubmitAppointment}>
+    <Drawer
+      isOpen={activeModal === 'drawer'}
+      onClose={handleClose}
+      onSubmit={handleSubmitAppointment}
+      disabled={isSubmitDisabled}
+      buttonText={isPending ? 'Tekshirilmoqda...' : 'Tasdiqlash'}
+    >
       <div className="mt-14 px-28">
         <section className="flex item-center justify-between">
           <div>
@@ -58,13 +86,13 @@ const DoctorAppointmentDrawer: FC<Props> = () => {
             <React.Fragment key={monthYear}>
               <p>{monthYear}</p>
               <div className="flex gap-4 mt-4">
-                {daysInMonth.map(({ weekDay, dateNumber }) => (
+                {daysInMonth.map((day) => (
                   <DayCard
-                    key={`${dateNumber} ${monthYear}`}
-                    day={weekDay}
-                    date={dateNumber}
-                    isSelected={selectedDay === `${dateNumber} ${monthYear}`}
-                    onSelect={() => handleSelectDay(dateNumber, monthYear)}
+                    key={day}
+                    day={dayjs(day).format('ddd')}
+                    date={dayjs(day).format('DD')}
+                    isSelected={selectedDay === day}
+                    onSelect={() => handleSelectDay(day)}
                   />
                 ))}
               </div>

@@ -7,4 +7,5 @@ export const DateFormat = {
   LOCAL_DATE: 'DD.MM.YYYY',
   LOCAL_TIME: 'HH:mm:ss',
   LOCAL_DATETIME: 'HH:mm / DD.MM.YYYY',
+  // LOCAL_DATETIME: 'YYYY-MM-DD HH:MM',
 } as const

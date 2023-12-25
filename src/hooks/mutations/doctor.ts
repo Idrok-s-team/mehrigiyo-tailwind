@@ -1,6 +1,7 @@
 import { addDoctorAdviceApi } from '@/api'
 import { useCustomMutation } from './common'
-import { DoctorFieldParamsType, IDoctorAppointmentResponse } from '@/types/doctor'
+import { DoctorFieldParamsType } from '@/types/doctor'
+import { GetResponseWithStatusType } from '@/types'
 
 export const useAddDoctorAdviceMutation = () =>
-  useCustomMutation<DoctorFieldParamsType, IDoctorAppointmentResponse>(addDoctorAdviceApi)
+  useCustomMutation<DoctorFieldParamsType, GetResponseWithStatusType<string>>(addDoctorAdviceApi)

@@ -9,11 +9,12 @@ import Button from '../Button'
 interface IProps extends PropsWithChildren {
   buttonText?: string
   isOpen: boolean
+  disabled?: boolean
   onSubmit: () => void
   onClose: () => void
 }
 
-const Drawer: FC<IProps> = ({ children, isOpen, onClose, onSubmit, buttonText = 'Tasdiqlash' }) => {
+const Drawer: FC<IProps> = ({ children, isOpen, onClose, onSubmit, disabled, buttonText = 'Tasdiqlash' }) => {
   useEffect(() => {
     const body = document.body
     const originalStyle = window.getComputedStyle(body).overflow
@@ -59,7 +60,9 @@ const Drawer: FC<IProps> = ({ children, isOpen, onClose, onSubmit, buttonText = 
 
         <footer className="flex justify-end pt-5">
           <div className="w-48">
-            <Button onClick={onSubmit}>{buttonText}</Button>
+            <Button onClick={onSubmit} disabled={disabled}>
+              {buttonText}
+            </Button>
           </div>
         </footer>
       </div>
