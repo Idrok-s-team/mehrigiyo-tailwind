@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { getSpecialistTypes } from '@/api'
+import { getDoctorTypesApi } from '@/api'
 import { Accordion, Input, SeeAllButton, WatchVideoButton } from '@/components'
 import { DeliveryIcon, FastPaymentIcon, OnlineHelpIcon, PermanentDiscountIcon } from '@/assets/icons'
 import {
@@ -19,7 +19,7 @@ import backgroundBubble2 from '@/assets/icons/common/backgroundBubble2.svg'
 import { faqData } from '@/constants'
 
 export default async function Home() {
-  const specialistTypesData = await getSpecialistTypes()
+  const specialistTypesData = await getDoctorTypesApi()
 
   const infoCard = [
     {

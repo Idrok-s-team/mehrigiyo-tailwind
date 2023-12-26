@@ -1,6 +1,15 @@
 import { create } from 'zustand'
 
-type ModalType = 'auth' | 'address' | 'order' | 'cart' | 'addressConfirm' | 'orderConfirm' | 'cartConfirm' | 'drawer'
+type ModalType =
+  | 'auth'
+  | 'address'
+  | 'order'
+  | 'cart'
+  | 'addressConfirm'
+  | 'orderConfirm'
+  | 'cartConfirm'
+  | 'logoutConfirm'
+  | 'drawer'
 
 interface ICommonStore {
   activeModal: ModalType | null

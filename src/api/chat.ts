@@ -1,5 +1,6 @@
 import {
   ChatFieldParamsType,
+  GetResponseType,
   GetResponseWithStatusType,
   IChat,
   IChatFile,
@@ -30,12 +31,12 @@ export const addChatFileApi = async (
 
 export const getChatMessages = async (
   params: Omit<QueryParamsType, 'type_ides'> & Pick<ChatFieldParamsType, 'chat_id'>,
-): Promise<GetResponseWithStatusType<IChatMessage[]>> => {
+): Promise<GetResponseType<IChatMessage[]>> => {
   return authorizedFetchApi('/chat/messages/', 'GET', { params })
 }
 
 export const getChatRooms = async (
   params: Omit<QueryParamsType, 'type_ides'>,
-): Promise<GetResponseWithStatusType<IChatRoom[]>> => {
+): Promise<GetResponseType<IChatRoom[]>> => {
   return authorizedFetchApi('/chat/rooms/', 'GET', { params })
 }

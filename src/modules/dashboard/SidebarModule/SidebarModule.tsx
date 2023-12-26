@@ -3,7 +3,9 @@
 import { FC, useMemo } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import toast from 'react-hot-toast'
+import { usePathname, useRouter } from 'next/navigation'
+import Cookies from 'js-cookie'
 import clsx from 'clsx'
 import { useUserMeQuery } from '@/hooks/queries'
 import {
@@ -16,12 +18,25 @@ import {
   PaymentIcon,
   SettingsIcon,
 } from '@/assets/icons'
+import { Confirm } from '@/components'
+import { useCommonStore } from '@/store'
 
 const SidebarModule: FC = () => {
-  const { data: userData } = useUserMeQuery()
+  const { activeModal, setActiveModal } = useCommonStore()
+  const { data: userData, refetch } = useUserMeQuery()
+  const router = useRouter()
 
   const pathname = usePathname()
   const subPath = pathname.split('/')[2]
+
+  const handleLogout = async () => {
+    Cookies.remove('access_token')
+    Cookies.remove('refresh_token')
+    await router.push('/')
+    setActiveModal(null)
+    refetch()
+    toast.success('Akkountdan chiqildi!')
+  }
 
   const sidebarData = useMemo(
     () => [
@@ -94,7 +109,10 @@ const SidebarModule: FC = () => {
           ))}
         </div>
         <div>
-          <button className="flex items-center gap-[14px] py-5 pr-3 ml-9">
+          <button
+            className="flex items-center gap-[14px] py-5 pr-3 ml-9"
+            onClick={() => setActiveModal('logoutConfirm')}
+          >
             <span>
               <LogoutIcon />
             </span>
@@ -102,6 +120,14 @@ const SidebarModule: FC = () => {
           </button>
         </div>
       </section>
+
+      <Confirm
+        confirmText="Akkountdan chiqmoqchimisiz?"
+        isOpen={activeModal === 'logoutConfirm'}
+        onClose={() => setActiveModal(null)}
+        onSubmit={handleLogout}
+        submitButtonText="Tasdiqlash"
+      />
     </div>
   )
 }

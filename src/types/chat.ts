@@ -19,17 +19,26 @@ export interface IChatMessage {
   file_message: IChatFile
   text: string
   created_at: string
-  owner: boolean
+  owner: number
+  doctor: boolean
 }
 
 export interface IChatRoom {
   readonly id: number
   client: string
-  doktor: string
+  doktor: ChatRoomDoctorType
   last_message: IChatMessage
   advice_time: string
   token: string
   created_at: string
+}
+
+type ChatRoomDoctorType = {
+  doctor_account_id: number
+  image: string
+  name: string
+  specialist_account_id: number
+  type: number
 }
 
 // PARAMS TYPES

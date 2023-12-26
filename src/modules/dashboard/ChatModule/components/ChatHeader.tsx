@@ -6,7 +6,6 @@ import { useChatMessagesQuery, useChatQuery, useChatRoomsQuery, useDoctorAdviceQ
 
 const ChatHeader = () => {
   const router = useRouter()
-  const { data } = useChatQuery({ pk: 38 })
   const { isLoading, data: appointmentsData } = useDoctorAdviceQuery({ my: true })
 
   return (

@@ -23,10 +23,10 @@ export const useChatFileQuery = (
 
 export const useChatMessagesQuery = (
   params: Omit<QueryParamsType, 'type_ides'> & Pick<ChatFieldParamsType, 'chat_id'>,
-  props?: QueryProps<GetResponseWithStatusType<IChatMessage[]>>,
+  props?: QueryProps<GetResponseType<IChatMessage[]>>,
 ) => useGetQuery('chat-messages', getChatMessages, [params], props)
 
 export const useChatRoomsQuery = (
   params: Omit<QueryParamsType, 'type_ides'>,
-  props?: QueryProps<GetResponseWithStatusType<IChatRoom[]>>,
+  props?: QueryProps<GetResponseType<IChatRoom[]>>,
 ) => useGetQuery('chat-rooms', getChatRooms, [params], props)
