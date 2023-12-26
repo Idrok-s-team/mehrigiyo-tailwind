@@ -1,10 +1,10 @@
-import { baseUrl } from '@/constants'
+import { baseApiUrl } from '@/constants'
 import { getCookie, queryStringUrl } from '@/utils'
 import { ApiError } from './error'
 import { QueryParamsType } from '@/types'
 
 export const fetchApi = async <T>(path: string, params?: QueryParamsType): Promise<T> => {
-  const url = queryStringUrl(`${baseUrl}${path}`, params)
+  const url = queryStringUrl(`${baseApiUrl}${path}`, params)
   const response = await fetch(url)
   if (!response.ok) {
     throw new Error('Network response was not ok')
@@ -24,7 +24,7 @@ export const authorizedFetchApi = async <T, R = T>(
 ): Promise<R> => {
   const { body, params, withAuth = true } = args || {}
 
-  const url = params && method === 'GET' ? queryStringUrl(`${baseUrl}${path}`, params) : `${baseUrl}${path}`
+  const url = params && method === 'GET' ? queryStringUrl(`${baseApiUrl}${path}`, params) : `${baseApiUrl}${path}`
 
   // Initialize headers and include Authorization header if withAuth is true
   const headers: HeadersInit = { 'Content-Type': 'application/json' }

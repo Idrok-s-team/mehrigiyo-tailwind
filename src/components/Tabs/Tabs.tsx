@@ -41,7 +41,7 @@ const Tabs: FC<Props> = ({ items }): JSX.Element => {
           ))}
         </ul>
       </div>
-      <div className='p-4'>{activeTabItem?.children}</div>
+      <div className='py-4'>{activeTabItem?.children}</div>
     </div>
   )
 }

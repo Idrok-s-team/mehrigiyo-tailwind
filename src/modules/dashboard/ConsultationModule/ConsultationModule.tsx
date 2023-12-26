@@ -2,36 +2,54 @@
 
 import { FC } from 'react'
 import { Loader, Tabs } from '@/components'
-import { useDoctorAdviceQuery, useDoctorsQuery } from '@/hooks/queries'
+import { useDoctorAdviceQuery } from '@/hooks/queries'
 import Image from 'next/image'
+import dayjs from 'dayjs'
+import { baseUrl } from '@/constants'
+import { UpcomingTimeIcon } from '@/assets/icons'
+import Link from 'next/link'
 
 const ConsultationModule: FC = () => {
-  const { data, isLoading } = useDoctorsQuery()
+  const { isLoading, data: appointmentsData } = useDoctorAdviceQuery({ my: true })
 
   const Ongoing = () => {
     return (
-      <div className="flex flex-col gap-5 bg-white px-[30px] py-8 rounded-[20px] shadow-sidebar">
-        {data?.results.map((doctor) => (
-          <div key={doctor.id} className="flex gap-[13px]">
-            <Image
-              src={doctor.image}
-              alt={doctor.full_name}
-              width={50}
-              height={50}
-              className="w-[50px] h-[50px] rounded-full object-cover"
-            />
-            <div className="flex-1 flex justify-between border-b-[#D7D7D7] border-b-[0.5px] pb-5 text-[#181725]/80">
-              <section>
-                <h6>{doctor.full_name}</h6>
-                <p>{doctor.type_doctor.name}</p>
-              </section>
-              <section className="mt-1">
-                <p>12.12.2021</p>
-              </section>
+      <Link
+        href="/dashboard/consultation/chat"
+        className="flex flex-col bg-white rounded-[20px] shadow-sidebar overflow-hidden"
+      >
+        {appointmentsData?.data.map((appointment) => {
+          const { doctor, start_time, end_time } = appointment
+          return (
+            <div
+              key={appointment.id}
+              className="flex gap-[13px] pt-5 px-[30px] cursor-pointer duration-100 hover:bg-green-primary/10"
+            >
+              <Image
+                src={`${baseUrl}/${doctor.image}`}
+                alt={doctor.full_name}
+                width={50}
+                height={50}
+                className="w-[50px] h-[50px] rounded-full object-cover"
+              />
+              <div className="flex-1 flex justify-between border-b-[#D7D7D7] border-b-[0.5px] pb-5 text-[#181725]/80">
+                <section>
+                  <h6>{doctor.full_name}</h6>
+                  <p>{doctor.type_doctor.name}</p>
+                </section>
+                <section className="mt-1 flex items-center gap-2">
+                  <UpcomingTimeIcon />
+                  <p>
+                    {dayjs(start_time).format('DD-MMMM')},&nbsp;
+                    <span className="font-semibold">{dayjs(start_time).format('HH:mm')}</span>-
+                    <span className="font-semibold">{dayjs(end_time).format('HH:mm')}</span>
+                  </p>
+                </section>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          )
+        })}
+      </Link>
     )
   }
 
