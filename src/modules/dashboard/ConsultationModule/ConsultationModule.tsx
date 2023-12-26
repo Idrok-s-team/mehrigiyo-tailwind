@@ -2,7 +2,7 @@
 
 import { FC } from 'react'
 import { Loader, Tabs } from '@/components'
-import { useDoctorsQuery } from '@/hooks/queries'
+import { useDoctorAdviceQuery, useDoctorsQuery } from '@/hooks/queries'
 import Image from 'next/image'
 
 const ConsultationModule: FC = () => {

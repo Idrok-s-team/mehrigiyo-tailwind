@@ -1,3 +1,3 @@
 export { default as useShopStore } from './shop'
 export { default as useCommonStore } from './common'
-export { default as appointment } from './appointment'
+export { default as useAppointmentStore } from './appointment'

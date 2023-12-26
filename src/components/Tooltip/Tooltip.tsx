@@ -12,7 +12,7 @@ const Tooltip: FC<TooltipProps> = ({ children, text }) => {
 
   return (
     <div className="relative flex items-center w-auto">
-      <div onMouseEnter={() => setShow(true)} onMouseLeave={() => setShow(false)}>
+      <div className='w-full' onMouseEnter={() => setShow(true)} onMouseLeave={() => setShow(false)}>
         {children}
       </div>
       {show && (

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import dayjs from 'dayjs'
+import { DateFormat } from '@/constants'
 
 type DayInfo = {
   formattedDate: string
@@ -28,10 +29,10 @@ export const useAppointmentData = () => {
 
   const generateUpcomingDays = (): DayInfo[] => {
     return Array.from({ length: 14 }, (_, i) => {
-      const date = dayjs().add(i, 'day')
+      const date = dayjs().add(i, 'day').format(DateFormat.ISO_DATETIME)
       return {
         formattedDate: date.toString(),
-        monthYearKey: `${date.format('MMM')} ${date.format('YYYY')}`,
+        monthYearKey: `${dayjs(date).format('MMM')} ${dayjs(date).format('YYYY')}`,
       }
     })
   }

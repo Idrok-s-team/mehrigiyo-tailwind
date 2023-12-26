@@ -19,7 +19,7 @@ export interface IDoctor extends LocalizedType<'full_name' | 'description'> {
   created_at: string
 }
 
-export interface IDoctorAppointmentResponse {
+export interface IDoctorAdvice {
   readonly id: number
   doctor: IDoctor
   start_time: string
@@ -33,4 +33,12 @@ export type DoctorFieldParamsType = {
   id: number
   start_time: string
   end_time: string
+}
+
+export type DoctorAdviceParamsType = {
+  id: number
+  day: number
+  month: number
+  year: number
+  my: boolean
 }

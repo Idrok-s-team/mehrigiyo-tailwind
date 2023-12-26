@@ -1,16 +1,18 @@
 'use client'
 
-import React, { FC, useCallback } from 'react'
+import React, { FC, useCallback, useEffect } from 'react'
 import dayjs from 'dayjs'
 import toast from 'react-hot-toast'
 import { BookingIcon } from '@/assets/icons'
 import { Drawer } from '@/components'
 import { useCommonStore } from '@/store'
-import { useAppointmentData } from './hooks'
+import { useAppointmentAvailability, useAppointmentData } from './hooks'
 import { DayCard, TimeRangeCard } from './components'
-import useAppointmentStore from '@/store/appointment'
+import { useAppointmentStore } from '@/store'
 import { useAddDoctorAdviceMutation } from '@/hooks/mutations'
 import { formatAppointmentTime } from '@/utils'
+import { useDoctorAdviceQuery } from '@/hooks/queries'
+import { DateFormat } from '@/constants'
 
 type Props = {}
 
@@ -19,8 +21,45 @@ const DoctorAppointmentDrawer: FC<Props> = () => {
   const { selectedDay, selectedRangeTime, selectedDoctor, updateAppointmentState } = useAppointmentStore()
   const { daysGroupedByMonth, appointmentTimeSlots } = useAppointmentData()
 
+  const { data: appointmentsData, refetch: refetchAppointment } = useDoctorAdviceQuery(
+    { id: selectedDoctor?.id as number },
+    { options: { enabled: activeModal === 'drawer' && !!selectedDoctor?.id } },
+  )
   const { mutateAsync: addAppointment, isPending } = useAddDoctorAdviceMutation()
+
+  const { isTimeRangeBusy } = useAppointmentAvailability(appointmentsData, selectedDay)
   const { startTime, endTime } = formatAppointmentTime(selectedDay, selectedRangeTime)
+
+  const handleSelectDay = useCallback(
+    (day: string) => {
+      updateAppointmentState('selectedDay', dayjs(day).format(DateFormat.ISO_DATE))
+    },
+    [updateAppointmentState],
+  )
+
+  useEffect(() => {
+    if (activeModal === 'drawer') {
+      const today = dayjs().format(DateFormat.ISO_DATE)
+      handleSelectDay(today)
+    }
+  }, [activeModal, handleSelectDay])
+
+  const handleClose = useCallback(() => {
+    setActiveModal(null)
+    updateAppointmentState('selectedDoctor', null)
+    updateAppointmentState('selectedRangeTime', null)
+  }, [setActiveModal, updateAppointmentState])
+
+  const handleSelectRangeTime = useCallback(
+    (timeRange: string) => {
+      if (!isTimeRangeBusy(timeRange)) {
+        updateAppointmentState('selectedRangeTime', timeRange)
+      } else {
+        toast.error("Bu vaqt oralig'i band. Boshqa vaqtni tanlang.")
+      }
+    },
+    [updateAppointmentState, isTimeRangeBusy],
+  )
 
   const handleSubmitAppointment = async () => {
     if (selectedDoctor?.id && startTime && endTime) {
@@ -32,34 +71,17 @@ const DoctorAppointmentDrawer: FC<Props> = () => {
 
       if (response.status === 'success') {
         toast.success('Uchrashuv muvaffaqqiyatli belgilandi!')
+        refetchAppointment()
         handleClose()
       } else {
-        const isBusyTime = response.data.includes('busy')
         toast.error(
-          isBusyTime ? "Kechirasiz bu vaqt band qilingan. Boshqa vaqt tanlab ko'ring" : 'Biror narsa xato ketdi',
+          response.data.includes('busy')
+            ? 'Kechirasiz bu vaqt band qilingan. Boshqa vaqtni tanlang.'
+            : 'Biror narsa xato ketdi',
         )
       }
     }
   }
-
-  const handleClose = useCallback(() => {
-    setActiveModal(null)
-    updateAppointmentState('selectedDoctor', null)
-  }, [setActiveModal, updateAppointmentState])
-
-  const handleSelectDay = useCallback(
-    (day: string) => {
-      updateAppointmentState('selectedDay', day)
-    },
-    [updateAppointmentState],
-  )
-
-  const handleSelectRangeTime = useCallback(
-    (timeRange: string) => {
-      updateAppointmentState('selectedRangeTime', timeRange)
-    },
-    [updateAppointmentState],
-  )
 
   const isSubmitDisabled = !startTime || !endTime || isPending
 
@@ -86,15 +108,18 @@ const DoctorAppointmentDrawer: FC<Props> = () => {
             <React.Fragment key={monthYear}>
               <p>{monthYear}</p>
               <div className="flex gap-4 mt-4">
-                {daysInMonth.map((day) => (
-                  <DayCard
-                    key={day}
-                    day={dayjs(day).format('ddd')}
-                    date={dayjs(day).format('DD')}
-                    isSelected={selectedDay === day}
-                    onSelect={() => handleSelectDay(day)}
-                  />
-                ))}
+                {daysInMonth.map((day) => {
+                  const dayFormatted = dayjs(day).format(DateFormat.ISO_DATE)
+                  return (
+                    <DayCard
+                      key={dayFormatted}
+                      day={dayjs(day).format('ddd')}
+                      date={dayjs(day).format('DD')}
+                      isSelected={selectedDay === dayFormatted}
+                      onSelect={() => handleSelectDay(day)}
+                    />
+                  )
+                })}
               </div>
               {index < Object.keys(daysGroupedByMonth).length - 1 && <div className="my-4" />}
             </React.Fragment>
@@ -106,6 +131,7 @@ const DoctorAppointmentDrawer: FC<Props> = () => {
               key={range}
               timeRange={range}
               isSelected={selectedRangeTime === range}
+              isBooked={isTimeRangeBusy(range)}
               onSelect={() => handleSelectRangeTime(range)}
             />
           ))}

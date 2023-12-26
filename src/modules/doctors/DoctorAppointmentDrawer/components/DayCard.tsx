@@ -1,5 +1,6 @@
-import clsx from 'clsx'
 import { FC } from 'react'
+import { Tooltip } from '@/components'
+import clsx from 'clsx'
 
 interface IProps {
   day: string
@@ -9,8 +10,8 @@ interface IProps {
 }
 
 const DayCard: FC<IProps> = ({ day, date, isSelected, onSelect }) => {
-  const classes = clsx(
-    ' w-[62px] h-[72px] rounded-2xl border flex flex-col items-center justify-center cursor-pointer duration-300 transition-colors ease-in-out',
+  const cardClasses = clsx(
+    ' w-[62px] h-[72px] rounded-2xl border flex flex-col items-center justify-center cursor-pointer duration-300 transition-colors ease-in-out select-none',
     {
       'bg-green-primary text-white': isSelected,
       'border-[#DEE1E6] bg-white': !isSelected,
@@ -18,7 +19,7 @@ const DayCard: FC<IProps> = ({ day, date, isSelected, onSelect }) => {
   )
 
   return (
-    <div onClick={onSelect} className={classes}>
+    <div onClick={onSelect} className={cardClasses}>
       <small className={isSelected ? 'font-medium' : ''}>{day}</small>
       <h5 className="font-normal">{date}</h5>
     </div>
