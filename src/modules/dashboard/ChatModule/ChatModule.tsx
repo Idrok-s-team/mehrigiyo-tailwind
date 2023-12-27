@@ -2,15 +2,13 @@
 
 import { FC, useEffect, useRef } from 'react'
 import { ChatFooter, ChatHeader, ChatMessage } from './components'
-import { useChatMessagesQuery, useInfiniteChatMessagesQuery, useUserMeQuery } from '@/hooks/queries'
+import { useInfiniteChatMessagesQuery, useUserMeQuery } from '@/hooks/queries'
 import { useChatStore } from '@/store'
-import { useInfiniteQuery } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
 import { Button } from '@/components'
 
 const ChatModule: FC = () => {
   const chatContainerRef = useRef<HTMLDivElement>(null)
-  const { chatMessages } = useChatStore()
   const { chat_id } = useParams()
   const { data: userMeData } = useUserMeQuery()
 

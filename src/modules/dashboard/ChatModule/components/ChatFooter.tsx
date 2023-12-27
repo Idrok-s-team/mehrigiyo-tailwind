@@ -53,7 +53,6 @@ const ChatFooter = () => {
     const file = e.target.files[0]
     if (file) {
       updateChatState('selectedChatFile', file)
-      console.log('Tanlangan fayl:', file)
     }
   }
 

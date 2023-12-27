@@ -91,3 +91,204 @@ export const VoiceChatIcon = () => {
     </svg>
   )
 }
+
+export const CallActionBgIcon = () => {
+  return (
+    <svg width="375" height="76" viewBox="0 0 375 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M187 54C207.987 54 225 36.9868 225 16C225 8.29982 230.291 0 237.991 0H337C357.987 0 375 17.0132 375 38C375 58.9868 357.987 76 337 76H38C17.0132 76 0 58.9868 0 38C0 17.0132 17.0132 0 38 0H136.009C143.709 0 149 8.29982 149 16C149 36.9868 166.013 54 187 54Z"
+        fill="white"
+      />
+    </svg>
+  )
+}
+
+export const CallEndIcon = () => {
+  return (
+    <svg width="108" height="108" viewBox="0 0 108 108" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g filter="url(#filter0_ddd_921_7759)">
+        <circle cx="54" cy="38" r="30" fill="#E64C3C" />
+      </g>
+      <g clip-path="url(#clip0_921_7759)">
+        <path
+          d="M65.6968 37.4264C62.3186 34.8503 58.2741 33.4883 53.9997 33.4883C49.7254 33.4883 45.6808 34.8503 42.3026 37.4264C42.1407 37.5498 42.0327 37.7334 42.0065 37.937C41.9803 38.1406 42.0342 38.3457 42.1576 38.5077L44.9805 42.2083C45.1054 42.3718 45.2875 42.4782 45.4911 42.5044C45.6947 42.5337 45.8998 42.4767 46.0618 42.3533C47.2527 41.4416 48.5823 40.7459 50.0107 40.2847C50.4149 40.1536 50.637 39.7201 50.5074 39.3145L49.5603 36.3697C52.431 35.6386 55.5669 35.637 58.4392 36.3697L57.492 39.3145C57.3609 39.7201 57.5846 40.1536 57.9887 40.2847C59.4156 40.7459 60.7437 41.4416 61.9376 42.3533C62.0734 42.4551 62.2369 42.5121 62.4066 42.5121C62.4405 42.5121 62.4744 42.5091 62.5084 42.5044C62.712 42.4767 62.8956 42.3718 63.019 42.2098L65.8418 38.5077C65.9652 38.3457 66.0207 38.139 65.993 37.937C65.9668 37.7334 65.8588 37.5498 65.6968 37.4264Z"
+          fill="white"
+        />
+      </g>
+      <defs>
+        <filter
+          id="filter0_ddd_921_7759"
+          x="0"
+          y="0"
+          width="108"
+          height="108"
+          filterUnits="userSpaceOnUse"
+          color-interpolation-filters="sRGB"
+        >
+          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feColorMatrix
+            in="SourceAlpha"
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+            result="hardAlpha"
+          />
+          <feOffset />
+          <feGaussianBlur stdDeviation="0.5" />
+          <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.04 0" />
+          <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_921_7759" />
+          <feColorMatrix
+            in="SourceAlpha"
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+            result="hardAlpha"
+          />
+          <feOffset dy="2" />
+          <feGaussianBlur stdDeviation="3" />
+          <feColorMatrix type="matrix" values="0 0 0 0 0.937255 0 0 0 0 0.137255 0 0 0 0 0.333333 0 0 0 0.12 0" />
+          <feBlend mode="normal" in2="effect1_dropShadow_921_7759" result="effect2_dropShadow_921_7759" />
+          <feColorMatrix
+            in="SourceAlpha"
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+            result="hardAlpha"
+          />
+          <feOffset dy="16" />
+          <feGaussianBlur stdDeviation="12" />
+          <feColorMatrix type="matrix" values="0 0 0 0 0.937255 0 0 0 0 0.137255 0 0 0 0 0.333333 0 0 0 0.2 0" />
+          <feBlend mode="normal" in2="effect2_dropShadow_921_7759" result="effect3_dropShadow_921_7759" />
+          <feBlend mode="normal" in="SourceGraphic" in2="effect3_dropShadow_921_7759" result="shape" />
+        </filter>
+        <clipPath id="clip0_921_7759">
+          <rect width="24" height="24" fill="white" transform="translate(42 26)" />
+        </clipPath>
+      </defs>
+    </svg>
+  )
+}
+
+export const CallRecordIcon = () => {
+  return (
+    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="6.33442" cy="6.66694" r="5.77778" fill="white" />
+      <circle cx="6.3342" cy="6.66672" r="2.88889" fill="#F33060" />
+    </svg>
+  )
+}
+
+export const CallVoiceIcon = () => {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M6.36523 13.6782C6.36523 16.8092 8.90323 19.3472 12.0342 19.3472C15.1662 19.3472 17.7042 16.8092 17.7042 13.6782"
+        stroke="#112950"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M17.7042 10.423V8.169C17.7042 5.038 15.1662 2.5 12.0342 2.5C8.90323 2.5 6.36523 5.038 6.36523 8.169V10.423"
+        stroke="#112950"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12.0352 21.4997V19.3477"
+        stroke="#112950"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M4.90039 13.6782H19.1684"
+        stroke="#112950"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
+export const CallDisableIcon = () => {
+  return (
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 11L35 34" stroke="white" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M16 15L32 31" stroke="#112950" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="24" cy="24" r="23.5" stroke="#F2F4F5" />
+    </svg>
+  )
+}
+
+export const CallChatIcon = () => {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M15.9389 12.4131H15.9479"
+        stroke="#112950"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M11.931 12.4131H11.94" stroke="#112950" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d="M7.92128 12.4131H7.93028"
+        stroke="#112950"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M19.071 19.0698C16.0159 22.1264 11.4896 22.7867 7.78631 21.074C7.23961 20.8539 3.70113 21.8339 2.93334 21.067C2.16555 20.2991 3.14639 16.7601 2.92631 16.2134C1.21285 12.5106 1.87411 7.9826 4.9302 4.9271C8.83147 1.0243 15.1698 1.0243 19.071 4.9271C22.9803 8.83593 22.9723 15.1681 19.071 19.0698Z"
+        stroke="#112950"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
+export const CallVideoIcon = () => {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g id=" 24px / Video">
+        <g id="Video">
+          <path
+            id="Stroke 1"
+            d="M16.1504 9.67302C17.9885 8.21588 20.4552 6.80636 20.9218 7.31112C21.6932 8.13969 21.6266 16.0254 20.9218 16.7778C20.4932 17.2445 18.0075 15.8349 16.1504 14.3873"
+            stroke="#112950"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            id="Stroke 3"
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M2.51367 12.0371C2.51367 6.84473 4.23843 5.11426 9.41462 5.11426C14.5899 5.11426 16.3146 6.84473 16.3146 12.0371C16.3146 17.2285 14.5899 18.96 9.41462 18.96C4.23843 18.96 2.51367 17.2285 2.51367 12.0371Z"
+            stroke="#112950"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </g>
+      </g>
+    </svg>
+  )
+}
+
+export const CallCallIcon = () => {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M5.57039 7.88709C5.28389 6.00009 6.61439 4.30509 8.64689 3.68409C9.00757 3.57381 9.39673 3.6052 9.73507 3.77187C10.0734 3.93853 10.3355 4.22792 10.4679 4.58109L11.1204 6.32109C11.2254 6.60101 11.2444 6.90593 11.1749 7.19672C11.1054 7.48751 10.9506 7.7509 10.7304 7.95309L8.78939 9.73059C8.69371 9.81839 8.62242 9.92948 8.58246 10.053C8.5425 10.1766 8.53524 10.3084 8.56139 10.4356L8.57939 10.5136L8.62589 10.7086C8.86728 11.6561 9.23508 12.5667 9.71939 13.4161C10.247 14.3186 10.9017 15.1406 11.6634 15.8566L11.7234 15.9106C11.8203 15.9966 11.9378 16.056 12.0645 16.0831C12.1912 16.1102 12.3228 16.104 12.4464 16.0651L14.9559 15.2746C15.2411 15.185 15.5465 15.1828 15.833 15.268C16.1195 15.3533 16.374 15.5222 16.5639 15.7531L17.7519 17.1946C18.2469 17.7946 18.1869 18.6766 17.6184 19.2061C16.0629 20.6566 13.9239 20.9536 12.4359 19.7581C10.6119 18.2868 9.07432 16.4924 7.89989 14.4646C6.71592 12.4383 5.92508 10.2067 5.56889 7.88709H5.57039ZM10.1349 10.5346L11.7429 9.05859C12.1836 8.65439 12.4935 8.12769 12.6328 7.5461C12.772 6.96451 12.7343 6.35457 12.5244 5.79459L11.8734 4.05459C11.6069 3.34396 11.0795 2.76168 10.3986 2.4264C9.71773 2.09111 8.93464 2.02806 8.20889 2.25009C5.68439 3.02259 3.65789 5.28609 4.08689 8.11359C4.38689 10.0876 5.07839 12.5986 6.60389 15.2206C7.87095 17.4071 9.52957 19.3419 11.4969 20.9281C13.7289 22.7206 16.7079 22.1086 18.6429 20.3056C19.7919 19.2346 19.9089 17.4556 18.9114 16.2436L17.7234 14.8006C17.3433 14.3393 16.8342 14.0021 16.2612 13.8321C15.6882 13.6621 15.0775 13.6672 14.5074 13.8466L12.4239 14.5021C11.8859 13.9474 11.4147 13.3317 11.0199 12.6676C10.6385 11.9961 10.3412 11.2802 10.1349 10.5361V10.5346Z"
+        fill="#2D2D2D"
+      />
+    </svg>
+  )
+}

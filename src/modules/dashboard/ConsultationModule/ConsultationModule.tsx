@@ -9,10 +9,17 @@ import dayjs from 'dayjs'
 import { baseUrl } from '@/constants'
 import { UpcomingTimeIcon } from '@/assets/icons'
 import { useChatStore } from '@/store'
+import { IChatRoom } from '@/types'
+import { useLocalStorage } from 'usehooks-ts'
 
 const ConsultationModule: FC = () => {
   const { updateChatState } = useChatStore()
   const { data: chatRoomsData, isLoading } = useChatRoomsQuery({})
+
+  const handleSelectRoom = (room: IChatRoom) => {
+    updateChatState('selectedChatRoom', room)
+    localStorage.setItem('selectedChatRoom', JSON.stringify(room))
+  }
 
   const Ongoing = () => {
     return (
@@ -24,7 +31,7 @@ const ConsultationModule: FC = () => {
               key={room.id}
               href={`/dashboard/consultation/chat/${room.id}`}
               className="flex gap-[13px] pt-5 px-[30px] cursor-pointer duration-100 hover:bg-green-primary/10"
-              onClick={() => updateChatState('selectedChatRoom', room)}
+              onClick={() => handleSelectRoom(room)}
             >
               <Image
                 src={`${baseUrl}/${doktor.image}`}
