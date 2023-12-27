@@ -2,11 +2,11 @@ import React from 'react'
 import { BackGreenIcon, CallIcon, VideoCallIcon } from '@/assets/icons'
 import { ActionButton } from '@/components'
 import { useRouter } from 'next/navigation'
-import { useChatMessagesQuery, useChatQuery, useChatRoomsQuery, useDoctorAdviceQuery } from '@/hooks/queries'
+import { useChatStore } from '@/store'
 
 const ChatHeader = () => {
   const router = useRouter()
-  const { isLoading, data: appointmentsData } = useDoctorAdviceQuery({ my: true })
+  const { selectedChatRoom } = useChatStore()
 
   return (
     <div className="h-[70px] flex items-center justify-between px-6 border-b bg-white">
@@ -15,7 +15,7 @@ const ChatHeader = () => {
           <BackGreenIcon />
         </ActionButton>
         <div>
-          <h6>Gavhar Sobirova</h6>
+          <h6>{selectedChatRoom?.doktor.name}</h6>
           <p className="text-green-primary text-sm">online</p>
         </div>
       </section>

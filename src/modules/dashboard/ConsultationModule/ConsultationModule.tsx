@@ -8,8 +8,10 @@ import Image from 'next/image'
 import dayjs from 'dayjs'
 import { baseUrl } from '@/constants'
 import { UpcomingTimeIcon } from '@/assets/icons'
+import { useChatStore } from '@/store'
 
 const ConsultationModule: FC = () => {
+  const { updateChatState } = useChatStore()
   const { data: chatRoomsData, isLoading } = useChatRoomsQuery({})
 
   const Ongoing = () => {
@@ -22,6 +24,7 @@ const ConsultationModule: FC = () => {
               key={room.id}
               href={`/dashboard/consultation/chat/${room.id}`}
               className="flex gap-[13px] pt-5 px-[30px] cursor-pointer duration-100 hover:bg-green-primary/10"
+              onClick={() => updateChatState('selectedChatRoom', room)}
             >
               <Image
                 src={`${baseUrl}/${doktor.image}`}

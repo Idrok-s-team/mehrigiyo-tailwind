@@ -1,4 +1,4 @@
-import { useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
+import { useQuery, UseQueryOptions } from '@tanstack/react-query'
 import { IErrorResponse, QueryParamsType } from '@/types'
 
 export type QueryProps<T> = {

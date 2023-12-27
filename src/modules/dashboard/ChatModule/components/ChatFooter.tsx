@@ -1,106 +1,87 @@
-import React, { FormEvent, useEffect, useRef, useState } from 'react'
+import React, { ChangeEventHandler, FormEvent, useCallback, useEffect, useRef, useState } from 'react'
 import { useParams } from 'next/navigation'
 import { PlusBlackIcon, VoiceChatIcon } from '@/assets/icons'
 import { ActionButton } from '@/components'
 import { ChatInput } from './'
-import { baseSocketUrl } from '@/constants'
-import Cookies from 'js-cookie'
-import { useChatMessagesQuery, useUserMeQuery } from '@/hooks/queries'
+import { useChatMessagesQuery, useInfiniteChatMessagesQuery } from '@/hooks/queries'
+import { IChatMessage } from '@/types'
+import { useChatWebSocket } from '../hooks'
 import { useChatStore } from '@/store'
-import { GetResponseWithStatusType, IChatMessage } from '@/types'
 
 const ChatFooter = () => {
   const [text, setText] = useState('')
-  const socketRef = useRef<WebSocket | null>(null)
+  const fileInputRef = useRef<HTMLInputElement | null>(null)
   const { chat_id } = useParams()
+  const { setChatMessages, updateChatState } = useChatStore()
+  // const [params, setParams] = useState({ limit: 10, offset: 0 })
+  const { data: messagesData, isSuccess } = useInfiniteChatMessagesQuery(Number(chat_id), {})
 
-  const { messages, updateChatState } = useChatStore()
+  const handleNewMessage = useCallback(
+    (messageData: IChatMessage) => {
+      setChatMessages((prevMessages) => [...prevMessages, messageData])
+    },
+    [setChatMessages],
+  )
 
-  const { data: chatMessagesData, isSuccess } = useChatMessagesQuery({ chat_id: Number(chat_id) })
-  const { data: userMeData } = useUserMeQuery()
-  const currentUserId = userMeData?.id
-  console.log(messages)
+  const { sendWebSocketMessage } = useChatWebSocket({
+    chat_id: Number(chat_id),
+    onMessage: handleNewMessage,
+  })
 
   useEffect(() => {
-    if (isSuccess) {
-      updateChatState('messages', chatMessagesData?.results)
+    if (messagesData) {
+      // setChatMessages(messagesData.pages.sort((a: any, b: any) => a.id - b.id))
+      // messagesData.pages.forEach((page) => {
+      //   setChatMessages(page?.results?.sort((a, b) => a.id - b.id))
+      // })
+      // const newMessages = messagesData.results.flatMap((page) => page.results).sort((a, b) => a.id - b.id)
+      // setChatMessages(newMessages)
     }
+  }, [messagesData])
 
-    const token = Cookies.get('access_token')
-    if (!token) {
-      console.error('Access token not found')
-      return
-    }
-
-    const webSocketUrl = `${baseSocketUrl}/chat/37/?token=${token}`
-    const socket = new WebSocket(webSocketUrl)
-
-    socket.onopen = () => {
-      console.log('WebSocket Connected')
-      socketRef.current = socket
-    }
-    socket.onerror = (error: Event) => console.error('WebSocket Error:', error)
-    socket.onclose = () => {
-      console.log('WebSocket Disconnected')
-    }
-
-    socketRef.current = socket
-
-    socketRef.current.onmessage = (event: any) => {
-      const messageData = JSON.parse(event.data) as GetResponseWithStatusType<IChatMessage>
-      if (messageData.status === 'success') {
-        const currentMessages = messages || []
-        const newMessages = [...currentMessages, messageData.data]
-        updateChatState('messages', newMessages)
-      }
-    }
-
-    return () => {
-      if (socketRef.current) {
-        socketRef.current.close()
-        console.log('WebSocket Connection Closed')
-      }
-    }
-  }, [isSuccess, messages, updateChatState])
-
-  const sendMessage = (e: FormEvent<HTMLFormElement | HTMLInputElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement | HTMLInputElement>) => {
     e.preventDefault()
-    if (!socketRef.current || socketRef.current.readyState !== WebSocket.OPEN) {
-      console.error('WebSocket not connected')
-      return
-    }
-
     const msg = {
       chat_id,
-      message: {
-        text,
-      },
+      message: { text },
     }
-
-    socketRef.current.send(JSON.stringify(msg))
+    sendWebSocketMessage(msg)
     setText('')
+  }
+
+  const handleFileSelect = (e: any) => {
+    const file = e.target.files[0]
+    if (file) {
+      updateChatState('selectedChatFile', file)
+      console.log('Tanlangan fayl:', file)
+    }
+  }
+
+  const handlePlusClick = () => {
+    fileInputRef.current?.click()
   }
 
   return (
     <div className="flex items-center gap-6 w-full px-5 py-[13px] shadow-chat-footer">
       <section>
-        <ActionButton isHoverable>
+        <ActionButton isHoverable onClick={handlePlusClick}>
           <PlusBlackIcon />
         </ActionButton>
+        <input type="file" className="hidden" ref={fileInputRef} onChange={handleFileSelect} />
       </section>
       <section className="flex-1 h-[34px]">
         <ChatInput
           placeholder="Xabar yozing..."
           value={text}
           onChange={(e) => setText(e.target.value)}
-          onSubmit={(e) => sendMessage(e)}
+          onSubmit={(e) => handleSubmit(e)}
         />
       </section>
-      <section>
+      {/* <section>
         <ActionButton isHoverable>
           <VoiceChatIcon />
         </ActionButton>
-      </section>
+      </section> */}
     </div>
   )
 }
