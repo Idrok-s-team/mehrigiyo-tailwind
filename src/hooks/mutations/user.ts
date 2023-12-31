@@ -1,4 +1,10 @@
-import { GetResponseWithStatusType, UserFieldParamsType, IUserRegion, IUserDeliverAddress } from '@/types'
+import {
+  GetResponseWithStatusType,
+  UserFieldParamsType,
+  IUserRegion,
+  IUserDeliverAddress,
+  IUserRegistration,
+} from '@/types'
 import {
   addUserAddressApi,
   addUserDeliverAddressApi,
@@ -10,8 +16,12 @@ import {
   deleteUserFavoriteMedicinesApi,
   updateUserAddressApi,
   updateUserDeliverAddressApi,
+  userRegistrationApi,
 } from '@/api'
 import { useCustomMutation } from './common'
+
+export const useUserRegisterMutation = () =>
+  useCustomMutation<FormData, GetResponseWithStatusType<IUserRegistration>>(userRegistrationApi)
 
 // FAVORITE MEDICINE MUTATIONS
 export const useAddUserFavoriteMedicinesMutation = () =>

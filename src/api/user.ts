@@ -8,6 +8,7 @@ import {
   IUserDeliverAddress,
   IUserCountry,
   ICardError,
+  IUserRegistration,
 } from '@/types'
 import { authorizedFetchApi } from './common'
 import { IDoctor } from '@/types/doctor'
@@ -16,6 +17,12 @@ import { IDoctor } from '@/types/doctor'
 export const getUserMeApi = async () => {
   const result = await authorizedFetchApi<Promise<GetResponseType<IUserMe[]>>>('/user/me/')
   return result.results[0]
+}
+
+export const userRegistrationApi = async (
+  body: FormData,
+): Promise<GetResponseWithStatusType<IUserRegistration>> => {
+  return authorizedFetchApi('/user/registration/', 'POST', { body, withAuth: false })
 }
 
 // USER FAVORITE MEDICINES API

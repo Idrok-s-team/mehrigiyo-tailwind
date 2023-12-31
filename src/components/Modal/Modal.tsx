@@ -67,7 +67,7 @@ const Modal: FC<IProps> = ({
         </header>
         <main>{children}</main>
         {withFooter && (
-          <footer className="mt-4 flex gap-5">
+          <footer className="mt-4 flex gap-5 px-16">
             {closeText && (
               <Button onClick={onClose} disabled={disabled} type="button" buttonType="secondary">
                 {closeText}

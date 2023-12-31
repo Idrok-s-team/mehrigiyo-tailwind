@@ -26,7 +26,6 @@ export const authorizedFetchApi = async <T, R = T>(
 
   const url = params && method === 'GET' ? queryStringUrl(`${baseApiUrl}${path}`, params) : `${baseApiUrl}${path}`
 
-  // Initialize headers and include Authorization header if withAuth is true
   const headers: HeadersInit = { 'Content-Type': 'application/json' }
   if (withAuth) {
     const token = getCookie('access_token')
@@ -42,7 +41,7 @@ export const authorizedFetchApi = async <T, R = T>(
 
   if (!response.ok) {
     const errorData = await response.json()
-    throw new ApiError(`Request failed: ${errorData.detail}`, { ...errorData, statusCode: response.status })
+    throw new ApiError(`${errorData.detail}`, { ...errorData, statusCode: response.status })
   }
 
   return response.json()

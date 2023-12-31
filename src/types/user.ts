@@ -22,6 +22,15 @@ export interface IUserMe {
   theme_mode: number
 }
 
+export interface IUserRegistration {
+  username: string
+  first_name: string
+  last_name: string
+  password: string
+  email: string
+  avatar: string
+}
+
 export interface IUserDeliverAddress {
   readonly id: number
   name: string

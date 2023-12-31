@@ -73,7 +73,7 @@ const ChatFooter = () => {
           placeholder="Xabar yozing..."
           value={text}
           onChange={(e) => setText(e.target.value)}
-          onSubmit={(e) => handleSubmit(e)}
+          onSubmit={(e: any) => handleSubmit(e)}
         />
       </section>
       {/* <section>
