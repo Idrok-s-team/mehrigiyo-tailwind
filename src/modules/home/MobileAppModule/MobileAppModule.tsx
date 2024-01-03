@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Input } from '@/components'
+import { Input } from '@/components/common'
 import Image from 'next/image'
 import appStoreIcon from '@/assets/icons/home/appStoreIcon.svg'
 import googlePlayIcon from '@/assets/icons/home/googlePlayIcon.svg'

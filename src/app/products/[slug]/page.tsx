@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import { Breadcrumb } from '@/components'
+import { Breadcrumb } from '@/components/common'
 import backgroundLeaf from '@/assets/images/common/backgroundLeaf.png'
 import backgroundBranch from '@/assets/images/common/backgroundBranchRight.png'
 import { getShopMedicineByIdApi } from '@/api'

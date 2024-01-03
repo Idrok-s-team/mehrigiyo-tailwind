@@ -4,7 +4,7 @@ import { FC } from 'react'
 import Image from 'next/image'
 import { useCopyToClipboard } from 'usehooks-ts'
 import { BookmarkIcon, SharedIcon } from '@/assets/icons'
-import { ActionButton, Button, Tooltip } from '@/components'
+import { ActionButton, Button, Tooltip } from '@/components/common'
 import { IDoctor } from '@/types/doctor'
 import { useChangeFavoriteDoctors } from '@/hooks/doctor'
 

@@ -4,7 +4,7 @@ import React, { useMemo } from 'react'
 import { useShopCartQuery } from '@/hooks/queries'
 import { CartItem, CartSummaryCard, CheckoutActionModal } from './components'
 import { useCartTotalsCalculator } from '@/hooks/cart'
-import { EmptyBox, Loader } from '@/components'
+import { EmptyBox, Loader } from '@/components/common'
 
 const CartModule = () => {
   const { data, isLoading } = useShopCartQuery()

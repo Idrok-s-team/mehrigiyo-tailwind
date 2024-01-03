@@ -1,6 +1,6 @@
 import React from 'react'
 import { BackGreenIcon, CallIcon, VideoCallIcon } from '@/assets/icons'
-import { ActionButton } from '@/components'
+import { ActionButton } from '@/components/common'
 import { useParams, useRouter } from 'next/navigation'
 import { useChatStore } from '@/store'
 

@@ -1,11 +1,12 @@
 import React from 'react'
 import Image from 'next/image'
-import { Breadcrumb, HashtagTime, SeeAllButton, Slider } from '@/components'
+import { Breadcrumb, SeeAllButton, Slider } from '@/components/common'
 import backgroundLeaf from '@/assets/images/common/backgroundLeaf.png'
 import backgroundBranch from '@/assets/images/common/backgroundBranchRight.png'
 import { getNewsApi } from '@/api'
 import { createSlug } from '@/utils'
 import { AllNewsModule } from '@/modules/news'
+import { HashtagTime } from '@/components/specific'
 
 const News = async () => {
   const newsData = await getNewsApi()

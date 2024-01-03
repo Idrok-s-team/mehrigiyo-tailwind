@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Tooltip } from '@/components'
+import { Tooltip } from '@/components/common'
 import clsx from 'clsx'
 
 interface IProps {

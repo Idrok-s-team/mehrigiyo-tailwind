@@ -3,12 +3,12 @@
 import { FC, FormEvent, useEffect, useRef, useState } from 'react'
 import Cookies from 'js-cookie'
 import toast from 'react-hot-toast'
-import { Button, Input, MaskInput, Modal, Tabs } from '@/components'
+import { Button, Input, MaskInput, Modal, Tabs } from '@/components/common'
 import { useAuthStore, useCommonStore } from '@/store'
 import { getCookie, inputHandler, parsePhoneNumber } from '@/utils'
 import { useLoginMutation, useRefreshTokenMutation, useUserRegisterMutation } from '@/hooks/mutations'
 import { useShopCartQuery, useUserFavoriteMedicinesQuery, useUserMeQuery } from '@/hooks/queries'
-import Upload from '@/components/InputUpload/InputUpload'
+import Upload from '@/components/common/InputUpload/InputUpload'
 import { EyeIcon, EyeOffIcon } from '@/assets/icons'
 
 type Props = {}

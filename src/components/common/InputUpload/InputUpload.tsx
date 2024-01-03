@@ -2,7 +2,7 @@ import React, { FC, useRef } from 'react'
 import Image from 'next/image'
 import uploadIcon from '@/assets/images/common/uploadImage.png'
 import { useAuthStore } from '@/store'
-import { CloseCircleRedIcon, CloseRoundIcon } from '@/assets/icons'
+import { CloseRoundIcon } from '@/assets/icons'
 import { ActionButton } from '..'
 
 type Props = {}

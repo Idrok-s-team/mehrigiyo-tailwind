@@ -1,7 +1,7 @@
 'use client'
 
 import { FC, useMemo } from 'react'
-import { ProductCard, ProductCardSkeleton, SeeAllButton, Slider } from '@/components'
+import { SeeAllButton, Slider } from '@/components/common'
 import { useShopMedicinesQuery, useShopTypesQuery } from '@/hooks/queries'
 
 type Props = {

@@ -2,7 +2,7 @@
 
 import { FC, useState } from 'react'
 import Image from 'next/image'
-import { Loader, SwitchableRadio } from '@/components'
+import { Loader, SwitchableRadio } from '@/components/common'
 import { AddressActionModal, AddressDeletionConfirmModal } from './components'
 import backgroundDeliverAddress from '@/assets/images/dashboard/backgroundDeliverAddress.png'
 import { useUserAddresses } from '@/hooks/checkout'

@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useMemo, useState } from 'react'
 import toast from 'react-hot-toast'
 import { clearObject, inputHandler } from '@/utils'
-import { Input, Modal, Select } from '@/components'
+import { Input, Modal, Select } from '@/components/common'
 import { ISelectOption, IUserDeliverAddress } from '@/types'
 import { useAddUserDeliverAddressMutation } from '@/hooks/mutations'
 import { useUserCountryQuery, useUserRegionQuery } from '@/hooks/queries'

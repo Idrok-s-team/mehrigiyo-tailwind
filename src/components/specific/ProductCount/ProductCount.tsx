@@ -3,7 +3,7 @@
 import { type FC } from 'react'
 import { MinusIcon, PlusIcon } from '@/assets/icons'
 import { useCartItemActions } from '@/hooks/cart'
-import { Tooltip } from '..'
+import { Tooltip } from '../../common'
 
 type Props = {
   productId: number

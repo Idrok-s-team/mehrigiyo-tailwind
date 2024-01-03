@@ -1,7 +1,7 @@
 'use client'
 
 import { FC } from 'react'
-import { Loader } from '@/components'
+import { Loader } from '@/components/common'
 import { useShopCheckoutQuery } from '@/hooks/queries'
 import { OrderCancelConfirmModal, OrderCard, OrderDetailsModal } from './components'
 import { DeliveryStatusMap } from '@/constants'

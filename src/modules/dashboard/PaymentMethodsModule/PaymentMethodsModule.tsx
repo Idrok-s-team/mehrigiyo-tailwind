@@ -2,7 +2,7 @@
 
 import { FC, useState } from 'react'
 import Image from 'next/image'
-import { Loader, SwitchableRadio } from '@/components'
+import { Loader, SwitchableRadio } from '@/components/common'
 import { CardActionModal, CardDeletionConfirmModal } from './components'
 import backgroundPaymentMethod from '@/assets/images/dashboard/backgroundPaymentMethod.png'
 import { usePaymentMethods } from '@/hooks/checkout'

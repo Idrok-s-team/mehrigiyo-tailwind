@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import backgroundBranch from '@/assets/images/common/backgroundBranchRight.png'
 import backgroundLeaf from '@/assets/images/common/backgroundLeaf.png'
-import { Breadcrumb } from '@/components'
+import { Breadcrumb } from '@/components/common'
 import { FavoriteProductsModule } from '@/modules/products'
 
 const FavoriteProducts = async () => {

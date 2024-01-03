@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Button } from '@/components'
+import { Button } from '@/components/common'
 import { useCommonStore } from '@/store'
 
 type Props = {

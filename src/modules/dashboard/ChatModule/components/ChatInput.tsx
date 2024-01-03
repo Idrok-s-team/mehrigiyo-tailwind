@@ -1,7 +1,7 @@
 import React, { FC, FormEvent, InputHTMLAttributes, TextareaHTMLAttributes, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { CloseRoundIcon, SendChatIcon } from '@/assets/icons'
-import { ActionButton } from '@/components'
+import { ActionButton } from '@/components/common'
 import { useChatStore } from '@/store'
 
 type Props = TextareaHTMLAttributes<HTMLTextAreaElement> & {

@@ -1,8 +1,9 @@
 'use client'
 
 import { FC, useMemo } from 'react'
-import { DoctorCard, ProductCardSkeleton, SeeAllButton, Slider } from '@/components'
+import { SeeAllButton, Slider } from '@/components/common'
 import { useDoctorTypesQuery, useDoctorsQuery } from '@/hooks/queries'
+import { DoctorCard, ProductCardSkeleton } from '@/components/specific'
 
 type Props = {
   title?: string

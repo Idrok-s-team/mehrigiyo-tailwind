@@ -5,8 +5,9 @@ import toast from 'react-hot-toast'
 import { useCopyToClipboard } from 'usehooks-ts'
 import { ChevronIcon, FavoriteFillIcon, FavoriteIcon, PlusWhiteIcon, SharedIcon } from '@/assets/icons'
 import { IShopMedicines } from '@/types'
-import { ActionButton, Button, ProductCount, Tooltip, ViewSlide } from '@/components'
+import { ActionButton, Button, Tooltip, ViewSlide } from '@/components/common'
 import { useAddToCart, useChangeFavoriteProducts } from '@/hooks/cart'
+import { ProductCount } from '@/components/specific'
 
 type Props = {
   product: IShopMedicines

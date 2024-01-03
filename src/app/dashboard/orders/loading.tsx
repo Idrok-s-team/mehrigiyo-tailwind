@@ -1,5 +1,5 @@
 import React from 'react'
-import { Loader } from '@/components'
+import { Loader } from '@/components/common'
 
 const Loading = () => {
   return (

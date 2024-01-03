@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { inputHandler } from '@/utils'
-import { MaskInput, Modal } from '@/components'
+import { MaskInput, Modal } from '@/components/common'
 import { ICard, ICardError, IVerifyCard } from '@/types'
 import { useAddCardMutation, useCardConfirmCodeMutation, useVerifyCardMutation } from '@/hooks/mutations'
 import { useCommonStore } from '@/store'

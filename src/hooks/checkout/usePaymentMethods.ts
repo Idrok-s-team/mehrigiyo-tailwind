@@ -1,6 +1,6 @@
 import { useGetCardQuery } from '@/hooks/queries'
 import { formatPlasticCardNumber } from '@/utils'
-import { SwitchableRadioType } from '@/components/SwitchableRadio/SwitchableRadio'
+import { SwitchableRadioType } from '@/components/common/SwitchableRadio/SwitchableRadio'
 
 const usePaymentMethods = () => {
   const { data: cardsData, isSuccess: isPaymentSuccess, refetch: refetchPayments } = useGetCardQuery()

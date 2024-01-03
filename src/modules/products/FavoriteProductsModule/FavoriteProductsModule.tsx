@@ -2,7 +2,8 @@
 
 import React from 'react'
 import { useUserFavoriteMedicinesQuery } from '@/hooks/queries'
-import { EmptyBox, Loader, ProductCard } from '@/components'
+import { EmptyBox, Loader } from '@/components/common'
+import { ProductCard } from '@/components/specific'
 
 const FavoriteProductsModule = () => {
   const { data, isLoading } = useUserFavoriteMedicinesQuery()

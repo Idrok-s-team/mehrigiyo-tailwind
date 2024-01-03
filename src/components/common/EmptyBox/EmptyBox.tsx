@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import Image from 'next/image'
 import boxGif from '@/assets/images/product/box.gif'
-import { SeeAllButton } from '@/components'
+import { SeeAllButton } from '@/components/common'
 
 type Props = {
   title: string

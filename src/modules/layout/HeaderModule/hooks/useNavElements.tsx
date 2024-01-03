@@ -1,5 +1,5 @@
 import React from 'react'
-import { ActiveLink, Dropdown } from '@/components'
+import { ActiveLink, Dropdown } from '@/components/common'
 import { useDoctorTypesQuery, useShopTypesQuery } from '@/hooks/queries'
 
 const useNavElements = () => {

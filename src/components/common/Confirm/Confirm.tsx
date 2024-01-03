@@ -67,36 +67,6 @@ const Confirm: FC<IConfirmProps> = ({
     </div>,
     modalRoot,
   )
-
-  // return (
-  //   <div className="relative flex items-center">
-  //     <div onClick={() => setShow(true)}>{children}</div>
-  //     {show && (
-  //       <div className="absolute w-auto top-full left-0 p-4 bg-white rounded-lg animate-scale-in shadow-primary">
-  //         <div className="flex items-center justify-between gap-10 whitespace-nowrap">
-  //           <h6 className="font-medium">{confirmText}</h6>
-  //           <button onClick={handleClose} aria-label="Close modal">
-  //             <CloseRoundIcon width={30} height={30} />
-  //           </button>
-  //         </div>
-  //         <div className="flex justify-end">
-  //           <div className="flex mt-7 gap-2">
-  //             <Button
-  //               onClick={handleClose}
-  //               size="sm"
-  //               className="whitespace-nowrap text-sm !text-black mr-2 px-4 py-2 !bg-gray-primary/40 hover:bg-gray-primary"
-  //             >
-  //               Bekor qilish
-  //             </Button>
-  //             <Button onClick={handleSubmit} size="sm" className="text-sm">
-  //               Tasdiqlash
-  //             </Button>
-  //           </div>
-  //         </div>
-  //       </div>
-  //     )}
-  //   </div>
-  // )
 }
 
 export default Confirm

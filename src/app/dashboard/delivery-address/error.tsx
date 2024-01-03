@@ -1,6 +1,6 @@
 'use client'
 
-import { ErrorDisplay } from '@/components'
+import { ErrorDisplay } from '@/components/common'
 import { FC } from 'react'
 
 interface IProps {

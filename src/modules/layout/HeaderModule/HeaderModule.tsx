@@ -3,7 +3,7 @@
 import { FC } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Dropdown } from '@/components'
+import { Dropdown } from '@/components/common'
 import { LogoIcon } from '@/assets/icons'
 import { useLanguageItems, useNavElements } from './hooks'
 import { HeaderActions, AuthModal, TopNavLinks, AddressDisplay, UserInfo } from './components'

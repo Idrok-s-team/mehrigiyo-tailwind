@@ -1,10 +1,11 @@
 'use client'
 
 import { FC, useMemo, useState } from 'react'
-import { ProductCardSkeleton, SeeAllButton, Slider } from '@/components'
+import { SeeAllButton, Slider } from '@/components/common'
 import { useNewsQuery, useNewsTagsQuery } from '@/hooks/queries'
 import { INews } from '@/types'
-import NewsCard from '@/components/NewsCard'
+import NewsCard from '@/components/specific/NewsCard'
+import { ProductCardSkeleton } from '@/components/specific'
 
 const NewsListModule: FC = () => {
   const [selectedNews, setSelectedNews] = useState<INews | null>(null)

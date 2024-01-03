@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
-import { Modal, SwitchableRadio } from '@/components'
+import { Modal, SwitchableRadio } from '@/components/common'
 import { useAddShopCheckoutMutation, useUpdateShopCheckoutMutation } from '@/hooks/mutations'
 import { useShopCartQuery } from '@/hooks/queries'
 import { usePaymentMethods, useUserAddresses } from '@/hooks/checkout'

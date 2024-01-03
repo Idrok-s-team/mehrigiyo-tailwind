@@ -3,8 +3,7 @@
 import { FC, useMemo, useState } from 'react'
 import { useNewsQuery, useNewsTagsQuery } from '@/hooks/queries'
 import { INews } from '@/types'
-import NewsCard from '@/components/NewsCard'
-import { MultiSlider } from '@/components'
+import NewsCard from '@/components/specific/NewsCard'
 
 const AllNewsModule: FC = () => {
   const [selectedNews, setSelectedNews] = useState<INews | null>(null)

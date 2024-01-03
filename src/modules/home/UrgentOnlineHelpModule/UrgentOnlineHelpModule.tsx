@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import Image from 'next/image'
-import { SeeAllButton } from '@/components'
+import { SeeAllButton } from '@/components/common'
 import onlineDoctorIcon from '@/assets/icons/home/onlineDoctorIcon.svg'
 
 const BrandsListModule: FC = () => {

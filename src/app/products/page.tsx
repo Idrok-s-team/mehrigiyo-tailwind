@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import { Breadcrumb, WatchVideoButton } from '@/components'
+import { Breadcrumb, WatchVideoButton } from '@/components/common'
 import { ProductTypesModule } from '@/modules/products'
 import backgroundLeaf from '@/assets/images/common/backgroundLeaf.png'
 import productsHeader from '@/assets/images/product/productsHeader.png'

@@ -1,4 +1,4 @@
-import { SwitchableRadioType } from '@/components/SwitchableRadio/SwitchableRadio'
+import { SwitchableRadioType } from '@/components/common/SwitchableRadio/SwitchableRadio'
 import { useUserDeliveryAddressQuery } from '@/hooks/queries'
 
 const useUserAddresses = () => {

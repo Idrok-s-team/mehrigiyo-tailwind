@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import Image from 'next/image'
-import { Slider } from '@/components'
+import { Slider } from '@/components/common'
 import grandpharmIcon from '@/assets/icons/home/grandpharmIcon.svg'
 import asklepiyIcon from '@/assets/icons/home/asklepiyIcon.svg'
 import doriDarmonIcon from '@/assets/icons/home/doriDarmonIcon.svg'

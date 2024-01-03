@@ -2,7 +2,6 @@
 
 import { FC, useState, useRef, useEffect, memo } from 'react'
 import { DropdownIcon } from '@/assets/icons'
-import { ElementSizeType } from '@/types'
 
 interface IChildren {
   title: string

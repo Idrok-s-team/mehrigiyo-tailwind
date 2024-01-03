@@ -5,7 +5,7 @@ import { ChatFooter, ChatHeader, ChatMessage } from './components'
 import { useInfiniteChatMessagesQuery, useUserMeQuery } from '@/hooks/queries'
 import { useChatStore } from '@/store'
 import { useParams } from 'next/navigation'
-import { Button } from '@/components'
+import { Button } from '@/components/common'
 
 const ChatModule: FC = () => {
   const chatContainerRef = useRef<HTMLDivElement>(null)

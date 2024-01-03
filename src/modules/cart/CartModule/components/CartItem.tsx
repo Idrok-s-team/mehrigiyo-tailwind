@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { IShopCart } from '@/types'
 import { DeleteIcon } from '@/assets/icons'
 import { useCartItemActions } from '@/hooks/cart'
-import { ProductCount } from '@/components'
+import { ProductCount } from '@/components/specific'
 
 type Props = {
   data: IShopCart

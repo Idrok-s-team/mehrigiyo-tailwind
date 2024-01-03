@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import { Breadcrumb, SeeAllButton, WatchVideoButton } from '@/components'
+import { Breadcrumb, SeeAllButton, WatchVideoButton } from '@/components/common'
 import { DoctorListModule, DoctorTypesModule } from '@/modules/doctors'
 import backgroundLeaf from '@/assets/images/common/backgroundLeaf.png'
 import doctorHeader from '@/assets/icons/doctor/doctorHeaderIcon.svg'

@@ -15,7 +15,7 @@ import {
   CallVideoIcon,
   CallVoiceIcon,
 } from '@/assets/icons'
-import { ActionButton } from '@/components'
+import { ActionButton } from '@/components/common'
 import { IChatRoom } from '@/types'
 
 const CallStreamModule: FC = () => {

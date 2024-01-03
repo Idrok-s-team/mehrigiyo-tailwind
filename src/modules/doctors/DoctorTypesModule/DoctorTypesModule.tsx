@@ -4,7 +4,6 @@ import { FC } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useDoctorTypesQuery } from '@/hooks/queries'
-import { useSyncUrlQueryParams } from '@/hooks/common'
 
 const DoctorTypesModule: FC = () => {
   const { data } = useDoctorTypesQuery()

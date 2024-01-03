@@ -1,4 +1,4 @@
-import { Tooltip } from '@/components'
+import { Tooltip } from '@/components/common'
 import clsx from 'clsx'
 import { FC } from 'react'
 

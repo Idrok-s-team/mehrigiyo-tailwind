@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Modal } from '@/components'
+import { Modal } from '@/components/common'
 import { DeliveryStatusMap } from '@/constants'
 import { useCommonStore, useShopStore } from '@/store'
 import clsx from 'clsx'

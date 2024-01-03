@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { getDoctorTypesApi } from '@/api'
-import { Accordion, Input, SeeAllButton, WatchVideoButton } from '@/components'
+import { Accordion, Input, SeeAllButton, WatchVideoButton } from '@/components/common'
 import { DeliveryIcon, FastPaymentIcon, OnlineHelpIcon, PermanentDiscountIcon } from '@/assets/icons'
 import {
   BrandsListModule,

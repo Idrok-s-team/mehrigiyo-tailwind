@@ -2,7 +2,7 @@
 
 import { FC } from 'react'
 import Link from 'next/link'
-import { Loader, Tabs } from '@/components'
+import { Loader, Tabs } from '@/components/common'
 import { useChatRoomsQuery } from '@/hooks/queries'
 import Image from 'next/image'
 import dayjs from 'dayjs'

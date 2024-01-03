@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import toast from 'react-hot-toast'
-import { Confirm } from '@/components'
+import { Confirm } from '@/components/common'
 import { ICardError } from '@/types'
 import { useDeleteCardMutation } from '@/hooks/mutations'
 import { useCommonStore, useShopStore } from '@/store'

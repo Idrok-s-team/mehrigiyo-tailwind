@@ -7,7 +7,7 @@ import { IShopMedicines } from '@/types'
 import { ArrowRightGrayIcon, FavoriteFillIcon, FavoriteIcon, PlusWhiteIcon } from '@/assets/icons'
 import { useAddToCart, useChangeFavoriteProducts } from '@/hooks/cart'
 import { createSlug } from '@/utils'
-import { Tooltip } from '..'
+import { Tooltip } from '../../common'
 
 type Props = {
   data: IShopMedicines

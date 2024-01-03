@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import { Accordion, Breadcrumb } from '@/components'
+import { Accordion, Breadcrumb } from '@/components/common'
 import backgroundLeaf from '@/assets/images/common/backgroundLeaf.png'
 import backgroundBranch from '@/assets/images/common/backgroundBranchRight.png'
 import { faqData } from '@/constants'

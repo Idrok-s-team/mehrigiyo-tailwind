@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Input, SeeAllButton } from '@/components'
+import { Input, SeeAllButton } from '@/components/common'
 import Image from 'next/image'
 import contactPersonIcon from '@/assets/icons/home/contactPersonIcon.svg'
 import contactBublesIcon from '@/assets/icons/home/contactBublesIcon.svg'

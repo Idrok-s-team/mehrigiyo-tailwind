@@ -1,7 +1,7 @@
 import React, { ChangeEventHandler, FormEvent, useCallback, useEffect, useRef, useState } from 'react'
 import { useParams } from 'next/navigation'
 import { PlusBlackIcon, VoiceChatIcon } from '@/assets/icons'
-import { ActionButton } from '@/components'
+import { ActionButton } from '@/components/common'
 import { ChatInput } from './'
 import { useChatMessagesQuery, useInfiniteChatMessagesQuery } from '@/hooks/queries'
 import { IChatMessage } from '@/types'

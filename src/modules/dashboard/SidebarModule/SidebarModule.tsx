@@ -18,7 +18,7 @@ import {
   PaymentIcon,
   SettingsIcon,
 } from '@/assets/icons'
-import { Confirm } from '@/components'
+import { Confirm } from '@/components/common'
 import { useCommonStore } from '@/store'
 
 const SidebarModule: FC = () => {
