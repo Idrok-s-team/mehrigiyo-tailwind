@@ -15,12 +15,13 @@ interface ItemProps {
 }
 
 interface IProps {
+  title?: ReactNode
   items: ItemProps[]
   className?: string
   linkable?: boolean
 }
 
-const Dropdown: FC<IProps> = function Dropdown({ items, linkable }: IProps) {
+const Dropdown: FC<IProps> = function Dropdown({ items, title = items[0].label, linkable }: IProps) {
   const initialSelected = items.find((item) => item.selected) || items[0]
 
   const [open, setOpen] = useState<boolean>(false)
@@ -68,7 +69,7 @@ const Dropdown: FC<IProps> = function Dropdown({ items, linkable }: IProps) {
         className="flex items-center justify-between h-full px-2 text-center rounded-lg focus:outline-none"
         type="button"
       >
-        <span className="mr-2">{selectedItem?.label}</span>
+        <span className="mr-2">{title}</span>
         <DropdownIcon width={10} height={10} />
       </button>
       {open && (

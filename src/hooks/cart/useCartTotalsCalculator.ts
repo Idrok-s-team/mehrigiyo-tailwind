@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { IShopCart } from '@/types'
-import { useAnimatedCounter } from '.'
+import { useAnimatedCounter } from './index'
 
 const useCartTotalsCalculator = (cartItems?: IShopCart[]) => {
   const computedTotalCost = useMemo(() => {

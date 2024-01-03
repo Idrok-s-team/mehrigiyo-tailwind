@@ -1,4 +1,4 @@
-import { LocalizedType } from '.'
+import { LocalizedType } from './index'
 
 export interface IUserMe {
   readonly id: number

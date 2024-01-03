@@ -1,20 +1,18 @@
 'use client'
 
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import Image from 'next/image'
-import { ActiveLink, Dropdown } from '@/components'
-import { AvatarIcon, FlagUzIcon, LocationIcon, LogoIcon } from '@/assets/icons'
-import { useUserMeQuery } from '@/hooks/queries'
-import { HeaderActions, AuthModal } from './components'
-import { useCommonStore } from '@/store'
+import { Dropdown } from '@/components'
+import { LogoIcon } from '@/assets/icons'
+import { useLanguageItems, useNavElements } from './hooks'
+import { HeaderActions, AuthModal, TopNavLinks, AddressDisplay, UserInfo } from './components'
 
 const HeaderModule: FC = () => {
   const pathname = usePathname()
 
-  const { setActiveModal } = useCommonStore()
-  const { data: userData, isSuccess } = useUserMeQuery()
+  const navElements = useNavElements()
+  const languageItems = useLanguageItems()
 
   const titles = [
     { text: `Mahsulotlar katalogi`, href: `#` },
@@ -24,78 +22,6 @@ const HeaderModule: FC = () => {
     { text: `Yangi`, href: `#`, color: `#53B175` },
   ]
 
-  const languageItems = [
-    {
-      label: (
-        <div className="flex items-center gap-3">
-          <span>
-            <FlagUzIcon />
-          </span>
-          <span>Uzbek</span>
-        </div>
-      ),
-      id: 'uz',
-      selected: true,
-    },
-  ]
-
-  const navElements = [
-    { label: 'Bosh sahifa', mainPath: '/', selected: true },
-
-    {
-      label: 'Mahsulotlar',
-      mainPath: '/products',
-      // dropdownItems: shopTypesData.results
-      //   ?.slice(0, 4)
-      //   .map((product) => ({
-      //     label: product.name,
-      //     path: `/products/all?type=${product.id.toString()}`,
-      //   }))
-      //   .concat([{ label: `Hammasi+`, path: `/products/all` }]),
-    },
-    { label: 'Onlayn shifokorlar', mainPath: '/online_doctors' },
-    { label: 'Biz haqimizda', mainPath: '/about_us' },
-    { label: 'Yangiliklar', mainPath: '/news' },
-    {
-      label: 'Yordam',
-      mainPath: '/help',
-      dropdownItems: [
-        {
-          label: 'Yordam',
-          path: '/help',
-        },
-        {
-          label: "Ko'p so'raladigan savollar",
-          path: '/help/faq',
-        },
-      ],
-    },
-  ]
-
-  const getNavElements = () => {
-    return navElements.map(({ label, mainPath, dropdownItems }) => {
-      if (dropdownItems) {
-        const dropdownChildren = dropdownItems.map((item) => ({
-          label: item.label,
-          id: item.path,
-          path: item.path,
-        }))
-
-        return (
-          <ActiveLink href={mainPath} key={label}>
-            <Dropdown items={dropdownChildren} linkable />
-          </ActiveLink>
-        )
-      } else {
-        return (
-          <ActiveLink href={mainPath} key={label}>
-            {label}
-          </ActiveLink>
-        )
-      }
-    })
-  }
-
   return (
     <>
       <nav
@@ -103,46 +29,13 @@ const HeaderModule: FC = () => {
           pathname === '/' ? 'bg-green-light' : 'bg-gray-background'
         }`}
       >
-        <ul className="flex gap-5">
-          {titles.map(({ text, href }) => (
-            <Link href={href} key={text}>
-              {text}
-            </Link>
-          ))}
-        </ul>
+        <TopNavLinks titles={titles} />
         <ul className="flex items-center gap-5">
           <div>
             <Dropdown items={languageItems} />
           </div>
-          <div className="flex items-center gap-2">
-            <div>Toshkent shahar</div>
-            <div>
-              <LocationIcon />
-            </div>
-          </div>
-          {isSuccess ? (
-            <Link href="/dashboard" className="flex items-center gap-2">
-              {userData && (
-                <Image
-                  src={userData?.avatar}
-                  alt={`${userData?.first_name} ${userData?.last_name}`}
-                  width={25}
-                  height={25}
-                  className="border rounded-full border-green-primary shadow-avatar"
-                />
-              )}
-              <p>
-                {userData?.first_name} {userData?.last_name}
-              </p>
-            </Link>
-          ) : (
-            <div className="flex items-center gap-2 cursor-pointer" onClick={() => setActiveModal('auth')}>
-              <div>Kirish</div>
-              <div>
-                <AvatarIcon />
-              </div>
-            </div>
-          )}
+          <AddressDisplay />
+          <UserInfo />
         </ul>
       </nav>
 
@@ -157,7 +50,7 @@ const HeaderModule: FC = () => {
               <LogoIcon />
             </Link>
           </div>
-          <div className="flex gap-3 text-sm">{getNavElements()}</div>
+          <div className="flex gap-3 text-sm">{navElements}</div>
         </section>
 
         <section>

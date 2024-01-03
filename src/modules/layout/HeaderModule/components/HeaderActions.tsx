@@ -7,7 +7,7 @@ import clsx from 'clsx'
 import { BasketIcon, FavouriteOutlineIcon, UserIcon } from '@/assets/icons'
 import { useShopCartQuery, useUserFavoriteDoctorsQuery, useUserFavoriteMedicinesQuery } from '@/hooks/queries'
 
-const HeaderActions: FC = ({}) => {
+const HeaderActions: FC = () => {
   const pathname = usePathname()
   const { data: favoriteProductsData } = useUserFavoriteMedicinesQuery()
   const { data: favoriteDoctorsData } = useUserFavoriteDoctorsQuery()

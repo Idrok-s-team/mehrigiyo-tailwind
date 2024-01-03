@@ -1,5 +1,5 @@
 import { QueryParamsType } from '@/types'
-import { clearObject } from '.'
+import { clearObject } from './index'
 
 export const queryStringUrl = (baseUrl: string, params?: QueryParamsType): string => {
   if (!params || Object.keys(params).length === 0) {

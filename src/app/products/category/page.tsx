@@ -7,7 +7,7 @@ import { Breadcrumb, Checkbox, Loader, Pagination, ProductCard } from '@/compone
 import { ResetIcon } from '@/assets/icons'
 import { useShopMedicinesQuery, useShopTypesQuery } from '@/hooks/queries'
 import { sortOptions } from '@/constants'
-import { IShopMedicines, SortCriteriaType } from '@/types'
+import { SortCriteriaType } from '@/types'
 import backgroundLeaf from '@/assets/images/common/backgroundLeaf.png'
 import backgroundBranch from '@/assets/images/common/backgroundBranchRight.png'
 import { useSortedData, useSyncUrlQueryParams } from '@/hooks/common'
