@@ -1,8 +1,10 @@
 'use client'
 
-import { FC, useMemo } from 'react'
+import { FC, useMemo, useState } from 'react'
 import { SeeAllButton, Slider } from '@/components/common'
 import { useShopMedicinesQuery, useShopTypesQuery } from '@/hooks/queries'
+import { ProductCard, ProductCardSkeleton } from '@/components/specific'
+import { SwiperSlide } from 'swiper/react'
 
 type Props = {
   title?: string
@@ -10,13 +12,17 @@ type Props = {
 }
 
 const ProductsListModule: FC<Props> = ({ title = "Mahsulotlarimiz ro'yxati", withFilter = true }) => {
-  const { data: shopMedicinesData, isFetching: isFetchingMedicines } = useShopMedicinesQuery()
-  const { data: shopTypesData, isFetching: isFetchingShopTypes } = useShopTypesQuery()
+  const [selectedFilter, setSelectedFilter] = useState<string>('')
+
+  const { data: shopTypesData, isLoading: isLoadingShopTypes } = useShopTypesQuery()
+  const { data: shopMedicinesData, isLoading: isLoadingMedicines } = useShopMedicinesQuery({
+    params: { type_ides: selectedFilter },
+  })
 
   const filterValues = useMemo(
     () => [
       { key: '', title: 'Hammasi' },
-      ...(shopTypesData?.results.map((value) => ({ key: value.id, title: value.name })) || []),
+      ...(shopTypesData?.results.map((value) => ({ key: value.id.toString(), title: value.name })) || []),
     ],
     [shopTypesData?.results],
   )
@@ -25,14 +31,14 @@ const ProductsListModule: FC<Props> = ({ title = "Mahsulotlarimiz ro'yxati", wit
     <>
       <div className="flex items-center justify-between">
         <h4>{title}</h4>
-        <SeeAllButton text="Barchasini ko'rish" />
+        <SeeAllButton text="Barchasini ko'rish" href="/products/category" />
       </div>
       {withFilter && (
         <nav
-          className="flex items-center text-lg text-gray-primary"
+          className="flex items-center text-lg text-gray-primary animate-fade-in"
           style={{ gap: 24, marginTop: 32, listStyle: 'none' }}
         >
-          {isFetchingShopTypes ? (
+          {isLoadingShopTypes ? (
             <div className={`w-20 h-10 grid grid-cols-4 gap-7`}>
               {Array.from({ length: 5 }).map((_, index) => (
                 <div key={index} className="w-full h-5 duration-300 bg-gray-300 rounded-md animate-pulse"></div>
@@ -40,7 +46,13 @@ const ProductsListModule: FC<Props> = ({ title = "Mahsulotlarimiz ro'yxati", wit
             </div>
           ) : (
             filterValues?.map(({ key, title }) => (
-              <li key={key} className="list-none cursor-pointer">
+              <li
+                key={key}
+                className={`list-none cursor-pointer ${
+                  selectedFilter === key ? 'text-green-primary font-medium duration-300' : ''
+                }`}
+                onClick={() => setSelectedFilter(key)}
+              >
                 {title}
               </li>
             ))
@@ -49,21 +61,25 @@ const ProductsListModule: FC<Props> = ({ title = "Mahsulotlarimiz ro'yxati", wit
       )}
 
       <div className="mt-10">
-        {/* {isFetchingMedicines ? (
-          <div className="grid grid-cols-5 gap-7 ">
+        {isLoadingMedicines ? (
+          <div className="flex gap-[30px]">
             {Array.from({ length: 5 }).map((_, index) => (
               <ProductCardSkeleton key={index} />
             ))}
           </div>
+        ) : Number(shopMedicinesData?.count) < 1 ? (
+          <h3 className="w-full min-h-[40vh] flex items-center justify-center">
+            Hozircha ushbu bo'limda yangiliklar yo'q
+          </h3>
         ) : (
-          <Slider slides={{ perView: 4.7 }}>
+          <Slider slidesPerView={4.7} autoplay={{ delay: 2000 }}>
             {shopMedicinesData?.results.map((product) => (
-              <div key={product.id} className="keen-slider__slide">
+              <SwiperSlide key={product.id}>
                 <ProductCard data={product} />
-              </div>
+              </SwiperSlide>
             ))}
           </Slider>
-        )} */}
+        )}
       </div>
     </>
   )

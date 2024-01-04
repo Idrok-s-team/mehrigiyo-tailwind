@@ -7,6 +7,7 @@ import { getNewsApi } from '@/api'
 import { createSlug } from '@/utils'
 import { AllNewsModule } from '@/modules/news'
 import { HashtagTime } from '@/components/specific'
+import { SwiperSlide } from 'swiper/react'
 
 const News = async () => {
   const newsData = await getNewsApi()
@@ -58,9 +59,9 @@ const News = async () => {
       </article>
 
       <section className="mt-10 -ml-5">
-        <Slider slides={{ perView: 1.7, spacing: 30 }}>
+        {/* <Slider slidesPerView={1.7} spaceBetween={30}>
           {newsData.results.map(({ image, name, description, id }) => (
-            <div key={id} className="p-5 keen-slider__slide">
+            <SwiperSlide key={id} className="p-5">
               <div className="flex items-center gap-6 p-5 pr-8 bg-white shadow-lg rounded-3xl">
                 <Image src={image} alt={name} width={272} height={170} className="rounded-2xl" />
                 <div>
@@ -68,9 +69,9 @@ const News = async () => {
                   <p className="mt-3 text-gray-primary line-clamp-3">{description}</p>
                 </div>
               </div>
-            </div>
+            </SwiperSlide>
           ))}
-        </Slider>
+        </Slider> */}
       </section>
 
       <section className="mt-36 mb-[75px]">

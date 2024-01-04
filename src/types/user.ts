@@ -58,4 +58,5 @@ export type UserFieldParamsType = {
   pk: number
   phone: string
   new_password: string
+  link: boolean
 }

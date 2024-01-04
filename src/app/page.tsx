@@ -130,7 +130,7 @@ export default async function Home() {
           <Image src={organicLogosIcon} alt="" className="mt-10" />
           <div className="flex items-center gap-8 mt-14">
             <SeeAllButton text="Batafsil" size="md" />
-            <WatchVideoButton />
+            <WatchVideoButton videoUrl="https://www.youtube.com/embed/CKvdClKdSJo?si=V-Hy0MKf5OdPGZWb" />
           </div>
         </div>
 
@@ -173,7 +173,7 @@ export default async function Home() {
         <div className="flex justify-between">
           <div className="w-1/5 mt-3">
             <p className="text-green-primary">Qo'shimcha ma'lumot uchun biz bilan bog'laning</p>
-            <SeeAllButton text="Batafsil" size="md" className="mt-11" />
+            <SeeAllButton text="Batafsil" size="md" className="mt-11" href="/help/faq" />
           </div>
           <div className="w-[68%]">
             <Accordion items={faqData} />
@@ -185,7 +185,7 @@ export default async function Home() {
         <SendRequestModule />
       </section>
 
-      <section>
+      <section className="mt-24">
         <BrandsListModule />
       </section>
     </div>

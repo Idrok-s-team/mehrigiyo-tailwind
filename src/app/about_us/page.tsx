@@ -17,6 +17,7 @@ import certificateImg3 from '@/assets/images/about/USDA3.png'
 import certificateImg4 from '@/assets/images/about/USDA4.png'
 import { ClientsInfoIcon, CountriesInfoIcon, DownloadDayIcon, UsersInfoIcon } from '@/assets/icons/about'
 import { BrandsListModule, HerbsBannerModule } from '@/modules/home'
+import { SwiperSlide } from 'swiper/react'
 
 const AboutUsPage = () => {
   const breadcrumbItems = [{ text: 'Bosh sahifa', href: '/' }, { text: 'Biz haqimizda' }]
@@ -72,7 +73,7 @@ const AboutUsPage = () => {
               Shifobaxsh o'simliklar yetishtirish va salomatlik va uzoq umr ko'rish uchun mahsulotlar ishlab chiqarish
               kompaniyasi
             </p>
-            <WatchVideoButton className="mt-10" />
+            <WatchVideoButton videoUrl="" className="mt-10" />
           </div>
         </div>
         <div className="flex-shrink-0">
@@ -245,13 +246,13 @@ const AboutUsPage = () => {
         </div>
 
         <div className="w-[55%]">
-          <Slider>
+          {/* <Slider>
             {certificates.map((certificate, index) => (
-              <div key={index} className="keen-slider__slide">
+              <SwiperSlide key={index}>
                 <Image src={certificate} alt={`Certificate ${index + 1}`} />
-              </div>
+              </SwiperSlide>
             ))}
-          </Slider>
+          </Slider> */}
         </div>
       </section>
 

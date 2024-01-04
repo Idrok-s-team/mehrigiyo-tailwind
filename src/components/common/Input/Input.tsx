@@ -11,12 +11,12 @@ type Props = InputHTMLAttributes<HTMLInputElement> & {
 
 const Input: FC<Props> = ({ className, label, icon, onClickIcon, ...props }) => {
   const inputClassNames = clsx(
-    'block w-full px-2 pb-3 pt-2 pr-8 text-gray-900 border-b border-gray-[#E2E2E2] focus:outline-none focus:ring-0 focus:border-green-primary placeholder:text-gray-primary/40',
+    'block w-full px-2 pb-3 pt-2 pr-8 text-gray-900 border-b border-[#B0B7C3]/50 focus:outline-none focus:ring-0 focus:border-green-primary placeholder:text-gray-primary/40',
     className,
   )
 
   return (
-    <div className="bg-white relative">
+    <div>
       {label && (
         <label htmlFor={props.id} className="flex items-center text-sm text-[#C3C3C3]">
           {label}

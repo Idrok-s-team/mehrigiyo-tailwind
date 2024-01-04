@@ -9,7 +9,6 @@ import { createSlug, formatDate } from '@/utils'
 
 type Props = {
   data: INews
-  setSelectedNews: (product: INews) => void
 }
 
 const NewsCard: FC<Props> = memo(function NewsCard({ data }) {
@@ -18,16 +17,20 @@ const NewsCard: FC<Props> = memo(function NewsCard({ data }) {
   const slug = createSlug(name, id)
 
   return (
-    <article className="w-[347px] h-[543px] flex flex-col shadow-card rounded-3xl bg-white">
-      <figure>
+    <article className="w-[347px] h-[543px] flex flex-col shadow-card rounded-3xl bg-white group overflow-hidden">
+      <Link
+        href={`/news/${slug}`}
+        aria-label={`${name} yangiliklar rasmi`}
+        className="group-hover:scale-110 transition-transform duration-300 cursor-pointer"
+      >
         <Image
           src={image}
-          alt={name}
+          alt={`${name} yangiliklari rasmi`}
           width={347}
           height={249}
           className="w-full h-[249px] object-cover rounded-t-3xl"
         />
-      </figure>
+      </Link>
 
       <main className="flex-1 p-5 pb-8">
         <section className="flex items-center gap-1 text-sm">
@@ -37,7 +40,11 @@ const NewsCard: FC<Props> = memo(function NewsCard({ data }) {
         </section>
 
         <section className="mt-2 h-[78%]">
-          <Link href={`/news/${slug}`} className="text-lg font-semibold text-black line-clamp-2 h-1/3 hover:underline">
+          <Link
+            href={`/news/${slug}`}
+            aria-label={`${name} yangiliklari`}
+            className="text-lg font-semibold text-black line-clamp-2 h-1/3 hover:underline"
+          >
             {name}
           </Link>
           <p className="text-sm text-gray-primary line-clamp-6">{description}</p>
@@ -45,6 +52,7 @@ const NewsCard: FC<Props> = memo(function NewsCard({ data }) {
 
         <Link
           href={`/news/${slug}`}
+          aria-label={`Ko'proq o'qish: ${name}`}
           className="flex items-center gap-3 mt-3 text-sm cursor-pointer text-green-primary group"
         >
           <span>Ko'proq o'qish</span>

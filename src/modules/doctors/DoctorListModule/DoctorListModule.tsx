@@ -4,6 +4,7 @@ import { FC, useMemo } from 'react'
 import { SeeAllButton, Slider } from '@/components/common'
 import { useDoctorTypesQuery, useDoctorsQuery } from '@/hooks/queries'
 import { DoctorCard, ProductCardSkeleton } from '@/components/specific'
+import { SwiperSlide } from 'swiper/react'
 
 type Props = {
   title?: string
@@ -57,11 +58,11 @@ const DoctorListModule: FC<Props> = ({ title = 'Top shifokorlar', withFilter = t
             ))}
           </div>
         ) : (
-          <Slider slides={{ perView: 5.4 }}>
+          <Slider slidesPerView={5.4}>
             {doctorsData?.results.map((doctor) => (
-              <div key={doctor.id} className="keen-slider__slide">
+              <SwiperSlide key={doctor.id}>
                 <DoctorCard data={doctor} />
-              </div>
+              </SwiperSlide>
             ))}
           </Slider>
         )}

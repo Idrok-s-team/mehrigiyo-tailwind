@@ -16,6 +16,7 @@ interface IProps extends PropsWithChildren {
   onClose: () => void
   className?: string
   withFooter?: boolean
+  isVideo?: boolean
 }
 
 const Modal: FC<IProps> = ({
@@ -28,6 +29,7 @@ const Modal: FC<IProps> = ({
   children,
   className,
   withFooter = true,
+  isVideo = false,
 }) => {
   useEventListener('keydown', (event: KeyboardEvent) => {
     if (event.key === 'Escape' && isOpen) {
@@ -53,7 +55,10 @@ const Modal: FC<IProps> = ({
   const modalRoot = document.body
 
   const modalClasses = clsx(
-    'w-[536px] min-h-[100px] flex flex-col gap-5 justify-between p-5 bg-white rounded-3xl animate-scale-in pb-11',
+    'min-w-[536px] min-h-[100px] flex flex-col gap-5 justify-between p-5 bg-white rounded-3xl animate-scale-in pb-11',
+    {
+      '!bg-transparent': isVideo,
+    },
     className,
   )
 

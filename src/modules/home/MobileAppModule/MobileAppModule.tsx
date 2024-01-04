@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Input } from '@/components/common'
+import { Input, MaskInput } from '@/components/common'
 import Image from 'next/image'
 import appStoreIcon from '@/assets/icons/home/appStoreIcon.svg'
 import googlePlayIcon from '@/assets/icons/home/googlePlayIcon.svg'
@@ -16,10 +16,6 @@ const NewsListModule: FC = () => {
         <p className="mt-5 text-gray-primary">
           O’zbekistonning yetakchi shifokorlari bilan videokonsultatsiyadan foydalaning.
         </p>
-        <div className="mt-[54px]">
-          <label htmlFor="">Ilovani yuklab olish uchun havolani oling</label>
-          <Input className="mt-4" />
-        </div>
         <div className="flex gap-7 mt-10">
           <button>
             <Image src={appStoreIcon} alt="" />

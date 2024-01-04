@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useMemo, useState } from 'react'
+import React, { useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { Breadcrumb, Pagination } from '@/components/common'
 import { useDoctorTypesQuery, useDoctorsQuery } from '@/hooks/queries'

@@ -15,7 +15,7 @@ const MaskInput = forwardRef<any, Props>(({ className, label, ...props }, ref) =
   )
 
   return (
-    <div >
+    <div className="relative">
       {label && (
         <label htmlFor={props.id} className="block text-sm text-[#C3C3C3]">
           {label}

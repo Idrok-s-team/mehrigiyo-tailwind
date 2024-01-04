@@ -19,10 +19,15 @@ export const getUserMeApi = async () => {
   return result.results[0]
 }
 
-export const userRegistrationApi = async (
-  body: FormData,
-): Promise<GetResponseWithStatusType<IUserRegistration>> => {
+export const userRegistrationApi = async (body: FormData): Promise<GetResponseWithStatusType<IUserRegistration>> => {
   return authorizedFetchApi('/user/registration/', 'POST', { body, withAuth: false })
+}
+
+// USER SMS API
+export const userSendSmsApi = async (
+  body: Pick<UserFieldParamsType, 'link'>,
+): Promise<GetResponseWithStatusType<string>> => {
+  return authorizedFetchApi('/user/send/sms/', 'POST', { body })
 }
 
 // USER FAVORITE MEDICINES API
