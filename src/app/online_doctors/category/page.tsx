@@ -9,12 +9,12 @@ import { DoctorAppointmentDrawer } from '@/modules/doctors'
 import CategoryFilter from '@/components/specific/CategoryFilter'
 import SortOptions from '@/components/specific/SortOptions'
 import { IDoctor } from '@/types/doctor'
-import Itemlist from '@/components/specific/DoctorOrProductList'
+import { DoctorOrProductList } from '@/components/specific'
 import { useSortedData } from '@/hooks/common'
 
 const breadcrumbItems = [
   { text: 'Bosh sahifa', href: '/' },
-  { text: 'Mahsulotlar', href: '/products' },
+  { text: 'Onlayn shifokorlar', href: '/online_doctors' },
   { text: 'Barchasi' },
 ]
 
@@ -46,7 +46,7 @@ const DoctorsCategory = () => {
 
         <div className="relative mt-3">
           <SortOptions sortCriteria={sortCriteria} setSortCriteria={setSortCriteria} />
-          <Itemlist doctorsData={sortedData} itemType="doctor" loading={isFetchingDoctors} />
+          <DoctorOrProductList doctorsData={sortedData} itemType="doctor" loading={isFetchingDoctors} />
         </div>
       </section>
 

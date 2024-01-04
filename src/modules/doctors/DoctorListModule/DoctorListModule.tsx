@@ -3,7 +3,7 @@
 import { FC, useMemo } from 'react'
 import { SeeAllButton, Slider } from '@/components/common'
 import { useDoctorTypesQuery, useDoctorsQuery } from '@/hooks/queries'
-import { DoctorCard, ProductCardSkeleton } from '@/components/specific'
+import { DoctorCard, DoctorCardSkeleton, ProductCardSkeleton } from '@/components/specific'
 import { SwiperSlide } from 'swiper/react'
 
 type Props = {
@@ -12,8 +12,8 @@ type Props = {
 }
 
 const DoctorListModule: FC<Props> = ({ title = 'Top shifokorlar', withFilter = true }) => {
-  const { data: doctorsData, isFetching: isFetchingDoctors } = useDoctorsQuery()
-  const { data: doctorTypesData, isFetching: isFetchingDoctorTypes } = useDoctorTypesQuery()
+  const { data: doctorsData, isLoading: isFetchingDoctors } = useDoctorsQuery()
+  const { data: doctorTypesData, isLoading: isFetchingDoctorTypes } = useDoctorTypesQuery()
 
   const filterValues = useMemo(
     () => [
@@ -27,7 +27,7 @@ const DoctorListModule: FC<Props> = ({ title = 'Top shifokorlar', withFilter = t
     <>
       <div className="flex items-center justify-between">
         <h4>{title}</h4>
-        <SeeAllButton text="Barchasini ko'rish" />
+        <SeeAllButton text="Barchasini ko'rish" href='/online_doctors/category' />
       </div>
       {withFilter && (
         <nav
@@ -52,9 +52,9 @@ const DoctorListModule: FC<Props> = ({ title = 'Top shifokorlar', withFilter = t
 
       <div className="mt-10">
         {isFetchingDoctors ? (
-          <div className="grid grid-cols-5 gap-7 ">
+          <div className="flex gap-[30px]">
             {Array.from({ length: 5 }).map((_, index) => (
-              <ProductCardSkeleton key={index} />
+              <DoctorCardSkeleton key={index} />
             ))}
           </div>
         ) : (

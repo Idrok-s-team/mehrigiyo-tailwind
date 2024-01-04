@@ -22,8 +22,8 @@ const ProductsPage = () => {
               Eng yaxshi shifokorlarimiz, Sizning barcha savolaringizga javob berishadi.
             </p>
             <div className="flex items-center gap-8 mt-8">
-              <SeeAllButton text="Bepul maslahat olish" size="md" href="#" />
-              <WatchVideoButton />
+              <SeeAllButton text="Bepul maslahat olish" size="md" href="/online_doctors" />
+              <WatchVideoButton videoUrl="https://www.youtube.com/embed/CKvdClKdSJo?si=V-Hy0MKf5OdPGZWb" />
             </div>
           </div>
         </div>
@@ -53,7 +53,7 @@ const ProductsPage = () => {
         <HerbsBannerModule />
       </section>
 
-      <section className="mt-32">
+      <section className="mt-32 mb-[70px]">
         <BrandsListModule />
       </section>
     </div>

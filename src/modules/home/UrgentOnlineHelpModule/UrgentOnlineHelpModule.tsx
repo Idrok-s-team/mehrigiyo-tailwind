@@ -12,7 +12,7 @@ const BrandsListModule: FC = () => {
           Bizga shoshilinch sog'liq bo'yicha maslahatchini ayting va biz 60 soniya ichida eng yaxshi shifokorni
           tayinlaymiz.
         </p>
-        <SeeAllButton text="Onlayn uchrashuv belgilash" className="mt-10" />
+        <SeeAllButton text="Onlayn uchrashuv belgilash" className="mt-10" href='/online_doctors' />
       </div>
       <div className="relative">
         <Image

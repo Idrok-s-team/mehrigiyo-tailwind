@@ -99,7 +99,7 @@ export default async function Home() {
         <div className="flex items-center gap-10 mt-14">
           {specialistTypesData.results.slice(0, 4).map(({ id, name, image, get_doctors_count }) => (
             <Link
-              href="#"
+              href={`/online_doctors/category?type=${id}`}
               key={id}
               className="flex flex-col items-center justify-center bg-white shadow-primary w-[188px] h-[118px] rounded-2xl duration-300 transition-colors hover:bg-green-light hover:border-[0.5px] hover:border-green-primary"
             >
@@ -113,7 +113,7 @@ export default async function Home() {
         </div>
 
         <div className="mt-14">
-          <SeeAllButton text="Bepul maslahat olish" />
+          <SeeAllButton text="Bepul maslahat olish" href="/online_doctors/category" />
         </div>
       </section>
 
@@ -129,7 +129,7 @@ export default async function Home() {
           </p>
           <Image src={organicLogosIcon} alt="" className="mt-10" />
           <div className="flex items-center gap-8 mt-14">
-            <SeeAllButton text="Batafsil" size="md" />
+            <SeeAllButton text="Batafsil" size="md" href='/about_us' />
             <WatchVideoButton videoUrl="https://www.youtube.com/embed/CKvdClKdSJo?si=V-Hy0MKf5OdPGZWb" />
           </div>
         </div>
@@ -185,7 +185,7 @@ export default async function Home() {
         <SendRequestModule />
       </section>
 
-      <section className="mt-24">
+      <section className="mt-24 mb-[70px]">
         <BrandsListModule />
       </section>
     </div>

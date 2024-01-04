@@ -1,7 +1,6 @@
 'use client'
 
-import { FC, useMemo, useState } from 'react'
-import toast from 'react-hot-toast'
+import { FC, useEffect, useMemo, useState } from 'react'
 import { useCopyToClipboard } from 'usehooks-ts'
 import { ChevronIcon, FavoriteFillIcon, FavoriteIcon, PlusWhiteIcon, SharedIcon } from '@/assets/icons'
 import { IShopMedicines } from '@/types'
@@ -10,16 +9,21 @@ import { useAddToCart, useChangeFavoriteProducts } from '@/hooks/cart'
 import { ProductCount } from '@/components/specific'
 
 type Props = {
-  product: IShopMedicines
+  product: IShopMedicines | null
 }
 
 const ProductDescriptionModule: FC<Props> = ({ product }) => {
   const [showFullDescription, setShowFullDescription] = useState(false)
-  const { id, name, description, discount, cost, quantity, image, pictures } = product
+  const [isLoading, setIsLoading] = useState(true)
+  const { id, name, description, discount, cost, quantity, image, pictures } = product!
 
   const { isProductInCart, addToBasket } = useAddToCart(id)
   const { isProductInFavorite, onChangeFavorite } = useChangeFavoriteProducts(id)
   const [__, copy] = useCopyToClipboard()
+
+  useEffect(() => {
+    setIsLoading(false)
+  }, [])
 
   const onCopyToClipboard = () => {
     copy(location.href)

@@ -1,14 +1,14 @@
 import React from 'react'
 import Image from 'next/image'
 import { Breadcrumb, WatchVideoButton } from '@/components/common'
-import { ProductTypesModule } from '@/modules/products'
+import { ProductTypesModule, ProductsListModule } from '@/modules/products'
 import backgroundLeaf from '@/assets/images/common/backgroundLeaf.png'
 import productsHeader from '@/assets/images/product/productsHeader.png'
 import bannerImg1 from '@/assets/images/product/productSuggestImg1.png'
 import bannerImg2 from '@/assets/images/product/productSuggestImg2.png'
 import bannerImg3 from '@/assets/images/product/productSuggestImg3.png'
 import saleBannerImg from '@/assets/images/product/saleBanner.png'
-import { BrandsListModule, HerbsBannerModule, MobileAppModule, ProductsListModule } from '@/modules/home'
+import { BrandsListModule, HerbsBannerModule, MobileAppModule } from '@/modules/home'
 
 const ProductsPage = () => {
   const breadcrumbItems = [{ text: 'Bosh sahifa', href: '/' }, { text: 'Mahsulotlar' }]
@@ -26,7 +26,10 @@ const ProductsPage = () => {
             <p className="w-2/3 mt-4 text-gray-primary">
               Shifobaxsh o'simliklardan foydalanish, salomatlik va uzoq umr ko'rishingi uchun asosiy omildir
             </p>
-            <WatchVideoButton className="mt-10" />
+            <WatchVideoButton
+              className="mt-10"
+              videoUrl="https://www.youtube.com/embed/CKvdClKdSJo?si=V-Hy0MKf5OdPGZWb"
+            />
           </div>
         </div>
         <div className="flex-shrink-0">
@@ -64,7 +67,7 @@ const ProductsPage = () => {
         <HerbsBannerModule />
       </section>
 
-      <section className="mt-32">
+      <section className="mt-32 mb-[70px]">
         <BrandsListModule />
       </section>
     </div>

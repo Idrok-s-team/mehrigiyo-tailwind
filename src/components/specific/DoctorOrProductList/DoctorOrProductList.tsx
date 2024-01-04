@@ -1,18 +1,18 @@
-// ItemList.tsx
 import React from 'react'
 import { IShopMedicines } from '@/types'
 import { IDoctor } from '@/types/doctor'
 import { DoctorCard, ProductCard } from '..'
 import { Loader } from '@/components/common'
+import clsx from 'clsx'
 
-interface ItemListProps {
+interface IProps {
   loading: boolean
   doctorsData?: IDoctor[]
   productsData?: IShopMedicines[]
   itemType: 'doctor' | 'product'
 }
 
-const ItemList: React.FC<ItemListProps> = ({ loading, doctorsData, productsData, itemType }) => {
+const DoctorOrProductList: React.FC<IProps> = ({ loading, doctorsData, productsData, itemType }) => {
   const renderItems = () => {
     if (itemType === 'doctor' && doctorsData) {
       return doctorsData.map((doctor) => <DoctorCard key={doctor.id} data={doctor} />)
@@ -21,13 +21,18 @@ const ItemList: React.FC<ItemListProps> = ({ loading, doctorsData, productsData,
     }
   }
 
+  const itemClasses = clsx('grid gap-[30px] mt-7 animate-fade-in', {
+    'grid-cols-3': itemType === 'product',
+    'grid-cols-4': itemType === 'doctor',
+  })
+
   return loading ? (
     <div className="flex items-center justify-center min-w-[50vw] min-h-[50vh]">
       <Loader />
     </div>
   ) : (
-    <div className="grid grid-cols-4 gap-[30px] mt-7 animate-fade-in">{renderItems()}</div>
+    <div className={itemClasses}>{renderItems()}</div>
   )
 }
 
-export default ItemList
+export default DoctorOrProductList

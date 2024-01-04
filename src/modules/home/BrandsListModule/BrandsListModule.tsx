@@ -17,7 +17,7 @@ const BrandsListModule: FC = () => {
   return (
     <div className="py-6 border-y-[1px] border-gray-100">
       <Slider
-        slidesPerView={5.2}
+        slidesPerView={5}
         effect="fade"
         autoplay={{ delay: 1000, disableOnInteraction: false }}
         speed={500}
