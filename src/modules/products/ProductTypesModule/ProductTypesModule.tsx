@@ -6,10 +6,10 @@ import { useShopTypesQuery } from '@/hooks/queries'
 import { ProductTypeCardSkeleton } from '@/components/specific'
 
 const ProductTypesModule = () => {
-  const { isLoading, data: shopTypesData } = useShopTypesQuery()
+  const { data, isLoading } = useShopTypesQuery()
 
   return (
-    <div className='mt-8'>
+    <div className="mt-8">
       {isLoading ? (
         <div className="flex gap-[30px]">
           {Array.from({ length: 6 }).map((_, index) => (
@@ -18,7 +18,7 @@ const ProductTypesModule = () => {
         </div>
       ) : (
         <div className="grid grid-cols-6 gap-[22px]">
-          {shopTypesData?.results.map(({ id, name, icon }) => (
+          {data?.results.map(({ id, name, icon }) => (
             <Link
               key={id}
               href={`/products/category?type=${id}`}

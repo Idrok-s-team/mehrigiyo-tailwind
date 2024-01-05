@@ -1,9 +1,8 @@
 import { FC } from 'react'
-import { Input, MaskInput } from '@/components/common'
 import Image from 'next/image'
 import appStoreIcon from '@/assets/icons/home/appStoreIcon.svg'
 import googlePlayIcon from '@/assets/icons/home/googlePlayIcon.svg'
-import mobileScreenIcon from '@/assets/icons/home/mobileScreenIcon.svg'
+import mobileScreenImg from '@/assets/images/home/mobileScreen.png'
 
 const NewsListModule: FC = () => {
   return (
@@ -26,7 +25,7 @@ const NewsListModule: FC = () => {
         </div>
       </div>
       <div>
-        <Image src={mobileScreenIcon} alt="" />
+        <Image src={mobileScreenImg} alt="" />
       </div>
     </div>
   )

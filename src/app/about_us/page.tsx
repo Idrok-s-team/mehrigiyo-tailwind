@@ -1,7 +1,9 @@
-import React from 'react'
+'use client'
+
+import React, { RefObject, useCallback, useRef } from 'react'
 import Image from 'next/image'
-import { Breadcrumb, Slider, Tabs, WatchVideoButton } from '@/components/common'
-import { ProductCategoriesModule } from '@/modules/about'
+import { Breadcrumb, Tabs, WatchVideoButton } from '@/components/common'
+import { AboutCertificatesModule, ProductCategoriesModule } from '@/modules/about'
 import backgroundLeaf from '@/assets/images/common/backgroundLeaf.png'
 import backgroundBranch from '@/assets/images/common/backgroundBranchLeft.png'
 import organicLogosIcon from '@/assets/images/product/organicLogosWide.png'
@@ -11,22 +13,45 @@ import backgroundBubble2 from '@/assets/icons/common/backgroundBubble2.svg'
 import historyImg from '@/assets/images/about/mehrigiyo_history.png'
 import nature1 from '@/assets/images/about/nature1.png'
 import nature2 from '@/assets/images/about/nature2.png'
-import certificateImg1 from '@/assets/images/about/USDA.png'
-import certificateImg2 from '@/assets/images/about/USDA2.png'
-import certificateImg3 from '@/assets/images/about/USDA3.png'
-import certificateImg4 from '@/assets/images/about/USDA4.png'
+
 import { ClientsInfoIcon, CountriesInfoIcon, DownloadDayIcon, UsersInfoIcon } from '@/assets/icons/about'
 import { BrandsListModule, HerbsBannerModule } from '@/modules/home'
-import { SwiperSlide } from 'swiper/react'
 
 const AboutUsPage = () => {
+  const originPartRef = useRef<HTMLElement>(null)
+  const nowPartRef = useRef<HTMLElement>(null)
+  const certificatesPartRef = useRef<HTMLElement>(null)
+
+  const scrollToRef = (ref: RefObject<HTMLElement>, offset: number) => {
+    if (ref.current) {
+      const yOffset = offset
+      const y = ref.current.getBoundingClientRect().top + window.pageYOffset + yOffset
+      window.scrollTo({ top: y, behavior: 'smooth' })
+    }
+  }
+
+  const handleTabChange = useCallback((key: string) => {
+    switch (key) {
+      case 'origin':
+        scrollToRef(originPartRef, -20)
+        break
+      case 'now':
+        scrollToRef(nowPartRef, -200)
+        break
+      case 'certificates':
+        scrollToRef(certificatesPartRef, -200)
+        break
+      default:
+        break
+    }
+  }, [])
+
   const breadcrumbItems = [{ text: 'Bosh sahifa', href: '/' }, { text: 'Biz haqimizda' }]
 
   const tabItems = [
-    { key: 1, label: 'Kelib chiqishi' },
-    { key: 2, label: 'Tarixi' },
-    { key: 3, label: 'Hozirda' },
-    { key: 4, label: 'Yutuqlar va sertifikatlar' },
+    { key: 'origin', label: 'Kelib chiqishi' },
+    { key: 'now', label: 'Hozirda' },
+    { key: 'certificates', label: 'Yutuqlar va sertifikatlar' },
   ]
 
   const achievementsData = [
@@ -58,8 +83,6 @@ const AboutUsPage = () => {
     { title: 3, text: "Texnik xizmat ko'rsatish" },
   ]
 
-  const certificates = [certificateImg1, certificateImg2, certificateImg3, certificateImg4]
-
   return (
     <div className="px-24 mt-14">
       <section className="flex items-center justify-between gap-32">
@@ -73,7 +96,10 @@ const AboutUsPage = () => {
               Shifobaxsh o'simliklar yetishtirish va salomatlik va uzoq umr ko'rish uchun mahsulotlar ishlab chiqarish
               kompaniyasi
             </p>
-            <WatchVideoButton videoUrl="" className="mt-10" />
+            <WatchVideoButton
+              videoUrl="https://www.youtube.com/embed/CKvdClKdSJo?si=V-Hy0MKf5OdPGZWb"
+              className="mt-10"
+            />
           </div>
         </div>
         <div className="flex-shrink-0">
@@ -81,8 +107,15 @@ const AboutUsPage = () => {
         </div>
       </section>
 
-      <section className="sticky z-50 bg-white mt-14 top-28 rounded-2xl">
-        <Tabs items={tabItems} />
+      <section className="sticky z-50 mt-14 top-28 rounded-2xl">
+        {/* <div className="w-4/5"> */}
+        <Tabs
+          items={tabItems}
+          className="shadow-primary bg-white !rounded-2xl"
+          fullWidth={false}
+          onTabChange={handleTabChange}
+        />
+        {/* </div> */}
       </section>
 
       <section className="flex items-center justify-between mt-24">
@@ -106,7 +139,7 @@ const AboutUsPage = () => {
         </div>
       </section>
 
-      <section className="relative flex justify-between">
+      <section className="relative flex justify-between" ref={originPartRef}>
         <div className="w-[30%] mt-72">
           <h2 className="font-extrabold text-green-primary">Kelib chiqish</h2>
           <p className="mt-4 text-gray-primary">
@@ -148,7 +181,7 @@ const AboutUsPage = () => {
         </div>
       </section>
 
-      <section className="mt-40">
+      <section className="mt-40" ref={nowPartRef}>
         <h2 className="font-extrabold text-green-primary">Hozirda</h2>
         <p className="mt-3 text-gray-primary">
           Bugungi kunda korxonada qadimiy sharq tabobati va zamonaviy farmatsevtika yutuqlarini o‘zida jamlagan
@@ -235,32 +268,15 @@ const AboutUsPage = () => {
         </div>
       </section>
 
-      <section className="flex justify-between mt-40">
-        <div className="flex-shrink-0 w-1/3">
-          <h2 className="font-extrabold">Yutuqlar va sertifikatlar</h2>
-          <p className="mt-3 text-gray-primary">
-            2020 yil dekabr oyida kompaniya ikkita xalqaro organik sertifikatlarni oldi: Amerika USDA ORGANIC va Yevropa
-            EU ORGANIC Gollandiyaning Control Union Certifications kompaniyasidan. Yaqin kelajakda Saudiya Arabistoni,
-            Omon, AQSH, Yevropa mamlakatlariga mahsulot eksport qilish rejalashtirilgan.
-          </p>
-        </div>
-
-        <div className="w-[55%]">
-          {/* <Slider>
-            {certificates.map((certificate, index) => (
-              <SwiperSlide key={index}>
-                <Image src={certificate} alt={`Certificate ${index + 1}`} />
-              </SwiperSlide>
-            ))}
-          </Slider> */}
-        </div>
+      <section className="flex justify-between mt-40" ref={certificatesPartRef}>
+        <AboutCertificatesModule />
       </section>
 
       <section className="mt-52">
         <HerbsBannerModule />
       </section>
 
-      <section className="mt-32">
+      <section className="mt-32 mb-[70px]">
         <BrandsListModule />
       </section>
     </div>

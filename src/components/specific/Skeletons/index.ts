@@ -1,5 +1,6 @@
 export { default as NewsCardSkeleton } from './NewsCardSkeleton'
 export { default as DoctorCardSkeleton } from './DoctorCardSkeleton'
 export { default as ProductCardSkeleton } from './ProductCardSkeleton'
+export { default as DoctorTypeCardSkeleton } from './DoctorTypeCardSkeleton'
 export { default as ProductTypeCardSkeleton } from './ProductTypeCardSkeleton'
 export { default as ProductDescriptionSkeleton } from './ProductDescriptionSkeleton'

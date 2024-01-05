@@ -1,6 +1,7 @@
 'use client'
 
 import { FC, useState, useCallback, ReactNode } from 'react'
+import clsx from 'clsx'
 
 export type TabItemType = {
   key: string
@@ -11,9 +12,11 @@ export type TabItemType = {
 type Props = {
   items: TabItemType[]
   onTabChange?: (key: string) => void
+  className?: string
+  fullWidth?: boolean
 }
 
-const Tabs: FC<Props> = ({ items, onTabChange }): JSX.Element => {
+const Tabs: FC<Props> = ({ items, onTabChange, className, fullWidth = true }): JSX.Element => {
   const [activeTab, setActiveTab] = useState(items[0].key)
 
   const handleTabClick = useCallback(
@@ -27,18 +30,37 @@ const Tabs: FC<Props> = ({ items, onTabChange }): JSX.Element => {
   )
 
   const activeTabItem = items.find((item) => item.key === activeTab)
-  const tabWidth = `${100 / items.length}%`
+  const tabWidth = fullWidth ? `${100 / items.length}%` : undefined
+
+  const tabContainerClasses = clsx(
+    'h-[50px] px-2 flex items-center bg-black/[0.03]',
+    {
+      'rounded-2xl': !fullWidth,
+      'rounded-[100px]': fullWidth,
+    },
+    className,
+  )
+
+  const getTabItemClasses = (key: string) => {
+    const tabItemClasses = clsx(
+      'h-full px-[23px] py-[7px] flex items-center justify-center text-gray-primary cursor-pointer select-none duration-200 whitespace-nowrap',
+      {
+        'bg-green-primary/20 text-green-primary font-semibold': key === activeTab,
+        'rounded-[10px]': !fullWidth,
+        'rounded-[100px]': fullWidth,
+      },
+    )
+    return tabItemClasses
+  }
 
   return (
     <>
-      <div className="h-[50px] px-2  rounded-[100px] flex items-center bg-black/[0.03]">
+      <div className={tabContainerClasses}>
         <ul className="w-full h-9 flex items-center" role="tablist">
           {items.map(({ key, label }) => (
             <li
               key={key}
-              className={`h-full px-[23px] py-[7px] flex items-center justify-center rounded-[100px] text-gray-primary cursor-pointer select-none duration-200 whitespace-nowrap ${
-                key === activeTab ? 'bg-green-primary/20 text-green-primary font-semibold' : ''
-              }`}
+              className={getTabItemClasses(key)}
               onClick={() => handleTabClick(key)}
               role="tab"
               tabIndex={key === activeTab ? 0 : -1}
@@ -50,7 +72,7 @@ const Tabs: FC<Props> = ({ items, onTabChange }): JSX.Element => {
           ))}
         </ul>
       </div>
-      <div className="py-4">{activeTabItem?.children}</div>
+      {activeTabItem?.children && <div className="py-4">{activeTabItem?.children}</div>}
     </>
   )
 }

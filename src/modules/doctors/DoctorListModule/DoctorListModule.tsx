@@ -53,7 +53,7 @@ const DoctorListModule: FC<Props> = ({ title = 'Top shifokorlar', withFilter = t
       <div className="mt-10">
         {isFetchingDoctors ? (
           <div className="flex gap-[30px]">
-            {Array.from({ length: 5 }).map((_, index) => (
+            {Array.from({ length: 6 }).map((_, index) => (
               <DoctorCardSkeleton key={index} />
             ))}
           </div>
