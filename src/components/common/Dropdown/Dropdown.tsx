@@ -1,6 +1,6 @@
 'use client'
 
-import { type FC, useState, useRef, memo, ReactNode } from 'react'
+import { type FC, useState, useRef, ReactNode } from 'react'
 import { useOnClickOutside } from 'usehooks-ts'
 import { DropdownIcon } from '@/assets/icons'
 import { useEffect } from 'react'

@@ -7,6 +7,7 @@ import { BookmarkIcon, SharedIcon } from '@/assets/icons'
 import { ActionButton, Button, Tooltip } from '@/components/common'
 import { IDoctor } from '@/types/doctor'
 import { useChangeFavoriteDoctors } from '@/hooks/doctor'
+import { cleanHtml } from '@/utils'
 
 type Props = {
   data: IDoctor
@@ -68,7 +69,7 @@ const DoctorDescriptionModule: FC<Props> = ({ data }) => {
             {description && (
               <div
                 className="mt-2.5 text-[#222222]/60"
-                dangerouslySetInnerHTML={{ __html: description.replace(/\n/g, '<br>') }}
+                dangerouslySetInnerHTML={{ __html: cleanHtml(description.replace(/\n/g, '<br>')) }}
               />
             )}
           </article>

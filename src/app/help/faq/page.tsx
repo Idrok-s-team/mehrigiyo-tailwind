@@ -1,10 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { Accordion, Breadcrumb } from '@/components/common'
 import backgroundLeaf from '@/assets/images/common/backgroundLeaf.png'
 import backgroundBranch from '@/assets/images/common/backgroundBranchRight.png'
 import { faqData } from '@/constants'
-import Link from 'next/link'
 
 const Faq = () => {
   const breadcrumbItems = [
@@ -32,7 +32,7 @@ const Faq = () => {
       </header>
 
       <section className="relative mt-10">
-        <Accordion items={faqData} />
+        <Accordion items={faqData} isFirstItemOpened />
       </section>
     </div>
   )

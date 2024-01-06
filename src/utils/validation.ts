@@ -1,3 +1,5 @@
+import sanitizeHtml from 'sanitize-html'
+
 export const clearObject = (object: object) => {
   return Object.fromEntries(
     Object.entries(object).filter(([_, value]) => {
@@ -22,4 +24,16 @@ export const formatPlasticCardNumber = (cardNumber: string | number) => {
   const lastFourDigits = cardNumberStr.substring(12, 16)
 
   return `${firstFourDigits} ${middleTwoDigits}** **** ${lastFourDigits}`
+}
+
+export const cleanHtml = (dirtyHtml: string, options?: sanitizeHtml.IOptions): string => {
+  const defaultOptions: sanitizeHtml.IOptions = {
+    allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
+    allowedAttributes: {
+      ...sanitizeHtml.defaults.allowedAttributes,
+      img: ['src', 'alt', 'title', 'width', 'height'],
+    },
+  }
+
+  return sanitizeHtml(dirtyHtml, { ...defaultOptions, ...options })
 }

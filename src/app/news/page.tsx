@@ -1,13 +1,12 @@
 import React from 'react'
 import Image from 'next/image'
-import { Breadcrumb, SeeAllButton, Slider } from '@/components/common'
+import { Breadcrumb, SeeAllButton } from '@/components/common'
 import backgroundLeaf from '@/assets/images/common/backgroundLeaf.png'
 import backgroundBranch from '@/assets/images/common/backgroundBranchRight.png'
 import { getNewsApi } from '@/api'
 import { createSlug } from '@/utils'
 import { AllNewsModule } from '@/modules/news'
 import { HashtagTime } from '@/components/specific'
-import { SwiperSlide } from 'swiper/react'
 
 const News = async () => {
   const newsData = await getNewsApi()
@@ -57,22 +56,6 @@ const News = async () => {
           />
         </div>
       </article>
-
-      <section className="mt-10 -ml-5">
-        {/* <Slider slidesPerView={1.7} spaceBetween={30}>
-          {newsData.results.map(({ image, name, description, id }) => (
-            <SwiperSlide key={id} className="p-5">
-              <div className="flex items-center gap-6 p-5 pr-8 bg-white shadow-lg rounded-3xl">
-                <Image src={image} alt={name} width={272} height={170} className="rounded-2xl" />
-                <div>
-                  <h6>{name}</h6>
-                  <p className="mt-3 text-gray-primary line-clamp-3">{description}</p>
-                </div>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Slider> */}
-      </section>
 
       <section className="mt-36 mb-[75px]">
         <AllNewsModule />

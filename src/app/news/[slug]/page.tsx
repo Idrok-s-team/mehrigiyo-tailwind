@@ -5,6 +5,7 @@ import { HashtagTime } from '@/components/specific'
 import backgroundLeaf from '@/assets/images/common/backgroundLeaf.png'
 import backgroundBranch from '@/assets/images/common/backgroundBranchRight.png'
 import { getNewsByIdApi } from '@/api'
+import { cleanHtml } from '@/utils'
 
 type Props = {
   params: {
@@ -48,7 +49,10 @@ const NewsBySlug = async ({ params }: Props) => {
               className="w-full rounded-[20px]"
             />
           </div>
-          <div className="mt-7" dangerouslySetInnerHTML={{ __html: description.replace(/\n/g, '<br>') }} />
+          <div
+            className="mt-8 leading-7"
+            dangerouslySetInnerHTML={{ __html: cleanHtml(description.replace(/\n/g, '<br>')) }}
+          />
         </article>
       </main>
     </div>

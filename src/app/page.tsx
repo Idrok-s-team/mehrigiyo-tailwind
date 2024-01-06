@@ -9,10 +9,10 @@ import {
   HerbsBannerModule,
   MobileAppModule,
   NewsListModule,
-  ProductsListModule,
   SendRequestModule,
   UrgentOnlineHelpModule,
 } from '@/modules/home'
+import { ProductsListModule } from '@/modules/products'
 import organicLogosIcon from '@/assets/icons/home/organicLogosIcon.svg'
 import backgroundBubble1 from '@/assets/icons/common/backgroundBubble1.svg'
 import backgroundBubble2 from '@/assets/icons/common/backgroundBubble2.svg'
@@ -129,7 +129,7 @@ export default async function Home() {
           </p>
           <Image src={organicLogosIcon} alt="" className="mt-10" />
           <div className="flex items-center gap-8 mt-14">
-            <SeeAllButton text="Batafsil" size="md" href='/about_us' />
+            <SeeAllButton text="Batafsil" size="md" href="/about_us" />
             <WatchVideoButton videoUrl="https://www.youtube.com/embed/CKvdClKdSJo?si=V-Hy0MKf5OdPGZWb" />
           </div>
         </div>

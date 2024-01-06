@@ -4,7 +4,7 @@ import { FC, useMemo, useState } from 'react'
 import { SeeAllButton, Slider } from '@/components/common'
 import { useNewsQuery, useNewsTagsQuery } from '@/hooks/queries'
 import NewsCard from '@/components/specific/NewsCard'
-import { NewsCardSkeleton, ProductCardSkeleton } from '@/components/specific'
+import { NewsCardSkeleton } from '@/components/specific'
 import { SwiperSlide } from 'swiper/react'
 
 const NewsListModule: FC = () => {
@@ -32,12 +32,9 @@ const NewsListModule: FC = () => {
         style={{ gap: 24, marginTop: 32, listStyle: 'none' }}
       >
         {isFetchingNewsTags ? (
-          <div className={`w-20 h-10 grid grid-cols-4 gap-7`}>
+          <div className="flex gap-4">
             {Array.from({ length: 5 }).map((_, index) => (
-              <div
-                key={`skeleton-${index}`}
-                className="w-full h-5 duration-300 bg-gray-300 rounded-md animate-pulse"
-              ></div>
+              <div key={`skeleton-filter-${index}`} className="w-24 h-7 bg-gray-300 rounded-full animate-pulse" />
             ))}
           </div>
         ) : (
@@ -69,7 +66,7 @@ const NewsListModule: FC = () => {
         ) : (
           <Slider slidesPerView={3.3} autoplay>
             {newsData?.results?.map((data) => (
-              <SwiperSlide key={data.id} className="keen-slider__slide p-2 py-7">
+              <SwiperSlide key={data.id} className="p-2 py-7">
                 <NewsCard data={data} />
               </SwiperSlide>
             ))}

@@ -39,9 +39,9 @@ const ProductsListModule: FC<Props> = ({ title = "Mahsulotlarimiz ro'yxati", wit
           style={{ gap: 24, marginTop: 32, listStyle: 'none' }}
         >
           {isLoadingShopTypes ? (
-            <div className={`w-20 h-10 grid grid-cols-4 gap-7`}>
-              {Array.from({ length: 5 }).map((_, index) => (
-                <div key={index} className="w-full h-5 duration-300 bg-gray-300 rounded-md animate-pulse"></div>
+            <div className="flex gap-4">
+              {Array.from({ length: 6 }).map((_, index) => (
+                <div key={`skeleton-filter-${index}`} className="w-24 h-7 bg-gray-300 rounded-full animate-pulse" />
               ))}
             </div>
           ) : (

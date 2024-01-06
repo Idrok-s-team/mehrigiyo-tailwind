@@ -10,8 +10,7 @@ type Props = PropsWithChildren<LinkProps> & {
 
 const ActiveLink: FC<Props> = ({ children, ...props }) => {
   const pathname = usePathname()
-  const { href } = props
-  const isActive = href === pathname
+  const isActive = props.href === pathname
 
   return (
     <Link

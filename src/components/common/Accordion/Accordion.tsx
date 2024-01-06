@@ -2,6 +2,7 @@
 
 import { FC, useState, useRef, useEffect, memo } from 'react'
 import { DropdownIcon } from '@/assets/icons'
+import { cleanHtml } from '@/utils'
 
 interface IChildren {
   title: string
@@ -12,15 +13,25 @@ interface IAccordionProps {
   items: IChildren[]
   withIndex?: boolean
   size?: 'sm' | 'md'
+  isFirstItemOpened?: boolean
 }
 
-const Accordion: FC<IAccordionProps> = memo(function Accordion({ items, withIndex = true, size = 'md' }) {
+const Accordion: FC<IAccordionProps> = memo(function Accordion({
+  items,
+  withIndex = true,
+  isFirstItemOpened = false,
+  size = 'md',
+}) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const contentRefs = useRef<HTMLDivElement[]>([])
 
   useEffect(() => {
     contentRefs.current = contentRefs.current.slice(0, items.length)
-  }, [items])
+
+    if (isFirstItemOpened) {
+      setActiveIndex(0)
+    }
+  }, [isFirstItemOpened, items])
 
   const toggleItem = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index)
@@ -58,7 +69,7 @@ const Accordion: FC<IAccordionProps> = memo(function Accordion({ items, withInde
               <li>
                 <p
                   className={`text-gray-primary ${smallSize ? 'text-sm mt-3' : ''}`}
-                  dangerouslySetInnerHTML={{ __html: String(children).replace(/\n/g, '<br>') }}
+                  dangerouslySetInnerHTML={{ __html: cleanHtml(String(children).replace(/\n/g, '<br>')) }}
                 />
               </li>
             </ul>

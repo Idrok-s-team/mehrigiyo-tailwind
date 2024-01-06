@@ -7,6 +7,7 @@ import { IShopMedicines } from '@/types'
 import { ActionButton, Button, Tooltip, ViewSlide } from '@/components/common'
 import { useAddToCart, useChangeFavoriteProducts } from '@/hooks/cart'
 import { ProductCount } from '@/components/specific'
+import { cleanHtml } from '@/utils'
 
 type Props = {
   product: IShopMedicines | null
@@ -97,7 +98,7 @@ const ProductDescriptionModule: FC<Props> = ({ product }) => {
             {description && (
               <div
                 className={`overflow-hidden ${showFullDescription ? '' : 'line-clamp-6'}`}
-                dangerouslySetInnerHTML={{ __html: description.replace(/\n/g, '<br>') }}
+                dangerouslySetInnerHTML={{ __html: cleanHtml(description.replace(/\n/g, '<br>')) }}
               />
             )}
             {description && (
