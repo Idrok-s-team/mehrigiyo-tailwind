@@ -33,7 +33,7 @@ export interface IChatRoom {
   created_at: string
 }
 
-type ChatRoomDoctorType = {
+export type ChatRoomDoctorType = {
   doctor_account_id: number
   image: string
   name: string

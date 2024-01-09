@@ -1,6 +1,7 @@
 import toast from 'react-hot-toast'
 import { useShopCartQuery } from '../queries'
 import { useAddShopCartMutation } from '../mutations/shop'
+import { ApiErrorDetail } from '@/types'
 
 const useAddToCart = (productId: number, amount: number = 1) => {
   const { data, refetch } = useShopCartQuery()
@@ -21,7 +22,8 @@ const useAddToCart = (productId: number, amount: number = 1) => {
         .promise(cartAddPromise, {
           loading: `savatga qo'shilmoqda`,
           success: `muvaffaqqiyatli qo'shildi`,
-          error: ({ data }) => data.detail,
+          error: (err: ApiErrorDetail) =>
+            err.statusCode === 401 ? `Iltimos avval ro'yxatdan o'ting` : JSON.stringify(err.detail),
         })
         .then(() => refetch())
     }

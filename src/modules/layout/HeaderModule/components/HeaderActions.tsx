@@ -4,6 +4,7 @@ import { FC } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import clsx from 'clsx'
+import Cookies from 'js-cookie'
 import { BasketIcon, FavouriteOutlineIcon, UserIcon } from '@/assets/icons'
 import { useShopCartQuery, useUserFavoriteDoctorsQuery, useUserFavoriteMedicinesQuery } from '@/hooks/queries'
 
@@ -12,25 +13,26 @@ const HeaderActions: FC = () => {
   const { data: favoriteProductsData } = useUserFavoriteMedicinesQuery()
   const { data: favoriteDoctorsData } = useUserFavoriteDoctorsQuery()
   const { data: shopCartData } = useShopCartQuery()
+  const isWithToken = !!Cookies.get('access_token')
 
   const actions = [
     {
       icon: <UserIcon color={pathname === '/favorite_doctors' ? '#fff' : '#7165E3'} />,
       name: `Sevimli doktorlar`,
       href: `/favorite_doctors`,
-      count: favoriteDoctorsData?.count,
+      count: isWithToken ? favoriteDoctorsData?.count : 0,
     },
     {
       icon: <FavouriteOutlineIcon color={pathname === '/favorite_products' ? '#fff' : '#F3603F'} />,
       name: `Sevimli mahsulotlar`,
       href: `/favorite_products`,
-      count: favoriteProductsData?.count,
+      count: isWithToken ? favoriteProductsData?.count : 0,
     },
     {
       icon: <BasketIcon color={pathname === '/cart' ? '#fff' : '#505050'} />,
       name: `Savat`,
       href: `/cart`,
-      count: shopCartData?.data.length,
+      count: isWithToken ? shopCartData?.data.length : 0,
     },
   ]
 

@@ -22,12 +22,12 @@ import { Confirm } from '@/components/common'
 import { useCommonStore } from '@/store'
 
 const SidebarModule: FC = () => {
-  const { activeModal, setActiveModal } = useCommonStore()
-  const { data: userData, refetch } = useUserMeQuery()
   const router = useRouter()
-
   const pathname = usePathname()
   const subPath = pathname.split('/')[2]
+
+  const { activeModal, setActiveModal } = useCommonStore()
+  const { data: userData, refetch } = useUserMeQuery()
 
   const handleLogout = async () => {
     Cookies.remove('access_token')

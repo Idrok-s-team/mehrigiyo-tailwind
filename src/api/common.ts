@@ -29,7 +29,6 @@ export const authorizedFetchApi = async <T, R = T>(
   const headers: HeadersInit = { 'Content-Type': 'application/json' }
   if (withAuth) {
     const token = getCookie('access_token')
-    if (!token) throw new Error('No access token available.')
     headers['Authorization'] = `Bearer ${token}`
   }
 
@@ -41,7 +40,7 @@ export const authorizedFetchApi = async <T, R = T>(
 
   if (!response.ok) {
     const errorData = await response.json()
-    throw new ApiError(`${errorData.detail}`, { ...errorData, statusCode: response.status })
+    throw new ApiError(errorData, response.status)
   }
 
   return response.json()

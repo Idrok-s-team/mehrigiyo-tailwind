@@ -1,3 +1,11 @@
+import { FC } from 'react'
+
+type Props = {
+  color?: string
+  width?: string | number
+  height?: string | number
+}
+
 export const UpcomingTimeIcon = () => {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -177,33 +185,33 @@ export const CallRecordIcon = () => {
   )
 }
 
-export const CallVoiceIcon = () => {
+export const CallVoiceIcon: FC<Props> = ({ color = '#112950' }) => {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M6.36523 13.6782C6.36523 16.8092 8.90323 19.3472 12.0342 19.3472C15.1662 19.3472 17.7042 16.8092 17.7042 13.6782"
-        stroke="#112950"
+        stroke={color}
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M17.7042 10.423V8.169C17.7042 5.038 15.1662 2.5 12.0342 2.5C8.90323 2.5 6.36523 5.038 6.36523 8.169V10.423"
-        stroke="#112950"
+        stroke={color}
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M12.0352 21.4997V19.3477"
-        stroke="#112950"
+        stroke={color}
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M4.90039 13.6782H19.1684"
-        stroke="#112950"
+        stroke={color}
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -212,12 +220,10 @@ export const CallVoiceIcon = () => {
   )
 }
 
-export const CallDisableIcon = () => {
+export const CallDisableIcon: FC<Props> = ({ color = '#112950' }) => {
   return (
-    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M12 11L35 34" stroke="white" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M16 15L32 31" stroke="#112950" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx="24" cy="24" r="23.5" stroke="#F2F4F5" />
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M1 1L17 17" stroke={color} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
     </svg>
   )
 }
@@ -253,7 +259,7 @@ export const CallChatIcon = () => {
   )
 }
 
-export const CallVideoIcon = () => {
+export const CallVideoIcon: FC<Props> = ({ color = '#112950' }) => {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g id=" 24px / Video">
@@ -261,7 +267,7 @@ export const CallVideoIcon = () => {
           <path
             id="Stroke 1"
             d="M16.1504 9.67302C17.9885 8.21588 20.4552 6.80636 20.9218 7.31112C21.6932 8.13969 21.6266 16.0254 20.9218 16.7778C20.4932 17.2445 18.0075 15.8349 16.1504 14.3873"
-            stroke="#112950"
+            stroke={color}
             strokeWidth="1.5"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -271,7 +277,7 @@ export const CallVideoIcon = () => {
             fill-rule="evenodd"
             clip-rule="evenodd"
             d="M2.51367 12.0371C2.51367 6.84473 4.23843 5.11426 9.41462 5.11426C14.5899 5.11426 16.3146 6.84473 16.3146 12.0371C16.3146 17.2285 14.5899 18.96 9.41462 18.96C4.23843 18.96 2.51367 17.2285 2.51367 12.0371Z"
-            stroke="#112950"
+            stroke={color}
             strokeWidth="1.5"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -282,12 +288,12 @@ export const CallVideoIcon = () => {
   )
 }
 
-export const CallCallIcon = () => {
+export const CallCallIcon: FC<Props> = ({ color = '#2D2D2D' }) => {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M5.57039 7.88709C5.28389 6.00009 6.61439 4.30509 8.64689 3.68409C9.00757 3.57381 9.39673 3.6052 9.73507 3.77187C10.0734 3.93853 10.3355 4.22792 10.4679 4.58109L11.1204 6.32109C11.2254 6.60101 11.2444 6.90593 11.1749 7.19672C11.1054 7.48751 10.9506 7.7509 10.7304 7.95309L8.78939 9.73059C8.69371 9.81839 8.62242 9.92948 8.58246 10.053C8.5425 10.1766 8.53524 10.3084 8.56139 10.4356L8.57939 10.5136L8.62589 10.7086C8.86728 11.6561 9.23508 12.5667 9.71939 13.4161C10.247 14.3186 10.9017 15.1406 11.6634 15.8566L11.7234 15.9106C11.8203 15.9966 11.9378 16.056 12.0645 16.0831C12.1912 16.1102 12.3228 16.104 12.4464 16.0651L14.9559 15.2746C15.2411 15.185 15.5465 15.1828 15.833 15.268C16.1195 15.3533 16.374 15.5222 16.5639 15.7531L17.7519 17.1946C18.2469 17.7946 18.1869 18.6766 17.6184 19.2061C16.0629 20.6566 13.9239 20.9536 12.4359 19.7581C10.6119 18.2868 9.07432 16.4924 7.89989 14.4646C6.71592 12.4383 5.92508 10.2067 5.56889 7.88709H5.57039ZM10.1349 10.5346L11.7429 9.05859C12.1836 8.65439 12.4935 8.12769 12.6328 7.5461C12.772 6.96451 12.7343 6.35457 12.5244 5.79459L11.8734 4.05459C11.6069 3.34396 11.0795 2.76168 10.3986 2.4264C9.71773 2.09111 8.93464 2.02806 8.20889 2.25009C5.68439 3.02259 3.65789 5.28609 4.08689 8.11359C4.38689 10.0876 5.07839 12.5986 6.60389 15.2206C7.87095 17.4071 9.52957 19.3419 11.4969 20.9281C13.7289 22.7206 16.7079 22.1086 18.6429 20.3056C19.7919 19.2346 19.9089 17.4556 18.9114 16.2436L17.7234 14.8006C17.3433 14.3393 16.8342 14.0021 16.2612 13.8321C15.6882 13.6621 15.0775 13.6672 14.5074 13.8466L12.4239 14.5021C11.8859 13.9474 11.4147 13.3317 11.0199 12.6676C10.6385 11.9961 10.3412 11.2802 10.1349 10.5361V10.5346Z"
-        fill="#2D2D2D"
+        fill={color}
       />
     </svg>
   )

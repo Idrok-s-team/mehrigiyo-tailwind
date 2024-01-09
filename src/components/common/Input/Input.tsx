@@ -16,7 +16,7 @@ const Input: FC<Props> = ({ className, label, icon, onClickIcon, ...props }) => 
   )
 
   return (
-    <div>
+    <div className="relative">
       {label && (
         <label htmlFor={props.id} className="flex items-center text-sm text-[#C3C3C3]">
           {label}
@@ -25,7 +25,7 @@ const Input: FC<Props> = ({ className, label, icon, onClickIcon, ...props }) => 
       )}
       <input {...props} className={inputClassNames} />
       {icon && (
-        <button className="absolute right-0 bottom-2.5 cursor-pointer p-1" onClick={onClickIcon}>
+        <button className="absolute right-0 bottom-2.5 cursor-pointer p-1" onClick={onClickIcon} type="button">
           {icon}
         </button>
       )}

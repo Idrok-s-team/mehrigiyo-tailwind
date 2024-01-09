@@ -27,7 +27,6 @@ const RootLayout: FC<IProps> = async ({ children }) => {
         suppressHydrationWarning={true}
       >
         <Providers>
-          <Toaster position="top-right" />
           <header className="sticky top-0 z-10">
             <HeaderModule />
           </header>

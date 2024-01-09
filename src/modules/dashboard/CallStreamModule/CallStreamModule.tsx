@@ -1,8 +1,8 @@
 'use client'
 
-import { FC } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
-import { CallStream } from './components'
+import { CallActions, CallStream, DoctorInfo, MiniVideoStream, VideoStream } from './components'
 import callBackground from '@/assets/icons/dashboard/consultation/callBackground.png'
 import { useChatStore } from '@/store'
 import { baseUrl } from '@/constants'
@@ -14,60 +14,91 @@ import {
   CallRecordIcon,
   CallVideoIcon,
   CallVoiceIcon,
+  CallDisableIcon,
 } from '@/assets/icons'
 import { ActionButton } from '@/components/common'
 import { IChatRoom } from '@/types'
+import clsx from 'clsx'
 
 const CallStreamModule: FC = () => {
   const selectedStorageChatRoom: IChatRoom = JSON.parse(String(window.localStorage.getItem('selectedChatRoom')))
+  const webcamVideoRef = useRef<HTMLVideoElement>(null)
+  const webcamVideo1Ref = useRef<HTMLVideoElement>(null)
+  const [isCameraOn, setIsCameraOn] = useState(false)
+  const [isMicOn, setIsMicOn] = useState(false)
+
+  const toggleCamera = async () => {
+    if (!isCameraOn) {
+      // Start the webcam
+      const constraints = {
+        width: { ideal: 1280 },
+        height: { ideal: 720 },
+        frameRate: { ideal: 60 },
+      }
+      const stream = await navigator.mediaDevices.getUserMedia({ video: constraints, audio: isMicOn })
+      if (webcamVideoRef.current) {
+        webcamVideoRef.current.srcObject = stream
+      }
+      if (webcamVideo1Ref.current) {
+        webcamVideo1Ref.current.srcObject = stream
+      }
+      setIsCameraOn(true)
+    } else {
+      // Turn off the camera
+      const stream = webcamVideoRef.current?.srcObject as MediaStream
+      // const stream1 = webcamVideo1Ref.current?.srcObject as MediaStream
+      stream.getVideoTracks().forEach((track) => track.stop())
+      setIsCameraOn(false)
+    }
+  }
+
+  const toggleMic = async () => {
+    if (!isMicOn) {
+      // Turn on the microphone
+      const stream = await navigator.mediaDevices.getUserMedia({ video: isCameraOn, audio: true })
+      if (webcamVideoRef.current) {
+        webcamVideoRef.current.srcObject = stream
+      }
+      setIsMicOn(true)
+    } else {
+      // Turn off the microphone
+      const stream = webcamVideoRef.current?.srcObject as MediaStream
+      stream.getAudioTracks().forEach((track) => track.stop())
+      setIsMicOn(false)
+    }
+  }
+
+  useEffect(() => {
+    toggleCamera()
+  }, [])
+
+  const micButtonClasses = clsx('absolute top-4 left-6 bg-white border border-[#F2F4F5]', {
+    'bg-[#E64C3C]': !isMicOn,
+    'bg-white': isMicOn,
+  })
+
+  const videoCallButtonClasses = clsx('absolute top-4 right-[84px] bg-white border border-[#F2F4F5]', {
+    'bg-[#E64C3C]': !isCameraOn,
+    'bg-white': isCameraOn,
+  })
 
   return (
-    <CallStream />
-    // <div className="fixed inset-0 z-50 w-screen h-screen overflow-hidden bg-white">
-    //   <Image src={callBackground} alt="" className="absolute select-none z-10" />
-    //   <div className="absolute top-[30%] w-full h-full flex flex-col gap-20 bg-[#2E6743]">
-    //     {selectedStorageChatRoom && (
-    //       <section className="flex flex-col items-center justify-center z-50">
-    //         <Image
-    //           src={`${baseUrl}/${selectedStorageChatRoom.doktor.image}`}
-    //           alt={selectedStorageChatRoom.doktor.name}
-    //           width={125}
-    //           height={125}
-    //           className="rounded-[30px]"
-    //         />
-    //         <h2 className="text-white">{selectedStorageChatRoom.doktor.name}</h2>
-    //         <p className="text-[22px] uppercase text-gray-primary">{selectedStorageChatRoom.doktor.type}</p>
-    //       </section>
-    //     )}
-    //     <section className="flex flex-col items-center just gap-10">
-    //       <div className="w-[130px] h-[43px] flex items-center justify-center gap-2 rounded-[20px] bg-[#8E9AAB]/20">
-    //         <CallRecordIcon />
-    //         <h6 className="text-white">00:29:12</h6>
-    //       </div>
-    //       <div>
-    //         <div className="relative">
-    //           <CallActionBgIcon />
-    //           <ActionButton size="lg" className="absolute top-4 left-6 bg-white border border-[#F2F4F5]">
-    //             <CallVoiceIcon />
-    //           </ActionButton>
-    //           <ActionButton size="lg" className="absolute top-4 left-[84px] bg-white border border-[#F2F4F5]">
-    //             <CallChatIcon />
-    //           </ActionButton>
-    //           <button className="absolute -bottom-2 left-[35%]">
-    //             <CallEndIcon />
-    //           </button>
-    //           <ActionButton size="lg" className="absolute top-4 right-[84px] bg-white border border-[#F2F4F5]">
-    //             <CallVideoIcon />
-    //           </ActionButton>
-    //           <ActionButton size="lg" className="absolute top-4 right-6 bg-white border border-[#F2F4F5]">
-    //             <CallCallIcon />
-    //           </ActionButton>
-    //         </div>
-    //       </div>
-    //     </section>
+    // <CallStream />
+    <div className="fixed inset-0 z-50 w-screen h-screen overflow-hidden bg-white">
+      <DoctorInfo selectedDoctor={selectedStorageChatRoom.doktor} />
+      <VideoStream ref={webcamVideoRef} />
+      <MiniVideoStream ref={webcamVideo1Ref} />
 
-    //   </div>
-    // </div>
+      <Image src={callBackground} alt="" className="absolute select-none z-10" />
+      <CallActions
+        isCameraOn={isCameraOn}
+        isMicOn={isMicOn}
+        toggleCamera={toggleCamera}
+        toggleMic={toggleMic}
+        micButtonClasses={micButtonClasses}
+        videoCallButtonClasses={videoCallButtonClasses}
+      />
+    </div>
   )
 }
 

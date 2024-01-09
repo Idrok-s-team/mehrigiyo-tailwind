@@ -1,3 +1,5 @@
+'use client'
+
 import { FC } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -5,8 +7,12 @@ import { FacebookIcon, InstagramIcon, LogoIcon, TelegramIcon, YoutubeIcon } from
 import googlePlayIcon from '@/assets/icons/layout/googlePlayIcon.svg'
 import appStoreIcon from '@/assets/icons/layout/appStoreIcon.svg'
 import bannerHome from '@/assets/images/home/bannerHome.png'
+import { usePathname } from 'next/navigation'
 
 const FooterModule: FC = () => {
+  const pathname = usePathname()
+  const showFooter = !pathname.includes('/dashboard')
+
   const socialDatas = [
     { icon: <FacebookIcon />, href: `https://www.facebook.com/mehrigiyo.uz/` },
     { icon: <InstagramIcon />, href: `https://www.instagram.com/mehrigiyo.uz/` },
@@ -33,7 +39,7 @@ const FooterModule: FC = () => {
     { text: `Biz haqimizda`, href: `/about_us` },
     { text: `Yangiliklar`, href: `/news` },
   ]
-  return (
+  return showFooter ? (
     <>
       <div className="flex justify-between relative bg-[#282828] py-[60px] px-24 pb-0">
         <section className="w-[45%] text-white">
@@ -105,7 +111,7 @@ const FooterModule: FC = () => {
         </section>
       </section>
     </>
-  )
+  ) : null
 }
 
 export default FooterModule

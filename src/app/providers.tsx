@@ -3,6 +3,7 @@
 import { FC, PropsWithChildren, useState } from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Next13ProgressBar } from 'next13-progressbar'
+import { Toaster } from 'react-hot-toast'
 
 type Props = PropsWithChildren
 
@@ -23,6 +24,7 @@ const Providers: FC<Props> = ({ children }) => {
     <QueryClientProvider client={queryClient}>
       {children}
       <Next13ProgressBar color="#53b175" showOnShallow options={{ showSpinner: true }} />
+      <Toaster position="top-right" />
     </QueryClientProvider>
   )
 }

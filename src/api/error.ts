@@ -1,11 +1,13 @@
-import { IApiErrorData } from '@/types'
+import { ApiErrorDetail } from '@/types'
 
 export class ApiError extends Error {
-  data: IApiErrorData
+  public statusCode: number
+  public errorData: ApiErrorDetail
 
-  constructor(message: string, data: IApiErrorData) {
-    super(message)
-    this.data = data
+  constructor(errorData: ApiErrorDetail, statusCode: number) {
+    super(errorData.detail)
     this.name = 'ApiError'
+    this.statusCode = statusCode
+    this.errorData = errorData
   }
 }

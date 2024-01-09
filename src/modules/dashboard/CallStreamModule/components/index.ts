@@ -1,1 +1,5 @@
 export { default as CallStream } from './CallStream'
+export { default as DoctorInfo } from './DoctorInfo'
+export { default as VideoStream } from './VideoStream'
+export { default as CallActions } from './CallActions'
+export { default as MiniVideoStream } from './MiniVideoStream'

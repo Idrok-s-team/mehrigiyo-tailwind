@@ -35,7 +35,7 @@ export type GetResponseWithStatusType<T> = {
 }
 
 // Error handling types
-interface ApiErrorDetail {
+export interface ApiErrorDetail {
   detail: string
   code?: string
   messages?: Array<{
@@ -44,10 +44,6 @@ interface ApiErrorDetail {
     message: string
   }>
   statusCode?: number
-}
-
-export interface IApiErrorData {
-  detail: string
 }
 
 export interface IErrorResponse {

@@ -13,7 +13,7 @@ const useChangeFavoriteProducts = (productId: number) => {
       if (isProductInFavorite) {
         await deleteFavoriteAsync({ pk: productId })
       } else {
-        await addFavoriteAsync({ pk: productId })
+        await addFavoriteAsync({ pk: productId }).catch((err) => console.log(err))
       }
       await refetch()
     } catch (error) {}
