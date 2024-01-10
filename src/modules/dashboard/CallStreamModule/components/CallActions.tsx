@@ -12,7 +12,7 @@ import { ActionButton } from '@/components/common'
 import { baseUrl } from '@/constants'
 import { IChatRoom } from '@/types'
 import Image from 'next/image'
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 
 interface CallActionsProps {
   isCameraOn: boolean
@@ -21,6 +21,7 @@ interface CallActionsProps {
   toggleMic: () => void
   micButtonClasses: string
   videoCallButtonClasses: string
+  isCallActive: boolean
 }
 
 const CallActions: FC<CallActionsProps> = ({
@@ -30,10 +31,38 @@ const CallActions: FC<CallActionsProps> = ({
   toggleMic,
   micButtonClasses,
   videoCallButtonClasses,
+  isCallActive,
 }) => {
   const selectedStorageChatRoom: IChatRoom = JSON.parse(String(window.localStorage.getItem('selectedChatRoom')))
+  const [timer, setTimer] = useState<number>(0)
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout
+
+    if (isCallActive) {
+      interval = setInterval(() => {
+        setTimer((prev) => prev + 1)
+      }, 1000)
+    } else {
+      setTimer(0)
+    }
+
+    return () => clearInterval(interval)
+  }, [isCallActive])
+
+  const formatTime = (totalSeconds: number): string => {
+    const hours = Math.floor(totalSeconds / 3600)
+      .toString()
+      .padStart(2, '0')
+    const minutes = Math.floor((totalSeconds % 3600) / 60)
+      .toString()
+      .padStart(2, '0')
+    const seconds = (totalSeconds % 60).toString().padStart(2, '0')
+    return `${hours}:${minutes}:${seconds}`
+  }
+
   return (
-    <div className="absolute top-[30%] w-full h-full flex flex-col gap-20 bg-[#2E6743]">
+    <div className="absolute top-[30%] w-full h-full flex flex-col gap-20 mt-16 bg-[#2E6743]">
       {selectedStorageChatRoom && (
         <section className="flex flex-col items-center justify-center z-40">
           <Image
@@ -50,7 +79,7 @@ const CallActions: FC<CallActionsProps> = ({
       <section className="flex flex-col items-center just gap-10 z-50">
         <div className="w-[130px] h-[43px] flex items-center justify-center gap-2 rounded-[20px] bg-[#8E9AAB]/20">
           <CallRecordIcon />
-          <h6 className="text-white">00:29:12</h6>
+          <h6 className="text-white">{formatTime(timer)}</h6>
         </div>
         <div>
           <div className="relative">
