@@ -1,8 +1,6 @@
 import React, { forwardRef } from 'react'
 
-interface VideoStreamProps {
-  stream: MediaStream | null
-}
+interface VideoStreamProps {}
 
 const VideoStream = forwardRef<HTMLVideoElement, VideoStreamProps>((_, ref) => {
   return (

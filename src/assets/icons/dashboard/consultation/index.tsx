@@ -119,7 +119,7 @@ export const CallEndIcon = () => {
       <g filter="url(#filter0_ddd_921_7759)">
         <circle cx="54" cy="38" r="30" fill="#E64C3C" />
       </g>
-      <g clip-path="url(#clip0_921_7759)">
+      <g clipPath="url(#clip0_921_7759)">
         <path
           d="M65.6968 37.4264C62.3186 34.8503 58.2741 33.4883 53.9997 33.4883C49.7254 33.4883 45.6808 34.8503 42.3026 37.4264C42.1407 37.5498 42.0327 37.7334 42.0065 37.937C41.9803 38.1406 42.0342 38.3457 42.1576 38.5077L44.9805 42.2083C45.1054 42.3718 45.2875 42.4782 45.4911 42.5044C45.6947 42.5337 45.8998 42.4767 46.0618 42.3533C47.2527 41.4416 48.5823 40.7459 50.0107 40.2847C50.4149 40.1536 50.637 39.7201 50.5074 39.3145L49.5603 36.3697C52.431 35.6386 55.5669 35.637 58.4392 36.3697L57.492 39.3145C57.3609 39.7201 57.5846 40.1536 57.9887 40.2847C59.4156 40.7459 60.7437 41.4416 61.9376 42.3533C62.0734 42.4551 62.2369 42.5121 62.4066 42.5121C62.4405 42.5121 62.4744 42.5091 62.5084 42.5044C62.712 42.4767 62.8956 42.3718 63.019 42.2098L65.8418 38.5077C65.9652 38.3457 66.0207 38.139 65.993 37.937C65.9668 37.7334 65.8588 37.5498 65.6968 37.4264Z"
           fill="white"
@@ -133,9 +133,9 @@ export const CallEndIcon = () => {
           width="108"
           height="108"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"
@@ -223,7 +223,7 @@ export const CallVoiceIcon: FC<Props> = ({ color = '#112950' }) => {
 export const CallDisableIcon: FC<Props> = ({ color = '#112950' }) => {
   return (
     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M1 1L17 17" stroke={color} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M1 1L17 17" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   )
 }
@@ -247,8 +247,8 @@ export const CallChatIcon = () => {
         strokeLinejoin="round"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M19.071 19.0698C16.0159 22.1264 11.4896 22.7867 7.78631 21.074C7.23961 20.8539 3.70113 21.8339 2.93334 21.067C2.16555 20.2991 3.14639 16.7601 2.92631 16.2134C1.21285 12.5106 1.87411 7.9826 4.9302 4.9271C8.83147 1.0243 15.1698 1.0243 19.071 4.9271C22.9803 8.83593 22.9723 15.1681 19.071 19.0698Z"
         stroke="#112950"
         strokeWidth="1.5"
@@ -274,8 +274,8 @@ export const CallVideoIcon: FC<Props> = ({ color = '#112950' }) => {
           />
           <path
             id="Stroke 3"
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M2.51367 12.0371C2.51367 6.84473 4.23843 5.11426 9.41462 5.11426C14.5899 5.11426 16.3146 6.84473 16.3146 12.0371C16.3146 17.2285 14.5899 18.96 9.41462 18.96C4.23843 18.96 2.51367 17.2285 2.51367 12.0371Z"
             stroke={color}
             strokeWidth="1.5"

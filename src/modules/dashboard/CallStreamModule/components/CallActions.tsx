@@ -11,55 +11,31 @@ import {
 import { ActionButton } from '@/components/common'
 import { baseUrl } from '@/constants'
 import { IChatRoom } from '@/types'
+import clsx from 'clsx'
 import Image from 'next/image'
-import { FC, useEffect, useState } from 'react'
+import { FC, memo } from 'react'
+import { Timer } from './index'
 
 interface CallActionsProps {
   isCameraOn: boolean
   isMicOn: boolean
   toggleCamera: () => void
   toggleMic: () => void
-  micButtonClasses: string
-  videoCallButtonClasses: string
   isCallActive: boolean
 }
 
-const CallActions: FC<CallActionsProps> = ({
-  isCameraOn,
-  isMicOn,
-  toggleCamera,
-  toggleMic,
-  micButtonClasses,
-  videoCallButtonClasses,
-  isCallActive,
-}) => {
+const CallActions: FC<CallActionsProps> = memo(({ isCameraOn, isMicOn, toggleCamera, toggleMic, isCallActive }) => {
   const selectedStorageChatRoom: IChatRoom = JSON.parse(String(window.localStorage.getItem('selectedChatRoom')))
-  const [timer, setTimer] = useState<number>(0)
 
-  useEffect(() => {
-    let interval: NodeJS.Timeout
+  const micButtonClasses = clsx('absolute top-4 left-6 border border-[#F2F4F5]', {
+    '!bg-[#E64C3C]': !isMicOn,
+    '!bg-white': isMicOn,
+  })
 
-    if (isCallActive) {
-      interval = setInterval(() => {
-        setTimer((prev) => prev + 1)
-      }, 1000)
-    } else {
-      setTimer(0)
-    }
-
-    return () => clearInterval(interval)
-  }, [isCallActive])
-
-  const formatTime = (totalSeconds: number): string => {
-    const hours = Math.floor(totalSeconds / 3600)
-      .toString()
-      .padStart(2, '0')
-    const minutes = Math.floor((totalSeconds % 3600) / 60)
-      .toString()
-      .padStart(2, '0')
-    const seconds = (totalSeconds % 60).toString().padStart(2, '0')
-    return `${hours}:${minutes}:${seconds}`
-  }
+  const videoCallButtonClasses = clsx('absolute top-4 right-[84px] border border-[#F2F4F5]', {
+    '!bg-[#E64C3C]': !isCameraOn,
+    '!bg-white': isCameraOn,
+  })
 
   return (
     <div className="absolute top-[30%] w-full h-full flex flex-col gap-20 mt-16 bg-[#2E6743]">
@@ -79,7 +55,7 @@ const CallActions: FC<CallActionsProps> = ({
       <section className="flex flex-col items-center just gap-10 z-50">
         <div className="w-[130px] h-[43px] flex items-center justify-center gap-2 rounded-[20px] bg-[#8E9AAB]/20">
           <CallRecordIcon />
-          <h6 className="text-white">{formatTime(timer)}</h6>
+          <Timer isCallActive={isCallActive} />
         </div>
         <div>
           <div className="relative">
@@ -114,6 +90,6 @@ const CallActions: FC<CallActionsProps> = ({
       </section>
     </div>
   )
-}
+})
 
 export default CallActions
