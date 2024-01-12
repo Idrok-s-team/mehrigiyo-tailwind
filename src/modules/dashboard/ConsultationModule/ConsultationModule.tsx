@@ -77,6 +77,7 @@ const ConsultationModule: FC = () => {
             </section>
             <div className="mt-10">
               <Tabs
+                tabContainerWidth="w-[245px]"
                 items={[
                   { key: 'ongoing', label: 'Hozirgi', children: <Ongoing /> },
                   { key: 'finished', label: 'Tugatilgan' },

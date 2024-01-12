@@ -14,9 +14,10 @@ type Props = {
   onTabChange?: (key: string) => void
   className?: string
   fullWidth?: boolean
+  tabContainerWidth?: string
 }
 
-const Tabs: FC<Props> = ({ items, onTabChange, className, fullWidth = true }): JSX.Element => {
+const Tabs: FC<Props> = ({ items, onTabChange, className, fullWidth = true, tabContainerWidth }): JSX.Element => {
   const [activeTab, setActiveTab] = useState(items[0].key)
 
   const handleTabClick = useCallback(
@@ -39,6 +40,7 @@ const Tabs: FC<Props> = ({ items, onTabChange, className, fullWidth = true }): J
       'rounded-[100px]': fullWidth,
     },
     className,
+    tabContainerWidth,
   )
 
   const getTabItemClasses = (key: string) => {

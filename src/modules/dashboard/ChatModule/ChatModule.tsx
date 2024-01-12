@@ -1,49 +1,41 @@
 'use client'
 
-import { FC, useEffect, useRef } from 'react'
+import { FC, useRef } from 'react'
 import { ChatFooter, ChatHeader, ChatMessage } from './components'
 import { useInfiniteChatMessagesQuery, useUserMeQuery } from '@/hooks/queries'
-import { useChatStore } from '@/store'
 import { useParams } from 'next/navigation'
-import { Button } from '@/components/common'
+import { Button, Loader } from '@/components/common'
 
 const ChatModule: FC = () => {
   const chatContainerRef = useRef<HTMLDivElement>(null)
   const { chat_id } = useParams()
   const { data: userMeData } = useUserMeQuery()
-
-  const { fetchNextPage, hasNextPage, data: messagesData } = useInfiniteChatMessagesQuery(Number(chat_id), {})
-
-  useEffect(() => {
-    if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight
-    }
-  }, [])
-
-  useEffect(() => {
-    const chatContainer = chatContainerRef.current
-    const handleScroll = () => {
-      // Yuqoriga scroll qilganda, `scrollTop` qiymati 0 ga yaqin bo'ladi
-      if (chatContainer && chatContainer.scrollTop < 50 && hasNextPage) {
-        fetchNextPage()
-      }
-    }
-
-    chatContainer?.addEventListener('scroll', handleScroll)
-
-    return () => {
-      chatContainer?.removeEventListener('scroll', handleScroll)
-    }
-  }, [fetchNextPage, hasNextPage])
+  const { fetchNextPage, data: messagesData, isFetchingNextPage } = useInfiniteChatMessagesQuery(Number(chat_id), {})
 
   return (
     <div className="-mt-12 w-full flex flex-col justify-between h-[83vh] rounded-2xl overflow-hidden shadow-card-secondary">
       <ChatHeader />
       <main ref={chatContainerRef} className="flex-1 bg-white px-6 overflow-y-auto">
-        <Button onClick={() => fetchNextPage()}>Load more</Button>
-        {messagesData?.pages?.map((message) => (
-          <ChatMessage key={message.id} message={message} currentUser={userMeData} />
-        ))}
+        {Number(messagesData?.pages.length) > 0 && (
+          <div className="flex justify-center my-2">
+            {isFetchingNextPage ? (
+              <Loader />
+            ) : (
+              <div className="w-[150px]">
+                <button
+                  onClick={() => fetchNextPage()}
+                  className="px-4 py-2 bg-gray-primary/20 rounded-md hover:shadow-card"
+                >
+                  Yana ko'proq...
+                </button>
+              </div>
+            )}
+          </div>
+        )}
+        {messagesData?.pages
+          ?.flatMap((page) => page)
+          .reverse()
+          .map((message) => <ChatMessage key={message.id} message={message} currentUser={userMeData} />)}
       </main>
       <ChatFooter />
     </div>

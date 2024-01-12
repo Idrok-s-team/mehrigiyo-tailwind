@@ -6,7 +6,6 @@ import {
   IChatFile,
   IChatMessage,
   IChatRoom,
-  IErrorResponse,
   QueryParamsType,
 } from '@/types'
 import { QueryProps, useGetQuery } from './common'

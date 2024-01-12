@@ -12,22 +12,30 @@ const useChatWebSocket = ({ chat_id, onMessage }: Props) => {
   const socketRef = useRef<WebSocket | null>(null)
 
   useEffect(() => {
-    const token = Cookies.get('access_token')
-    if (!token) {
-      console.error('Access token not found')
-      return
+    const connectWebSocket = () => {
+      const token = Cookies.get('access_token')
+      if (!token) {
+        console.error('Access token not found')
+        return
+      }
+
+      const webSocketUrl = `${baseSocketUrl}/chat/${chat_id}/?token=${token}`
+      const socket = new WebSocket(webSocketUrl)
+      socket.onmessage = (event: MessageEvent) => {
+        const messageData = JSON.parse(event.data) as GetResponseWithStatusType<IChatMessage>
+        onMessage(messageData.data)
+      }
+      socket.onclose = () => {
+        console.log('WebSocket closed. Reconnecting...')
+        setTimeout(connectWebSocket, 3000)
+      }
+      socketRef.current = socket
     }
 
-    const webSocketUrl = `${baseSocketUrl}/chat/${chat_id}/?token=${token}`
-    const socket = new WebSocket(webSocketUrl)
-    socket.onmessage = (event: MessageEvent) => {
-      const messageData = JSON.parse(event.data) as GetResponseWithStatusType<IChatMessage>
-      onMessage(messageData.data)
-    }
-    socketRef.current = socket
+    connectWebSocket()
 
     return () => {
-      socket.close()
+      socketRef.current?.close()
     }
   }, [chat_id, onMessage])
 
