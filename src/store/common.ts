@@ -10,6 +10,7 @@ type ModalType =
   | 'cartConfirm'
   | 'logoutConfirm'
   | 'drawer'
+  | 'drawerMobile'
 
 interface ICommonStore {
   activeModal: ModalType | null

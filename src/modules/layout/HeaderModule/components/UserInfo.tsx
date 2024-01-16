@@ -4,8 +4,14 @@ import Link from 'next/link'
 import { AvatarIcon } from '@/assets/icons'
 import { useUserMeQuery } from '@/hooks/queries'
 import { useCommonStore } from '@/store'
+import { ElementSizeType } from '@/types'
+import clsx from 'clsx'
 
-const UserInfo: FC = () => {
+interface IProps {
+  size?: ElementSizeType
+}
+
+const UserInfo: FC<IProps> = ({ size = 'md' }) => {
   const { setActiveModal } = useCommonStore()
   const { data: userData, isSuccess } = useUserMeQuery()
 
@@ -15,8 +21,8 @@ const UserInfo: FC = () => {
         <Image
           src={userData?.avatar}
           alt={`${userData?.first_name} ${userData?.last_name}`}
-          width={25}
-          height={25}
+          width={size === 'md' ? 25 : 50}
+          height={size === 'md' ? 25 : 5025}
           className="border rounded-full border-green-primary shadow-avatar"
         />
       )}

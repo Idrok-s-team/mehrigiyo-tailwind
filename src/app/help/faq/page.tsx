@@ -32,7 +32,7 @@ const Faq = () => {
       </header>
 
       <section className="relative mt-10">
-        <Accordion items={faqData} isFirstItemOpened />
+        <Accordion items={faqData} isFirstItemOpened withIndex={false} />
       </section>
     </div>
   )

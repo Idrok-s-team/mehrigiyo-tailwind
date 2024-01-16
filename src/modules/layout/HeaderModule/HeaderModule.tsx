@@ -1,18 +1,24 @@
 'use client'
 
-import { FC } from 'react'
+import { FC, useCallback } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Dropdown } from '@/components/common'
-import { LogoIcon } from '@/assets/icons'
+import { LogoIcon, MenuIcon } from '@/assets/icons'
 import { useLanguageItems, useNavElements } from './hooks'
-import { HeaderActions, AuthModal, TopNavLinks, AddressDisplay, UserInfo } from './components'
+import { HeaderActions, AuthModal, AddressDisplay, UserInfo, MenuDrawer } from './components'
+import { useCommonStore } from '@/store'
 
 const HeaderModule: FC = () => {
   const pathname = usePathname()
+  const { activeModal, setActiveModal } = useCommonStore()
 
-  const navElements = useNavElements()
+  const { renderNavElements } = useNavElements()
   const languageItems = useLanguageItems()
+
+  const handleOpenDrawer = useCallback(() => {
+    setActiveModal('drawerMobile')
+  }, [])
 
   const titles = [
     { text: `Mahsulotlar katalogi`, href: `#` },
@@ -23,43 +29,47 @@ const HeaderModule: FC = () => {
   ]
 
   return (
-    <>
+    <div>
       <nav
-        className={`flex items-center justify-between h-10 text-sm px-24 ${
-          pathname === '/' ? 'bg-green-light' : 'bg-gray-background'
-        }`}
+        className={`h-10 text-sm px-10 max-xs:px-4 xl:px-24 max-lg:hidden
+        ${pathname === '/' ? 'bg-green-light' : 'bg-gray-background'}
+        `}
       >
-        <TopNavLinks titles={titles} />
-        <ul className="flex items-center gap-5">
-          <div>
-            <Dropdown items={languageItems} />
-          </div>
-          <AddressDisplay />
-          <UserInfo />
-        </ul>
+        <div className="h-full w-full max-w-[1440px] flex items-center justify-end mx-auto max-xs:flex-wrap">
+          {/* <TopNavLinks titles={titles} /> */}
+          <ul className="flex items-center gap-5 max-xs:gap-2">
+            {/* <div>
+              <Dropdown items={languageItems} />
+            </div> */}
+            <AddressDisplay />
+            <UserInfo />
+          </ul>
+        </div>
       </nav>
 
-      <nav
-        className={`flex items-center justify-between px-24 py-4 ${
-          pathname === '/' ? 'bg-[#addabe]' : 'bg-gray-background'
-        }`}
-      >
-        <section className="flex items-center gap-12">
-          <div>
-            <Link href="/">
-              <LogoIcon />
-            </Link>
-          </div>
-          <div className="flex gap-3 text-sm">{navElements}</div>
-        </section>
+      <nav className={`px-10 max-xs:px-4 xl:px-24 py-4 ${pathname === '/' ? 'bg-[#addabe]' : 'bg-gray-background'}`}>
+        <div className="w-full max-w-[1440px] flex items-center justify-between mx-auto max-xs:flex-wrap">
+          <section className="flex items-center gap-8 max-2xs:w-full max-xs:justify-center xl:gap-12">
+            <div>
+              <Link href="/">
+                <LogoIcon />
+              </Link>
+            </div>
+            <div className="flex gap-3 text-sm max-lg:hidden">{renderNavElements()}</div>
+          </section>
 
-        <section>
-          <HeaderActions />
-        </section>
+          <section className="flex items-center gap-6 max-2xs:mt-4 max-2xs:w-full max-2xs:justify-between">
+            <HeaderActions />
+            <div className="lg:hidden" onClick={handleOpenDrawer}>
+              <MenuIcon />
+            </div>
+          </section>
 
-        <AuthModal />
+          <AuthModal />
+        </div>
       </nav>
-    </>
+      <MenuDrawer />
+    </div>
   )
 }
 

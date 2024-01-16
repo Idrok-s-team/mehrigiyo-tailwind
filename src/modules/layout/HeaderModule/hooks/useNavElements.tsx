@@ -59,7 +59,7 @@ const useNavElements = () => {
       ),
     )
 
-  return renderNavElements()
+  return { navElements, renderNavElements }
 }
 
 export default useNavElements

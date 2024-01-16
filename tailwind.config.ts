@@ -33,6 +33,13 @@ const config: Config = {
         'doctor-card': '0px 0px 20px 0px rgba(0, 0, 0, 0.10)',
         'chat-footer': '0px -1px 0px 0px #F1F5F7',
       },
+      screens: {
+        '3xs': '240px',
+        '2xs': '360px',
+        'xs': '480px',
+        '2xl': '1440px',
+        '3xl': '1536px',
+      }
     },
   },
   plugins: [],

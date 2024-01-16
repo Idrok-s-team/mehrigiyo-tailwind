@@ -1,12 +1,12 @@
 'use client'
 
-import { FC, useState, useRef, useEffect, memo } from 'react'
+import { FC, useState, useRef, useEffect, memo, ReactNode } from 'react'
 import { DropdownIcon } from '@/assets/icons'
 import { cleanHtml } from '@/utils'
 
 interface IChildren {
   title: string
-  children: string
+  children: ReactNode
 }
 
 interface IAccordionProps {
@@ -53,9 +53,11 @@ const Accordion: FC<IAccordionProps> = memo(function Accordion({
               {withIndex && <h4 className="font-medium text-green-primary">0{index + 1}</h4>}
               <h5 className={`font-medium ${smallSize ? 'text-base' : ''}`}>{title}</h5>
             </div>
-            <span className={`${activeIndex === index ? '' : '-rotate-90'} duration-300`}>
-              <DropdownIcon />
-            </span>
+            {children && (
+              <span className={`${activeIndex === index ? '' : '-rotate-90'} duration-300`}>
+                <DropdownIcon />
+              </span>
+            )}
           </button>
 
           <div
@@ -65,14 +67,15 @@ const Accordion: FC<IAccordionProps> = memo(function Accordion({
               maxHeight: activeIndex === index ? `${contentRefs.current[index]?.scrollHeight}px` : '0',
             }}
           >
-            <ul className={`flex flex-col ${smallSize ? '' : 'ml-12'}`}>
+            {children}
+            {/* <ul className={`flex flex-col ${smallSize ? '' : 'ml-12'}`}>
               <li>
                 <p
                   className={`text-gray-primary ${smallSize ? 'text-sm mt-3' : ''}`}
                   dangerouslySetInnerHTML={{ __html: cleanHtml(String(children).replace(/\n/g, '<br>')) }}
                 />
               </li>
-            </ul>
+            </ul> */}
           </div>
         </div>
       ))}

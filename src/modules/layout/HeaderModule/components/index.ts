@@ -1,5 +1,6 @@
 export { default as UserInfo } from './UserInfo'
 export { default as AuthModal } from './AuthModal'
+export { default as MenuDrawer } from './MenuDrawer'
 export { default as TopNavLinks } from './TopNavLinks'
 export { default as HeaderActions } from './HeaderActions'
 export { default as AddressDisplay } from './AddressDisplay'
