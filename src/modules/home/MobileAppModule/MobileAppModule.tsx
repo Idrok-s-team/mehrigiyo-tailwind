@@ -3,11 +3,12 @@ import Image from 'next/image'
 import appStoreIcon from '@/assets/icons/home/appStoreIcon.svg'
 import googlePlayIcon from '@/assets/icons/home/googlePlayIcon.svg'
 import mobileScreenImg from '@/assets/images/home/mobileScreen.png'
+import Link from 'next/link'
 
 const NewsListModule: FC = () => {
   return (
-    <div className="flex justify-between items-center gap-20">
-      <div className="w-1/2">
+    <div className="flex justify-between items-center gap-20 max-lg:gap-5 max-xs:flex-wrap">
+      <section className="w-1/2 max-lg:w-3/5 max-xs:w-full">
         <h2>
           ”Mehrigiyo” mobil ilovasini yuklab <span className="text-green-primary"> Shifokorlardan BEPUL maslahat </span>
           oling
@@ -15,18 +16,18 @@ const NewsListModule: FC = () => {
         <p className="mt-5 text-gray-primary">
           O’zbekistonning yetakchi shifokorlari bilan videokonsultatsiyadan foydalaning.
         </p>
-        <div className="flex gap-7 mt-10">
-          <button>
-            <Image src={appStoreIcon} alt="" />
-          </button>
-          <button>
+        <div className="flex gap-7 mt-10 max-2xs:gap-2">
+          <Link href="https://play.google.com/store/apps/details?id=com.mehrigiyo.doctor_ali" target="_blank">
+            <Image src={appStoreIcon} alt="" width={239} height={75} />
+          </Link>
+          <Link href="https://play.google.com/store/apps/details?id=com.mehrigiyo.doctor_ali" target="_blank">
             <Image src={googlePlayIcon} alt="" />
-          </button>
+          </Link>
         </div>
-      </div>
-      <div>
+      </section>
+      <section className="max-lg:flex-1 max-xs:mt-5">
         <Image src={mobileScreenImg} alt="" />
-      </div>
+      </section>
     </div>
   )
 }

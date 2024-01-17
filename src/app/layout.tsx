@@ -31,7 +31,7 @@ const RootLayout: FC<IProps> = async ({ children }) => {
             <HeaderModule />
           </header>
 
-          <main className="">{children}</main>
+          <main className="min-h-screen">{children}</main>
 
           <footer>
             <FooterModule />

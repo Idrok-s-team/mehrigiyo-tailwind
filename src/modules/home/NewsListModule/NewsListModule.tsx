@@ -23,12 +23,12 @@ const NewsListModule: FC = () => {
 
   return (
     <>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between max-sm:flex-wrap">
         <h4>So'nggi yangiliklar</h4>
-        <SeeAllButton text="Batafsil" size="md" href="/news" />
+        <SeeAllButton text="Batafsil" size="md" href="/news" className="max-sm:mt-2" />
       </div>
       <nav
-        className="flex items-center text-lg text-gray-primary"
+        className="w-1/2 flex items-center text-lg text-gray-primary animate-fade-in max-md:w-full"
         style={{ gap: 24, marginTop: 32, listStyle: 'none' }}
       >
         {isFetchingNewsTags ? (
@@ -38,17 +38,29 @@ const NewsListModule: FC = () => {
             ))}
           </div>
         ) : (
-          filterValues?.map(({ key, title }) => (
-            <li
-              key={key}
-              className={`list-none cursor-pointer ${
-                selectedFilter === key ? 'text-green-primary font-medium duration-300' : ''
-              }`}
-              onClick={() => setSelectedFilter(key)}
-            >
-              {title}
-            </li>
-          ))
+          <Slider
+            breakpoints={{
+              360: {
+                slidesPerView: 3,
+              },
+              240: {
+                slidesPerView: 2,
+              },
+            }}
+          >
+            {filterValues?.map(({ key, title }) => (
+              <SwiperSlide key={key} className="mx-2">
+                <li
+                  className={`list-none cursor-pointer ${
+                    selectedFilter === key ? 'text-green-primary font-medium duration-300' : ''
+                  }`}
+                  onClick={() => setSelectedFilter(key)}
+                >
+                  {title}
+                </li>
+              </SwiperSlide>
+            ))}
+          </Slider>
         )}
       </nav>
 
@@ -64,7 +76,35 @@ const NewsListModule: FC = () => {
             Hozircha ushbu bo'limda yangiliklar yo'q
           </h3>
         ) : (
-          <Slider slidesPerView={3.3} autoplay>
+          <Slider
+            autoplay
+            breakpoints={{
+              1345: {
+                slidesPerView: 3.3,
+              },
+              1240: {
+                slidesPerView: 3,
+              },
+              1070: {
+                slidesPerView: 2.5,
+              },
+              930: {
+                slidesPerView: 2.1,
+              },
+              630: {
+                slidesPerView: 1.6,
+              },
+              480: {
+                slidesPerView: 1.3,
+              },
+              420: {
+                slidesPerView: 1.1,
+              },
+              360: {
+                slidesPerView: 1,
+              },
+            }}
+          >
             {newsData?.results?.map((data) => (
               <SwiperSlide key={data.id} className="p-2 py-7">
                 <NewsCard data={data} />

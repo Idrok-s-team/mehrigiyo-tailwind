@@ -16,6 +16,8 @@ import { ProductsListModule } from '@/modules/products'
 import organicLogosIcon from '@/assets/icons/home/organicLogosIcon.svg'
 import backgroundBubble1 from '@/assets/icons/common/backgroundBubble1.svg'
 import backgroundBubble2 from '@/assets/icons/common/backgroundBubble2.svg'
+import backgroundDarkGreen from '@/assets/icons/home/backgroundDarkGreen.svg'
+import backgroundLightGreen from '@/assets/icons/home/backgroundLightGreen.svg'
 import { faqData } from '@/constants'
 
 export default async function Home() {
@@ -46,38 +48,39 @@ export default async function Home() {
   ]
 
   return (
-    <div className="px-24">
-      <section className="w-full absolute inset-0 top-0 h-[97vh] bg-[url(../assets/icons/home/backgroundDarkGreen.svg)] bg-no-repeat bg-bottom bg-cover">
-        <div className="w-full h-[100vh] bg-[url(../assets/icons/home/backgroundLightGreen.svg)] bg-no-repeat bg-bottom bg-cover">
-          <div className="flex flex-col items-center">
-            <div className="pt-40 text-center">
-              <h1>Bepul shifokor maslahati kerakmi?</h1>
-              <p className="mx-auto mt-3">24/7 Video maslahat Shaxsiy maslahat + Audio qo'ng'iroq</p>
-              <p>
-                Faqat{' '}
-                <Link href="#" className="underline text-green-dark">
-                  mobil ilovada
-                </Link>
-              </p>
-            </div>
-            <div className="w-2/5 mt-5">
-              <Input />
-            </div>
-            <div>
-              <Image
-                src={'https://res.cloudinary.com/mehrigiyo/image/upload/v1661486824/Mehrigiyo/doctorCall_r3tuct.png'}
-                alt="Doctor"
-                width={900}
-                height={600}
-                priority
-              />
-            </div>
+    <div className="px-24 max-md:px-4 max-lg:relative max-w-[1440px] mx-auto">
+      <section className="w-full">
+        <Image src={backgroundDarkGreen} alt="Doctor" className="w-full absolute left-0 top-0 -z-10" priority />
+        <Image src={backgroundLightGreen} alt="Doctor" className="w-full absolute left-0 top-0 -z-10" priority />
+        <div className="flex flex-col items-center">
+          <div className="pt-16 max-lg:pt-10 text-center">
+            <h1 className="max-md:text-3xl">Bepul shifokor maslahati kerakmi?</h1>
+            <p className="mx-auto mt-3">24/7 Video maslahat Shaxsiy maslahat + Audio qo'ng'iroq</p>
+            <p>
+              Faqat{' '}
+              <Link href="#" className="underline text-green-dark">
+                mobil ilovada
+              </Link>
+            </p>
+          </div>
+          <div className="w-2/5 max-xs:w-full max-sm:w-4/5 max-lg:w-3/5 mt-5">
+            <Input />
+          </div>
+          <div className="flex items-center justify-center mt-2 max-md:w-[100vw] max-lg:w-[80vw]">
+            <Image
+              src={'https://res.cloudinary.com/mehrigiyo/image/upload/v1661486824/Mehrigiyo/doctorCall_r3tuct.png'}
+              alt="Doctor"
+              className="w-full"
+              width={900}
+              height={600}
+              priority
+            />
           </div>
         </div>
       </section>
 
-      <section className="mt-[115vh]">
-        <div className="grid grid-cols-4 gap-5 border-y-[1px] border-gray-100 py-9">
+      <section className="mt-28 max-xs:mt-4 max-lg:mt-16">
+        <div className="grid grid-cols-4 gap-5 border-y-[1px] border-gray-100 py-9 max-xs:grid-cols-1 max-md:grid-cols-2 max-lg:grid-cols-3">
           {infoCard.map(({ icon, title, description }) => (
             <div key={title} className="flex items-center gap-5">
               <div>{icon}</div>
@@ -90,13 +93,13 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="flex flex-col items-center mt-40 text-center">
+      <section className="flex flex-col items-center mt-40 text-center max-lg:mt-20">
         <h2 className="w-4/5">Har qanday sog'liq bilan bog'liq muammolar uchun onlayn shifokorlarga murojaat qiling</h2>
         <p className="mt-4 text-gray-primary">
           Eng yaxshi shifokorlarimiz, Sizning barcha savolaringizga javob berishadi
         </p>
 
-        <div className="flex items-center gap-10 mt-14">
+        <div className="flex items-center mt-14 gap-10 max-xs:gap-4 max-sm:justify-center max-sm:gap-8 max-lg:gap-3 max-md:flex-wrap max-md:gap-8">
           {specialistTypesData.results.slice(0, 4).map(({ id, name, image, get_doctors_count }) => (
             <Link
               href={`/online_doctors/category?type=${id}`}
@@ -112,13 +115,13 @@ export default async function Home() {
           ))}
         </div>
 
-        <div className="mt-14">
+        <div className="mt-14 max-xs:mt-8">
           <SeeAllButton text="Bepul maslahat olish" href="/online_doctors/category" />
         </div>
       </section>
 
-      <section className="relative flex justify-between">
-        <div className="w-2/5 mt-72">
+      <section className="relative flex justify-between max-lg:flex-wrap">
+        <div className="w-2/5 mt-72 max-lg:w-full max-lg:mt-52 max-sm:mt-20">
           <p className="uppercase text-gray-primary">MEHRIGIYOGA Xush kelibsiz</p>
           <h3 className="mt-2">Yaxshi kelajak uchun salomatlik</h3>
           <p className="mt-2 text-gray-primary">
@@ -128,31 +131,33 @@ export default async function Home() {
             kelmoqda. shifobaxsh choy, asal, moy, sirop, holva va boshqalar ishlab chiqaradi.
           </p>
           <Image src={organicLogosIcon} alt="" className="mt-10" />
-          <div className="flex items-center gap-8 mt-14">
+          <div className="flex items-center gap-8 mt-14 max-2xs:flex-wrap max-2xs:justify-center">
             <SeeAllButton text="Batafsil" size="md" href="/about_us" />
             <WatchVideoButton videoUrl="https://www.youtube.com/embed/CKvdClKdSJo?si=V-Hy0MKf5OdPGZWb" />
           </div>
         </div>
 
-        <div>
-          <Image src={backgroundBubble1} alt="" className="absolute top-[3%] -right-[8%]" />
-          <Image src={backgroundBubble2} alt="" className="absolute top-0 -right-[8%]" />
+        <div className="overflow-hidden -z-10 max-lg:w-full max-lg:min-h-screen max-xs:min-h-[80vh]">
+          <div className="max-md:hidden">
+            <Image src={backgroundBubble1} alt="" className="absolute top-[3%] -right-[8%] max-lg:-right-[12%]" />
+            <Image src={backgroundBubble2} alt="" className="absolute top-0 -right-[8%] max-lg:-right-[12%]" />
+          </div>
 
           <Image
             src={'https://res.cloudinary.com/mehrigiyo/image/upload/v1661489066/Mehrigiyo/organicPlantation_m9fvbp.png'}
             alt=""
             width={660}
             height={600}
-            className="absolute mt-64 -right-20"
+            className="object-contain mx-auto md:absolute md:mt-64 md:-right-20 max-lg:mt-24 max-lg:right-10 max-md:mt-20"
           />
         </div>
       </section>
 
-      <section className="mt-64">
+      <section className="mt-64 max-sm:mt-0 max-2xs:-mt-24">
         <UrgentOnlineHelpModule />
       </section>
 
-      <section className="mt-48">
+      <section className="mt-48 max-sm:mt-24 max-2xs:mt-36">
         <ProductsListModule />
       </section>
 
@@ -160,22 +165,22 @@ export default async function Home() {
         <HerbsBannerModule />
       </section>
 
-      <section className="mt-52">
+      <section className="mt-52 max-sm:mt-24">
         <MobileAppModule />
       </section>
 
-      <section className="mt-48">
+      <section className="mt-48 max-sm:mt-24">
         <NewsListModule />
       </section>
 
       <section className="mt-20">
         <h2>Ko’p so'raladigan savollar</h2>
-        <div className="flex justify-between">
-          <div className="w-1/5 mt-3">
-            <p className="text-green-primary">Qo'shimcha ma'lumot uchun biz bilan bog'laning</p>
-            <SeeAllButton text="Batafsil" size="md" className="mt-11" href="/help/faq" />
+        <div className="flex justify-between max-lg:gap-5 max-xs:flex-wrap">
+          <div className="flex-1 mt-3">
+            <p className="text-green-primary w-3/5 max-lg:w-full">Qo'shimcha ma'lumot uchun biz bilan bog'laning</p>
+            <SeeAllButton text="Batafsil" size="md" className="mt-11 max-xs:mt-3" href="/help/faq" />
           </div>
-          <div className="w-[68%]">
+          <div className="w-[68%] max-xs:w-full">
             <Accordion items={faqData} />
           </div>
         </div>

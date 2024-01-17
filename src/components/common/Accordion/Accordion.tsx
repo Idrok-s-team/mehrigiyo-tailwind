@@ -51,7 +51,7 @@ const Accordion: FC<IAccordionProps> = memo(function Accordion({
           >
             <div className="flex items-center gap-5">
               {withIndex && <h4 className="font-medium text-green-primary">0{index + 1}</h4>}
-              <h5 className={`font-medium ${smallSize ? 'text-base' : ''}`}>{title}</h5>
+              <h5 className={`font-medium text-left max-2xs:text-base ${smallSize ? 'text-base' : ''}`}>{title}</h5>
             </div>
             {children && (
               <span className={`${activeIndex === index ? '' : '-rotate-90'} duration-300`}>
@@ -62,7 +62,7 @@ const Accordion: FC<IAccordionProps> = memo(function Accordion({
 
           <div
             ref={(el) => (contentRefs.current[index] = el!)}
-            className="overflow-hidden duration-300 ease-in-out transition-max-height"
+            className="ml-12 overflow-hidden duration-300 ease-in-out transition-max-height max-2xs:mt-4"
             style={{
               maxHeight: activeIndex === index ? `${contentRefs.current[index]?.scrollHeight}px` : '0',
             }}

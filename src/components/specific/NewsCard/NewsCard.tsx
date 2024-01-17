@@ -17,7 +17,7 @@ const NewsCard: FC<Props> = memo(function NewsCard({ data }) {
   const slug = createSlug(name, id)
 
   return (
-    <article className="w-[347px] h-[543px] flex flex-col shadow-card rounded-3xl bg-white group overflow-hidden">
+    <article className="w-[347px] h-[543px] flex flex-col shadow-card rounded-3xl bg-white group overflow-hidden max-xs:w-full">
       <Link
         href={`/news/${slug}`}
         aria-label={`${name} yangiliklar rasmi`}
@@ -53,7 +53,7 @@ const NewsCard: FC<Props> = memo(function NewsCard({ data }) {
         <Link
           href={`/news/${slug}`}
           aria-label={`Ko'proq o'qish: ${name}`}
-          className="flex items-center gap-3 mt-3 text-sm cursor-pointer text-green-primary group"
+          className="flex items-center gap-3 mt-3 text-sm cursor-pointer text-green-primary group max-xs:mt-1"
         >
           <span>Ko'proq o'qish</span>
           <span className="duration-200 group-hover:translate-x-1">

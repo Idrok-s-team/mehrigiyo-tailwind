@@ -37,14 +37,14 @@ const SeeAllButton: FC<Props> = ({
     <Link href={href}>
       <button className={classNames} {...props}>
         <span className="whitespace-nowrap">{text}</span>
-        {!props.disabled && <span className="duration-200 group-hover:translate-x-1">{icon}</span>}
+        {!props.disabled && <span className="duration-200 group-hover:translate-x-1 max-2xs:hidden">{icon}</span>}
       </button>
     </Link>
   ) : (
     <div>
       <button className={classNames} {...props}>
         <span className="whitespace-nowrap">{text}</span>
-        {!props.disabled && <span className="duration-200 group-hover:translate-x-1">{icon}</span>}
+        {!props.disabled && <span className="duration-200 group-hover:translate-x-1 max-2xs:hidden">{icon}</span>}
       </button>
     </div>
   )

@@ -34,14 +34,15 @@ const WatchVideoButton: FC<IProps> = ({ className, videoUrl }) => {
         onClose={closeModal}
         onSubmit={() => {}}
         withFooter={false}
-        className="w-[70%]"
+        className="w-[70%] max-lg:w-full"
         isVideo
       >
         {iframeLoading && (
-          <div className='absolute left-[48%] top-[48%]'>
+          <div className="absolute left-[48%] top-[48%]">
             <Loader />
           </div>
         )}
+
         <iframe
           src={videoUrl}
           title="Doctor ali shifobaxsh choylari"

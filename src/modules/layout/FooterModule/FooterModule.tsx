@@ -71,20 +71,24 @@ const FooterModule: FC = () => {
         </section>
       </div>
 
-      <section className="bg-gray-background py-6 text-xs flex items-center justify-between px-10 max-xs:px-4 xl:px-24">
-        <section>
-          <p>© 1996-{new Date().getFullYear()}. Mehrigiyo. Barcha huquqlar himoyalangan.</p>
-          <p className="mt-0.5">Saytdan olingan barcha maʼlumotlar chop etilganda veb-saytga havola qilish majburiy.</p>
-        </section>
+      <div className="bg-gray-background">
+        <section className="py-6 text-xs flex items-center justify-between px-10 max-xs:px-4 xl:px-24 max-w-[1440px] mx-auto">
+          <section>
+            <p>© 1996-{new Date().getFullYear()}. Mehrigiyo. Barcha huquqlar himoyalangan.</p>
+            <p className="mt-0.5">
+              Saytdan olingan barcha maʼlumotlar chop etilganda veb-saytga havola qilish majburiy.
+            </p>
+          </section>
 
-        <section className="flex items-center gap-7 max-lg:hidden">
-          {privacyLinks.map(({ text, href }) => (
-            <Link key={text} href={href} className="hover:text-green-primary duration-200 text-sm">
-              {text}
-            </Link>
-          ))}
+          <section className="flex items-center gap-7 max-lg:hidden">
+            {privacyLinks.map(({ text, href }) => (
+              <Link key={text} href={href} className="hover:text-green-primary duration-200 text-sm">
+                {text}
+              </Link>
+            ))}
+          </section>
         </section>
-      </section>
+      </div>
     </div>
   ) : null
 }

@@ -17,11 +17,30 @@ const BrandsListModule: FC = () => {
   return (
     <div className="py-6 border-y-[1px] border-gray-100">
       <Slider
-        slidesPerView={5}
         effect="fade"
-        autoplay={{ delay: 1000, disableOnInteraction: false }}
-        speed={500}
+        autoplay={{ delay: 2000, disableOnInteraction: false }}
+        speed={1000}
         loopAdditionalSlides={3}
+        breakpoints={{
+          1024: {
+            slidesPerView: 5,
+          },
+          880: {
+            slidesPerView: 4,
+          },
+          600: {
+            slidesPerView: 3,
+          },
+          480: {
+            slidesPerView: 2.5,
+          },
+          400: {
+            slidesPerView: 2,
+          },
+          320: {
+            slidesPerView: 1,
+          },
+        }}
       >
         {brands.map((brand, index) => (
           <SwiperSlide key={index}>

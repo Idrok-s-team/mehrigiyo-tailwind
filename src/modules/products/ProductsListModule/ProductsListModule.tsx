@@ -1,10 +1,10 @@
 'use client'
 
 import { FC, useMemo, useState } from 'react'
+import { SwiperSlide } from 'swiper/react'
 import { SeeAllButton, Slider } from '@/components/common'
 import { useShopMedicinesQuery, useShopTypesQuery } from '@/hooks/queries'
 import { ProductCard, ProductCardSkeleton } from '@/components/specific'
-import { SwiperSlide } from 'swiper/react'
 
 type Props = {
   title?: string
@@ -29,13 +29,13 @@ const ProductsListModule: FC<Props> = ({ title = "Mahsulotlarimiz ro'yxati", wit
 
   return (
     <>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between max-sm:flex-wrap">
         <h4>{title}</h4>
-        <SeeAllButton text="Barchasini ko'rish" href="/products/category" />
+        <SeeAllButton text="Barchasini ko'rish" href="/products/category" className="max-sm:mt-2" />
       </div>
       {withFilter && (
         <nav
-          className="flex items-center text-lg text-gray-primary animate-fade-in"
+          className="w-1/2 flex items-center text-lg text-gray-primary animate-fade-in max-lg:w-full"
           style={{ gap: 24, marginTop: 32, listStyle: 'none' }}
         >
           {isLoadingShopTypes ? (
@@ -45,17 +45,32 @@ const ProductsListModule: FC<Props> = ({ title = "Mahsulotlarimiz ro'yxati", wit
               ))}
             </div>
           ) : (
-            filterValues?.map(({ key, title }) => (
-              <li
-                key={key}
-                className={`list-none cursor-pointer ${
-                  selectedFilter === key ? 'text-green-primary font-medium duration-300' : ''
-                }`}
-                onClick={() => setSelectedFilter(key)}
-              >
-                {title}
-              </li>
-            ))
+            <Slider
+              breakpoints={{
+                500: {
+                  slidesPerView: 6,
+                },
+                340: {
+                  slidesPerView: 4,
+                },
+                240: {
+                  slidesPerView: 3,
+                },
+              }}
+            >
+              {filterValues?.map(({ key, title }) => (
+                <SwiperSlide key={key} className="mx-2">
+                  <li
+                    className={`flex justify-center list-none cursor-pointer ${
+                      selectedFilter === key ? 'text-green-primary font-medium duration-300' : ''
+                    }`}
+                    onClick={() => setSelectedFilter(key)}
+                  >
+                    {title}
+                  </li>
+                </SwiperSlide>
+              ))}
+            </Slider>
           )}
         </nav>
       )}
@@ -72,7 +87,41 @@ const ProductsListModule: FC<Props> = ({ title = "Mahsulotlarimiz ro'yxati", wit
             Hozircha ushbu bo'limda yangiliklar yo'q
           </h3>
         ) : (
-          <Slider slidesPerView={4.7} autoplay={{ delay: 2000 }}>
+          <Slider
+            breakpoints={{
+              1330: {
+                slidesPerView: 4.7,
+              },
+              1180: {
+                slidesPerView: 4,
+              },
+              1040: {
+                slidesPerView: 3.5,
+              },
+              920: {
+                slidesPerView: 3,
+              },
+              800: {
+                slidesPerView: 2.5,
+              },
+              600: {
+                slidesPerView: 2.3,
+              },
+              520: {
+                slidesPerView: 2,
+              },
+              400: {
+                slidesPerView: 1.5,
+              },
+              300: {
+                slidesPerView: 1.1,
+              },
+              240: {
+                slidesPerView: 1,
+              },
+            }}
+            autoplay={{ delay: 2000 }}
+          >
             {shopMedicinesData?.results.map((product) => (
               <SwiperSlide key={product.id}>
                 <ProductCard data={product} />
