@@ -16,8 +16,8 @@ const ProductsCategory = () => {
   const searchParams = useSearchParams()
   const selectedCategories = searchParams.get('type')
 
-  const { data: shopTypesData, isFetching: isFetchingShopTypes } = useShopTypesQuery()
-  const { data: shopMedicinesData, isFetching: isFetchingMedicines } = useShopMedicinesQuery({
+  const { data: shopTypesData, isLoading: isFetchingShopTypes } = useShopTypesQuery()
+  const { data: shopMedicinesData, isLoading: isFetchingMedicines } = useShopMedicinesQuery({
     params: { type_ides: selectedCategories as string },
   })
 
@@ -29,18 +29,20 @@ const ProductsCategory = () => {
   )
 
   return (
-    <div className="relative min-h-screen px-24 mt-14">
+    <div className="relative min-h-screen mt-14 px-10 mx-auto xl:px-24 max-md:px-4 mx max-w-[1440px] max-sm:mt-5">
       <header>
         <Breadcrumb items={breadcrumbItems} />
       </header>
 
-      <section className="flex gap-[70px]">
-        <CategoryFilter
-          categories={shopTypesData?.results}
-          loading={isFetchingShopTypes}
-          sortCriteria={sortCriteria}
-          selectedCategories={selectedCategories}
-        />
+      <section className="flex gap-[70px] max-xl:gap-5 max-md:flex-wrap">
+        <div className="max-md:w-full">
+          <CategoryFilter
+            categories={shopTypesData?.results}
+            loading={isFetchingShopTypes}
+            sortCriteria={sortCriteria}
+            selectedCategories={selectedCategories}
+          />
+        </div>
 
         <div className="relative mt-3">
           <SortOptions sortCriteria={sortCriteria} setSortCriteria={setSortCriteria} />

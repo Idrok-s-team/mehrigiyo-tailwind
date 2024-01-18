@@ -34,8 +34,8 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({ categories, loading, se
   return (
     <aside className="relative flex flex-col">
       <h4 className="mt-3">Mahsulotlar</h4>
-      <Image src={backgroundLeaf} alt="" priority className="absolute -left-[40%] top-[2%]" />
-      <div className="relative w-[280px] flex flex-col p-5 gap-3 shadow-primary rounded-2xl mt-6 bg-white">
+      <Image src={backgroundLeaf} alt="" priority className="absolute -left-[40%] top-[2%] -z-10" />
+      <div className="relative w-[280px] flex flex-col p-5 gap-3 shadow-primary rounded-2xl mt-6 bg-white max-lg:w-[260px] max-md:w-full">
         <div className="flex items-center justify-between">
           <h6 className="text-base">Kategoriyalar</h6>
           <button className="flex items-center gap-[6px] group" onClick={handleClearFilters}>
@@ -50,7 +50,7 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({ categories, loading, se
             <Loader />
           </div>
         ) : (
-          <div className="flex flex-col gap-3 animate-fade-in">
+          <div className="grid gap-3 animate-fade-in max-md:grid-cols-6 max-sm:grid-cols-4 max-xs:grid-cols-3 max-2xs:grid-cols-2">
             {categories?.map(({ id, name }) => (
               <Checkbox
                 key={id}

@@ -47,10 +47,10 @@ const WatchVideoButton: FC<IProps> = ({ className, videoUrl }) => {
           src={videoUrl}
           title="Doctor ali shifobaxsh choylari"
           loading="lazy"
-          style={{ width: '100%', height: '70vh', borderRadius: 12 }}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
           onLoad={() => setIframeLoading(false)}
+          className="w-full h-[70vh] rounded-xl mx-auto max-sm:h-[50vh]"
         />
       </Modal>
     </>

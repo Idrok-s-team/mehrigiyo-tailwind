@@ -55,7 +55,7 @@ const Modal: FC<IProps> = ({
   const modalRoot = document.body
 
   const modalClasses = clsx(
-    'min-w-[536px] min-h-[100px] flex flex-col gap-5 justify-between p-5 bg-white rounded-3xl animate-scale-in pb-11',
+    'xs:min-w-[536px] min-h-[100px] flex flex-col gap-5 justify-between p-5 bg-white rounded-3xl animate-scale-in pb-11',
     {
       '!bg-transparent': isVideo,
     },

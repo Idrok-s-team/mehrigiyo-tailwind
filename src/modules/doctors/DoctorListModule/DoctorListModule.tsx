@@ -3,7 +3,7 @@
 import { FC, useMemo } from 'react'
 import { SeeAllButton, Slider } from '@/components/common'
 import { useDoctorTypesQuery, useDoctorsQuery } from '@/hooks/queries'
-import { DoctorCard, DoctorCardSkeleton, ProductCardSkeleton } from '@/components/specific'
+import { DoctorCard, DoctorCardSkeleton } from '@/components/specific'
 import { SwiperSlide } from 'swiper/react'
 
 type Props = {
@@ -25,13 +25,13 @@ const DoctorListModule: FC<Props> = ({ title = 'Top shifokorlar', withFilter = t
 
   return (
     <>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between max-sm:flex-wrap">
         <h4>{title}</h4>
-        <SeeAllButton text="Barchasini ko'rish" href='/online_doctors/category' />
+        <SeeAllButton text="Barchasini ko'rish" href="/online_doctors/category" className="max-sm:mt-2" />
       </div>
       {withFilter && (
         <nav
-          className="flex items-center text-lg text-gray-primary"
+          className="w-1/2 flex items-center text-lg text-gray-primary animate-fade-in max-lg:w-full"
           style={{ gap: 24, marginTop: 32, listStyle: 'none' }}
         >
           {isFetchingDoctorTypes ? (
@@ -58,7 +58,44 @@ const DoctorListModule: FC<Props> = ({ title = 'Top shifokorlar', withFilter = t
             ))}
           </div>
         ) : (
-          <Slider slidesPerView={5.4}>
+          <Slider
+            // slidesPerView={5.4}
+            breakpoints={{
+              1290: {
+                slidesPerView: 5.4,
+              },
+              1090: {
+                slidesPerView: 5,
+              },
+              990: {
+                slidesPerView: 4.5,
+              },
+              890: {
+                slidesPerView: 4,
+              },
+              790: {
+                slidesPerView: 3.5,
+              },
+              640: {
+                slidesPerView: 3,
+              },
+              535: {
+                slidesPerView: 2.5,
+              },
+              460: {
+                slidesPerView: 2.1,
+              },
+              360: {
+                slidesPerView: 1.6,
+              },
+              300: {
+                slidesPerView: 1.2,
+              },
+              240: {
+                slidesPerView: 1,
+              },
+            }}
+          >
             {doctorsData?.results.map((doctor) => (
               <SwiperSlide key={doctor.id}>
                 <DoctorCard data={doctor} />

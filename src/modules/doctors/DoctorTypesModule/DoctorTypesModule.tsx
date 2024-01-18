@@ -12,18 +12,18 @@ const DoctorTypesModule: FC = () => {
   return (
     <div className="mt-8">
       {isLoading ? (
-        <div className="grid grid-cols-6 gap-x-[22px] gap-y-[30px]">
+        <div className="flex gap-[30px]">
           {Array.from({ length: 12 }).map((_, index) => (
             <DoctorTypeCardSkeleton key={`skeleton-${index}`} />
           ))}
         </div>
       ) : (
-        <div className="grid grid-cols-6 gap-x-[22px] gap-y-[30px]">
+        <div className="gap-x-[22px] gap-y-[30px] grid grid-cols-6 max-xl:grid-cols-5 max-lg:grid-cols-3 max-sm:grid-cols-2 max-xs:grid-cols-1 max-xs:gap-y-3">
           {data?.results.map(({ id, name, image, get_doctors_count }) => (
             <Link
               key={id}
               href={`/online_doctors/category?type=${id}`}
-              className="shadow-primary flex flex-col items-center justify-between p-5 py-4 w-[188px] rounded-2xl duration-300 transition-colors hover:bg-green-light hover:border-[0.5px] hover:border-green-primary"
+              className="shadow-primary flex flex-col items-center justify-between p-5 py-4 w-[188px] rounded-2xl duration-300 transition-colors hover:bg-green-light hover:border-[0.5px] hover:border-green-primary justify-self-center"
               title={name}
             >
               <div className=" w-full h-9 flex items-center justify-center flex-shrink-0">

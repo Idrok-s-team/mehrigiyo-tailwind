@@ -14,7 +14,7 @@ type Props = {
 }
 
 const ProductCard: FC<Props> = ({ data }) => {
-  const { id, name, image, description, cost, discount, quantity } = data
+  const { id, name, image, description, cost, discount } = data
   const slug = createSlug(name, id)
 
   const { isProductInCart, addToBasket } = useAddToCart(id)
@@ -24,10 +24,14 @@ const ProductCard: FC<Props> = ({ data }) => {
     return discount ? (
       <>
         <p className="line-through text-[#808080]">{cost.toLocaleString('ru')} uzs</p>
-        <h4 className="font-bold text-green-primary">{discount.toLocaleString('ru')} uzs</h4>
+        <h4 className="font-bold text-green-primary max-xl:text-xl max-md:text-2xl max-sm:text-xl max-xs:text-2xl">
+          {discount.toLocaleString('ru')} uzs
+        </h4>
       </>
     ) : (
-      <h4 className="font-bold text-green-primary">{cost.toLocaleString('ru')} uzs</h4>
+      <h4 className="font-bold text-green-primary max-xl:text-xl max-md:text-2xl max-sm:text-xl max-xs:text-2xl">
+        {cost.toLocaleString('ru')} uzs
+      </h4>
     )
   }
 
@@ -51,10 +55,10 @@ const ProductCard: FC<Props> = ({ data }) => {
   return (
     <article
       key={id}
-      className="w-[240px] h-[378px] bg-white border border-[#E2E2E2] shadow-secondary rounded-[18px] p-3.5"
+      className="w-[240px h-[378px] bg-white border border-[#E2E2E2] shadow-secondary rounded-[18px] p-3.5 mx-auto max-xs:w-4/5 max-2xs:w-full"
     >
       <header className="flex items-start justify-between">
-        <Link href={`/products/${slug}`}>
+        <Link href={`/products/${slug}`} className="mx-auto">
           <Image src={image} alt={name} width={175} height={175} loading="lazy" />
         </Link>
         <button aria-label="Add to favorites" className="cursor-pointer" onClick={onChangeFavorite}>

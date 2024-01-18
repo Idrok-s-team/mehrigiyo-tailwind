@@ -10,9 +10,9 @@ interface SortOptionsProps {
 
 const SortOptions: React.FC<SortOptionsProps> = ({ sortCriteria, setSortCriteria }) => {
   return (
-    <nav className="flex items-center gap-5 my-3">
+    <nav className="flex gap-5 my-3">
       <span className="text-sm">Saralash:</span>
-      <ul className="flex items-center gap-5">
+      <ul className="flex items-center gap-5 flex-wrap">
         {sortOptions.map(({ label, value }, i) => (
           <li
             key={label}
