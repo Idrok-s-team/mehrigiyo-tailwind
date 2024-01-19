@@ -10,6 +10,7 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/zoom'
 import 'swiper/css/thumbs'
+import { useScreenSize } from '@/hooks/common'
 
 interface ISlide {
   name: string
@@ -23,6 +24,7 @@ type Props = {
 const ViewSlide: FC<Props> = ({ slides }): JSX.Element => {
   const [imagesNavSlider, setImagesNavSlider] = useState<any>(null)
   const sliderRef = useRef<any>()
+  const { isMaxMd } = useScreenSize()
 
   const handleSwiper = (e: any) => {
     setImagesNavSlider(e)
@@ -31,16 +33,17 @@ const ViewSlide: FC<Props> = ({ slides }): JSX.Element => {
   const slidesArray = Array.isArray(slides)
 
   return (
-    <div className="flex items-start justify-start h-full">
-      <section className="flex relative">
+    <div className="flex items-start justify-start h-full max-md:flex-wrap">
+      {/* Thumbnails slide images */}
+      <section className="flex max-md:order-2 max-md:mt-3 max-md:w-full max-md:justify-start">
         <Swiper
           onSwiper={handleSwiper}
           spaceBetween={10}
           modules={[Mousewheel, FreeMode]}
           freeMode
           mousewheel
-          direction="vertical"
-          className="!pr-4 h-[300px]"
+          direction={isMaxMd ? 'horizontal' : 'vertical'}
+          className="!pr-4 max-h-[300px] w-full"
         >
           {slidesArray ? (
             slides.map((slide) => (
@@ -74,6 +77,7 @@ const ViewSlide: FC<Props> = ({ slides }): JSX.Element => {
         </button> */}
       </section>
 
+      {/* Main view slide image */}
       <Swiper
         thumbs={{
           swiper: imagesNavSlider && !imagesNavSlider.destroyed ? imagesNavSlider : null,
@@ -86,7 +90,13 @@ const ViewSlide: FC<Props> = ({ slides }): JSX.Element => {
         {slidesArray ? (
           slides.map((slide) => (
             <SwiperSlide key={slide.name}>
-              <Image src={slide.image} fill alt={slide.name} loading="eager" className="object-contain" />
+              <Image
+                src={slide.image}
+                fill
+                alt={slide.name}
+                loading="eager"
+                className="object-contain max-sm:object-cover"
+              />
             </SwiperSlide>
           ))
         ) : (
@@ -97,4 +107,4 @@ const ViewSlide: FC<Props> = ({ slides }): JSX.Element => {
   )
 }
 
-export default memo(ViewSlide)
+export default ViewSlide

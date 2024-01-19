@@ -12,7 +12,7 @@ type Props = {
 const Breadcrumb: React.FC<Props> = ({ items }) => {
   return (
     <nav aria-label="breadcrumb">
-      <ol className="flex leading-none text-[#505050]">
+      <ol className="flex leading-none text-[#505050] max-md:flex-wrap">
         {items.map((item, index) => {
           const isLastItem = index === items.length - 1
           return (

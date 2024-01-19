@@ -21,15 +21,11 @@ const DoctorBySlug = async ({ params }: Props) => {
   ]
 
   return (
-    <div className="px-24 mt-14 mb-36">
+    <div className="mt-14 mb-36 mx-auto px-10 max-xs:px-4 xl:px-24 max-w-[1440px] max-md:mb-16">
       <header className="relative flex items-center justify-between gap-32">
-        <figure className="flex gap-12">
-          {/* <Image src={backgroundLeaf} alt="" priority className="-ml-[15%]" /> */}
-
-          <figcaption className="mt-12">
-            <Breadcrumb items={breadcrumbItems} />
-          </figcaption>
-        </figure>
+        <div>
+          <Breadcrumb items={breadcrumbItems} />
+        </div>
       </header>
 
       <main className="mt-10">

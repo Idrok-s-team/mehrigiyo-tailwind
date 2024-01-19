@@ -21,9 +21,9 @@ const DoctorOrProductList: React.FC<IProps> = ({ loading, doctorsData, productsD
     }
   }
 
-  const itemClasses = clsx('grid gap-[30px] mt-7 animate-fade-in max-xl:gap-x-4 max-sm:mt-2', {
-    'grid-cols-3 max-lg:grid-cols-2 max-xs:grid-cols-1': itemType === 'product',
-    'grid-cols-4': itemType === 'doctor',
+  const itemClasses = clsx('grid gap-[30px] mt-7 animate-fade-in max-xl:gap-x-4', {
+    'grid-cols-3 max-lg:grid-cols-2 max-xs:grid-cols-1 max-sm:mt-2': itemType === 'product',
+    'grid-cols-4 max-lg:grid-cols-3 max-xs:grid-cols-2 max-2xs:grid-cols-1': itemType === 'doctor',
   })
 
   return loading ? (

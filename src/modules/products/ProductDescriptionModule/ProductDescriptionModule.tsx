@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, useEffect, useMemo, useState } from 'react'
+import { FC, useMemo, useState } from 'react'
 import { useCopyToClipboard } from 'usehooks-ts'
 import { ChevronIcon, FavoriteFillIcon, FavoriteIcon, PlusWhiteIcon, SharedIcon } from '@/assets/icons'
 import { IShopMedicines } from '@/types'
@@ -15,16 +15,11 @@ type Props = {
 
 const ProductDescriptionModule: FC<Props> = ({ product }) => {
   const [showFullDescription, setShowFullDescription] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
   const { id, name, description, discount, cost, quantity, image, pictures } = product!
 
   const { isProductInCart, addToBasket } = useAddToCart(id)
   const { isProductInFavorite, onChangeFavorite } = useChangeFavoriteProducts(id)
   const [__, copy] = useCopyToClipboard()
-
-  useEffect(() => {
-    setIsLoading(false)
-  }, [])
 
   const onCopyToClipboard = () => {
     copy(location.href)
@@ -71,15 +66,15 @@ const ProductDescriptionModule: FC<Props> = ({ product }) => {
 
   return (
     <>
-      <div className="flex gap-10 relative">
-        <section className="w-2/5 h-[550px] sticky top-32">
+      <div className="flex gap-10 relative max-lg:gap-5 max-md:flex-wrap">
+        <section className="w-2/5 md:sticky top-32 max-lg:w-1/2 max-md:w-full md:h-[550px] max-md:h-[50vh]">
           <ViewSlide slides={slides} />
         </section>
 
-        <div className="flex-1">
+        <div className="flex-1 max-md:mt-32">
           <section className="flex justify-between">
             <h2>{name}</h2>
-            <div className="flex gap-4">
+            <div className="flex gap-4 items-center">
               <ActionButton onClick={onChangeFavorite}>{renderFavoriteIcon()}</ActionButton>
               <Tooltip text="Nusxa olish">
                 <ActionButton onClick={onCopyToClipboard}>
@@ -89,9 +84,11 @@ const ProductDescriptionModule: FC<Props> = ({ product }) => {
             </div>
           </section>
 
-          <section className="flex items-center justify-between mt-7">
-            <ProductCount productId={id} quantity={quantity} />
-            <div className="flex items-center gap-2">{renderPriceSection()}</div>
+          <section className="flex items-center justify-between mt-7 max-lg:flex-wrap">
+            <div className='order-2'>
+              <ProductCount productId={id} quantity={quantity} />
+            </div>
+            <div className="flex items-center gap-2 order-1">{renderPriceSection()}</div>
           </section>
 
           <article className="mt-4">
@@ -116,7 +113,7 @@ const ProductDescriptionModule: FC<Props> = ({ product }) => {
             )}
           </article>
 
-          <section className="flex justify-end mt-10">
+          <section className="flex justify-end mt-10 max-md:justify-start">
             <div className="w-56">{renderAddToCartButton()}</div>
           </section>
         </div>

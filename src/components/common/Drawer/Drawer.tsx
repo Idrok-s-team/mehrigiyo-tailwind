@@ -38,7 +38,7 @@ const Drawer: FC<IProps> = ({ children, isOpen, onClose, onSubmit, disabled, but
   })
 
   const drawerClasses = clsx(
-    'flex flex-col justify-between fixed bottom-0 left-0 right-0 z-40 w-full px-12 py-10 overflow-x-hidden overflow-y-auto transition-transform duration-200 bg-white h-[80vh] rounded-t-[30px]',
+    'flex flex-col justify-between fixed bottom-0 left-0 right-0 z-40 w-full px-12 py-10 overflow-x-hidden overflow-y-auto transition-transform duration-200 bg-white h-[80vh] rounded-t-[30px] max-md:px-6 max-md:py-5 max-xs:rounded-t-2xl',
     {
       'translate-y-0': isOpen,
       'translate-y-full': !isOpen,
@@ -58,7 +58,7 @@ const Drawer: FC<IProps> = ({ children, isOpen, onClose, onSubmit, disabled, but
 
         <main className="overflow-auto flex-1">{children}</main>
 
-        <footer className="flex justify-end pt-5">
+        <footer className="flex justify-end mt-5 max-sm:mt-2">
           <div className="w-48">
             <Button onClick={onSubmit} disabled={disabled}>
               {buttonText}

@@ -93,21 +93,21 @@ const DoctorAppointmentDrawer: FC<Props> = () => {
       disabled={isSubmitDisabled}
       buttonText={isPending ? 'Tekshirilmoqda...' : 'Tasdiqlash'}
     >
-      <div className="mt-14 px-28">
+      <div className="mt-5 px-28 max-w-[1440px] mx-auto max-xl:px-12 max-lg:px-6 max-sm:px-0 bg-red-50">
         <section className="flex item-center justify-between">
           <div>
             <h3 className="text-[28px]">Maslahat kunini band qiling</h3>
             <p className="mt-3 text-[#505050]">Iltimos, maslahat kuniga borishdan oldin kun va vaqtni tanlang</p>
           </div>
-          <div className="mr-12">
+          <div className="md:mr-12">
             <BookingIcon />
           </div>
         </section>
         <section className="mt-2">
           {Object.entries(daysGroupedByMonth).map(([monthYear, daysInMonth], index) => (
             <React.Fragment key={monthYear}>
-              <p>{monthYear}</p>
-              <div className="flex gap-4 mt-4">
+              <p className="italic">{monthYear}</p>
+              <div className="flex gap-4 mt-4 max-xl:gap-2.5 max-lg:flex-wrap ju">
                 {daysInMonth.map((day) => {
                   const dayFormatted = dayjs(day).format(DateFormat.ISO_DATE)
                   return (
@@ -125,7 +125,7 @@ const DoctorAppointmentDrawer: FC<Props> = () => {
             </React.Fragment>
           ))}
         </section>
-        <section className="grid grid-cols-3 gap-x-3.5 gap-y-4 mt-7">
+        <section className="grid grid-cols-3 gap-x-3.5 gap-y-4 mt-7 max-sm:grid-cols-2 max-xs:grid-cols-1 max-sm:gap-y-2">
           {appointmentTimeSlots.map(({ range }) => (
             <TimeRangeCard
               key={range}

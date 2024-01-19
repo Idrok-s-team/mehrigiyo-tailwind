@@ -9,15 +9,23 @@ import { ResetIcon } from '@/assets/icons'
 import { useSyncUrlQueryParams } from '@/hooks/common'
 import { IShopTypes, SortCriteriaType } from '@/types'
 import { IDoctorTypes } from '@/types/doctor'
+import clsx from 'clsx'
 
 interface CategoryFilterProps {
   selectedCategories: string | null
   sortCriteria: SortCriteriaType
   categories?: Array<IDoctorTypes | IShopTypes>
   loading: boolean
+  filterType: 'doctor' | 'product'
 }
 
-const CategoryFilter: React.FC<CategoryFilterProps> = ({ categories, loading, selectedCategories, sortCriteria }) => {
+const CategoryFilter: React.FC<CategoryFilterProps> = ({
+  categories,
+  loading,
+  selectedCategories,
+  sortCriteria,
+  filterType,
+}) => {
   const [filters, setFilters] = useState<number[]>([])
 
   useSyncUrlQueryParams('type', filters)
@@ -30,6 +38,11 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({ categories, loading, se
   }, [selectedCategories])
 
   const handleClearFilters = useCallback(() => setFilters([]), [])
+
+  const filterClasses = clsx('grid gap-3 animate-fade-in max-2xs:max-h-[140px] max-2xs:overflow-y-auto', {
+    'max-md:grid-cols-6 max-sm:grid-cols-4 max-xs:grid-cols-3 max-2xs:grid-cols-2': filterType === 'product',
+    'max-md:grid-cols-2 max-2xs:grid-cols-1': filterType === 'doctor',
+  })
 
   return (
     <aside className="relative flex flex-col">
@@ -50,7 +63,7 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({ categories, loading, se
             <Loader />
           </div>
         ) : (
-          <div className="grid gap-3 animate-fade-in max-md:grid-cols-6 max-sm:grid-cols-4 max-xs:grid-cols-3 max-2xs:grid-cols-2">
+          <div className={filterClasses}>
             {categories?.map(({ id, name }) => (
               <Checkbox
                 key={id}

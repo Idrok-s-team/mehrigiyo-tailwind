@@ -29,7 +29,7 @@ const ProductsCategory = () => {
   )
 
   return (
-    <div className="relative min-h-screen mt-14 px-10 mx-auto xl:px-24 max-md:px-4 mx max-w-[1440px] max-sm:mt-5">
+    <div className="relative min-h-screen mt-14 px-10 mx-auto xl:px-24 max-md:px-4 max-w-[1440px] max-sm:mt-5">
       <header>
         <Breadcrumb items={breadcrumbItems} />
       </header>
@@ -41,6 +41,7 @@ const ProductsCategory = () => {
             loading={isFetchingShopTypes}
             sortCriteria={sortCriteria}
             selectedCategories={selectedCategories}
+            filterType="product"
           />
         </div>
 
@@ -63,7 +64,7 @@ const ProductsCategory = () => {
 
       {shopMedicinesData && shopMedicinesData?.count < 10 && (
         <section className="flex justify-end mt-[30%]">
-          <Image src={backgroundBranch} alt={''} className="absolute -bottom-[16%] -right-[9%] scale-75" />
+          <Image src={backgroundBranch} alt={''} className="absolute -bottom-[16%] -right-[9%] scale-75 -z-10" />
         </section>
       )}
     </div>
