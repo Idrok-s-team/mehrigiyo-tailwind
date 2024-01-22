@@ -28,10 +28,15 @@ const Help = () => {
   const breadcrumbItems = [{ text: 'Bosh sahifa', href: '/' }, { text: 'Yordam' }]
 
   return (
-    <div className="mt-14">
-      <header className="relative flex items-center justify-between gap-32 px-24">
+    <div className="mt-14 mx-auto max-w-[1440px] overflow-hidden">
+      <header className="relative flex items-center justify-between gap-32 px-10 mx-auto xl:px-24 max-md:px-4">
         <figure className="flex gap-12">
-          <Image src={backgroundLeaf} alt="" priority className="-ml-[10%] object-cover w-[225px] h-[305px]" />
+          <Image
+            src={backgroundLeaf}
+            alt=""
+            priority
+            className="-ml-[10%] object-cover w-[225px] h-[305px] max-lg:hidden"
+          />
 
           <figcaption className="mt-12">
             <Breadcrumb items={breadcrumbItems} />
@@ -39,26 +44,26 @@ const Help = () => {
           </figcaption>
         </figure>
 
-        <Image src={backgroundBranch} alt={''} className="absolute mt-[20%] -right-[9%]" />
+        <Image src={backgroundBranch} alt={''} className="absolute mt-[20%] -right-[9%] max-lg:hidden" />
       </header>
 
-      <section className="px-24 -mt-[200px]">
+      <section className="px-10 mx-auto xl:px-24 max-md:px-4 lg:-mt-[200px]">
         <SendRequestModule />
       </section>
 
-      <section className="grid grid-cols-2 p-16 mx-24 mt-52 bg-white gap-y-10 rounded-xl shadow-primary">
+      <section className="grid grid-cols-2 p-16 px-10 mx-auto mt-52 gap-10 bg-white gap-y-10 rounded-xl shadow-primary xl:px-24 max-xl:p-10 max-xl:mx-16 max-lg:mx-10 max-sm:mx-4  max-sm:p-6 max-sm:grid-cols-1 max-sm:mt-24">
         {contactData.map(({ name, phone, address }) => (
           <div key={name} className="flex flex-col">
             <h5 className="text-[22px] font-medium">{name}</h5>
-            <p className="text-lg text-gray-primary">{address}</p>
+            <p className="text-lg text-gray-primary max-xs:text-base">{address}</p>
             <Link
               href={`tel:${phone}`}
-              className="flex items-center gap-2.5 rounded-lg mt-2.5 text-gray-primary bg-gray-primary/10 py-2 px-5 h-10 max-w-[240px] cursor-pointer hover:bg-green-primary/10 group duration-700"
+              className="flex items-center gap-2.5 rounded-lg mt-2.5 text-gray-primary bg-gray-primary/10 py-2 px-5 h-10 md:max-w-[240px] cursor-pointer hover:bg-green-primary/10 group duration-700 max-sm:max-w-[240px]"
             >
               <span>
                 <PhoneIcon />
               </span>
-              <span className="text-lg font-medium group-hover:text-green-primary">{phone}</span>
+              <span className="text-lg font-medium group-hover:text-green-primary max-xs:text-sm">{phone}</span>
             </Link>
           </div>
         ))}
@@ -75,7 +80,12 @@ const Help = () => {
             referrerPolicy={'no-referrer-when-downgrade'}
           />
         ) : (
-          <Image src={locationMap} alt="" className="w-full h-[564px] cursor-pointer object-cover" onClick={handleIframeLoad} />
+          <Image
+            src={locationMap}
+            alt=""
+            className="w-full h-[564px] cursor-pointer object-cover"
+            onClick={handleIframeLoad}
+          />
         )}
       </section>
     </div>

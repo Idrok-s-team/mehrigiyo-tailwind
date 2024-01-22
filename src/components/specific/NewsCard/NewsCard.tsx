@@ -1,23 +1,24 @@
 'use client'
 
-import { memo, type FC } from 'react'
+import { type FC } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { INews } from '@/types'
 import { ArrowRightLongerGreenIcon } from '@/assets/icons'
-import { createSlug, formatDate } from '@/utils'
+import { createSlug } from '@/utils'
+import { HashtagTime } from '@/components/specific'
 
 type Props = {
   data: INews
 }
 
-const NewsCard: FC<Props> = memo(function NewsCard({ data }) {
+const NewsCard: FC<Props> = ({ data }) => {
   const { name, id, hashtag, image, created_at, description } = data
 
   const slug = createSlug(name, id)
 
   return (
-    <article className="w-[347px] h-[543px] flex flex-col shadow-card rounded-3xl bg-white group overflow-hidden max-xs:w-full">
+    <article className="h-[543px] flex flex-col shadow-card rounded-3xl bg-white group overflow-hidden max-xs:w-full">
       <Link
         href={`/news/${slug}`}
         aria-label={`${name} yangiliklar rasmi`}
@@ -33,13 +34,9 @@ const NewsCard: FC<Props> = memo(function NewsCard({ data }) {
       </Link>
 
       <main className="flex-1 p-5 pb-8">
-        <section className="flex items-center gap-1 text-sm">
-          <span className="text-green-primary">#{hashtag.tag_name}</span>
-          <span className="w-1 h-1 rounded-full bg-[#C4C4C4]"></span>
-          <span className="text-[#C4C4C4]">{formatDate(created_at)}</span>
-        </section>
+        <HashtagTime hashtag={hashtag.tag_name} date={created_at} />
 
-        <section className="mt-2 h-[78%]">
+        <section className="mt-2 h-[78%] max-sm:h-[75%]">
           <Link
             href={`/news/${slug}`}
             aria-label={`${name} yangiliklari`}
@@ -63,6 +60,6 @@ const NewsCard: FC<Props> = memo(function NewsCard({ data }) {
       </main>
     </article>
   )
-})
+}
 
 export default NewsCard

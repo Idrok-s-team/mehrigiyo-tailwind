@@ -28,7 +28,7 @@ const FavoriteProductsModule = () => {
   return (
     <div className="mt-2.5 animate-fade-in">
       <h4>Sevimlilarda {data?.count} ta mahsulot bor</h4>
-      <div className="flex flex-wrap gap-[30px] mt-[30px]">
+      <div className="grid grid-cols-4 gap-[30px] mt-[30px] justify-between max-xl:gap-5 max-lg:grid-cols-3 max-md:grid-cols-2 max-xs:grid-cols-1">
         {data?.results.map((product) => <ProductCard key={product.id} data={product} />)}
       </div>
     </div>

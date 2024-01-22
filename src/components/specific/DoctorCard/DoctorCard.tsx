@@ -32,7 +32,7 @@ const DoctorCard: FC<Props> = ({ data }) => {
   return (
     <article
       key={id}
-      className="w-[200px h-[250px] bg-white border border-[#E2E2E2] shadow-secondary rounded-[18px] p-4"
+      className="w-full h-[250px] bg-white border border-[#E2E2E2] shadow-secondary rounded-[18px] p-4"
       title={full_name}
     >
       <header className="flex items-start justify-between">

@@ -28,7 +28,7 @@ const FavoriteDoctorsModule = () => {
   return (
     <div className="mt-2.5 animate-fade-in">
       <h4>Sevimlilarda {data?.count} ta shifokor bor</h4>
-      <div className="flex flex-wrap gap-[30px] mt-[30px]">
+      <div className="grid grid-cols-5 gap-[30px] mt-[30px] justify-between max-xl:gap-5 max-lg:grid-cols-4 max-md:grid-cols-3 max-sm:grid-cols-2 max-2xs:grid-cols-1">
         {data?.results.map((doctor) => <DoctorCard key={doctor.id} data={doctor} />)}
       </div>
     </div>

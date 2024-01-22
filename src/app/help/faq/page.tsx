@@ -14,10 +14,15 @@ const Faq = () => {
   ]
 
   return (
-    <div className="px-24 mt-14 mb-[70px]">
+    <div className="mt-14 px-10 mb-[70px] mx-auto xl:px-24 max-md:px-4 mx max-w-[1440px] max-sm:mt-0 overflow-hidden">
       <header className="relative flex items-center justify-between gap-32">
         <figure className="flex gap-12">
-          <Image src={backgroundLeaf} alt="" priority className="-ml-[10%] object-cover w-[225px] h-[305px]" />
+          <Image
+            src={backgroundLeaf}
+            alt=""
+            priority
+            className="-ml-[10%] object-cover w-[225px] h-[305px] max-lg:hidden"
+          />
 
           <figcaption className="mt-12">
             <Breadcrumb items={breadcrumbItems} />
@@ -28,11 +33,11 @@ const Faq = () => {
           </figcaption>
         </figure>
 
-        <Image src={backgroundBranch} alt={''} className="absolute mt-[20%] -right-[9%]" />
+        <Image src={backgroundBranch} alt={''} className="absolute mt-[20%] -right-[9%] max-lg:hidden" />
       </header>
 
       <section className="relative mt-10">
-        <Accordion items={faqData} isFirstItemOpened withIndex={false} />
+        <Accordion items={faqData} isFirstItemOpened withIndex={false} size="md" />
       </section>
     </div>
   )

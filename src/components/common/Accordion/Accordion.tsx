@@ -62,7 +62,9 @@ const Accordion: FC<IAccordionProps> = memo(function Accordion({
 
           <div
             ref={(el) => (contentRefs.current[index] = el!)}
-            className="ml-12 overflow-hidden duration-300 ease-in-out transition-max-height max-2xs:mt-4"
+            className={`overflow-hidden duration-300 ease-in-out transition-max-height max-2xs:mt-4 ${
+              withIndex ? 'ml-12' : ''
+            }`}
             style={{
               maxHeight: activeIndex === index ? `${contentRefs.current[index]?.scrollHeight}px` : '0',
             }}

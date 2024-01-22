@@ -42,13 +42,15 @@ const CartModule = () => {
   return (
     <div className="mt-2.5 animate-fade-in">
       <h4>Savatchada {cartData.length} ta mahsulot bor</h4>
-      <div className="flex justify-between gap-9">
+      <div className="flex justify-between gap-9 max-xl:gap-4 max-lg:flex-wrap">
         <section className="flex flex-col flex-1 gap-4 mt-11">
           {cartData.map((item) => (
             <CartItem key={item.id} data={item} />
           ))}
         </section>
-        <CartSummaryCard infoCard={infoCard} />
+        <section className="max-lg:w-full">
+          <CartSummaryCard infoCard={infoCard} />
+        </section>
       </div>
 
       <CheckoutActionModal />

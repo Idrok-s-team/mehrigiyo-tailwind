@@ -24,7 +24,7 @@ const ProductCard: FC<Props> = ({ data }) => {
     return discount ? (
       <>
         <p className="line-through text-[#808080]">{cost.toLocaleString('ru')} uzs</p>
-        <h4 className="font-bold text-green-primary max-xl:text-xl max-md:text-2xl max-sm:text-xl max-xs:text-2xl">
+        <h4 className="font-bold text-green-primary max-xl:text-xl max-sm:text-xl max-xs:text-2xl">
           {discount.toLocaleString('ru')} uzs
         </h4>
       </>
@@ -55,7 +55,7 @@ const ProductCard: FC<Props> = ({ data }) => {
   return (
     <article
       key={id}
-      className="w-[240px h-[378px] bg-white border border-[#E2E2E2] shadow-secondary rounded-[18px] p-3.5 mx-auto max-xs:w-4/5 max-2xs:w-full"
+      className="h-[378px] bg-white border border-[#E2E2E2] shadow-secondary rounded-[18px] p-3.5 mx-auto max-xs:w-4/5 max-2xs:w-full"
     >
       <header className="flex items-start justify-between">
         <Link href={`/products/${slug}`} className="mx-auto">

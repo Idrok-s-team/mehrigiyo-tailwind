@@ -21,10 +21,15 @@ const NewsBySlug = async ({ params }: Props) => {
   const breadcrumbItems = [{ text: 'Bosh sahifa', href: '/' }, { text: 'Yangiliklar', href: '/news' }, { text: name }]
 
   return (
-    <div className="px-24 overflow-hidden mt-14 mb-36">
+    <div className="mt-14 mb-36 px-10 mx-auto xl:px-24 max-md:px-4 mx max-w-[1440px] max-sm:mt-0 overflow-hidden max-md:mb-12">
       <header className="relative flex items-center justify-between gap-32">
         <figure className="flex gap-12">
-          <Image src={backgroundLeaf} alt="" priority className="-ml-[10%] object-cover w-[225px] h-[305px]" />
+          <Image
+            src={backgroundLeaf}
+            alt=""
+            priority
+            className="-ml-[10%] object-cover w-[225px] h-[305px] max-lg:hidden"
+          />
 
           <figcaption className="mt-12">
             <Breadcrumb items={breadcrumbItems} />
@@ -33,11 +38,11 @@ const NewsBySlug = async ({ params }: Props) => {
           </figcaption>
         </figure>
 
-        <Image src={backgroundBranch} alt={''} className="absolute rotate-45 scale-75 -right-[25%]" />
+        <Image src={backgroundBranch} alt={''} className="absolute rotate-45 scale-75 -right-[25%] max-lg:hidden" />
       </header>
 
-      <main className="flex">
-        <article className="w-4/5">
+      <main className="flex justify-center max-lg:mt-12">
+        <article className="w-full">
           <div>
             <Image
               src={image}

@@ -13,7 +13,7 @@ type Props = {
 const CartItem: FC<Props> = ({ infoCard }) => {
   const { setActiveModal } = useCommonStore()
   return (
-    <div className="flex-shrink-0 bg-white rounded-3xl shadow-card mt-11 px-[30px] py-6 w-[347px] sticky top-0">
+    <div className="flex-shrink-0 bg-white rounded-3xl shadow-card mt-11 px-[30px] py-6 w-[347px] sticky top-0 max-lg:w-full">
       <div className="flex flex-col gap-4">
         {infoCard.map(({ label, value, isLast }) => (
           <div key={label} className="flex items-center justify-between">

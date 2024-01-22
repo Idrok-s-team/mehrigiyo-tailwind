@@ -2,8 +2,7 @@
 
 import { FC, useMemo, useState } from 'react'
 import { useNewsQuery, useNewsTagsQuery } from '@/hooks/queries'
-import NewsCard from '@/components/specific/NewsCard'
-import { NewsCardSkeleton } from '@/components/specific'
+import { NewsCard, NewsCardSkeleton } from '@/components/specific'
 
 const AllNewsModule: FC = () => {
   const [selectedFilter, setSelectedFilter] = useState<string>('')
@@ -25,7 +24,7 @@ const AllNewsModule: FC = () => {
         <h4>Yangiliklar</h4>
       </div>
       <nav
-        className="flex items-center text-lg text-gray-primary"
+        className="flex items-center text-lg text-gray-primary overflow-x-auto no-scrollbar"
         style={{ gap: 24, marginTop: 32, listStyle: 'none' }}
       >
         {isFetchingNewsTags ? (
@@ -61,7 +60,7 @@ const AllNewsModule: FC = () => {
             Hozircha ushbu bo'limda yangiliklar yo'q
           </h3>
         ) : (
-          <div className="grid grid-cols-3 gap-y-[50px]">
+          <div className="grid grid-cols-3 gap-x-[60px] gap-y-[50px] max-xl:gap-x-10 max-lg:gap-x-5 max-[900px]:grid-cols-2 max-[900px]:gap-x-[60px] max-md:gap-x-5 max-md:gap-y-8 max-sm:grid-cols-1">
             {newsData?.results
               .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
               .map((data) => <NewsCard key={data.id} data={data} />)}
