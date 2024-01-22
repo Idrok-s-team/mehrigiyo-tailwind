@@ -22,7 +22,7 @@ const ProductCategoriesModule: FC = () => {
           ))}
         </div>
       ) : (
-        <div className="grid grid-cols-6 gap-x-[22px] gap-y-[30px]">
+        <div className="grid grid-cols-6 gap-x-[22px] gap-y-[30px] max-lg:gap-5 max-lg:grid-cols-4 max-sm:grid-cols-3 max-xs:grid-cols-2 max-xs:gap-x-3 max-2xs:grid-cols-1">
           {data?.results.map(({ id, name, icon }) => (
             <div
               key={id}

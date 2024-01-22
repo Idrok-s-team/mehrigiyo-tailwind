@@ -4,6 +4,8 @@ import React, { RefObject, useCallback, useRef } from 'react'
 import Image from 'next/image'
 import { Breadcrumb, Tabs, WatchVideoButton } from '@/components/common'
 import { AboutCertificatesModule, ProductCategoriesModule } from '@/modules/about'
+import { BrandsListModule, HerbsBannerModule } from '@/modules/home'
+import { aboutUsTabItems, achievementsData, stagesData } from '@/constants'
 import backgroundLeaf from '@/assets/images/common/backgroundLeaf.png'
 import backgroundBranch from '@/assets/images/common/backgroundBranchLeft.png'
 import organicLogosIcon from '@/assets/images/product/organicLogosWide.png'
@@ -13,9 +15,6 @@ import backgroundBubble2 from '@/assets/icons/common/backgroundBubble2.svg'
 import historyImg from '@/assets/images/about/mehrigiyo_history.png'
 import nature1 from '@/assets/images/about/nature1.png'
 import nature2 from '@/assets/images/about/nature2.png'
-
-import { ClientsInfoIcon, CountriesInfoIcon, DownloadDayIcon, UsersInfoIcon } from '@/assets/icons/about'
-import { BrandsListModule, HerbsBannerModule } from '@/modules/home'
 
 const AboutUsPage = () => {
   const originPartRef = useRef<HTMLElement>(null)
@@ -48,46 +47,16 @@ const AboutUsPage = () => {
 
   const breadcrumbItems = [{ text: 'Bosh sahifa', href: '/' }, { text: 'Biz haqimizda' }]
 
-  const tabItems = [
-    { key: 'origin', label: 'Kelib chiqishi' },
-    { key: 'now', label: 'Hozirda' },
-    { key: 'certificates', label: 'Yutuqlar va sertifikatlar' },
-  ]
-
-  const achievementsData = [
-    {
-      title: '10,000+',
-      text: 'Kuniga yuklab olish',
-      icon: <DownloadDayIcon />,
-    },
-    {
-      title: '2 million',
-      text: 'Foydalanuvchilar',
-      icon: <UsersInfoIcon />,
-    },
-    {
-      title: '50 000+',
-      text: 'Mijozlar',
-      icon: <ClientsInfoIcon />,
-    },
-    {
-      title: '12',
-      text: 'Mamlakatlar',
-      icon: <CountriesInfoIcon />,
-    },
-  ]
-
-  const stagesData = [
-    { title: 1, text: 'Tozalash' },
-    { title: 2, text: "To'ldirish" },
-    { title: 3, text: "Texnik xizmat ko'rsatish" },
-  ]
-
   return (
-    <div className="px-24 mt-14">
-      <section className="flex items-center justify-between gap-32">
-        <div className="flex gap-12">
-          <Image src={backgroundLeaf} alt="" priority className="-ml-[10%] object-cover w-[225px] h-[305px]" />
+    <div className="mt-14 px-10 mx-auto xl:px-24 max-md:px-4 mx max-w-[1440px] max-sm:mt-0 overflow-hidden">
+      <section className="flex justify-between items-center max-sm:flex-wrap">
+        <div className="flex gap-12 max-xl:gap-2 max-xl:w-4/5 max-lg:w-full">
+          <Image
+            src={backgroundLeaf}
+            alt=""
+            priority
+            className="-ml-[10%] object-cover w-[225px] h-[305px] max-lg:hidden"
+          />
 
           <div className="mt-10">
             <Breadcrumb items={breadcrumbItems} />
@@ -97,33 +66,31 @@ const AboutUsPage = () => {
               kompaniyasi
             </p>
             <WatchVideoButton
+              className="mt-10 max-sm:mt-4"
               videoUrl="https://www.youtube.com/embed/CKvdClKdSJo?si=V-Hy0MKf5OdPGZWb"
-              className="mt-10"
             />
           </div>
         </div>
-        <div className="flex-shrink-0">
+        <div className="flex items-center justify-center xl:flex-shrink-0 max-sm:w-full max-sm:mt-4">
           <Image src={organicLogosIcon} alt={''} priority width={464} height={329} />
         </div>
       </section>
 
-      <section className="sticky z-50 mt-14 top-28 rounded-2xl">
-        {/* <div className="w-4/5"> */}
+      <section className="sticky z-50 mt-14 top-28 rounded-2xl max-lg:top-16">
         <Tabs
-          items={tabItems}
+          items={aboutUsTabItems}
           className="shadow-primary bg-white !rounded-2xl"
           fullWidth={false}
           onTabChange={handleTabChange}
         />
-        {/* </div> */}
       </section>
 
-      <section className="flex items-center justify-between mt-24">
+      <section className="flex items-center justify-between mt-24 max-sm:flex-wrap">
         <div>
-          <Image src={ownerImg} alt="Mehrigiyo owner" className="-ml-[16%]" />
+          <Image src={ownerImg} alt="Mehrigiyo owner" className="sm:-ml-[16%]" />
         </div>
 
-        <div className="w-3/5">
+        <div className="w-3/5 max-lg:w-4/5 max-md:w-full">
           <h2 className="font-bold">Xush kelibsiz!</h2>
           <p className="mt-5 text-gray-primary">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
@@ -132,15 +99,15 @@ const AboutUsPage = () => {
             cupidatat Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
             consequat.
           </p>
-          <h5 className="mt-20">Hurmat bilan, Abdurazakov Alijon G‘aniyevich</h5>
+          <h5 className="mt-20 max-sm:mt-10">Hurmat bilan, Abdurazakov Alijon G‘aniyevich</h5>
           <p className="text-sm italic text-[#505050]">
             “Mehrigiyo” shirkati asoschisi, farmatsevt, xalq tabibi, Turon Fanlar akademiyasi akademigi.
           </p>
         </div>
       </section>
 
-      <section className="relative flex justify-between" ref={originPartRef}>
-        <div className="w-[30%] mt-72">
+      <section className="relative flex items-center justify-between max-md:flex-wrap" ref={originPartRef}>
+        <div className="w-[30%] mt-[15%] max-xl:w-3/5 max-lg:w-4/5 max-md:w-full">
           <h2 className="font-extrabold text-green-primary">Kelib chiqish</h2>
           <p className="mt-4 text-gray-primary">
             1992-yildan buyon yuqori malakali shifokorlar, o‘simlikshunoslar, sharq tabobati izdoshlari, fermer va
@@ -152,28 +119,35 @@ const AboutUsPage = () => {
         </div>
 
         <div>
-          <Image src={backgroundBubble1} alt="" className="absolute -top-[20%] -right-[8%]" />
-          <Image src={backgroundBubble2} alt="" className="absolute -top-[23%] -right-[8%]" />
+          <Image src={backgroundBubble1} alt="" className="absolute -top-[20%] -right-[8%] -z-10" />
+          <Image src={backgroundBubble2} alt="" className="absolute -top-[23%] -right-[8%] -z-10" />
 
-          <Image src={historyImg} alt="" className="absolute -right-[5%] top-[30%]" />
+          <Image src={historyImg} alt="" className="mt-[20%] max-md:mt-10" />
         </div>
       </section>
 
-      <section className="flex items-center mt-60">
-        <div className="flex items-center gap-12">
-          <Image src={backgroundLeaf} alt="" priority className="-ml-[20%] object-cover w-[225px] h-[305px]" />
+      <section className="flex items-center mt-24 max-xl:gap-10 max-md:flex-wrap max-md:mt-12">
+        <div className="flex items-center xl:gap-12 max-md:w-full">
+          <Image
+            src={backgroundLeaf}
+            alt=""
+            priority
+            className="-ml-[20%] object-cover w-[225px] h-[305px] max-lg:hidden"
+          />
 
-          <div className="mt-10">
-            <h1 className="text-4xl">30 yillik yutuqlarimiz</h1>
-            <p className="mt-5 text-gray-primary">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+          <div className="mt-10 max-md:mx-auto">
+            <h1 className="text-4xl max-md:text-3xl">30 yillik yutuqlarimiz</h1>
+            <p className="mt-5 text-gray-primary max-md:mt-2">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit
+            </p>
           </div>
         </div>
-        <div className="grid flex-shrink-0 grid-cols-2 gap-x-20 gap-y-10">
+        <div className="grid flex-shrink-0 grid-cols-2 gap-x-20 gap-y-10 max-lg:gap-x-10 2xs:mx-auto max-xs:gap-x-3 max-2xs:grid-cols-1">
           {achievementsData.map(({ title, text, icon }) => (
             <div key={title} className="flex items-center gap-4">
               <span>{icon}</span>
               <span>
-                <h4>{title}</h4>
+                <h4 className="max-md:text-xl">{title}</h4>
                 <p className="text-gray-primary">{text}</p>
               </span>
             </div>
@@ -181,7 +155,7 @@ const AboutUsPage = () => {
         </div>
       </section>
 
-      <section className="mt-40" ref={nowPartRef}>
+      <section className="mt-40 max-sm:mt-24" ref={nowPartRef}>
         <h2 className="font-extrabold text-green-primary">Hozirda</h2>
         <p className="mt-3 text-gray-primary">
           Bugungi kunda korxonada qadimiy sharq tabobati va zamonaviy farmatsevtika yutuqlarini o‘zida jamlagan
@@ -196,8 +170,8 @@ const AboutUsPage = () => {
         <div>
           <ProductCategoriesModule />
         </div>
-        <div className="flex items-center gap-8">
-          <p className="text-gray-primary">
+        <div className="flex items-center justify-between lg:gap-8 max-lg:mt-8 max-md:flex-wrap">
+          <p className="text-gray-primary max-xl:w-1/2 max-md:w-full">
             Yuqori sifat va mahsulot samaradorligini oshirish maqsadida, o'simliklar va mevalar organik usulda, mineral
             o'g'itlarsiz, pestitsidlarsiz, kompaniyaning xususiy ekish maydonlarida (plantatsiyalarda) yetishtiriladi.
             Mahsulotlar jahon standartlariga muvofiq tanlab olinadi, tayyorlanadi va qadoqlanadi.
@@ -210,11 +184,11 @@ const AboutUsPage = () => {
             qilinadi, bu esa har bir mahsulotning sifatini kafolatlaydi.
           </p>
 
-          <Image src={nature1} alt="" className="flex-shrink-0" />
+          <Image src={nature1} alt="" className="xl:flex-shrink-0 max-md:mx-auto" />
         </div>
-        <div className="flex items-center gap-8">
-          <Image src={nature2} alt="" className="flex-shrink-0" />
-          <p className="text-gray-primary">
+        <div className="flex items-center justify-between lg:gap-8 max-lg:mt-8 max-md:flex-wrap">
+          <Image src={nature2} alt="" className="xl:flex-shrink-0 max-md:order-2 max-md:mx-auto max-md:mt-6" />
+          <p className="text-gray-primary max-xl:w-1/2 max-md:w-full">
             Yuqori sifat va mahsulot samaradorligini oshirish maqsadida, o'simliklar va mevalar organik usulda, mineral
             o'g'itlarsiz, pestitsidlarsiz, kompaniyaning xususiy ekish maydonlarida (plantatsiyalarda) yetishtiriladi.
             Mahsulotlar jahon standartlariga muvofiq tanlab olinadi, tayyorlanadi va qadoqlanadi.
@@ -247,7 +221,7 @@ const AboutUsPage = () => {
           </p>
         </h2>
 
-        <div className="flex justify-center gap-16 mt-14">
+        <div className="flex justify-center gap-16 mt-14 max-lg:gap-10 max-md:gap-5 max-sm:flex-wrap">
           {stagesData.map(({ title, text }, index) => (
             <div key={title} className="w-80 h-[150px] p-7 pb-9 flex items-end shadow-primary rounded-2xl">
               <h1 className="text-8xl font-extrabold text-[#69CB3A]/30 absolute">{title}</h1>
@@ -258,21 +232,25 @@ const AboutUsPage = () => {
           ))}
         </div>
 
-        <div className="relative flex justify-center mt-48">
+        <div className="relative flex justify-center mt-48 max-md:mt-24">
           <h3 className="text-[34px] text-green-primary italic font-medium">
             “Mehrigiyo” shifobaxsh mahsulotlari kasalliklarning <br /> oldini oladi hamda uzoq, sog‘lom va to‘kin hayot{' '}
             <br /> manbai bo‘lib xizmat qiladi.
           </h3>
-          <Image src={backgroundBranch} alt="" className="absolute left-[10%] -bottom-[120%] rotate-180" />
-          <Image src={backgroundBranch} alt="" className="absolute right-[10%] -top-full " />
+          <Image
+            src={backgroundBranch}
+            alt=""
+            className="absolute left-[10%] -bottom-[120%] rotate-180 max-md:hidden"
+          />
+          <Image src={backgroundBranch} alt="" className="absolute right-[10%] -top-full max-md:hidden" />
         </div>
       </section>
 
-      <section className="flex justify-between mt-40" ref={certificatesPartRef}>
+      <section className="flex justify-between mt-40 max-md:mt-24" ref={certificatesPartRef}>
         <AboutCertificatesModule />
       </section>
 
-      <section className="mt-52">
+      <section className="mt-40 max-sm:mt-32">
         <HerbsBannerModule />
       </section>
 

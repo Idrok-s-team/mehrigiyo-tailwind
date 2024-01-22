@@ -21,15 +21,15 @@ const AboutCertificatesModule: FC = () => {
   const certificates = [certificateImg1, certificateImg2, certificateImg3, certificateImg4]
 
   return (
-    <>
-      <div className="flex-shrink-0 w-1/3">
+    <div className="flex items-center justify-between gap-20 max-lg:gap-10 max-md:gap-5 max-md:flex-wrap">
+      <section>
         <h2 className="font-extrabold">Yutuqlar va sertifikatlar</h2>
         <p className="mt-3 text-gray-primary">
           2020 yil dekabr oyida kompaniya ikkita xalqaro organik sertifikatlarni oldi: Amerika USDA ORGANIC va Yevropa
           EU ORGANIC Gollandiyaning Control Union Certifications kompaniyasidan. Yaqin kelajakda Saudiya Arabistoni,
           Omon, AQSH, Yevropa mamlakatlariga mahsulot eksport qilish rejalashtirilgan.
         </p>
-        <div className="flex gap-3.5 mt-10">
+        <div className="flex gap-3.5 mt-10 max-md:hidden">
           <button onClick={() => swiperRef.current?.swiper.slidePrev()}>
             <SlidePrevIcon />
           </button>
@@ -37,7 +37,8 @@ const AboutCertificatesModule: FC = () => {
             <SlidePrevIcon />
           </button>
         </div>
-      </div>
+      </section>
+
       {isLoading ? (
         <div className="flex gap-10">
           {Array.from({ length: 3 }).map((_, index) => (
@@ -45,17 +46,27 @@ const AboutCertificatesModule: FC = () => {
           ))}
         </div>
       ) : (
-        <div className="w-[55%]">
+        <section className="w-[55%] max-md:hidden">
           <Slider slidesPerView={3} spaceBetween={40} ref={swiperRef}>
             {certificates.map((certificate, index) => (
               <SwiperSlide key={index}>
-                <Image src={certificate} alt={`Certificate ${index + 1}`} />
+                <Image
+                  src={certificate}
+                  alt={`Certificate ${index + 1}`}
+                  className="w-[213px] h-[300px] object-contain"
+                />
               </SwiperSlide>
             ))}
           </Slider>
-        </div>
+        </section>
       )}
-    </>
+
+      <section className="flex items-center gap-10 overflow-x-auto no-scrollbar max-md:w-full">
+        {certificates.map((item, index) => (
+          <Image src={item} alt="" key={`Certificate-${index}`} className="w-[213px] h-[300px] object-contain" />
+        ))}
+      </section>
+    </div>
   )
 }
 

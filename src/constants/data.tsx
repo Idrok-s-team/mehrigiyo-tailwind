@@ -1,4 +1,5 @@
 import { FacebookIcon, InstagramIcon, TelegramIcon, YoutubeIcon } from '@/assets/icons'
+import { ClientsInfoIcon, CountriesInfoIcon, DownloadDayIcon, UsersInfoIcon } from '@/assets/icons/about'
 import { SortCriteriaType } from '@/types'
 
 export const faqData = [
@@ -86,4 +87,40 @@ export const sortOptions: { label: string; value: SortCriteriaType }[] = [
   { label: 'Narxi boʻyicha: Pastdan Yuqoriga', value: 'price_low_to_high' },
   { label: 'Yangi', value: 'newest' },
   { label: 'Eski', value: 'oldest' },
+]
+
+export const aboutUsTabItems = [
+  { key: 'origin', label: 'Kelib chiqishi' },
+  { key: 'now', label: 'Hozirda' },
+  { key: 'certificates', label: 'Yutuqlar va sertifikatlar' },
+]
+
+export const achievementsData = [
+  {
+    title: '10,000+',
+    text: 'Kuniga yuklab olish',
+    icon: <DownloadDayIcon />,
+  },
+  {
+    title: '2 million',
+    text: 'Foydalanuvchilar',
+    icon: <UsersInfoIcon />,
+  },
+  {
+    title: '50 000+',
+    text: 'Mijozlar',
+    icon: <ClientsInfoIcon />,
+  },
+  {
+    title: '12',
+    text: 'Mamlakatlar',
+    icon: <CountriesInfoIcon />,
+  },
+]
+
+
+export const stagesData = [
+  { title: 1, text: 'Tozalash' },
+  { title: 2, text: "To'ldirish" },
+  { title: 3, text: "Texnik xizmat ko'rsatish" },
 ]

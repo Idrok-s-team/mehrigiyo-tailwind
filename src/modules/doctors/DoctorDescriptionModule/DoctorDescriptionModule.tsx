@@ -30,7 +30,7 @@ const DoctorDescriptionModule: FC<Props> = ({ data }) => {
       </div>
 
       <div className="flex-1 mt-5">
-        <section className="flex items-end justify-between">
+        <section className="flex items-end justify-between max-2xs:flex-wrap">
           <h2 className='max-2xs:text-2xl'>{full_name}</h2>
 
           <div className="flex gap-4">

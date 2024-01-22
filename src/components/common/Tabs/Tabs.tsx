@@ -58,7 +58,7 @@ const Tabs: FC<Props> = ({ items, onTabChange, className, fullWidth = true, tabC
   return (
     <>
       <div className={tabContainerClasses}>
-        <ul className="w-full h-9 flex items-center" role="tablist">
+        <ul className="w-full h-9 flex items-center overflow-x-auto no-scrollbar" role="tablist">
           {items.map(({ key, label }) => (
             <li
               key={key}
