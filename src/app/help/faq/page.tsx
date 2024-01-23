@@ -4,12 +4,12 @@ import Link from 'next/link'
 import { Accordion, Breadcrumb } from '@/components/common'
 import backgroundLeaf from '@/assets/images/common/backgroundLeaf.png'
 import backgroundBranch from '@/assets/images/common/backgroundBranchRight.png'
-import { faqData } from '@/constants'
+import { ROUTES, faqData } from '@/constants'
 
 const Faq = () => {
   const breadcrumbItems = [
-    { text: 'Bosh sahifa', href: '/' },
-    { text: 'Yordam', href: '/help' },
+    { text: 'Bosh sahifa', href: ROUTES.HOME },
+    { text: 'Yordam', href: ROUTES.HELP },
     { text: "Ko'p so'raladigan savollar" },
   ]
 

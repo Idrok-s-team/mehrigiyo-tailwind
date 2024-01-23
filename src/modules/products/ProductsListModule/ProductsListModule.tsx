@@ -5,6 +5,7 @@ import { SwiperSlide } from 'swiper/react'
 import { SeeAllButton, Slider } from '@/components/common'
 import { useShopMedicinesQuery, useShopTypesQuery } from '@/hooks/queries'
 import { ProductCard, ProductCardSkeleton } from '@/components/specific'
+import { ROUTES } from '@/constants'
 
 type Props = {
   title?: string
@@ -31,7 +32,7 @@ const ProductsListModule: FC<Props> = ({ title = "Mahsulotlarimiz ro'yxati", wit
     <>
       <div className="flex items-center justify-between max-sm:flex-wrap">
         <h4>{title}</h4>
-        <SeeAllButton text="Barchasini ko'rish" href="/products/category" className="max-sm:mt-2" />
+        <SeeAllButton text="Barchasini ko'rish" href={ROUTES.PRODUCTS_CATEGORY} className="max-sm:mt-2" />
       </div>
       {withFilter && (
         <nav

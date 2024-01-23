@@ -1,6 +1,7 @@
 import React from 'react'
 import { ActiveLink, Dropdown } from '@/components/common'
 import { useDoctorTypesQuery, useShopTypesQuery } from '@/hooks/queries'
+import { ROUTES } from '@/constants'
 
 const useNavElements = () => {
   const { data: shopTypesData } = useShopTypesQuery()
@@ -10,34 +11,34 @@ const useNavElements = () => {
     const productItems =
       shopTypesData?.results?.slice(0, 4).map((product) => ({
         label: product.name,
-        path: `/products/category?type=${product.id}`,
+        path: `${ROUTES.PRODUCTS_CATEGORY}?type=${product.id}`,
       })) || []
 
-    return [...productItems, { label: 'Hammasi+', path: '/products/category' }]
+    return [...productItems, { label: 'Hammasi+', path: ROUTES.PRODUCTS_CATEGORY }]
   }
 
   const createDoctorDropdownItems = () => {
     const doctorItems =
       doctorTypesData?.results?.slice(0, 4).map((doctor) => ({
         label: doctor.name,
-        path: `/online_doctors/category?type=${doctor.id}`,
+        path: `${ROUTES.ONLINE_DOCTORS_CATEGORY}?type=${doctor.id}`,
       })) || []
 
-    return [...doctorItems, { label: 'Hammasi+', path: '/online_doctors/category' }]
+    return [...doctorItems, { label: 'Hammasi+', path: ROUTES.ONLINE_DOCTORS_CATEGORY }]
   }
 
   const navElements = [
-    { label: 'Bosh sahifa', mainPath: '/', selected: true },
-    { label: 'Mahsulotlar', mainPath: '/products', dropdownItems: createProductDropdownItems() },
-    { label: 'Onlayn shifokorlar', mainPath: '/online_doctors', dropdownItems: createDoctorDropdownItems() },
-    { label: 'Biz haqimizda', mainPath: '/about_us' },
-    { label: 'Yangiliklar', mainPath: '/news' },
+    { label: 'Bosh sahifa', mainPath: ROUTES.HOME, selected: true },
+    { label: 'Mahsulotlar', mainPath: ROUTES.PRODUCTS, dropdownItems: createProductDropdownItems() },
+    { label: 'Onlayn shifokorlar', mainPath: ROUTES.ONLINE_DOCTORS, dropdownItems: createDoctorDropdownItems() },
+    { label: 'Biz haqimizda', mainPath: ROUTES.ABOUT_US },
+    { label: 'Yangiliklar', mainPath: ROUTES.NEWS },
     {
       label: 'Yordam',
-      mainPath: '/help',
+      mainPath: ROUTES.HELP,
       dropdownItems: [
-        { label: 'Yordam', path: '/help' },
-        { label: "Ko'p so'raladigan savollar", path: '/help/faq' },
+        { label: 'Yordam', path: ROUTES.HELP },
+        { label: "Ko'p so'raladigan savollar", path: ROUTES.HELP_FAQ },
       ],
     },
   ]

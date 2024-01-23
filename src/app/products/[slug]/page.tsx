@@ -2,6 +2,7 @@ import React from 'react'
 import { Breadcrumb } from '@/components/common'
 import { getShopMedicineByIdApi } from '@/api'
 import { ProductDescriptionModule } from '@/modules/products'
+import { ROUTES } from '@/constants'
 
 type Props = {
   params: {
@@ -15,8 +16,8 @@ const ProductBySlug = async ({ params }: Props) => {
   const product = await getShopMedicineByIdApi(id)
 
   const breadcrumbItems = [
-    { text: 'Bosh sahifa', href: '/' },
-    { text: 'Mahsulotlar', href: '/products/category' },
+    { text: 'Bosh sahifa', href: ROUTES.HOME },
+    { text: 'Mahsulotlar', href: ROUTES.PRODUCTS_CATEGORY },
     { text: product.name },
   ]
 

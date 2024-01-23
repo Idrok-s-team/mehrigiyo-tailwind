@@ -7,6 +7,7 @@ import clsx from 'clsx'
 import Cookies from 'js-cookie'
 import { BasketIcon, FavouriteOutlineIcon, UserIcon } from '@/assets/icons'
 import { useShopCartQuery, useUserFavoriteDoctorsQuery, useUserFavoriteMedicinesQuery } from '@/hooks/queries'
+import { ROUTES } from '@/constants'
 
 const HeaderActions: FC = () => {
   const pathname = usePathname()
@@ -17,19 +18,19 @@ const HeaderActions: FC = () => {
 
   const actions = [
     {
-      icon: <UserIcon color={pathname === '/favorite_doctors' ? '#fff' : '#7165E3'} />,
+      icon: <UserIcon color={pathname === ROUTES.FAVORITE_DOCTORS ? '#fff' : '#7165E3'} />,
       name: `Sevimli doktorlar`,
       href: `/favorite_doctors`,
       count: isWithToken ? favoriteDoctorsData?.count : 0,
     },
     {
-      icon: <FavouriteOutlineIcon color={pathname === '/favorite_products' ? '#fff' : '#F3603F'} />,
+      icon: <FavouriteOutlineIcon color={pathname === ROUTES.FAVORITE_PRODUCTS ? '#fff' : '#F3603F'} />,
       name: `Sevimli mahsulotlar`,
       href: `/favorite_products`,
       count: isWithToken ? favoriteProductsData?.count : 0,
     },
     {
-      icon: <BasketIcon color={pathname === '/cart' ? '#fff' : '#505050'} />,
+      icon: <BasketIcon color={pathname === ROUTES.CART ? '#fff' : '#505050'} />,
       name: `Savat`,
       href: `/cart`,
       count: isWithToken ? shopCartData?.data.length : 0,

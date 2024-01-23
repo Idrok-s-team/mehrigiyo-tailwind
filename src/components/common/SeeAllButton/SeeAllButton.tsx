@@ -5,6 +5,7 @@ import Link from 'next/link'
 import clsx from 'clsx'
 import { ArrowRightIcon } from '@/assets/icons'
 import { ElementSizeType } from '@/types'
+import { ROUTES } from '@/constants'
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
   text: string
@@ -20,7 +21,7 @@ const SeeAllButton: FC<Props> = ({
   className,
   icon = <ArrowRightIcon />,
   useLink = true,
-  href = '/',
+  href = ROUTES.HOME,
   ...props
 }) => {
   const classNames = clsx(

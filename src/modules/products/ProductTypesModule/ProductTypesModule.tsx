@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useShopTypesQuery } from '@/hooks/queries'
 import { ProductTypeCardSkeleton } from '@/components/specific'
+import { ROUTES } from '@/constants'
 
 const ProductTypesModule = () => {
   const { data, isLoading } = useShopTypesQuery()
@@ -21,7 +22,7 @@ const ProductTypesModule = () => {
           {data?.results.map(({ id, name, icon }) => (
             <Link
               key={id}
-              href={`/products/category?type=${id}`}
+              href={`${ROUTES.PRODUCTS_CATEGORY}?type=${id}`}
               className="shadow-primary flex flex-col justify-between p-5 pb-2.5 w-[188px] h-[150px] rounded-2xl duration-300 transition-colors hover:bg-green-light hover:border-[0.5px] hover:border-green-primary justify-self-center"
             >
               <p className="font-semibold text-green-primary">{name}</p>

@@ -7,13 +7,14 @@ import { getNewsApi } from '@/api'
 import { createSlug } from '@/utils'
 import { AllNewsModule } from '@/modules/news'
 import { HashtagTime } from '@/components/specific'
+import { ROUTES } from '@/constants'
 
 const News = async () => {
   const newsData = await getNewsApi()
   const firstNewsData = newsData.results[0]
   const firstSlug = createSlug(firstNewsData.name, firstNewsData.id)
 
-  const breadcrumbItems = [{ text: 'Bosh sahifa', href: '/' }, { text: 'Yangiliklar' }]
+  const breadcrumbItems = [{ text: 'Bosh sahifa', href: ROUTES.HOME }, { text: 'Yangiliklar' }]
 
   return (
     <div className="mt-14 px-10 mx-auto xl:px-24 max-md:px-4 max-w-[1440px] max-sm:mt-0 overflow-hidden">
@@ -57,7 +58,7 @@ const News = async () => {
             text="Ko’proq o’qish"
             className="mt-7 text-green-primary"
             size="md"
-            href={`/news/${firstSlug}`}
+            href={`${ROUTES.NEWS}/${firstSlug}`}
           />
         </div>
       </article>

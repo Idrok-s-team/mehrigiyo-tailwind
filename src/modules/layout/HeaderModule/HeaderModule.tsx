@@ -8,6 +8,7 @@ import { LogoIcon, MenuIcon } from '@/assets/icons'
 import { useLanguageItems, useNavElements } from './hooks'
 import { HeaderActions, AuthModal, AddressDisplay, UserInfo, MenuDrawer } from './components'
 import { useCommonStore } from '@/store'
+import { ROUTES } from '@/constants'
 
 const HeaderModule: FC = () => {
   const pathname = usePathname()
@@ -32,7 +33,7 @@ const HeaderModule: FC = () => {
     <div>
       <nav
         className={`h-10 text-sm px-10 max-xs:px-4 xl:px-24 max-lg:hidden
-        ${pathname === '/' ? 'bg-green-light' : 'bg-gray-background'}
+        ${pathname === ROUTES.HOME ? 'bg-green-light' : 'bg-gray-background'}
         `}
       >
         <div className="h-full w-full max-w-[1440px] flex items-center justify-end mx-auto max-xs:flex-wrap">
@@ -47,7 +48,11 @@ const HeaderModule: FC = () => {
         </div>
       </nav>
 
-      <nav className={`px-10 max-xs:px-4 xl:px-24 py-4 ${pathname === '/' ? 'bg-[#addabe]' : 'bg-gray-background'}`}>
+      <nav
+        className={`px-10 max-xs:px-4 xl:px-24 py-4 ${
+          pathname === ROUTES.HOME ? 'bg-[#addabe]' : 'bg-gray-background'
+        }`}
+      >
         <div className="w-full max-w-[1440px] flex items-center justify-between mx-auto max-xs:flex-wrap">
           <section className="flex items-center gap-8 max-2xs:w-full max-xs:justify-center xl:gap-12">
             <div>

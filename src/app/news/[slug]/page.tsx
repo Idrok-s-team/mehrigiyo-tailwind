@@ -6,6 +6,7 @@ import backgroundLeaf from '@/assets/images/common/backgroundLeaf.png'
 import backgroundBranch from '@/assets/images/common/backgroundBranchRight.png'
 import { getNewsByIdApi } from '@/api'
 import { cleanHtml } from '@/utils'
+import { ROUTES } from '@/constants'
 
 type Props = {
   params: {
@@ -18,7 +19,11 @@ const NewsBySlug = async ({ params }: Props) => {
   const id = Number(slug.split('___')[1])
   const { name, hashtag, created_at, image, description } = await getNewsByIdApi(id)
 
-  const breadcrumbItems = [{ text: 'Bosh sahifa', href: '/' }, { text: 'Yangiliklar', href: '/news' }, { text: name }]
+  const breadcrumbItems = [
+    { text: 'Bosh sahifa', href: ROUTES.HOME },
+    { text: 'Yangiliklar', href: ROUTES.NEWS },
+    { text: name },
+  ]
 
   return (
     <div className="mt-14 mb-36 px-10 mx-auto xl:px-24 max-md:px-4 mx max-w-[1440px] max-sm:mt-0 overflow-hidden max-md:mb-12">

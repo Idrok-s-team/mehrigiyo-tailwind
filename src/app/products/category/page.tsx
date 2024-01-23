@@ -9,6 +9,7 @@ import { useShopMedicinesQuery, useShopTypesQuery } from '@/hooks/queries'
 import { SortCriteriaType } from '@/types'
 import backgroundBranch from '@/assets/images/common/backgroundBranchRight.png'
 import { useSortedData } from '@/hooks/common'
+import { ROUTES } from '@/constants'
 
 const ProductsCategory = () => {
   const [sortCriteria, setSortCriteria] = useState<SortCriteriaType>('')
@@ -24,7 +25,11 @@ const ProductsCategory = () => {
   const sortedData = useSortedData(shopMedicinesData?.results, sortCriteria)
 
   const breadcrumbItems = useMemo(
-    () => [{ text: 'Bosh sahifa', href: '/' }, { text: 'Mahsulotlar', href: '/products' }, { text: 'Barchasi' }],
+    () => [
+      { text: 'Bosh sahifa', href: ROUTES.HOME },
+      { text: 'Mahsulotlar', href: ROUTES.PRODUCTS },
+      { text: 'Barchasi' },
+    ],
     [],
   )
 

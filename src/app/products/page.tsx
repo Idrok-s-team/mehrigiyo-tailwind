@@ -9,9 +9,10 @@ import bannerImg2 from '@/assets/images/product/productSuggestImg2.png'
 import bannerImg3 from '@/assets/images/product/productSuggestImg3.png'
 import saleBannerImg from '@/assets/images/product/saleBanner.png'
 import { BrandsListModule, HerbsBannerModule, MobileAppModule } from '@/modules/home'
+import { ROUTES } from '@/constants'
 
 const ProductsPage = () => {
-  const breadcrumbItems = [{ text: 'Bosh sahifa', href: '/' }, { text: 'Mahsulotlar' }]
+  const breadcrumbItems = [{ text: 'Bosh sahifa', href: ROUTES.HOME}, { text: 'Mahsulotlar' }]
   const bannerImages = [bannerImg1, bannerImg2, bannerImg3]
 
   return (

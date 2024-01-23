@@ -5,6 +5,7 @@ import { SeeAllButton, Slider } from '@/components/common'
 import { useDoctorTypesQuery, useDoctorsQuery } from '@/hooks/queries'
 import { DoctorCard, DoctorCardSkeleton } from '@/components/specific'
 import { SwiperSlide } from 'swiper/react'
+import { ROUTES } from '@/constants'
 
 type Props = {
   title?: string
@@ -27,7 +28,7 @@ const DoctorListModule: FC<Props> = ({ title = 'Top shifokorlar', withFilter = t
     <>
       <div className="flex items-center justify-between max-sm:flex-wrap">
         <h4>{title}</h4>
-        <SeeAllButton text="Barchasini ko'rish" href="/online_doctors/category" className="max-sm:mt-2" />
+        <SeeAllButton text="Barchasini ko'rish" href={ROUTES.ONLINE_DOCTORS_CATEGORY} className="max-sm:mt-2" />
       </div>
       {withFilter && (
         <nav

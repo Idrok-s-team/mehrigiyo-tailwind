@@ -7,6 +7,7 @@ import { useShopCartQuery } from '@/hooks/queries'
 import { usePaymentMethods, useUserAddresses } from '@/hooks/checkout'
 import { SuccessfulCheckoutIcon, UnsuccessfulCheckoutIcon } from '@/assets/icons'
 import { useCommonStore, useShopStore } from '@/store'
+import { ROUTES } from '@/constants'
 
 const CheckoutActionModal: FC = () => {
   const [checkoutStatus, setCheckoutStatus] = useState<'idle' | 'success' | 'fail'>('idle')
@@ -55,7 +56,7 @@ const CheckoutActionModal: FC = () => {
 
   const handleSubmit = () => {
     if (checkoutStatus === 'success') {
-      navigateTo('/dashboard/orders')
+      navigateTo(ROUTES.DASHBOARD_ORDERS)
     } else if (checkoutStatus === 'fail') {
       setCheckoutStatus('idle')
     } else {
@@ -72,12 +73,12 @@ const CheckoutActionModal: FC = () => {
           <SwitchableRadio
             isAddressMode
             items={addressData}
-            onAddAction={() => navigateTo('/dashboard/delivery-address')}
+            onAddAction={() => navigateTo(ROUTES.DASHBOARD_DELIVERY_ADDRESS)}
           />
         </section>
         <section className="flex flex-col">
           <h6 className="mb-3 text-start">To'lov turi</h6>
-          <SwitchableRadio items={paymentMethods} onAddAction={() => navigateTo('/dashboard/payment-methods')} />
+          <SwitchableRadio items={paymentMethods} onAddAction={() => navigateTo(ROUTES.DASHBOARD_PAYMENT_METHODS)} />
         </section>
       </div>
     </>

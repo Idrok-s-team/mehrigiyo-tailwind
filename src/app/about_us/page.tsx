@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { Breadcrumb, Tabs, WatchVideoButton } from '@/components/common'
 import { AboutCertificatesModule, ProductCategoriesModule } from '@/modules/about'
 import { BrandsListModule, HerbsBannerModule } from '@/modules/home'
-import { aboutUsTabItems, achievementsData, stagesData } from '@/constants'
+import { ROUTES, aboutUsTabItems, achievementsData, stagesData } from '@/constants'
 import backgroundLeaf from '@/assets/images/common/backgroundLeaf.png'
 import backgroundBranch from '@/assets/images/common/backgroundBranchLeft.png'
 import organicLogosIcon from '@/assets/images/product/organicLogosWide.png'
@@ -45,7 +45,7 @@ const AboutUsPage = () => {
     }
   }, [])
 
-  const breadcrumbItems = [{ text: 'Bosh sahifa', href: '/' }, { text: 'Biz haqimizda' }]
+  const breadcrumbItems = [{ text: 'Bosh sahifa', href: ROUTES.HOME }, { text: 'Biz haqimizda' }]
 
   return (
     <div className="mt-14 px-10 mx-auto xl:px-24 max-md:px-4 mx max-w-[1440px] max-sm:mt-0 overflow-hidden">

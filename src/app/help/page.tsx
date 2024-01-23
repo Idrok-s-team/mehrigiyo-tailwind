@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { PhoneIcon } from '@/assets/icons'
-import { contactData } from '@/constants'
+import { ROUTES, contactData } from '@/constants'
 import { Breadcrumb } from '@/components/common'
 import backgroundLeaf from '@/assets/images/common/backgroundLeaf.png'
 import backgroundBranch from '@/assets/images/common/backgroundBranchRight.png'
@@ -25,7 +25,7 @@ const Help = () => {
     setIframeLoaded(true)
   }
 
-  const breadcrumbItems = [{ text: 'Bosh sahifa', href: '/' }, { text: 'Yordam' }]
+  const breadcrumbItems = [{ text: 'Bosh sahifa', href: ROUTES.HOME}, { text: 'Yordam' }]
 
   return (
     <div className="mt-14 mx-auto max-w-[1440px] overflow-hidden">

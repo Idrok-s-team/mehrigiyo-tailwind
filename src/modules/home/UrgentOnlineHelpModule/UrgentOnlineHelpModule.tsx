@@ -2,6 +2,7 @@ import { FC } from 'react'
 import Image from 'next/image'
 import { SeeAllButton } from '@/components/common'
 import onlineDoctorIcon from '@/assets/icons/home/onlineDoctorIcon.svg'
+import { ROUTES } from '@/constants'
 
 const BrandsListModule: FC = () => {
   return (
@@ -12,7 +13,7 @@ const BrandsListModule: FC = () => {
           Bizga shoshilinch sog'liq bo'yicha maslahatchini ayting va biz 60 soniya ichida eng yaxshi shifokorni
           tayinlaymiz.
         </p>
-        <SeeAllButton text="Onlayn uchrashuv belgilash" className="mt-10 max-2xs:w-full" href='/online_doctors' />
+        <SeeAllButton text="Onlayn uchrashuv belgilash" className="mt-10 max-2xs:w-full" href={ROUTES.ONLINE_DOCTORS} />
       </div>
       <div className="relative mx-auto max-xl:mt-10">
         <Image

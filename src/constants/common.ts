@@ -9,3 +9,26 @@ export const DateFormat = {
   LOCAL_TIME: 'HH:mm',
   LOCAL_DATETIME: 'HH:mm / DD.MM.YYYY',
 } as const
+
+export const ROUTES = {
+  HOME: '/',
+  PRODUCTS: '/products',
+  PRODUCTS_CATEGORY: '/products/category',
+  ONLINE_DOCTORS: '/online_doctors',
+  ONLINE_DOCTORS_CATEGORY: '/online_doctors/category',
+  ABOUT_US: '/about_us',
+  NEWS: '/news',
+  HELP: '/help',
+  HELP_FAQ: '/help/faq',
+  FAVORITE_DOCTORS: '/favorite_doctors',
+  FAVORITE_PRODUCTS: '/favorite_products',
+  CART: '/cart',
+  DASHBOARD: '/dashboard',
+  DASHBOARD_CONTROL_PANEL: '/dashboard/control-panel',
+  DASHBOARD_CONSULTATION: '/dashboard/consultation',
+  DASHBOARD_ORDERS: '/dashboard/orders',
+  DASHBOARD_DELIVERY_ADDRESS: '/dashboard/delivery-address',
+  DASHBOARD_PAYMENT_METHODS: '/dashboard/payment-methods',
+  DASHBOARD_NOTIFICATIONS: '/dashboard/notifications',
+  DASHBOARD_SETTINGS: '/dashboard/settings',
+} as const

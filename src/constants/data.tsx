@@ -1,6 +1,7 @@
 import { FacebookIcon, InstagramIcon, TelegramIcon, YoutubeIcon } from '@/assets/icons'
 import { ClientsInfoIcon, CountriesInfoIcon, DownloadDayIcon, UsersInfoIcon } from '@/assets/icons/about'
 import { SortCriteriaType } from '@/types'
+import { ROUTES } from '.'
 
 export const faqData = [
   {
@@ -47,9 +48,9 @@ export const legalDatas = [
 ]
 
 export const privacyLinks = [
-  { text: `Bosh sahifa`, href: `/` },
-  { text: `Biz haqimizda`, href: `/about_us` },
-  { text: `Yangiliklar`, href: `/news` },
+  { text: `Bosh sahifa`, href: ROUTES.HOME },
+  { text: `Biz haqimizda`, href: ROUTES.ABOUT_US },
+  { text: `Yangiliklar`, href: ROUTES.NEWS },
 ]
 
 export const contactData = [
@@ -117,7 +118,6 @@ export const achievementsData = [
     icon: <CountriesInfoIcon />,
   },
 ]
-
 
 export const stagesData = [
   { title: 1, text: 'Tozalash' },

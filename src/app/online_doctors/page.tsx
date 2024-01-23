@@ -5,9 +5,10 @@ import { DoctorListModule, DoctorTypesModule } from '@/modules/doctors'
 import backgroundLeaf from '@/assets/images/common/backgroundLeaf.png'
 import doctorHeader from '@/assets/icons/doctor/doctorHeaderIcon.svg'
 import { BrandsListModule, HerbsBannerModule, MobileAppModule, UrgentOnlineHelpModule } from '@/modules/home'
+import { ROUTES } from '@/constants'
 
 const ProductsPage = () => {
-  const breadcrumbItems = [{ text: 'Bosh sahifa', href: '/' }, { text: 'Onlayn shifokorlar' }]
+  const breadcrumbItems = [{ text: 'Bosh sahifa', href: ROUTES.HOME}, { text: 'Onlayn shifokorlar' }]
 
   return (
     <div className="mt-14 px-10 mx-auto xl:px-24 max-md:px-4 mx max-w-[1440px] max-sm:mt-0">

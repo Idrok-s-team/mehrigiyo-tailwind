@@ -18,7 +18,7 @@ import backgroundBubble1 from '@/assets/icons/common/backgroundBubble1.svg'
 import backgroundBubble2 from '@/assets/icons/common/backgroundBubble2.svg'
 import backgroundDarkGreen from '@/assets/icons/home/backgroundDarkGreen.svg'
 import backgroundLightGreen from '@/assets/icons/home/backgroundLightGreen.svg'
-import { faqData } from '@/constants'
+import { ROUTES, faqData } from '@/constants'
 
 export default async function Home() {
   const specialistTypesData = await getDoctorTypesApi()
@@ -102,7 +102,7 @@ export default async function Home() {
         <div className="flex items-center mt-14 gap-10 max-xs:gap-4 max-sm:justify-center max-sm:gap-8 max-lg:gap-3 max-md:flex-wrap max-md:gap-8">
           {specialistTypesData.results.slice(0, 4).map(({ id, name, image, get_doctors_count }) => (
             <Link
-              href={`/online_doctors/category?type=${id}`}
+              href={`${ROUTES.ONLINE_DOCTORS_CATEGORY}?type=${id}`}
               key={id}
               className="flex flex-col items-center justify-center bg-white shadow-primary w-[188px] h-[118px] rounded-2xl duration-300 transition-colors hover:bg-green-light hover:border-[0.5px] hover:border-green-primary"
             >
@@ -116,7 +116,7 @@ export default async function Home() {
         </div>
 
         <div className="mt-14 max-xs:mt-8">
-          <SeeAllButton text="Bepul maslahat olish" href="/online_doctors/category" />
+          <SeeAllButton text="Bepul maslahat olish" href={ROUTES.ONLINE_DOCTORS_CATEGORY} />
         </div>
       </section>
 
@@ -132,7 +132,7 @@ export default async function Home() {
           </p>
           <Image src={organicLogosIcon} alt="" className="mt-10" />
           <div className="flex items-center gap-8 mt-14 max-2xs:flex-wrap max-2xs:justify-center">
-            <SeeAllButton text="Batafsil" size="md" href="/about_us" />
+            <SeeAllButton text="Batafsil" size="md" href={ROUTES.ABOUT_US} />
             <WatchVideoButton videoUrl="https://www.youtube.com/embed/CKvdClKdSJo?si=V-Hy0MKf5OdPGZWb" />
           </div>
         </div>
@@ -178,7 +178,7 @@ export default async function Home() {
         <div className="flex justify-between max-lg:gap-5 max-xs:flex-wrap">
           <div className="flex-1 mt-3">
             <p className="text-green-primary w-3/5 max-lg:w-full">Qo'shimcha ma'lumot uchun biz bilan bog'laning</p>
-            <SeeAllButton text="Batafsil" size="md" className="mt-11 max-xs:mt-3" href="/help/faq" />
+            <SeeAllButton text="Batafsil" size="md" className="mt-11 max-xs:mt-3" href={ROUTES.HELP_FAQ} />
           </div>
           <div className="w-[68%] max-xs:w-full">
             <Accordion items={faqData} />

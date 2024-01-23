@@ -13,10 +13,11 @@ import { DoctorOrProductList } from '@/components/specific'
 import { useSortedData } from '@/hooks/common'
 import backgroundBranch from '@/assets/images/common/backgroundBranchRight.png'
 import Image from 'next/image'
+import { ROUTES } from '@/constants'
 
 const breadcrumbItems = [
-  { text: 'Bosh sahifa', href: '/' },
-  { text: 'Onlayn shifokorlar', href: '/online_doctors' },
+  { text: 'Bosh sahifa', href: ROUTES.HOME },
+  { text: 'Onlayn shifokorlar', href: ROUTES.ONLINE_DOCTORS },
   { text: 'Barchasi' },
 ]
 
@@ -45,7 +46,7 @@ const DoctorsCategory = () => {
             loading={isFetchingDoctorTypes}
             sortCriteria={sortCriteria}
             selectedCategories={selectedCategories}
-            filterType='doctor'
+            filterType="doctor"
           />
         </div>
 

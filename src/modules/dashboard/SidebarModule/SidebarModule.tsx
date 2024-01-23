@@ -20,6 +20,7 @@ import {
 } from '@/assets/icons'
 import { Confirm } from '@/components/common'
 import { useCommonStore } from '@/store'
+import { ROUTES } from '@/constants'
 
 const SidebarModule: FC = () => {
   const router = useRouter()
@@ -43,33 +44,33 @@ const SidebarModule: FC = () => {
       {
         icon: <ControlPanelIcon />,
         title: 'Boshqaruv paneli',
-        href: `/control-panel`,
+        href: ROUTES.DASHBOARD_CONTROL_PANEL,
       },
       {
         icon: <ConsultationIcon />,
         title: 'Konsultatsiya',
-        href: `/consultation`,
+        href: ROUTES.DASHBOARD_CONSULTATION,
       },
-      { icon: <OrderIcon />, title: 'Buyurtmalar', href: `/orders` },
+      { icon: <OrderIcon />, title: 'Buyurtmalar', href: ROUTES.DASHBOARD_ORDERS },
       {
         icon: <DeliveryAddressIcon />,
         title: 'Yetkazish manzili',
-        href: `/delivery-address`,
+        href: ROUTES.DASHBOARD_DELIVERY_ADDRESS,
       },
       {
         icon: <PaymentIcon />,
         title: "To'lov usullari",
-        href: `/payment-methods`,
+        href: ROUTES.DASHBOARD_PAYMENT_METHODS,
       },
-      {
-        icon: <NotificationIcon />,
-        title: 'Bildirishnomalar',
-        href: `/notifications`,
-      },
+      // {
+      //   icon: <NotificationIcon />,
+      //   title: 'Bildirishnomalar',
+      //   href: ROUTES.DASHBOARD_NOTIFICATIONS,
+      // },
       {
         icon: <SettingsIcon />,
         title: 'Sozlamalar',
-        href: `/settings`,
+        href: ROUTES.DASHBOARD_SETTINGS,
       },
     ],
     [],
@@ -102,7 +103,7 @@ const SidebarModule: FC = () => {
       <section className="flex flex-col justify-between flex-1">
         <div className="flex flex-col gap-3 p-[30px]">
           {sidebarData.map(({ icon, title, href }) => (
-            <Link key={title} href={`/dashboard${href}`} className={getLinkClassName(href)}>
+            <Link key={title} href={href} className={getLinkClassName(href)}>
               <span>{icon}</span>
               <span>{title}</span>
             </Link>

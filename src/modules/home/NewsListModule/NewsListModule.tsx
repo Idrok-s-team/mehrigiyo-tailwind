@@ -6,6 +6,7 @@ import { useNewsQuery, useNewsTagsQuery } from '@/hooks/queries'
 import NewsCard from '@/components/specific/NewsCard'
 import { NewsCardSkeleton } from '@/components/specific'
 import { SwiperSlide } from 'swiper/react'
+import { ROUTES } from '@/constants'
 
 const NewsListModule: FC = () => {
   const [selectedFilter, setSelectedFilter] = useState<string>('')
@@ -25,7 +26,7 @@ const NewsListModule: FC = () => {
     <>
       <div className="flex items-center justify-between max-sm:flex-wrap">
         <h4>So'nggi yangiliklar</h4>
-        <SeeAllButton text="Batafsil" size="md" href="/news" className="max-sm:mt-2" />
+        <SeeAllButton text="Batafsil" size="md" href={ROUTES.NEWS} className="max-sm:mt-2" />
       </div>
       <nav
         className="w-1/2 flex items-center text-lg text-gray-primary animate-fade-in max-md:w-full"
