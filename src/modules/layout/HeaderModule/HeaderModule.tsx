@@ -12,7 +12,7 @@ import { ROUTES } from '@/constants'
 
 const HeaderModule: FC = () => {
   const pathname = usePathname()
-  const { activeModal, setActiveModal } = useCommonStore()
+  const { setActiveModal } = useCommonStore()
 
   const { renderNavElements } = useNavElements()
   const languageItems = useLanguageItems()

@@ -6,16 +6,17 @@ import { useAddShopCheckoutMutation, useUpdateShopCheckoutMutation } from '@/hoo
 import { useShopCartQuery } from '@/hooks/queries'
 import { usePaymentMethods, useUserAddresses } from '@/hooks/checkout'
 import { SuccessfulCheckoutIcon, UnsuccessfulCheckoutIcon } from '@/assets/icons'
-import { useCommonStore, useShopStore } from '@/store'
+import { useAuthStore, useCommonStore, useShopStore } from '@/store'
 import { ROUTES } from '@/constants'
 
 const CheckoutActionModal: FC = () => {
   const [checkoutStatus, setCheckoutStatus] = useState<'idle' | 'success' | 'fail'>('idle')
-  const { selectedAddress, selectedPaymentCard } = useShopStore()
   const router = useRouter()
-
+  const { selectedAddress, selectedPaymentCard } = useShopStore()
   const { activeModal, setActiveModal } = useCommonStore()
-  const { data: cartData, refetch } = useShopCartQuery()
+  const { isUserRegistered } = useAuthStore()
+
+  const { data: cartData, refetch } = useShopCartQuery({ options: { enabled: isUserRegistered } })
   const { mutateAsync: addCheckout, isPending: addCheckoutPending } = useAddShopCheckoutMutation()
   const { mutateAsync: updateCheckout, isPending: updateCheckoutPending } = useUpdateShopCheckoutMutation()
   const { paymentMethods } = usePaymentMethods()

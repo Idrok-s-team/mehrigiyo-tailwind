@@ -4,9 +4,11 @@ import React from 'react'
 import { useUserFavoriteMedicinesQuery } from '@/hooks/queries'
 import { EmptyBox, Loader } from '@/components/common'
 import { ProductCard } from '@/components/specific'
+import { useAuthStore } from '@/store'
 
 const FavoriteProductsModule = () => {
-  const { data, isLoading } = useUserFavoriteMedicinesQuery()
+  const { isUserRegistered } = useAuthStore()
+  const { data, isLoading } = useUserFavoriteMedicinesQuery({ options: { enabled: isUserRegistered } })
 
   if (isLoading) {
     return (

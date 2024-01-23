@@ -7,18 +7,25 @@ import { INews } from '@/types'
 import { ArrowRightLongerGreenIcon } from '@/assets/icons'
 import { createSlug } from '@/utils'
 import { HashtagTime } from '@/components/specific'
+import clsx from 'clsx'
 
 type Props = {
   data: INews
+  className?: string
 }
 
-const NewsCard: FC<Props> = ({ data }) => {
+const NewsCard: FC<Props> = ({ data, className }) => {
   const { name, id, hashtag, image, created_at, description } = data
 
   const slug = createSlug(name, id)
 
+  const cardClasses = clsx(
+    'h-[543px] flex flex-col shadow-card rounded-3xl bg-white group overflow-hidden max-xs:w-full',
+    className,
+  )
+
   return (
-    <article className="h-[543px] flex flex-col shadow-card rounded-3xl bg-white group overflow-hidden max-xs:w-full">
+    <article className={cardClasses}>
       <Link
         href={`/news/${slug}`}
         aria-label={`${name} yangiliklar rasmi`}

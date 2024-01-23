@@ -8,7 +8,7 @@ import googlePlayIcon from '@/assets/icons/layout/googlePlayIcon.svg'
 import appStoreIcon from '@/assets/icons/layout/appStoreIcon.svg'
 import bannerHome from '@/assets/images/home/bannerHome.png'
 import { usePathname } from 'next/navigation'
-import { footerContactDatas, legalDatas, privacyLinks, socialDatas } from '@/constants'
+import { APP_DOWNLOAD_LINKS, footerContactDatas, legalDatas, privacyLinks, socialDatas } from '@/constants'
 
 const FooterModule: FC = () => {
   const pathname = usePathname()
@@ -63,8 +63,12 @@ const FooterModule: FC = () => {
           <div className="max-md:mr-2">
             <h4 className="text-lg font-medium">Ilovani yuklab olish</h4>
             <div className="flex flex-col gap-4 mt-6 max-md:mt-3">
-              <Image src={googlePlayIcon} alt="Mehrigiyo google play" />
-              <Image src={appStoreIcon} alt="Mehrigiyo app store" />
+              <Link href={APP_DOWNLOAD_LINKS.APP_STORE} target="_blank">
+                <Image src={googlePlayIcon} alt="Mehrigiyo google play" />
+              </Link>
+              <Link href={APP_DOWNLOAD_LINKS.APP_STORE} target="_blank">
+                <Image src={appStoreIcon} alt="Mehrigiyo app store" />
+              </Link>
             </div>
           </div>
           <Image src={bannerHome} alt="" className="w-full absolute object-cover bottom-0 right-0" />

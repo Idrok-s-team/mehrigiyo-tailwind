@@ -8,12 +8,14 @@ import Cookies from 'js-cookie'
 import { BasketIcon, FavouriteOutlineIcon, UserIcon } from '@/assets/icons'
 import { useShopCartQuery, useUserFavoriteDoctorsQuery, useUserFavoriteMedicinesQuery } from '@/hooks/queries'
 import { ROUTES } from '@/constants'
+import { useAuthStore } from '@/store'
 
 const HeaderActions: FC = () => {
   const pathname = usePathname()
-  const { data: favoriteProductsData } = useUserFavoriteMedicinesQuery()
-  const { data: favoriteDoctorsData } = useUserFavoriteDoctorsQuery()
-  const { data: shopCartData } = useShopCartQuery()
+  const { isUserRegistered } = useAuthStore()
+  const { data: favoriteProductsData } = useUserFavoriteMedicinesQuery({ options: { enabled: isUserRegistered } })
+  const { data: favoriteDoctorsData } = useUserFavoriteDoctorsQuery({ options: { enabled: isUserRegistered } })
+  const { data: shopCartData } = useShopCartQuery({ options: { enabled: isUserRegistered } })
   const isWithToken = !!Cookies.get('access_token')
 
   const actions = [

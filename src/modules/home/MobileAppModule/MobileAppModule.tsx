@@ -4,6 +4,7 @@ import appStoreIcon from '@/assets/icons/home/appStoreIcon.svg'
 import googlePlayIcon from '@/assets/icons/home/googlePlayIcon.svg'
 import mobileScreenImg from '@/assets/images/home/mobileScreen.png'
 import Link from 'next/link'
+import { APP_DOWNLOAD_LINKS } from '@/constants'
 
 const NewsListModule: FC = () => {
   return (
@@ -17,10 +18,10 @@ const NewsListModule: FC = () => {
           O’zbekistonning yetakchi shifokorlari bilan videokonsultatsiyadan foydalaning.
         </p>
         <div className="flex gap-7 mt-10 max-2xs:gap-2">
-          <Link href="https://play.google.com/store/apps/details?id=com.mehrigiyo.doctor_ali" target="_blank">
+          <Link href={APP_DOWNLOAD_LINKS.APP_STORE} target="_blank">
             <Image src={appStoreIcon} alt="" width={239} height={75} />
           </Link>
-          <Link href="https://play.google.com/store/apps/details?id=com.mehrigiyo.doctor_ali" target="_blank">
+          <Link href={APP_DOWNLOAD_LINKS.PLAY_STORE} target="_blank">
             <Image src={googlePlayIcon} alt="" />
           </Link>
         </div>

@@ -5,9 +5,12 @@ import { useShopCartQuery } from '@/hooks/queries'
 import { CartItem, CartSummaryCard, CheckoutActionModal } from './components'
 import { useCartTotalsCalculator } from '@/hooks/cart'
 import { EmptyBox, Loader } from '@/components/common'
+import { useAuthStore } from '@/store'
 
 const CartModule = () => {
-  const { data, isLoading } = useShopCartQuery()
+  const { isUserRegistered } = useAuthStore()
+
+  const { data, isLoading } = useShopCartQuery({ options: { enabled: isUserRegistered } })
   const cartData = useMemo(() => data?.data.sort((a, b) => a.id - b.id) ?? [], [data])
 
   const { totalCost, totalAmount, totalDiscount, deliveryPrice, finalPrice } = useCartTotalsCalculator(cartData)

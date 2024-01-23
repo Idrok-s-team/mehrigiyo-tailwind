@@ -7,6 +7,7 @@ import backgroundBranch from '@/assets/images/common/backgroundBranchRight.png'
 import { getNewsByIdApi } from '@/api'
 import { cleanHtml } from '@/utils'
 import { ROUTES } from '@/constants'
+import { NewsDescriptionModule } from '@/modules/news'
 
 type Props = {
   params: {
@@ -17,7 +18,8 @@ type Props = {
 const NewsBySlug = async ({ params }: Props) => {
   const { slug } = params
   const id = Number(slug.split('___')[1])
-  const { name, hashtag, created_at, image, description } = await getNewsByIdApi(id)
+  const newsData = await getNewsByIdApi(id)
+  const { name, hashtag, created_at } = newsData
 
   const breadcrumbItems = [
     { text: 'Bosh sahifa', href: ROUTES.HOME },
@@ -46,24 +48,8 @@ const NewsBySlug = async ({ params }: Props) => {
         <Image src={backgroundBranch} alt={''} className="absolute rotate-45 scale-75 -right-[25%] max-lg:hidden" />
       </header>
 
-      <main className="flex justify-center max-lg:mt-12">
-        <article className="w-full">
-          <div>
-            <Image
-              src={image}
-              alt={name}
-              width={600}
-              height={600}
-              loading="eager"
-              priority
-              className="w-full rounded-[20px]"
-            />
-          </div>
-          <div
-            className="mt-8 leading-7"
-            dangerouslySetInnerHTML={{ __html: cleanHtml(description.replace(/\n/g, '<br>')) }}
-          />
-        </article>
+      <main className="max-lg:mt-12">
+        <NewsDescriptionModule data={newsData} />
       </main>
     </div>
   )

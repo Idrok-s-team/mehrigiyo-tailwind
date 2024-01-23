@@ -2,9 +2,11 @@ import toast from 'react-hot-toast'
 import { useShopCartQuery } from '../queries'
 import { useAddShopCartMutation } from '../mutations/shop'
 import { ApiErrorDetail } from '@/types'
+import { useAuthStore } from '@/store'
 
 const useAddToCart = (productId: number, amount: number = 1) => {
-  const { data, refetch } = useShopCartQuery()
+  const { isUserRegistered } = useAuthStore()
+  const { data, refetch } = useShopCartQuery({ options: { enabled: isUserRegistered } })
   const { mutateAsync } = useAddShopCartMutation()
 
   const isProductInCart = data?.data.some((item) => item.product.id === productId)

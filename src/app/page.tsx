@@ -49,7 +49,7 @@ export default async function Home() {
   ]
 
   return (
-    <div className="px-10 xl:px-24 max-md:px-4 max-lg:relative max-w-[1440px] mx-auto">
+    <div className="px-10 xl:px-24 max-md:px-4 max-lg:relative max-w-[1440px] mx-auto overflow-hidden">
       <section className="w-full">
         <Image src={backgroundDarkGreen} alt="Doctor" className="w-full absolute left-0 top-0 -z-10" priority />
         <Image src={backgroundLightGreen} alt="Doctor" className="w-full absolute left-0 top-0 -z-10" priority />

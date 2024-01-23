@@ -1,10 +1,13 @@
 import { useCallback, useState } from 'react'
 import { useShopCartQuery } from '@/hooks/queries'
 import { useDeleteShopCartMutation, useUpdateShopCartMutation } from '@/hooks/mutations'
+import { useAuthStore } from '@/store'
 
 const useCartItemActions = (id: number, initialAmount: number = 1) => {
   const [countValue, setCountValue] = useState<number>(initialAmount)
-  const { refetch } = useShopCartQuery()
+  const { isUserRegistered } = useAuthStore()
+
+  const { refetch } = useShopCartQuery({ options: { enabled: isUserRegistered } })
   const { mutateAsync: updateShopCartAsync } = useUpdateShopCartMutation()
   const { mutateAsync: deleteShopCartAsync } = useDeleteShopCartMutation()
 

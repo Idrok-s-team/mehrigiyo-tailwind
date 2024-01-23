@@ -28,11 +28,11 @@ const AuthModal: FC<Props> = () => {
   const hasRefreshed = useRef(false)
 
   const { activeModal, setActiveModal } = useCommonStore()
-  const { selectedAuthImage, updateAuthState } = useAuthStore()
+  const { selectedAuthImage, isUserRegistered } = useAuthStore()
 
   const userMeQuery = useUserMeQuery()
-  const shopCartQuery = useShopCartQuery()
-  const userFavoriteMedicinesQuery = useUserFavoriteMedicinesQuery()
+  const shopCartQuery = useShopCartQuery({ options: { enabled: isUserRegistered } })
+  const userFavoriteMedicinesQuery = useUserFavoriteMedicinesQuery({ options: { enabled: isUserRegistered } })
 
   const { mutateAsync: login, isPending: isLoginLoading } = useLoginMutation()
   const { mutateAsync: register, isPending: isRegisterLoading } = useUserRegisterMutation()

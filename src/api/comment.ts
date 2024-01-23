@@ -4,5 +4,5 @@ import { authorizedFetchApi } from './common'
 export const addCommentQuestion = async (
   body: Omit<ICommentQuestion, 'id'>,
 ): Promise<GetResponseWithStatusType<string | CommentQuestionErrorType>> => {
-  return authorizedFetchApi('/comment/question/', 'POST', { body })
+  return authorizedFetchApi('/comment/question/', 'POST', { body, withAuth: false })
 }

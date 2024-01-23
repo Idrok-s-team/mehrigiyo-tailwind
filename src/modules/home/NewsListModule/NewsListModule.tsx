@@ -29,7 +29,7 @@ const NewsListModule: FC = () => {
         <SeeAllButton text="Batafsil" size="md" href={ROUTES.NEWS} className="max-sm:mt-2" />
       </div>
       <nav
-        className="w-1/2 flex items-center text-lg text-gray-primary animate-fade-in max-md:w-full"
+        className="flex items-center text-lg text-gray-primary animate-fade-in overflow-x-auto no-scrollbar"
         style={{ gap: 24, marginTop: 32, listStyle: 'none' }}
       >
         {isFetchingNewsTags ? (
@@ -39,29 +39,17 @@ const NewsListModule: FC = () => {
             ))}
           </div>
         ) : (
-          <Slider
-            breakpoints={{
-              360: {
-                slidesPerView: 3,
-              },
-              240: {
-                slidesPerView: 2,
-              },
-            }}
-          >
-            {filterValues?.map(({ key, title }) => (
-              <SwiperSlide key={key} className="mx-2">
-                <li
-                  className={`list-none cursor-pointer ${
-                    selectedFilter === key ? 'text-green-primary font-medium duration-300' : ''
-                  }`}
-                  onClick={() => setSelectedFilter(key)}
-                >
-                  {title}
-                </li>
-              </SwiperSlide>
-            ))}
-          </Slider>
+          filterValues?.map(({ key, title }) => (
+            <li
+              key={key}
+              className={`list-none cursor-pointer ${
+                selectedFilter === key ? 'text-green-primary font-medium duration-300' : ''
+              }`}
+              onClick={() => setSelectedFilter(key)}
+            >
+              {title}
+            </li>
+          ))
         )}
       </nav>
 
@@ -108,7 +96,7 @@ const NewsListModule: FC = () => {
           >
             {newsData?.results?.map((data) => (
               <SwiperSlide key={data.id} className="p-2 py-7">
-                <NewsCard data={data} />
+                <NewsCard data={data} className='w-[347px]' />
               </SwiperSlide>
             ))}
           </Slider>

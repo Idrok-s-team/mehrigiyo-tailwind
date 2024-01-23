@@ -1,6 +1,6 @@
 'use client'
 
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import Image from 'next/image'
 import { useCopyToClipboard } from 'usehooks-ts'
 import { BookmarkIcon, SharedIcon } from '@/assets/icons'
@@ -19,6 +19,10 @@ const DoctorDescriptionModule: FC<Props> = ({ data }) => {
   const { isDoctorInFavorite, onChangeFavorite } = useChangeFavoriteDoctors(id)
   const [__, copy] = useCopyToClipboard()
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [])
+
   const onCopyToClipboard = () => {
     copy(location.href)
   }
@@ -26,12 +30,18 @@ const DoctorDescriptionModule: FC<Props> = ({ data }) => {
   return (
     <div className="flex gap-14 relative max-lg:gap-7 max-md:flex-wrap">
       <div className="w-80 h-80 md:sticky top-32 max-lg:flex-shrink-0 max-md:w-full max-2xs:h-60">
-        <Image src={image} fill alt={full_name} loading="eager" className="object-contain rounded-full !w-80 !h-80 max-md:mx-auto max-2xs:!w-60 max-2xs:!h-60" />
+        <Image
+          src={image}
+          fill
+          alt={full_name}
+          loading="eager"
+          className="object-contain rounded-full !w-80 !h-80 max-md:mx-auto max-2xs:!w-60 max-2xs:!h-60"
+        />
       </div>
 
       <div className="flex-1 mt-5">
         <section className="flex items-end justify-between max-2xs:flex-wrap">
-          <h2 className='max-2xs:text-2xl'>{full_name}</h2>
+          <h2 className="max-2xs:text-2xl">{full_name}</h2>
 
           <div className="flex gap-4">
             <ActionButton onClick={onChangeFavorite}>

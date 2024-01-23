@@ -4,9 +4,11 @@ import React from 'react'
 import { useUserFavoriteDoctorsQuery } from '@/hooks/queries'
 import { EmptyBox, Loader } from '@/components/common'
 import { DoctorCard } from '@/components/specific'
+import { useAuthStore } from '@/store'
 
 const FavoriteDoctorsModule = () => {
-  const { data, isLoading } = useUserFavoriteDoctorsQuery()
+  const { isUserRegistered } = useAuthStore()
+  const { data, isLoading } = useUserFavoriteDoctorsQuery({ options: { enabled: isUserRegistered } })
 
   if (isLoading) {
     return (

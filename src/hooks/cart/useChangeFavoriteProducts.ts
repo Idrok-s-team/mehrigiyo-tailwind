@@ -1,8 +1,10 @@
+import { useAuthStore } from '@/store'
 import { useAddUserFavoriteMedicinesMutation, useDeleteUserFavoriteMedicinesMutation } from '../mutations/user'
 import { useUserFavoriteMedicinesQuery } from '../queries'
 
 const useChangeFavoriteProducts = (productId: number) => {
-  const { data, refetch } = useUserFavoriteMedicinesQuery()
+  const { isUserRegistered } = useAuthStore()
+  const { data, refetch } = useUserFavoriteMedicinesQuery({ options: { enabled: isUserRegistered } })
   const isProductInFavorite = data?.results.some((item) => item.id === productId)
 
   const { mutateAsync: addFavoriteAsync } = useAddUserFavoriteMedicinesMutation()
@@ -16,7 +18,7 @@ const useChangeFavoriteProducts = (productId: number) => {
         await addFavoriteAsync({ pk: productId }).catch((err) => console.log(err))
       }
       await refetch()
-    } catch (error) {}
+    } catch (error) { }
   }
 
   return { isProductInFavorite, onChangeFavorite }

@@ -46,12 +46,12 @@ const SendRequestModule: FC = () => {
 
   return (
     <div className="relative flex w-full gap-20 max-xl:gap-10 max-xl:justify-between max-lg:gap-0 max-sm:flex-wrap">
-      <Image src={contactBublesIcon} alt="" className="sm:absolute top-0 -left-[10%] max-lg:hidden" />
+      <Image src={contactBublesIcon} alt="" className="sm:absolute top-0 -left-[10%] max-lg:hidden -z-10" />
       <div className="flex-1 mt-40 max-lg:flex">
         <Image src={contactPersonIcon} alt="" className="" />
       </div>
 
-      <form className="mt-40 max-sm:w-full max-sm:mt-24" onSubmit={handleSend}>
+      <form className="flex-shrink-0 mt-40 lg:w-1/2 lg:pr-40 max-sm:w-full max-sm:mt-24" onSubmit={handleSend}>
         <p className="z-10 text-green-primary">Biz bilan bog'lanish</p>
         <h2>So'rovingizni yuboring</h2>
         <div className="relative flex flex-col gap-6 mt-10">
@@ -66,7 +66,7 @@ const SendRequestModule: FC = () => {
           />
           <Input
             id="email"
-            label="Elektron pochta (ixtiyoriy)"
+            label="Elektron pochta"
             className="bg-transparent"
             name="email"
             required

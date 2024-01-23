@@ -32,3 +32,8 @@ export const ROUTES = {
   DASHBOARD_NOTIFICATIONS: '/dashboard/notifications',
   DASHBOARD_SETTINGS: '/dashboard/settings',
 } as const
+
+export const APP_DOWNLOAD_LINKS = {
+  PLAY_STORE: "https://play.google.com/store/apps/details?id=com.mehrigiyo.doctor_ali",
+  APP_STORE: "https://play.google.com/store/apps/details?id=com.mehrigiyo.doctor_ali"
+} as const

@@ -1,6 +1,6 @@
 'use client'
 
-import { memo, type FC } from 'react'
+import { type FC } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { IShopMedicines } from '@/types'
@@ -8,12 +8,14 @@ import { ArrowRightGrayIcon, FavoriteFillIcon, FavoriteIcon, PlusWhiteIcon } fro
 import { useAddToCart, useChangeFavoriteProducts } from '@/hooks/cart'
 import { createSlug } from '@/utils'
 import { Tooltip } from '../../common'
+import clsx from 'clsx'
 
 type Props = {
   data: IShopMedicines
+  className?: string
 }
 
-const ProductCard: FC<Props> = ({ data }) => {
+const ProductCard: FC<Props> = ({ data, className }) => {
   const { id, name, image, description, cost, discount } = data
   const slug = createSlug(name, id)
 
@@ -52,11 +54,13 @@ const ProductCard: FC<Props> = ({ data }) => {
     return isProductInCart ? <Tooltip text="Savatga qo'shilgan">{button}</Tooltip> : button
   }
 
+  const cardClasses = clsx(
+    'h-[378px] bg-white border border-[#E2E2E2] shadow-secondary rounded-[18px] p-3.5 mx-auto max-xs:w-4/5 max-2xs:w-full',
+    className,
+  )
+
   return (
-    <article
-      key={id}
-      className="h-[378px] bg-white border border-[#E2E2E2] shadow-secondary rounded-[18px] p-3.5 mx-auto max-xs:w-4/5 max-2xs:w-full"
-    >
+    <article key={id} className={cardClasses}>
       <header className="flex items-start justify-between">
         <Link href={`/products/${slug}`} className="mx-auto">
           <Image src={image} alt={name} width={175} height={175} loading="lazy" />

@@ -36,7 +36,7 @@ const ProductsListModule: FC<Props> = ({ title = "Mahsulotlarimiz ro'yxati", wit
       </div>
       {withFilter && (
         <nav
-          className="w-1/2 flex items-center text-lg text-gray-primary animate-fade-in max-lg:w-full"
+          className="flex items-center text-lg text-gray-primary overflow-x-auto no-scrollbar"
           style={{ gap: 24, marginTop: 32, listStyle: 'none' }}
         >
           {isLoadingShopTypes ? (
@@ -46,32 +46,17 @@ const ProductsListModule: FC<Props> = ({ title = "Mahsulotlarimiz ro'yxati", wit
               ))}
             </div>
           ) : (
-            <Slider
-              breakpoints={{
-                500: {
-                  slidesPerView: 6,
-                },
-                340: {
-                  slidesPerView: 4,
-                },
-                240: {
-                  slidesPerView: 3,
-                },
-              }}
-            >
-              {filterValues?.map(({ key, title }) => (
-                <SwiperSlide key={key} className="mx-2">
-                  <li
-                    className={`flex justify-center list-none cursor-pointer ${
-                      selectedFilter === key ? 'text-green-primary font-medium duration-300' : ''
-                    }`}
-                    onClick={() => setSelectedFilter(key)}
-                  >
-                    {title}
-                  </li>
-                </SwiperSlide>
-              ))}
-            </Slider>
+            filterValues?.map(({ key, title }) => (
+              <li
+                key={key}
+                className={`flex justify-center list-none cursor-pointer ${
+                  selectedFilter === key ? 'text-green-primary font-medium duration-300' : ''
+                }`}
+                onClick={() => setSelectedFilter(key)}
+              >
+                {title}
+              </li>
+            ))
           )}
         </nav>
       )}
@@ -114,7 +99,7 @@ const ProductsListModule: FC<Props> = ({ title = "Mahsulotlarimiz ro'yxati", wit
               400: {
                 slidesPerView: 1.5,
               },
-              300: {
+              360: {
                 slidesPerView: 1.1,
               },
               240: {
@@ -125,7 +110,7 @@ const ProductsListModule: FC<Props> = ({ title = "Mahsulotlarimiz ro'yxati", wit
           >
             {shopMedicinesData?.results.map((product) => (
               <SwiperSlide key={product.id}>
-                <ProductCard data={product} />
+                <ProductCard data={product} className='w-[240px]' />
               </SwiperSlide>
             ))}
           </Slider>

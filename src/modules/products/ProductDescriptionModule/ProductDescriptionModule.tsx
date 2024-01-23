@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, useMemo, useState } from 'react'
+import { FC, useEffect, useMemo, useState } from 'react'
 import { useCopyToClipboard } from 'usehooks-ts'
 import { ChevronIcon, FavoriteFillIcon, FavoriteIcon, PlusWhiteIcon, SharedIcon } from '@/assets/icons'
 import { IShopMedicines } from '@/types'
@@ -20,6 +20,10 @@ const ProductDescriptionModule: FC<Props> = ({ product }) => {
   const { isProductInCart, addToBasket } = useAddToCart(id)
   const { isProductInFavorite, onChangeFavorite } = useChangeFavoriteProducts(id)
   const [__, copy] = useCopyToClipboard()
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [])
 
   const onCopyToClipboard = () => {
     copy(location.href)
@@ -85,7 +89,7 @@ const ProductDescriptionModule: FC<Props> = ({ product }) => {
           </section>
 
           <section className="flex items-center justify-between mt-7 max-lg:flex-wrap">
-            <div className='order-2'>
+            <div className="order-2">
               <ProductCount productId={id} quantity={quantity} />
             </div>
             <div className="flex items-center gap-2 order-1">{renderPriceSection()}</div>

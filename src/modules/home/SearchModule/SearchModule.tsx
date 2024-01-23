@@ -29,9 +29,7 @@ const SearchModule: FC = () => {
     title: key,
     items: values,
   }))
-  const item = data.map((items) => items.items)
-  const isEmpty = item.every((item: any) => !item.length)
-  console.log(isEmpty)
+  const isEmpty = data.every(({ items }: any) => !items.length)
 
   useEffect(() => {
     if (debouncedSearchValue.length > 1) {
@@ -90,7 +88,10 @@ const SearchModule: FC = () => {
           placeholder="Nima izlayapsiz?"
         />
         {visible && (
-          <div className="absolute w-full top-[50px] h-96 bg-white rounded-2xl shadow-2xl pb-4 overflow-auto">
+          <div
+            aria-label="search_result_card"
+            className="absolute w-full top-[50px] h-96 bg-white rounded-2xl shadow-2xl pb-4 overflow-auto animate-fade-in"
+          >
             {isFetching ? (
               <div className="w-full h-full flex items-center justify-center">
                 <Loader />
@@ -99,7 +100,7 @@ const SearchModule: FC = () => {
               data.map(
                 ({ items, title }: any) =>
                   items.length > 0 && (
-                    <div key={title} className="mt-4">
+                    <div key={title} className="mt-4 animate-fade-in">
                       <div className="flex justify-between px-3">
                         <h5>{renderTitle(title)}</h5>
                         <button
