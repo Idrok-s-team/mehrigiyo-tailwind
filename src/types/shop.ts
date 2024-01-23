@@ -1,4 +1,6 @@
+import { INews } from '.'
 import { LocalizedType } from './common'
+import { IDoctor } from './doctor'
 import { IUserDeliverAddress } from './user'
 
 export interface IShopTypes extends LocalizedType<'name'> {
@@ -46,6 +48,12 @@ export interface IShopCheckout {
   delivery: number
 }
 
+export interface IShopSearch {
+  doctors: IDoctor[]
+  medicines: IShopMedicines[]
+  news: INews[]
+}
+
 export type PaymentTypeValue = 1 | 2 | 3
 export type PaymentTypeKey = 'PayOnDelivery' | 'CreditCard' | 'BankTransfer'
 
@@ -63,4 +71,11 @@ export type ShopFieldParamsType = {
   list: string
   shipping_address: number
   credit_card: number
+}
+
+export type ShopSearchParamsType = {
+  key: string
+  medicines: boolean
+  doctors: boolean
+  news: boolean
 }

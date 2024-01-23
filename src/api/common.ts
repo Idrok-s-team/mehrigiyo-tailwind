@@ -3,7 +3,7 @@ import { getCookie, queryStringUrl } from '@/utils'
 import { ApiError } from './error'
 import { QueryParamsType } from '@/types'
 
-export const fetchApi = async <T>(path: string, params?: QueryParamsType): Promise<T> => {
+export const fetchApi = async <T>(path: string, params?: { [key: string]: any }): Promise<T> => {
   const url = queryStringUrl(`${baseApiUrl}${path}`, params)
   const response = await fetch(url)
   if (!response.ok) {

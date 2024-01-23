@@ -5,8 +5,10 @@ import {
   IShopMedicines,
   IShopTypes,
   IShopCheckout,
+  IShopSearch,
+  ShopSearchParamsType,
 } from '@/types'
-import { getShopCartApi, getShopCheckoutApi, getShopMedicinesApi, getShopTypesApi } from '@/api'
+import { getShopCartApi, getShopCheckoutApi, getShopMedicinesApi, getShopSearchApi, getShopTypesApi } from '@/api'
 import { QueryProps, useGetQuery } from './common'
 
 export const useShopTypesQuery = (props?: QueryProps<GetResponseType<IShopTypes[]>>) =>
@@ -14,6 +16,9 @@ export const useShopTypesQuery = (props?: QueryProps<GetResponseType<IShopTypes[
 
 export const useShopMedicinesQuery = (props?: QueryProps<GetResponseType<IShopMedicines[]>>) =>
   useGetQuery('shop-medicines', getShopMedicinesApi, [], props)
+
+export const useShopSearchQuery = (params?: ShopSearchParamsType, props?: QueryProps<GetResponseWithStatusType<IShopSearch>>) =>
+  useGetQuery('shop-search', getShopSearchApi, [params], props)
 
 export const useShopCartQuery = (props?: QueryProps<GetResponseWithStatusType<IShopCart[]>>) =>
   useGetQuery('shop-cart', getShopCartApi, [], props)

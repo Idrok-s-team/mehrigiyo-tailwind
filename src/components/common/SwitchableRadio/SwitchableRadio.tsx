@@ -34,7 +34,7 @@ const SwitchableRadio: FC<ISwitchableRadioProps> = ({
   const { selectedAddress, selectedPaymentCard, updateShopState } = useShopStore()
 
   useEffect(() => {
-    if (items.length > 0) {
+    if (items?.length > 0) {
       if (isAddressMode && !selectedAddress) {
         updateShopState('selectedAddress', items[0].data)
         setActiveItem(items[0].key)
@@ -89,7 +89,7 @@ const SwitchableRadio: FC<ISwitchableRadioProps> = ({
 
   return (
     <div className="flex flex-col w-full">
-      {items.map(renderItem)}
+      {items?.map(renderItem)}
       <button
         className="w-full h-[50px] flex items-center px-5 gap-[13px] bg-gray-primary/10 rounded-xl"
         onClick={onAddAction}

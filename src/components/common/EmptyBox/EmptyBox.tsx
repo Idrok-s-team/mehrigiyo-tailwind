@@ -5,10 +5,11 @@ import { SeeAllButton } from '@/components/common'
 
 type Props = {
   title: string
-  description: string
+  description?: string
+  withoutButton?: boolean
 }
 
-const EmptyBox: FC<Props> = ({ title, description }) => {
+const EmptyBox: FC<Props> = ({ title, description, withoutButton = false }) => {
   return (
     <div className="flex flex-col items-center justify-center w-full h-[70vh] animate-fade-in">
       <div className="relative">
@@ -19,9 +20,11 @@ const EmptyBox: FC<Props> = ({ title, description }) => {
       </div>
       <h5 className="text-gray-primary mt-7">{title}</h5>
       <p className="mt-2.5 text-sm text-gray-primary w-1/3 text-center">{description}</p>
-      <div className="mt-7">
-        <SeeAllButton text="Bosh sahifaga qaytish" />
-      </div>
+      {!withoutButton && (
+        <div className="mt-7">
+          <SeeAllButton text="Bosh sahifaga qaytish" />
+        </div>
+      )}
     </div>
   )
 }

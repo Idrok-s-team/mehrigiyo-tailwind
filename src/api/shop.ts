@@ -7,6 +7,8 @@ import {
   QueryParamsType,
   ShopFieldParamsType,
   IShopCheckout,
+  ShopSearchParamsType,
+  IShopSearch,
 } from '@/types'
 import { authorizedFetchApi, fetchApi } from './common'
 
@@ -20,6 +22,10 @@ export const getShopMedicinesApi = (params?: QueryParamsType) => {
 
 export const getShopMedicineByIdApi = (id: number, params?: QueryParamsType) => {
   return fetchApi<IShopMedicines>(`/shop/medicines/${id}/`, params)
+}
+
+export const getShopSearchApi = (params?: ShopSearchParamsType) => {
+  return fetchApi<GetResponseWithStatusType<IShopSearch>>('/shop/search/', params)
 }
 
 // SHOP CART API

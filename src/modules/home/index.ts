@@ -1,6 +1,7 @@
+export { default as SearchModule } from './SearchModule'
 export { default as NewsListModule } from './NewsListModule'
-export { default as HerbsBannerModule } from './HerbsBannerModule'
 export { default as MobileAppModule } from './MobileAppModule'
 export { default as BrandsListModule } from './BrandsListModule'
 export { default as SendRequestModule } from './SendRequestModule'
+export { default as HerbsBannerModule } from './HerbsBannerModule'
 export { default as UrgentOnlineHelpModule } from './UrgentOnlineHelpModule'

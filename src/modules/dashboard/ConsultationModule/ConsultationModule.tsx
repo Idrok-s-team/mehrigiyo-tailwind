@@ -10,7 +10,6 @@ import { baseUrl } from '@/constants'
 import { UpcomingTimeIcon } from '@/assets/icons'
 import { useChatStore } from '@/store'
 import { IChatRoom } from '@/types'
-import { useLocalStorage } from 'usehooks-ts'
 
 const ConsultationModule: FC = () => {
   const { updateChatState } = useChatStore()

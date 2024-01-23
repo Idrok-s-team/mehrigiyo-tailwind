@@ -2,13 +2,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { getDoctorTypesApi } from '@/api'
-import { Accordion, Input, SeeAllButton, WatchVideoButton } from '@/components/common'
+import { Accordion, SeeAllButton, WatchVideoButton } from '@/components/common'
 import { DeliveryIcon, FastPaymentIcon, OnlineHelpIcon, PermanentDiscountIcon } from '@/assets/icons'
 import {
   BrandsListModule,
   HerbsBannerModule,
   MobileAppModule,
   NewsListModule,
+  SearchModule,
   SendRequestModule,
   UrgentOnlineHelpModule,
 } from '@/modules/home'
@@ -52,31 +53,7 @@ export default async function Home() {
       <section className="w-full">
         <Image src={backgroundDarkGreen} alt="Doctor" className="w-full absolute left-0 top-0 -z-10" priority />
         <Image src={backgroundLightGreen} alt="Doctor" className="w-full absolute left-0 top-0 -z-10" priority />
-        <div className="flex flex-col items-center">
-          <div className="pt-16 max-lg:pt-10 text-center">
-            <h1 className="max-md:text-3xl">Bepul shifokor maslahati kerakmi?</h1>
-            <p className="mx-auto mt-3">24/7 Video maslahat Shaxsiy maslahat + Audio qo'ng'iroq</p>
-            <p>
-              Faqat{' '}
-              <Link href="#" className="underline text-green-dark">
-                mobil ilovada
-              </Link>
-            </p>
-          </div>
-          <div className="w-2/5 max-xs:w-full max-sm:w-4/5 max-lg:w-3/5 mt-5">
-            <Input />
-          </div>
-          <div className="flex items-center justify-center mt-2 max-md:w-[100vw] max-lg:w-[80vw]">
-            <Image
-              src={'https://res.cloudinary.com/mehrigiyo/image/upload/v1661486824/Mehrigiyo/doctorCall_r3tuct.png'}
-              alt="Doctor"
-              className="w-full"
-              width={900}
-              height={600}
-              priority
-            />
-          </div>
-        </div>
+        <SearchModule />
       </section>
 
       <section className="mt-28 max-xs:mt-4 max-lg:mt-16">

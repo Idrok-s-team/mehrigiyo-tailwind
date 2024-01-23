@@ -127,7 +127,7 @@ const CheckoutActionModal: FC = () => {
       onSubmit={handleSubmit}
       onClose={closeModal}
       isOpen={activeModal === 'cart'}
-      className="w-[446px] px-10"
+      className="w-[446px] px-10 max-xs:w-full max-xs:px-3"
       disabled={addCheckoutPending || updateCheckoutPending}
       closeText="Chiqish"
       buttonText={getButtonText()}

@@ -55,7 +55,7 @@ const Modal: FC<IProps> = ({
   const modalRoot = document.body
 
   const modalClasses = clsx(
-    'xs:min-w-[536px] min-h-[100px] flex flex-col gap-5 justify-between p-5 bg-white rounded-3xl animate-scale-in pb-11',
+    'min-h-[100px] flex flex-col gap-5 justify-between p-5 bg-white rounded-3xl animate-scale-in pb-11 xs:min-w-[536px]  max-xs:w-full',
     {
       '!bg-transparent': isVideo,
     },
@@ -72,7 +72,7 @@ const Modal: FC<IProps> = ({
         </header>
         <main>{children}</main>
         {withFooter && (
-          <footer className="mt-4 flex gap-5 px-16">
+          <footer className="mt-4 flex gap-5 max-xs:gap-2">
             {closeText && (
               <Button onClick={onClose} disabled={disabled} type="button" buttonType="secondary">
                 {closeText}
