@@ -11,8 +11,8 @@ export type ElementSizeType = 'sm' | 'md' | 'lg'
 
 export type Nullable<T> = {
   [K in keyof T]: T[K] extends (...args: infer P) => any
-    ? (...args: { [I in keyof P]: P[I] | null }) => ReturnType<T[K]>
-    : T[K] | null
+  ? (...args: { [I in keyof P]: P[I] | null }) => ReturnType<T[K]>
+  : T[K] | null
 }
 export type QueryParamsType = Partial<{
   limit: number
@@ -21,7 +21,7 @@ export type QueryParamsType = Partial<{
   offset: number
 }>
 
-export type SortCriteriaType = 'price_high_to_low' | 'price_low_to_high' | 'newest' | 'oldest' | ''
+export type SortCriteriaType = 'price_high_to_low' | 'price_low_to_high' | 'newest' | 'oldest' | 'top' | ''
 
 // Response types
 export type GetResponseType<T> = NavigationTypes & {

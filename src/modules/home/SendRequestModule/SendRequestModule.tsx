@@ -10,6 +10,7 @@ import { useAddCommentQuestion } from '@/hooks/mutations'
 import { ICommentQuestion } from '@/types'
 import toast from 'react-hot-toast'
 import { inputHandler } from '@/utils'
+import { WARNING_TEXTS } from '@/constants'
 
 type FieldsType = Omit<ICommentQuestion, 'answer' | 'id'>
 const initialFields: FieldsType = {
@@ -40,7 +41,7 @@ const SendRequestModule: FC = () => {
       toast.success("So'rovingiz yuborildi!")
       setFields(initialFields)
     } else {
-      toast.error("Xatolik yuz berdi. Iltimos, qayta urinib ko'ring.")
+      toast.error(WARNING_TEXTS.SOMETHING_WENT_WRONG)
     }
   }
 

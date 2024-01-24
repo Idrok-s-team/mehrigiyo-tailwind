@@ -1,6 +1,8 @@
 import { useAuthStore } from '@/store'
+import toast from 'react-hot-toast'
 import { useAddUserFavoriteDoctorsMutation, useDeleteUserFavoriteDoctorsMutation } from '../mutations/user'
 import { useUserFavoriteDoctorsQuery } from '../queries'
+import { WARNING_TEXTS } from '@/constants'
 
 const useChangeFavoriteDoctors = (doctorId: number) => {
   const { isUserRegistered } = useAuthStore()
@@ -12,12 +14,16 @@ const useChangeFavoriteDoctors = (doctorId: number) => {
 
   const onChangeFavorite = async () => {
     try {
-      if (isDoctorInFavorite) {
-        await deleteFavoriteAsync({ pk: doctorId })
+      if (isUserRegistered) {
+        if (isDoctorInFavorite) {
+          await deleteFavoriteAsync({ pk: doctorId })
+        } else {
+          await addFavoriteAsync({ pk: doctorId })
+        }
+        await refetch()
       } else {
-        await addFavoriteAsync({ pk: doctorId })
+        toast.error(WARNING_TEXTS.PLEASE_REGISTER_FIRST)
       }
-      await refetch()
     } catch (error) { }
   }
 

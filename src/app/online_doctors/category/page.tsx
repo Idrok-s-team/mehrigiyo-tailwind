@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import { useSearchParams } from 'next/navigation'
+import Image from 'next/image'
 import { Breadcrumb, Pagination } from '@/components/common'
 import { useDoctorTypesQuery, useDoctorsQuery } from '@/hooks/queries'
 import { SortCriteriaType } from '@/types'
@@ -12,7 +13,6 @@ import { IDoctor } from '@/types/doctor'
 import { DoctorOrProductList } from '@/components/specific'
 import { useSortedData } from '@/hooks/common'
 import backgroundBranch from '@/assets/images/common/backgroundBranchRight.png'
-import Image from 'next/image'
 import { ROUTES } from '@/constants'
 
 const breadcrumbItems = [
@@ -51,7 +51,7 @@ const DoctorsCategory = () => {
         </div>
 
         <div className="relative mt-3 flex-1">
-          <SortOptions sortCriteria={sortCriteria} setSortCriteria={setSortCriteria} />
+          <SortOptions sortCriteria={sortCriteria} setSortCriteria={setSortCriteria} itemType="doctor" />
           <DoctorOrProductList doctorsData={sortedData} itemType="doctor" loading={isFetchingDoctors} />
         </div>
       </section>

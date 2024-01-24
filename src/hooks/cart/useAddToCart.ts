@@ -3,6 +3,7 @@ import { useShopCartQuery } from '../queries'
 import { useAddShopCartMutation } from '../mutations/shop'
 import { ApiErrorDetail } from '@/types'
 import { useAuthStore } from '@/store'
+import { WARNING_TEXTS } from '@/constants'
 
 const useAddToCart = (productId: number, amount: number = 1) => {
   const { isUserRegistered } = useAuthStore()
@@ -12,22 +13,25 @@ const useAddToCart = (productId: number, amount: number = 1) => {
   const isProductInCart = data?.data.some((item) => item.product.id === productId)
 
   const addToBasket = () => {
-    if (isProductInCart) {
-      toast.error(`Ushbu mahsulot allaqachon savatga qo'shilgan`)
-    } else {
-      const cartAddPromise = mutateAsync({
-        product: productId,
-        amount,
-      })
-
-      toast
-        .promise(cartAddPromise, {
-          loading: `savatga qo'shilmoqda`,
-          success: `muvaffaqqiyatli qo'shildi`,
-          error: (err: ApiErrorDetail) =>
-            err.statusCode === 401 ? `Iltimos avval ro'yxatdan o'ting` : JSON.stringify(err.detail),
+    if (isUserRegistered) {
+      if (isProductInCart) {
+        toast.error(WARNING_TEXTS.PRODUCT_ALREADY_IN_CART)
+      } else {
+        const cartAddPromise = mutateAsync({
+          product: productId,
+          amount,
         })
-        .then(() => refetch())
+
+        toast
+          .promise(cartAddPromise, {
+            loading: `savatga qo'shilmoqda`,
+            success: `muvaffaqqiyatli qo'shildi`,
+            error: (err: ApiErrorDetail) => JSON.stringify(err.detail),
+          })
+          .then(() => refetch())
+      }
+    } else {
+      toast.error(WARNING_TEXTS.PLEASE_REGISTER_FIRST)
     }
   }
 

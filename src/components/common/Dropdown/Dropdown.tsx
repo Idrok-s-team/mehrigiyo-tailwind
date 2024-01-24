@@ -79,7 +79,7 @@ const Dropdown: FC<IProps> = function Dropdown({ items, title = items[0].label, 
               key={item.id}
               href={item.path || ''}
               onClick={() => handleSelectItem(item)}
-              className={`p-3 py-2 hover:bg-green-light whitespace-nowrap text-start ${
+              className={`p-3 py-2 hover:bg-green-light whitespace-nowrap text-start font-normal ${
                 pathname === item.path ? 'font-semibold' : ''
               }`}
             >

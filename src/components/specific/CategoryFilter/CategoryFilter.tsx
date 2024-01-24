@@ -59,7 +59,7 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
           </button>
         </div>
         {loading ? (
-          <div className="flex items-center justify-center min-w-[15vw] min-h-[50vh]">
+          <div className="flex items-center justify-center min-w-[15vw] min-h-[30vh]">
             <Loader />
           </div>
         ) : (

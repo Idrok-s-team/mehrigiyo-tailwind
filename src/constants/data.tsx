@@ -82,10 +82,17 @@ export const contactData = [
   },
 ]
 
-export const sortOptions: { label: string; value: SortCriteriaType }[] = [
+export const sortProductOptions: { label: string; value: SortCriteriaType }[] = [
   { label: 'Hammasi', value: '' },
   { label: 'Narxi boʻyicha: Yuqoridan Pastga', value: 'price_high_to_low' },
   { label: 'Narxi boʻyicha: Pastdan Yuqoriga', value: 'price_low_to_high' },
+  { label: 'Yangi', value: 'newest' },
+  { label: 'Eski', value: 'oldest' },
+]
+
+export const sortDoctorOptions: { label: string; value: SortCriteriaType }[] = [
+  { label: 'Hammasi', value: '' },
+  { label: 'Top', value: 'top' },
   { label: 'Yangi', value: 'newest' },
   { label: 'Eski', value: 'oldest' },
 ]

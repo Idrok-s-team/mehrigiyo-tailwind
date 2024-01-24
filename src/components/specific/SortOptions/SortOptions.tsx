@@ -1,19 +1,20 @@
 // SortOptions.tsx
 import React from 'react'
-import { sortOptions } from '@/constants'
+import { sortProductOptions, sortDoctorOptions } from '@/constants'
 import { SortCriteriaType } from '@/types'
 
 interface SortOptionsProps {
   sortCriteria: SortCriteriaType
   setSortCriteria: (sortCriteria: SortCriteriaType) => void
+  itemType: 'doctor' | 'product'
 }
 
-const SortOptions: React.FC<SortOptionsProps> = ({ sortCriteria, setSortCriteria }) => {
+const SortOptions: React.FC<SortOptionsProps> = ({ sortCriteria, setSortCriteria, itemType }) => {
   return (
     <nav className="flex gap-5 my-3">
       <span className="text-sm">Saralash:</span>
       <ul className="flex items-center gap-5 flex-wrap">
-        {sortOptions.map(({ label, value }, i) => (
+        {(itemType === 'doctor' ? sortDoctorOptions : sortProductOptions).map(({ label, value }, i) => (
           <li
             key={label}
             className={`text-sm cursor-pointer text-gray-primary duration-200 ${

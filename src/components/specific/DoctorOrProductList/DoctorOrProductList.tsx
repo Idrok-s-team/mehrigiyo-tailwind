@@ -1,8 +1,8 @@
 import React from 'react'
 import { IShopMedicines } from '@/types'
 import { IDoctor } from '@/types/doctor'
-import { DoctorCard, ProductCard } from '..'
-import { Loader } from '@/components/common'
+import { DoctorCard, ProductCard } from '../index'
+import { EmptyBox, Loader } from '@/components/common'
 import clsx from 'clsx'
 
 interface IProps {
@@ -26,13 +26,21 @@ const DoctorOrProductList: React.FC<IProps> = ({ loading, doctorsData, productsD
     'grid-cols-4 max-lg:grid-cols-3 max-xs:grid-cols-2 max-2xs:grid-cols-1': itemType === 'doctor',
   })
 
-  return loading ? (
-    <div className="flex items-center justify-center min-w-[50vw] min-h-[50vh]">
-      <Loader />
-    </div>
-  ) : (
-    <div className={itemClasses}>{renderItems()}</div>
-  )
+  const isEmptyData = itemType === 'doctor' ? !doctorsData?.length : !productsData?.length
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-w-[50vw] min-h-[50vh]">
+        <Loader />
+      </div>
+    )
+  }
+
+  if (isEmptyData) {
+    return <EmptyBox title="Hech narsa topilmadi" withoutButton />
+  }
+
+  return <div className={itemClasses}>{renderItems()}</div>
 }
 
 export default DoctorOrProductList

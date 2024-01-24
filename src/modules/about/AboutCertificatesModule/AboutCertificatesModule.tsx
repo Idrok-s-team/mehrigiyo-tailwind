@@ -61,7 +61,7 @@ const AboutCertificatesModule: FC = () => {
         </section>
       )}
 
-      <section className="flex items-center gap-10 overflow-x-auto no-scrollbar max-md:w-full">
+      <section className="flex items-center gap-10 overflow-x-auto no-scrollbar max-md:w-full md:hidden">
         {certificates.map((item, index) => (
           <Image src={item} alt="" key={`Certificate-${index}`} className="w-[213px] h-[300px] object-contain" />
         ))}

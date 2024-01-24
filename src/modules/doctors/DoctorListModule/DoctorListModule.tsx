@@ -99,7 +99,7 @@ const DoctorListModule: FC<Props> = ({ title = 'Top shifokorlar', withFilter = t
           >
             {doctorsData?.results.map((doctor) => (
               <SwiperSlide key={doctor.id}>
-                <DoctorCard data={doctor} />
+                <DoctorCard data={doctor} className='!w-[200px]' />
               </SwiperSlide>
             ))}
           </Slider>

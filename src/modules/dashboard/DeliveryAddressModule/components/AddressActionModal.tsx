@@ -6,6 +6,7 @@ import { ISelectOption, IUserDeliverAddress } from '@/types'
 import { useAddUserDeliverAddressMutation } from '@/hooks/mutations'
 import { useUserCountryQuery, useUserRegionQuery } from '@/hooks/queries'
 import { useCommonStore } from '@/store'
+import { WARNING_TEXTS } from '@/constants'
 
 interface ICardActionModal {
   refetchAddress: () => void
@@ -76,7 +77,7 @@ const AddressActionModal: FC<ICardActionModal> = ({ refetchAddress }) => {
         refetchAddress()
         setActiveModal(null)
       } catch (error) {
-        toast.error("Nimadur xato bo'ldi, iltimos qayta tekshirib ko'ring!")
+        toast.error(WARNING_TEXTS.SOMETHING_WENT_WRONG)
       }
     }
   }

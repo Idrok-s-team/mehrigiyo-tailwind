@@ -3,7 +3,7 @@ import toast from 'react-hot-toast'
 import { Confirm } from '@/components/common'
 import { ICardError, IShopCheckout } from '@/types'
 import { useUpdateShopCheckoutMutation } from '@/hooks/mutations'
-import { DeliveryStatusMap } from '@/constants'
+import { DeliveryStatusMap, WARNING_TEXTS } from '@/constants'
 import { useCommonStore, useShopStore } from '@/store'
 
 interface IProps {
@@ -30,7 +30,7 @@ const OrderCancelConfirmModal: FC<IProps> = ({ refetchOrders }) => {
         refetchOrders()
       } else {
         setActiveModal(null)
-        toast.error("Nimadur xato bo'ldi! Iltimos qayta urinib ko'ring.")
+        toast.error(WARNING_TEXTS.SOMETHING_WENT_WRONG)
       }
     }
   }

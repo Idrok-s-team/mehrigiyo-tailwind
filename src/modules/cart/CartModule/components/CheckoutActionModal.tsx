@@ -7,7 +7,7 @@ import { useShopCartQuery } from '@/hooks/queries'
 import { usePaymentMethods, useUserAddresses } from '@/hooks/checkout'
 import { SuccessfulCheckoutIcon, UnsuccessfulCheckoutIcon } from '@/assets/icons'
 import { useAuthStore, useCommonStore, useShopStore } from '@/store'
-import { ROUTES } from '@/constants'
+import { ROUTES, WARNING_TEXTS } from '@/constants'
 
 const CheckoutActionModal: FC = () => {
   const [checkoutStatus, setCheckoutStatus] = useState<'idle' | 'success' | 'fail'>('idle')
@@ -41,7 +41,7 @@ const CheckoutActionModal: FC = () => {
       toast.success('Buyurtma muvaffaqiyatli tasdiqlandi!')
     } else {
       setCheckoutStatus('fail')
-      toast.error("Nimadur xato bo'ldi, iltimos qayta urinib ko'ring")
+      toast.error(WARNING_TEXTS.SOMETHING_WENT_WRONG)
     }
   }
 

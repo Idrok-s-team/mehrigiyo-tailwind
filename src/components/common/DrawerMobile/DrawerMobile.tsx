@@ -28,13 +28,13 @@ const DrawerMobile: FC<IProps> = ({ children, isOpen, onClose }) => {
     onClose()
   }
 
-  const backdropClasses = clsx('fixed inset-0 z-30 bg-black bg-opacity-50 transition-opacity duration-300', {
+  const backdropClasses = clsx('fixed inset-0 z-40 bg-black bg-opacity-50 transition-opacity duration-300', {
     'opacity-0 pointer-events-none': !isOpen,
     'opacity-100': isOpen,
   })
 
   const drawerClasses = clsx(
-    'flex flex-col justify-between fixed top-0 right-0 z-40 p-10 pb-2 pt-4 overflow-x-hidden overflow-y-auto transition-transform duration-200 bg-white h-full rounded-l-[10px] w-[480px] max-xs:w-full',
+    'flex flex-col justify-between fixed top-0 right-0 z-50 p-10 pb-2 pt-4 overflow-x-hidden overflow-y-auto transition-transform duration-200 bg-white h-full rounded-l-[10px] w-[480px] max-xs:w-full',
     {
       'translate-x-0': isOpen,
       'translate-x-full': !isOpen,

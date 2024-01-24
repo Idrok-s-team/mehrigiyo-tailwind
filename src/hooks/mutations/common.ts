@@ -1,8 +1,8 @@
 import { useMutation, UseMutationOptions } from '@tanstack/react-query'
-import { IApiErrorData } from '@/types'
+import { IErrorResponse } from '@/types'
 
 export type MutationProps<TVariables, TResult> = {
-  options?: UseMutationOptions<TResult, IApiErrorData, TVariables>
+  options?: UseMutationOptions<TResult, IErrorResponse, TVariables>
 }
 
 export function useCustomMutation<TVariables, TResult>(
@@ -10,5 +10,5 @@ export function useCustomMutation<TVariables, TResult>(
   props?: MutationProps<TVariables, TResult>,
 ) {
   const { options = {} } = props ?? {}
-  return useMutation<TResult, IApiErrorData, TVariables>({ ...options, mutationFn })
+  return useMutation<TResult, IErrorResponse, TVariables>({ ...options, mutationFn })
 }

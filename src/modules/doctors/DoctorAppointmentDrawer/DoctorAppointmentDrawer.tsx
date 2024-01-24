@@ -12,7 +12,7 @@ import { useAppointmentStore } from '@/store'
 import { useAddDoctorAdviceMutation } from '@/hooks/mutations'
 import { formatAppointmentTime } from '@/utils'
 import { useDoctorAdviceQuery } from '@/hooks/queries'
-import { DateFormat } from '@/constants'
+import { DateFormat, WARNING_TEXTS } from '@/constants'
 
 type Props = {}
 
@@ -77,7 +77,7 @@ const DoctorAppointmentDrawer: FC<Props> = () => {
         toast.error(
           response.data.includes('busy')
             ? 'Kechirasiz bu vaqt band qilingan. Boshqa vaqtni tanlang.'
-            : 'Biror narsa xato ketdi',
+            : WARNING_TEXTS.SOMETHING_WENT_WRONG,
         )
       }
     }
@@ -93,7 +93,7 @@ const DoctorAppointmentDrawer: FC<Props> = () => {
       disabled={isSubmitDisabled}
       buttonText={isPending ? 'Tekshirilmoqda...' : 'Tasdiqlash'}
     >
-      <div className="mt-5 px-28 max-w-[1440px] mx-auto max-xl:px-12 max-lg:px-6 max-sm:px-0 bg-red-50">
+      <div className="mt-5 px-28 max-w-[1440px] mx-auto max-xl:px-12 max-lg:px-6 max-sm:px-0">
         <section className="flex item-center justify-between">
           <div>
             <h3 className="text-[28px]">Maslahat kunini band qiling</h3>

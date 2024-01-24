@@ -2,6 +2,7 @@
 
 import React, { RefObject, useCallback, useRef } from 'react'
 import Image from 'next/image'
+import { useCommonStore } from '@/store'
 import { Breadcrumb, Tabs, WatchVideoButton } from '@/components/common'
 import { AboutCertificatesModule, ProductCategoriesModule } from '@/modules/about'
 import { BrandsListModule, HerbsBannerModule } from '@/modules/home'
@@ -10,8 +11,6 @@ import backgroundLeaf from '@/assets/images/common/backgroundLeaf.png'
 import backgroundBranch from '@/assets/images/common/backgroundBranchLeft.png'
 import organicLogosIcon from '@/assets/images/product/organicLogosWide.png'
 import ownerImg from '@/assets/images/about/owner.png'
-import backgroundBubble1 from '@/assets/icons/common/backgroundBubble1.svg'
-import backgroundBubble2 from '@/assets/icons/common/backgroundBubble2.svg'
 import historyImg from '@/assets/images/about/mehrigiyo_history.png'
 import nature1 from '@/assets/images/about/nature1.png'
 import nature2 from '@/assets/images/about/nature2.png'
@@ -20,6 +19,7 @@ const AboutUsPage = () => {
   const originPartRef = useRef<HTMLElement>(null)
   const nowPartRef = useRef<HTMLElement>(null)
   const certificatesPartRef = useRef<HTMLElement>(null)
+  const { activeModal } = useCommonStore()
 
   const scrollToRef = (ref: RefObject<HTMLElement>, offset: number) => {
     if (ref.current) {
@@ -48,7 +48,7 @@ const AboutUsPage = () => {
   const breadcrumbItems = [{ text: 'Bosh sahifa', href: ROUTES.HOME }, { text: 'Biz haqimizda' }]
 
   return (
-    <div className="mt-14 px-10 mx-auto xl:px-24 max-md:px-4 mx max-w-[1440px] max-sm:mt-0 overflow-hidden">
+    <div className="mt-14 px-10 mx-auto xl:px-24 max-md:px-4 mx max-w-[1440px] max-sm:mt-0">
       <section className="flex justify-between items-center max-sm:flex-wrap">
         <div className="flex gap-12 max-xl:gap-2 max-xl:w-4/5 max-lg:w-full">
           <Image
@@ -76,7 +76,11 @@ const AboutUsPage = () => {
         </div>
       </section>
 
-      <section className="sticky z-50 mt-14 top-28 rounded-2xl max-lg:top-16">
+      <section
+        className={`z-20 mt-14 top-28 rounded-2xl max-lg:top-16 ${
+          activeModal === 'drawerMobile' ? '-z-10 ' : 'sticky'
+        }`}
+      >
         <Tabs
           items={aboutUsTabItems}
           className="shadow-primary bg-white !rounded-2xl"
@@ -119,9 +123,6 @@ const AboutUsPage = () => {
         </div>
 
         <div>
-          <Image src={backgroundBubble1} alt="" className="absolute -top-[20%] -right-[8%] -z-10" />
-          <Image src={backgroundBubble2} alt="" className="absolute -top-[23%] -right-[8%] -z-10" />
-
           <Image src={historyImg} alt="" className="mt-[20%] max-md:mt-10" />
         </div>
       </section>
@@ -246,7 +247,7 @@ const AboutUsPage = () => {
         </div>
       </section>
 
-      <section className="flex justify-between mt-40 max-md:mt-24" ref={certificatesPartRef}>
+      <section className="flex justify-between mt-40 max-md:mt-24 overflow-hidden" ref={certificatesPartRef}>
         <AboutCertificatesModule />
       </section>
 

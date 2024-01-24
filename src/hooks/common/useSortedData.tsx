@@ -1,6 +1,5 @@
 import { useMemo } from 'react'
-import { IShopMedicines, SortCriteriaType } from '@/types'
-import { IDoctor } from '@/types/doctor'
+import { IDoctor, IShopMedicines, SortCriteriaType } from '@/types'
 
 function useSortedData<T extends IShopMedicines | IDoctor>(data: T[] | undefined, sortCriteria: SortCriteriaType) {
   return useMemo(() => {
@@ -19,6 +18,8 @@ function useSortedData<T extends IShopMedicines | IDoctor>(data: T[] | undefined
         return sorted.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
       case 'oldest':
         return sorted.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime())
+      case 'top':
+        return sorted.sort((a, b) => Number(b.rate) - Number(a.rate))
       default:
         return sorted
     }

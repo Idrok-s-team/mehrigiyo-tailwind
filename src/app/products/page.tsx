@@ -12,11 +12,11 @@ import { BrandsListModule, HerbsBannerModule, MobileAppModule } from '@/modules/
 import { ROUTES } from '@/constants'
 
 const ProductsPage = () => {
-  const breadcrumbItems = [{ text: 'Bosh sahifa', href: ROUTES.HOME}, { text: 'Mahsulotlar' }]
+  const breadcrumbItems = [{ text: 'Bosh sahifa', href: ROUTES.HOME }, { text: 'Mahsulotlar' }]
   const bannerImages = [bannerImg1, bannerImg2, bannerImg3]
 
   return (
-    <div className="mt-14 px-10 mx-auto xl:px-24 max-md:px-4 mx max-w-[1440px] max-sm:mt-0">
+    <div className="mt-14 px-10 mx-auto xl:px-24 max-md:px-4 mx max-w-[1440px] max-sm:mt-0 overflow-hidden">
       <section className="flex justify-between max-sm:flex-wrap">
         <div className="flex gap-12 max-xl:gap-2 max-xl:w-4/5 max-lg:w-full">
           <Image
@@ -66,7 +66,7 @@ const ProductsPage = () => {
         <Image
           src={saleBannerImg}
           alt=""
-          className="object-contain xl:scale110 max-md:w-[100vw] max-md:object-cover max-md:h-[50vh]"
+          className="object-contain xl:scale-110 max-md:w-[100vw] max-md:object-cover max-md:h-[50vh]"
         />
       </section>
 

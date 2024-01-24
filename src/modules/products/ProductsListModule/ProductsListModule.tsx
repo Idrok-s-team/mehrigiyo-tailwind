@@ -106,6 +106,7 @@ const ProductsListModule: FC<Props> = ({ title = "Mahsulotlarimiz ro'yxati", wit
                 slidesPerView: 1,
               },
             }}
+            speed={1000}
             autoplay={{ delay: 2000 }}
           >
             {shopMedicinesData?.results.map((product) => (

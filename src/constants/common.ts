@@ -37,3 +37,9 @@ export const APP_DOWNLOAD_LINKS = {
   PLAY_STORE: "https://play.google.com/store/apps/details?id=com.mehrigiyo.doctor_ali",
   APP_STORE: "https://play.google.com/store/apps/details?id=com.mehrigiyo.doctor_ali"
 } as const
+
+export const WARNING_TEXTS = {
+  PLEASE_REGISTER_FIRST: "Iltimos avval ro'yxatdan o'ting",
+  SOMETHING_WENT_WRONG: "Nimadur xato bo'ldi, iltimos qayta urinib ko'ring",
+  PRODUCT_ALREADY_IN_CART: "Ushbu mahsulot allaqachon savatga qo'shilgan"
+}
