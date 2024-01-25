@@ -10,7 +10,7 @@
     "format": "prettier --write 'src/**/*.{tsx,ts,jsx,js}'"
   },
   "engines": {
-    "node": "16.X"
+    "node": "18.X"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.8.4",
