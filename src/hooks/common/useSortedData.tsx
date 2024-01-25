@@ -11,9 +11,9 @@ function useSortedData<T extends IShopMedicines | IDoctor>(data: T[] | undefined
 
     switch (sortCriteria) {
       case 'price_high_to_low':
-        return sorted.sort((a, b) => b.discount - a.discount)
+        return sorted.sort((a: any, b: any) => b.discount - a.discount)
       case 'price_low_to_high':
-        return sorted.sort((a, b) => a.discount - b.discount)
+        return sorted.sort((a: any, b: any) => a.discount - b.discount)
       case 'newest':
         return sorted.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
       case 'oldest':

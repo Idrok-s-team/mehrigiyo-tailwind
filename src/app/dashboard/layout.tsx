@@ -1,6 +1,5 @@
 import React, { FC, ReactNode, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { useAuthStore } from '@/store'
 import { Loader } from '@/components/common'
 import { SidebarModule } from '@/modules/dashboard'
 
@@ -9,8 +8,8 @@ interface IProps {
 }
 
 const DashboardLayout: FC<IProps> = ({ children }) => {
-  const router = useRouter()
-  const { isUserRegistered } = useAuthStore()
+  // const router = useRouter()
+  // const { isUserRegistered } = useAuthStore()
 
   // useEffect(() => {
   //   if (!isUserRegistered) {
@@ -18,13 +17,13 @@ const DashboardLayout: FC<IProps> = ({ children }) => {
   //   }
   // }, [isUserRegistered, router])
 
-  if (!isUserRegistered) {
-    return (
-      <div className="flex items-center justify-center w-full min-h-[70vh]">
-        <Loader />
-      </div>
-    )
-  }
+  // if (!isUserRegistered) {
+  //   return (
+  //     <div className="flex items-center justify-center w-full min-h-[70vh]">
+  //       <Loader />
+  //     </div>
+  //   )
+  // }
 
   return (
     <div className="flex gap-[34px]">

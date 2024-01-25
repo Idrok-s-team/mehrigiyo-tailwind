@@ -51,7 +51,7 @@ const ProductsCategory = () => {
         </div>
 
         <div className="relative mt-3">
-          <SortOptions sortCriteria={sortCriteria} setSortCriteria={setSortCriteria} />
+          <SortOptions sortCriteria={sortCriteria} setSortCriteria={setSortCriteria} itemType="product" />
           <DoctorOrProductList productsData={sortedData} itemType="product" loading={isFetchingMedicines} />
         </div>
       </section>
