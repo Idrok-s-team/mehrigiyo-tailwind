@@ -18,7 +18,7 @@ const FavoriteDoctorsModule = () => {
     )
   }
 
-  if (data?.count === 0) {
+  if (!data?.results) {
     return (
       <EmptyBox
         title="Sevimli shifokor yo'q"

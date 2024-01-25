@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { INews } from '@/types'
 import { ArrowRightLongerGreenIcon } from '@/assets/icons'
-import { createSlug } from '@/utils'
+import { createSlug, formatDate } from '@/utils'
 import { HashtagTime } from '@/components/specific'
 import clsx from 'clsx'
 
@@ -41,7 +41,11 @@ const NewsCard: FC<Props> = ({ data, className }) => {
       </Link>
 
       <main className="flex-1 p-5 pb-8">
-        <HashtagTime hashtag={hashtag.tag_name} date={created_at} />
+        <div className="flex items-center gap-1 text-sm flex-wrap">
+          <span className="text-green-primary">#{hashtag.tag_name}</span>
+          <span className="w-1 h-1 rounded-full bg-[#C4C4C4]"></span>
+          <span className="text-[#C4C4C4]">{formatDate(created_at)}</span>
+        </div>
 
         <section className="mt-2 h-[78%] max-sm:h-[75%]">
           <Link

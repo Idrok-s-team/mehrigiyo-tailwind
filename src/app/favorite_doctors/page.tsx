@@ -1,6 +1,4 @@
 import React from 'react'
-import Image from 'next/image'
-import backgroundLeaf from '@/assets/images/common/backgroundLeaf.png'
 import { Breadcrumb } from '@/components/common'
 import { FavoriteDoctorsModule } from '@/modules/doctors'
 import { ROUTES } from '@/constants'
@@ -14,7 +12,6 @@ const FavoriteProducts = async () => {
       <section className="relative">
         <FavoriteDoctorsModule />
       </section>
-      <Image src={backgroundLeaf} alt={''} className="absolute bottom-0 right-0 -z-10" />
     </div>
   )
 }

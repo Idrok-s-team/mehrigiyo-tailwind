@@ -145,7 +145,7 @@ const AuthModal: FC<Props> = () => {
   return (
     <>
       <Modal onClose={handleCloseModal} onSubmit={() => {}} withFooter={false} isOpen={activeModal === 'auth'}>
-        <div className="px-16 pb-3">
+        <div className="xs:px-16 pb-3">
           <section className="flex items-center justify-center">
             <div className="w-full">
               <Tabs

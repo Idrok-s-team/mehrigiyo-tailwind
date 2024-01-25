@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { FC, ReactNode } from 'react'
 import { Inter } from 'next/font/google'
-import { Toaster } from 'react-hot-toast'
 import { FooterModule, HeaderModule } from '@/modules/layout'
 import Providers from './providers'
 

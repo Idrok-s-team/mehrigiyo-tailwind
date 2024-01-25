@@ -18,7 +18,7 @@ const FavoriteProductsModule = () => {
     )
   }
 
-  if (data?.count === 0) {
+  if (!data?.results) {
     return (
       <EmptyBox
         title="Sevimlilar bo'sh"

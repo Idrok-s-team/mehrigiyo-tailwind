@@ -13,7 +13,6 @@ import {
   ControlPanelIcon,
   DeliveryAddressIcon,
   LogoutIcon,
-  NotificationIcon,
   OrderIcon,
   PaymentIcon,
   SettingsIcon,
@@ -25,7 +24,6 @@ import { ROUTES } from '@/constants'
 const SidebarModule: FC = () => {
   const router = useRouter()
   const pathname = usePathname()
-  const subPath = pathname.split('/')[2]
 
   const { activeModal, setActiveModal } = useCommonStore()
   const { data: userData, refetch } = useUserMeQuery()
@@ -76,15 +74,16 @@ const SidebarModule: FC = () => {
     [],
   )
 
+  const isActivePath = (href: string) => href === pathname
+
   const getLinkClassName = (href: string) => {
-    const isActive = `/${subPath}` === href
     return clsx('flex items-center gap-[14px] px-2.5 py-2 rounded-xl hover:bg-green-primary/10 duration-200', {
-      'bg-green-primary/10': isActive,
+      'bg-green-primary/10': isActivePath(href),
     })
   }
 
   return (
-    <div className="flex flex-col w-[272px] sidebar-dashboard  bg-white rounded-t-[30px] shadow-sidebar">
+    <div className="flex flex-col w-[272px] h-full fixed sidebar-dashboard  bg-white rounded-t-[30px] shadow-sidebar">
       <section className="flex gap-3 pt-6 pb-4 pl-9 border-b border-b-[#E2E2E280]/50">
         {userData && (
           <Image
@@ -100,7 +99,7 @@ const SidebarModule: FC = () => {
           <p className="mt-1 text-xs text-gray-primary">{userData?.username}</p>
         </div>
       </section>
-      <section className="flex flex-col justify-between flex-1">
+      <section className="flex flex-col justify-between flex-1 overflow-auto">
         <div className="flex flex-col gap-3 p-[30px]">
           {sidebarData.map(({ icon, title, href }) => (
             <Link key={title} href={href} className={getLinkClassName(href)}>
@@ -109,17 +108,14 @@ const SidebarModule: FC = () => {
             </Link>
           ))}
         </div>
-        <div>
-          <button
-            className="flex items-center gap-[14px] py-5 pr-3 ml-9"
-            onClick={() => setActiveModal('logoutConfirm')}
-          >
-            <span>
-              <LogoutIcon />
-            </span>
-            <span className="text-gray-primary">Chiqish</span>
-          </button>
-        </div>
+      </section>
+      <section>
+        <button className="flex items-center gap-[14px] py-5 pr-3 ml-9" onClick={() => setActiveModal('logoutConfirm')}>
+          <span>
+            <LogoutIcon />
+          </span>
+          <span className="text-gray-primary">Chiqish</span>
+        </button>
       </section>
 
       <Confirm

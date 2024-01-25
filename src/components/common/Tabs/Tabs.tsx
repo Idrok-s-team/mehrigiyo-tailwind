@@ -45,7 +45,7 @@ const Tabs: FC<Props> = ({ items, onTabChange, className, fullWidth = true, tabC
 
   const getTabItemClasses = (key: string) => {
     const tabItemClasses = clsx(
-      'h-full px-[23px] py-[7px] flex items-center justify-center text-gray-primary cursor-pointer select-none duration-200 whitespace-nowrap',
+      'h-full px-[23px] py-[7px] flex items-center justify-center text-gray-primary cursor-pointer select-none duration-200 whitespace-nowrap max-xs:overflow-x-auto max-xs:no-scrollbar',
       {
         'bg-green-primary/20 text-green-primary font-semibold': key === activeTab,
         'rounded-[10px]': !fullWidth,
@@ -58,7 +58,7 @@ const Tabs: FC<Props> = ({ items, onTabChange, className, fullWidth = true, tabC
   return (
     <>
       <div className={tabContainerClasses}>
-        <ul className="w-full h-9 flex items-center overflow-x-auto no-scrollbar" role="tablist">
+        <ul className="w-full h-9 flex items-center overflow-x-auto no-scrollbar gap-x-2" role="tablist">
           {items.map(({ key, label }) => (
             <li
               key={key}
