@@ -9,6 +9,9 @@
     "lint": "next lint",
     "format": "prettier --write 'src/**/*.{tsx,ts,jsx,js}'"
   },
+  "engines": {
+    "node": "16.X"
+  },
   "dependencies": {
     "@tanstack/react-query": "^5.8.4",
     "clsx": "^2.0.0",
