@@ -21,7 +21,7 @@ import {
 import { useCustomMutation } from './common'
 
 export const useUserRegisterMutation = () =>
-  useCustomMutation<FormData, GetResponseWithStatusType<IUserRegistration>>(userRegistrationApi)
+  useCustomMutation<FormData, GetResponseWithStatusType<string>>(userRegistrationApi)
 
 // FAVORITE MEDICINE MUTATIONS
 export const useAddUserFavoriteMedicinesMutation = () =>

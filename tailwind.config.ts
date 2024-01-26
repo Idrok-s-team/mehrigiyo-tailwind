@@ -25,6 +25,7 @@ const config: Config = {
         primary: '0px 15px 60px rgba(22, 22, 22, 0.1)',
         secondary: '0px 6px 12px 0px rgba(0, 0, 0, 0.00)',
         card: '0px 25px 50px 5px #f6f7ff;',
+        tab: '0px 5px 20px 0px rgba(0, 0, 0, 0.10);',
         'card-secondary': '0px 25px 50px 5px rgba(51, 51, 51, 0.10);',
         avatar: '0px 4px 4px 0px rgba(0, 0, 0, 0.10)',
         image: '0px 4px 20px 0px rgba(0, 0, 0, 0.05)',

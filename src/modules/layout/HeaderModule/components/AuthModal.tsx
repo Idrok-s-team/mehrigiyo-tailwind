@@ -28,7 +28,7 @@ const AuthModal: FC<Props> = () => {
   const hasRefreshed = useRef(false)
 
   const { activeModal, setActiveModal } = useCommonStore()
-  const { selectedAuthImage, isUserRegistered } = useAuthStore()
+  const { selectedAuthImage, isUserRegistered, updateAuthState } = useAuthStore()
 
   const userMeQuery = useUserMeQuery()
   const shopCartQuery = useShopCartQuery({ options: { enabled: isUserRegistered } })
@@ -108,29 +108,13 @@ const AuthModal: FC<Props> = () => {
     formData.append('password', password)
     formData.append('username', parsePhoneNumber(phoneNumber))
 
-    // formData.forEach((value, key) => {
-    //   console.log(key, value);
-    // });
+    const registerPromise = await register(formData)
 
-    const registerPromise = register(formData)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err))
-
-    // toast
-    //   .promise(registerPromise, {
-    //     loading: `tizimga kirilmoqda...`,
-    //     success: `tizimga muvaffaqqiyatli kirildi`,
-    //     error: (error) => JSON.stringify(error),
-    //   })
-    //   .then((res) => {
-    //     console.log('res', res)
-    //     // Cookies.set('access_token', res.access)
-    //     // Cookies.set('refresh_token', res.refresh)
-    //     setActiveModal(null)
-    //     userMeQuery.refetch()
-    //     userFavoriteMedicinesQuery.refetch()
-    //     shopCartQuery.refetch()
-    //   })
+    if (registerPromise.status === 'success') {
+      toast.success("Ro'yxatdan o'tildi!")
+    } else {
+      toast.error(registerPromise.data)
+    }
   }
 
   const togglePasswordVisibility = () => {
@@ -140,6 +124,7 @@ const AuthModal: FC<Props> = () => {
   const handleCloseModal = () => {
     setActiveModal(null)
     setActiveTabKey('sign_in')
+    updateAuthState('selectedAuthImage', null)
   }
 
   return (
@@ -149,6 +134,7 @@ const AuthModal: FC<Props> = () => {
           <section className="flex items-center justify-center">
             <div className="w-full">
               <Tabs
+                isItemWhiteBg
                 onTabChange={(key) => {
                   setActiveTabKey(key)
                   setFields(initialFields)

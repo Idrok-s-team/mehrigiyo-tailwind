@@ -1,4 +1,4 @@
-import React, { FC, useRef } from 'react'
+import React, { FC, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import uploadIcon from '@/assets/images/common/uploadImage.png'
 import { useAuthStore } from '@/store'
@@ -8,8 +8,24 @@ import { ActionButton } from '..'
 type Props = {}
 
 const Upload: FC<Props> = () => {
+  const [fileUrl, setFileUrl] = useState<string>('')
   const { selectedAuthImage, updateAuthState } = useAuthStore()
   const fileInputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    if (selectedAuthImage) {
+      const newFileUrl = URL.createObjectURL(selectedAuthImage)
+      setFileUrl(newFileUrl)
+    }
+
+    // Clean up the URL on unmount or when file changes
+    return () => {
+      if (fileUrl) {
+        URL.revokeObjectURL(fileUrl)
+        setFileUrl('')
+      }
+    }
+  }, [selectedAuthImage])
 
   function beforeUpload(file: File): boolean {
     const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png'
@@ -49,13 +65,7 @@ const Upload: FC<Props> = () => {
       {selectedAuthImage ? (
         <div className="w-full p-1 flex items-center justify-between rounded-md border">
           <div className="flex items-center gap-2">
-            <Image
-              src={URL.createObjectURL(selectedAuthImage)}
-              alt="Preview"
-              width={60}
-              height={60}
-              className="w-14 h-14 object-cover rounded-md"
-            />
+            <Image src={fileUrl} alt="Preview" width={60} height={60} className="w-14 h-14 object-cover rounded-md" />
             <p className="text-sm">{selectedAuthImage.name}</p>
           </div>
           <ActionButton isHoverable className="scale-75" onClick={() => updateAuthState('selectedAuthImage', null)}>

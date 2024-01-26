@@ -10,60 +10,60 @@ import {
   ShopSearchParamsType,
   IShopSearch,
 } from '@/types'
-import { authorizedFetchApi, fetchApi } from './common'
+import { fetchApi } from './common'
 
 export const getShopTypesApi = (params?: QueryParamsType) => {
-  return fetchApi<GetResponseType<IShopTypes[]>>('/shop/types/', params)
+  return fetchApi<GetResponseType<IShopTypes[]>>('/shop/types/', 'GET', { params })
 }
 
 export const getShopMedicinesApi = (params?: QueryParamsType) => {
-  return fetchApi<GetResponseType<IShopMedicines[]>>('/shop/medicines/', params)
+  return fetchApi<GetResponseType<IShopMedicines[]>>('/shop/medicines/', 'GET', { params })
 }
 
 export const getShopMedicineByIdApi = (id: number, params?: QueryParamsType) => {
-  return fetchApi<IShopMedicines>(`/shop/medicines/${id}/`, params)
+  return fetchApi<IShopMedicines>(`/shop/medicines/${id}/`, 'GET', { params })
 }
 
 export const getShopSearchApi = (params?: ShopSearchParamsType) => {
-  return fetchApi<GetResponseWithStatusType<IShopSearch>>('/shop/search/', params)
+  return fetchApi<GetResponseWithStatusType<IShopSearch>>('/shop/search/', 'GET', { params })
 }
 
 // SHOP CART API
 export const getShopCartApi = async (): Promise<GetResponseWithStatusType<IShopCart[]>> => {
-  return authorizedFetchApi('/shop/cart/')
+  return fetchApi('/shop/cart/', 'GET', { withAuth: true })
 }
 
 export const addShopCartApi = async (
   body: Pick<ShopFieldParamsType, 'product' | 'amount'>,
 ): Promise<GetResponseWithStatusType<IShopCart>> => {
-  return authorizedFetchApi('/shop/cart/', 'POST', { body })
+  return fetchApi('/shop/cart/', 'POST', { body, withAuth: true })
 }
 
 export const updateShopCartApi = async (
   body: Pick<ShopFieldParamsType, 'id' | 'amount'>,
 ): Promise<GetResponseWithStatusType<IShopCart>> => {
-  return authorizedFetchApi('/shop/cart/', 'PUT', { body })
+  return fetchApi('/shop/cart/', 'PUT', { body, withAuth: true })
 }
 
 export const deleteShopCartApi = async (
   body: Pick<ShopFieldParamsType, 'id'>,
 ): Promise<GetResponseWithStatusType<IShopCart>> => {
-  return authorizedFetchApi('/shop/cart/', 'DELETE', { body })
+  return fetchApi('/shop/cart/', 'DELETE', { body, withAuth: true })
 }
 
 // SHOP CHECKOUT API
 export const getShopCheckoutApi = async (): Promise<GetResponseWithStatusType<IShopCheckout[]>> => {
-  return authorizedFetchApi('/shop/checkout/')
+  return fetchApi('/shop/checkout/', 'GET', { withAuth: true })
 }
 
 export const addShopCheckoutApi = async (
   body: Pick<ShopFieldParamsType, 'list'>,
 ): Promise<GetResponseWithStatusType<IShopCheckout>> => {
-  return authorizedFetchApi('/shop/checkout/', 'POST', { body })
+  return fetchApi('/shop/checkout/', 'POST', { body, withAuth: true })
 }
 
 export const updateShopCheckoutApi = async (
   body: Partial<IShopCheckout>,
 ): Promise<GetResponseWithStatusType<IShopCheckout>> => {
-  return authorizedFetchApi('/shop/checkout/', 'PUT', { body })
+  return fetchApi('/shop/checkout/', 'PUT', { body, withAuth: true })
 }

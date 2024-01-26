@@ -13,11 +13,19 @@ type Props = {
   items: TabItemType[]
   onTabChange?: (key: string) => void
   className?: string
+  isItemWhiteBg?: boolean
   fullWidth?: boolean
   tabContainerWidth?: string
 }
 
-const Tabs: FC<Props> = ({ items, onTabChange, className, fullWidth = true, tabContainerWidth }): JSX.Element => {
+const Tabs: FC<Props> = ({
+  items,
+  onTabChange,
+  className,
+  fullWidth = true,
+  tabContainerWidth,
+  isItemWhiteBg = false,
+}): JSX.Element => {
   const [activeTab, setActiveTab] = useState(items[0].key)
 
   const handleTabClick = useCallback(
@@ -34,7 +42,7 @@ const Tabs: FC<Props> = ({ items, onTabChange, className, fullWidth = true, tabC
   const tabWidth = fullWidth ? `${100 / items.length}%` : undefined
 
   const tabContainerClasses = clsx(
-    'h-[50px] px-2 flex items-center bg-black/[0.03]',
+    'h[50px] px-2 flex items-center bg-black/[0.03]',
     {
       'rounded-2xl': !fullWidth,
       'rounded-[100px]': fullWidth,
@@ -45,9 +53,10 @@ const Tabs: FC<Props> = ({ items, onTabChange, className, fullWidth = true, tabC
 
   const getTabItemClasses = (key: string) => {
     const tabItemClasses = clsx(
-      'h-full px-[23px] py-[7px] flex items-center justify-center text-gray-primary cursor-pointer select-none duration-200 whitespace-nowrap max-xs:overflow-x-auto max-xs:no-scrollbar',
+      'px-[23px] py-[7px] flex items-center justify-center text-gray-primary cursor-pointer select-none duration-200 whitespace-nowrap shadow-tab max-xs:overflow-x-auto max-xs:no-scrollbar',
       {
         'bg-green-primary/20 text-green-primary font-semibold': key === activeTab,
+        'bg-white': key === activeTab && isItemWhiteBg,
         'rounded-[10px]': !fullWidth,
         'rounded-[100px]': fullWidth,
       },

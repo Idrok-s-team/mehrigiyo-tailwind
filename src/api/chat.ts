@@ -8,35 +8,35 @@ import {
   IChatRoom,
   QueryParamsType,
 } from '@/types'
-import { authorizedFetchApi } from './common'
+import { fetchApi } from './common'
 
 export const getChatApi = async (
   params: Pick<ChatFieldParamsType, 'pk'>,
 ): Promise<GetResponseWithStatusType<IChat[]>> => {
-  return authorizedFetchApi('/chat/', 'GET', { params })
+  return fetchApi('/chat/', 'GET', { params, withAuth: true })
 }
 
 export const getChatFileApi = async (
   params: Pick<ChatFieldParamsType, 'pk'>,
 ): Promise<GetResponseWithStatusType<IChatFile[]>> => {
-  return authorizedFetchApi('/chat/file/', 'GET', { params })
+  return fetchApi('/chat/file/', 'GET', { params, withAuth: true })
 }
 
 export const addChatFileApi = async (
   body: Pick<ChatFieldParamsType, 'size' | 'video'>,
   params: Pick<ChatFieldParamsType, 'pk'>,
 ): Promise<GetResponseWithStatusType<IChatFile[]>> => {
-  return authorizedFetchApi('/chat/file/', 'POST', { body, params })
+  return fetchApi('/chat/file/', 'POST', { body, params, withAuth: true })
 }
 
 export const getChatMessages = async (
   params: Omit<QueryParamsType, 'type_ides'> & Pick<ChatFieldParamsType, 'chat_id'>,
 ): Promise<GetResponseType<IChatMessage[]>> => {
-  return authorizedFetchApi('/chat/messages/', 'GET', { params })
+  return fetchApi('/chat/messages/', 'GET', { params, withAuth: true })
 }
 
 export const getChatRooms = async (
   params: Omit<QueryParamsType, 'type_ides'>,
 ): Promise<GetResponseType<IChatRoom[]>> => {
-  return authorizedFetchApi('/chat/rooms/', 'GET', { params })
+  return fetchApi('/chat/rooms/', 'GET', { params, withAuth: true })
 }
