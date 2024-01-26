@@ -111,9 +111,9 @@ const AuthModal: FC<Props> = () => {
     const registerPromise = await register(formData)
 
     if (registerPromise.status === 'success') {
-      toast.success("Ro'yxatdan o'tildi!")
+      toast.success("Ro'yxatdan muvaffaqiyatli o'tildi!")
     } else {
-      toast.error(registerPromise.data)
+      toast.error(JSON.stringify(registerPromise.data))
     }
   }
 
@@ -222,6 +222,7 @@ const AuthModal: FC<Props> = () => {
                             label="Parol"
                             id="password"
                             name="password"
+                            required
                             type={showPassword ? 'text' : 'password'}
                             onChange={inputHandler(setFields)}
                             icon={showPassword ? <EyeOffIcon /> : <EyeIcon />}
@@ -229,7 +230,7 @@ const AuthModal: FC<Props> = () => {
                           />
                         </div>
                         <Button disabled={isRegisterLoading} type="submit" className="mt-12">
-                          Ro'yxatdan o'tish
+                          {isRegisterLoading ? "Ro'yxatdan o'tilmoqda..." : "Ro'yxatdan o'tish"}
                         </Button>
                       </form>
                     ),

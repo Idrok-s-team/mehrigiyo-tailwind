@@ -8,7 +8,6 @@ import {
   IUserDeliverAddress,
   IUserCountry,
   ICardError,
-  IUserRegistration,
 } from '@/types'
 import { fetchApi } from './common'
 import { IDoctor } from '@/types/doctor'
